@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6361D5831C3FE721005CD430"
-               BuildableName = "TCimb-Mac.framework"
+               BuildableName = "TCimb.framework"
                BlueprintName = "TCimb-Mac"
                ReferencedContainer = "container:TCimb.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6361D5831C3FE721005CD430"
-            BuildableName = "TCimb-Mac.framework"
+            BuildableName = "TCimb.framework"
             BlueprintName = "TCimb-Mac"
             ReferencedContainer = "container:TCimb.xcodeproj">
          </BuildableReference>
@@ -65,7 +65,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6361D5831C3FE721005CD430"
-            BuildableName = "TCimb-Mac.framework"
+            BuildableName = "TCimb.framework"
             BlueprintName = "TCimb-Mac"
             ReferencedContainer = "container:TCimb.xcodeproj">
          </BuildableReference>
@@ -83,7 +83,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6361D5831C3FE721005CD430"
-            BuildableName = "TCimb-Mac.framework"
+            BuildableName = "TCimb.framework"
             BlueprintName = "TCimb-Mac"
             ReferencedContainer = "container:TCimb.xcodeproj">
          </BuildableReference>

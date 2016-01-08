@@ -8,13 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		6361D5701C3FE680005CD430 /* TCimb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6361D5651C3FE680005CD430 /* TCimb.framework */; };
-		6361D5751C3FE680005CD430 /* TCimbTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6361D5741C3FE680005CD430 /* TCimbTests.swift */; };
 		6361D5941C3FE721005CD430 /* TCimb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6361D5841C3FE721005CD430 /* TCimb.framework */; };
 		6361D5A61C3FE900005CD430 /* Doublish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6361D5A41C3FE900005CD430 /* Doublish.swift */; };
 		6361D5A71C3FE900005CD430 /* Doublish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6361D5A41C3FE900005CD430 /* Doublish.swift */; };
 		6361D5A81C3FE900005CD430 /* Stringish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6361D5A51C3FE900005CD430 /* Stringish.swift */; };
 		6361D5A91C3FE900005CD430 /* Stringish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6361D5A51C3FE900005CD430 /* Stringish.swift */; };
-		6361D5AA1C3FE9D8005CD430 /* TCimbTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6361D5741C3FE680005CD430 /* TCimbTests.swift */; };
+		6361D5B01C3FF5F0005CD430 /* DoublishTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6361D5AE1C3FF5F0005CD430 /* DoublishTests.swift */; };
+		6361D5B11C3FF5F0005CD430 /* DoublishTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6361D5AE1C3FF5F0005CD430 /* DoublishTests.swift */; };
+		6361D5B21C3FF5F0005CD430 /* StringishTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6361D5AF1C3FF5F0005CD430 /* StringishTests.swift */; };
+		6361D5B31C3FF5F0005CD430 /* StringishTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6361D5AF1C3FF5F0005CD430 /* StringishTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +39,6 @@
 /* Begin PBXFileReference section */
 		6361D5651C3FE680005CD430 /* TCimb.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TCimb.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6361D56F1C3FE680005CD430 /* TCimb-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TCimb-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6361D5741C3FE680005CD430 /* TCimbTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCimbTests.swift; sourceTree = "<group>"; };
 		6361D5761C3FE680005CD430 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6361D5841C3FE721005CD430 /* TCimb.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TCimb.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6361D5931C3FE721005CD430 /* TCimb-MacTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TCimb-MacTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -45,6 +46,8 @@
 		6361D5A31C3FE7AA005CD430 /* TCimb.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TCimb.h; sourceTree = "<group>"; };
 		6361D5A41C3FE900005CD430 /* Doublish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Doublish.swift; sourceTree = "<group>"; };
 		6361D5A51C3FE900005CD430 /* Stringish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stringish.swift; sourceTree = "<group>"; };
+		6361D5AE1C3FF5F0005CD430 /* DoublishTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoublishTests.swift; sourceTree = "<group>"; };
+		6361D5AF1C3FF5F0005CD430 /* StringishTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringishTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,7 +107,8 @@
 		6361D5731C3FE680005CD430 /* TCimbTests */ = {
 			isa = PBXGroup;
 			children = (
-				6361D5741C3FE680005CD430 /* TCimbTests.swift */,
+				6361D5AE1C3FF5F0005CD430 /* DoublishTests.swift */,
+				6361D5AF1C3FF5F0005CD430 /* StringishTests.swift */,
 				6361D5761C3FE680005CD430 /* Info.plist */,
 			);
 			path = TCimbTests;
@@ -302,7 +306,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6361D5751C3FE680005CD430 /* TCimbTests.swift in Sources */,
+				6361D5B01C3FF5F0005CD430 /* DoublishTests.swift in Sources */,
+				6361D5B21C3FF5F0005CD430 /* StringishTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,7 +324,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6361D5AA1C3FE9D8005CD430 /* TCimbTests.swift in Sources */,
+				6361D5B11C3FF5F0005CD430 /* DoublishTests.swift in Sources */,
+				6361D5B31C3FF5F0005CD430 /* StringishTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -587,6 +593,7 @@
 				6361D57B1C3FE680005CD430 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6361D57C1C3FE680005CD430 /* Build configuration list for PBXNativeTarget "TCimb-iOSTests" */ = {
 			isa = XCConfigurationList;
@@ -595,6 +602,7 @@
 				6361D57E1C3FE680005CD430 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6361D59B1C3FE721005CD430 /* Build configuration list for PBXNativeTarget "TCimb-Mac" */ = {
 			isa = XCConfigurationList;
@@ -603,6 +611,7 @@
 				6361D59D1C3FE721005CD430 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6361D59E1C3FE721005CD430 /* Build configuration list for PBXNativeTarget "TCimb-MacTests" */ = {
 			isa = XCConfigurationList;
@@ -611,6 +620,7 @@
 				6361D5A01C3FE721005CD430 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
