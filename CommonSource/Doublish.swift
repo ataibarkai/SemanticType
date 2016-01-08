@@ -16,7 +16,7 @@ public protocol Doublish: Comparable, CustomStringConvertible, Hashable /*, Floa
 
 
 // Providing the default constructor
-extension Doublish {
+public extension Doublish {
 	init(_ value: Double){
 		self.init()
 		self.value = value
@@ -24,16 +24,16 @@ extension Doublish {
 }
 
 // Comparable compliance
-func == <T where T: Doublish> (x: T, y: T) -> Bool {
+public func == <T where T: Doublish> (x: T, y: T) -> Bool {
 	return (x.value == y.value)
 }
-func < <T where T: Doublish> (x: T, y:T) -> Bool {
+public func < <T where T: Doublish> (x: T, y:T) -> Bool {
 	return x.value < y.value
 }
 
 
 // CustomStringConvertible compliance
-extension Doublish {
+public extension Doublish {
 	var description: String {
 		return self.value.description
 	}
@@ -41,7 +41,7 @@ extension Doublish {
 
 
 // Hashable compliance
-extension Doublish {
+public extension Doublish {
 	var hashValue: Int {
 		return self.value.hashValue
 	}
@@ -49,12 +49,12 @@ extension Doublish {
 
 
 // Addition
-func +<T where T: Doublish>(left: T, right: T) -> T {
+public func +<T where T: Doublish>(left: T, right: T) -> T {
 	return T.init((left.value + right.value))
 }
 
 // Subtract
-func -<T where T: Doublish>(left: T, right: T) -> T {
+public func -<T where T: Doublish>(left: T, right: T) -> T {
 	return T.init((left.value - right.value))
 }
 
