@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol Stringish: Comparable, CustomStringConvertible, CustomDebugStringConvertible, Hashable{
+public protocol Stringish: Comparable, CustomStringConvertible, CustomDebugStringConvertible, Hashable{
 	var value: String {get set}
 	init()
 }

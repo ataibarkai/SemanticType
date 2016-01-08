@@ -9,7 +9,7 @@
 import Foundation
 
 
-protocol Doublish: Comparable, CustomStringConvertible, Hashable /*, FloatingPointType */ {
+public protocol Doublish: Comparable, CustomStringConvertible, Hashable /*, FloatingPointType */ {
 	var value: Double {get set}
 	init()
 }

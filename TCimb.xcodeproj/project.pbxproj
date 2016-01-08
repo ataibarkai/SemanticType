@@ -113,8 +113,8 @@
 		6361D5A11C3FE7AA005CD430 /* CommonSource */ = {
 			isa = PBXGroup;
 			children = (
-				6361D5A41C3FE900005CD430 /* Doublish.swift */,
 				6361D5A51C3FE900005CD430 /* Stringish.swift */,
+				6361D5A41C3FE900005CD430 /* Doublish.swift */,
 				6361D5A21C3FE7AA005CD430 /* Info.plist */,
 				6361D5A31C3FE7AA005CD430 /* TCimb.h */,
 			);
