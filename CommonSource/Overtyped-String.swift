@@ -16,11 +16,11 @@ extension String: CustomStringConvertible{
 	}
 }
 
-// We cannot extend Overtyped specifically for values of type String, so we
-// create a new protocol, and make String conform to it
-protocol StringOnlyProtocol {}
-extension String: StringOnlyProtocol {}
-
-extension Overtyped where Self.UnderlyingValueType: StringOnlyProtocol {
-	
-}
+//// We cannot extend Overtyped specifically for values of type String, so we
+//// create a new protocol, and make String conform to it
+//protocol StringOnlyProtocol {}
+//extension String: StringOnlyProtocol {}
+//
+//extension Overtyped where Self.UnderlyingValueType: StringOnlyProtocol {
+//	
+//}

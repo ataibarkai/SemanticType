@@ -8,12 +8,12 @@
 
 import Foundation
 
-// Addition
+// Addition for appropriate Overtyped types
 public func + <T where T: Overtyped, T.UnderlyingValueType: SummableSubtractable>(left: T, right: T) -> T {
 	return T.init((left.value + right.value))
 }
 
-// Subtraction
+// Subtraction for appropriate Overtyped types
 public func -<T where T: Overtyped, T.UnderlyingValueType: SummableSubtractable>(left: T, right: T) -> T {
 	return T.init((left.value - right.value))
 }
