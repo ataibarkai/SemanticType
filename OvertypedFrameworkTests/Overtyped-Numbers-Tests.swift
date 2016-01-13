@@ -52,14 +52,21 @@ class Overtyped_Numbers_Tests: XCTestCase {
 		let num2_DoubleWrapped = DoubleWrapper(num2_Double)
 		XCTAssertEqual((num2_DoubleWrapped-num1_DoubleWrapped).value, num2_Double-num1_Double)
 		
-		
 		let num1_Float: Float = 3432.343
 		let num2_Float: Float = 234.5
 		let num1_FloatWrapped = FloatWrapper(num1_Float)
 		let num2_FloatWrapped = FloatWrapper(num2_Float)
 		XCTAssertEqual((num2_FloatWrapped-num1_FloatWrapped).value, num2_Float-num1_Float)
-
 		
+		let num1_Int: Int = 42
+		let num2_Int: Int = 293
+		let num1_IntWrapped = IntWrapper(num1_Int)
+		let num2_IntWrapped = IntWrapper(num2_Int)
+		XCTAssertEqual((num2_IntWrapped-num1_IntWrapped).value, num2_Int-num1_Int)
+		
+		// the following should produce compile-time errors:
+//		let anImpossibility = Kg(284) + Meters(34)
+//		if (Kg(34) < Meters(35)) { }
 	}
 	
 }

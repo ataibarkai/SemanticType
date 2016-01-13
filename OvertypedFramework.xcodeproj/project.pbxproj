@@ -9,10 +9,6 @@
 /* Begin PBXBuildFile section */
 		6361D5701C3FE680005CD430 /* OvertypedFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6361D5651C3FE680005CD430 /* OvertypedFramework.framework */; };
 		6361D5941C3FE721005CD430 /* OvertypedFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6361D5841C3FE721005CD430 /* OvertypedFramework.framework */; };
-		6361D5B01C3FF5F0005CD430 /* DoublishTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6361D5AE1C3FF5F0005CD430 /* DoublishTests.swift */; };
-		6361D5B11C3FF5F0005CD430 /* DoublishTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6361D5AE1C3FF5F0005CD430 /* DoublishTests.swift */; };
-		6361D5B21C3FF5F0005CD430 /* StringishTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6361D5AF1C3FF5F0005CD430 /* StringishTests.swift */; };
-		6361D5B31C3FF5F0005CD430 /* StringishTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6361D5AF1C3FF5F0005CD430 /* StringishTests.swift */; };
 		63ED8FFA1C46350500AF08D8 /* Overtyped-String-Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED8FF91C46350500AF08D8 /* Overtyped-String-Tests.swift */; };
 		63ED8FFB1C46350500AF08D8 /* Overtyped-String-Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED8FF91C46350500AF08D8 /* Overtyped-String-Tests.swift */; };
 		63ED8FFD1C463C3A00AF08D8 /* Overtyped-Numbers-Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED8FFC1C463C3A00AF08D8 /* Overtyped-Numbers-Tests.swift */; };
@@ -23,6 +19,8 @@
 		63ED90151C46B07D00AF08D8 /* Overtyped-String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED90101C46B07D00AF08D8 /* Overtyped-String.swift */; };
 		63ED90161C46B07D00AF08D8 /* Overtyped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED90111C46B07D00AF08D8 /* Overtyped.swift */; };
 		63ED90171C46B07D00AF08D8 /* Overtyped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED90111C46B07D00AF08D8 /* Overtyped.swift */; };
+		63ED90221C470E0500AF08D8 /* Overtyped-GeneralUsecases-Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED90211C470E0500AF08D8 /* Overtyped-GeneralUsecases-Tests.swift */; };
+		63ED90231C470E0500AF08D8 /* Overtyped-GeneralUsecases-Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED90211C470E0500AF08D8 /* Overtyped-GeneralUsecases-Tests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,19 +42,18 @@
 
 /* Begin PBXFileReference section */
 		6361D5651C3FE680005CD430 /* OvertypedFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OvertypedFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6361D56F1C3FE680005CD430 /* OvertypedFramework-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "OvertypedFramework-iOSTests.xctest"; path = "OvertypedFramework-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6361D56F1C3FE680005CD430 /* OvertypedFramework-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OvertypedFramework-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6361D5761C3FE680005CD430 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6361D5841C3FE721005CD430 /* OvertypedFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OvertypedFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6361D5931C3FE721005CD430 /* OvertypedFramework-MacTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "OvertypedFramework-MacTests.xctest"; path = "OvertypedFramework-MacTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6361D5931C3FE721005CD430 /* OvertypedFramework-MacTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OvertypedFramework-MacTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6361D5A21C3FE7AA005CD430 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6361D5A31C3FE7AA005CD430 /* OvertypedFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OvertypedFramework.h; sourceTree = "<group>"; };
-		6361D5AE1C3FF5F0005CD430 /* DoublishTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoublishTests.swift; sourceTree = "<group>"; };
-		6361D5AF1C3FF5F0005CD430 /* StringishTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringishTests.swift; sourceTree = "<group>"; };
 		63ED8FF91C46350500AF08D8 /* Overtyped-String-Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Overtyped-String-Tests.swift"; sourceTree = "<group>"; };
 		63ED8FFC1C463C3A00AF08D8 /* Overtyped-Numbers-Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Overtyped-Numbers-Tests.swift"; sourceTree = "<group>"; };
 		63ED900F1C46B07D00AF08D8 /* Overtyped-Numbers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Overtyped-Numbers.swift"; sourceTree = "<group>"; };
 		63ED90101C46B07D00AF08D8 /* Overtyped-String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Overtyped-String.swift"; sourceTree = "<group>"; };
 		63ED90111C46B07D00AF08D8 /* Overtyped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Overtyped.swift; sourceTree = "<group>"; };
+		63ED90211C470E0500AF08D8 /* Overtyped-GeneralUsecases-Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Overtyped-GeneralUsecases-Tests.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,8 +115,7 @@
 			children = (
 				63ED8FF91C46350500AF08D8 /* Overtyped-String-Tests.swift */,
 				63ED8FFC1C463C3A00AF08D8 /* Overtyped-Numbers-Tests.swift */,
-				6361D5AF1C3FF5F0005CD430 /* StringishTests.swift */,
-				6361D5AE1C3FF5F0005CD430 /* DoublishTests.swift */,
+				63ED90211C470E0500AF08D8 /* Overtyped-GeneralUsecases-Tests.swift */,
 				6361D5761C3FE680005CD430 /* Info.plist */,
 			);
 			path = OvertypedFrameworkTests;
@@ -128,9 +124,9 @@
 		6361D5A11C3FE7AA005CD430 /* CommonSource */ = {
 			isa = PBXGroup;
 			children = (
-				63ED900F1C46B07D00AF08D8 /* Overtyped-Numbers.swift */,
-				63ED90101C46B07D00AF08D8 /* Overtyped-String.swift */,
 				63ED90111C46B07D00AF08D8 /* Overtyped.swift */,
+				63ED90101C46B07D00AF08D8 /* Overtyped-String.swift */,
+				63ED900F1C46B07D00AF08D8 /* Overtyped-Numbers.swift */,
 				6361D5A21C3FE7AA005CD430 /* Info.plist */,
 				6361D5A31C3FE7AA005CD430 /* OvertypedFramework.h */,
 			);
@@ -319,9 +315,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6361D5B01C3FF5F0005CD430 /* DoublishTests.swift in Sources */,
+				63ED90221C470E0500AF08D8 /* Overtyped-GeneralUsecases-Tests.swift in Sources */,
 				63ED8FFA1C46350500AF08D8 /* Overtyped-String-Tests.swift in Sources */,
-				6361D5B21C3FF5F0005CD430 /* StringishTests.swift in Sources */,
 				63ED8FFD1C463C3A00AF08D8 /* Overtyped-Numbers-Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -340,9 +335,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6361D5B11C3FF5F0005CD430 /* DoublishTests.swift in Sources */,
+				63ED90231C470E0500AF08D8 /* Overtyped-GeneralUsecases-Tests.swift in Sources */,
 				63ED8FFB1C46350500AF08D8 /* Overtyped-String-Tests.swift in Sources */,
-				6361D5B31C3FF5F0005CD430 /* StringishTests.swift in Sources */,
 				63ED8FFE1C463C3A00AF08D8 /* Overtyped-Numbers-Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
