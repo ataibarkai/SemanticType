@@ -36,6 +36,3 @@ extension UInt32: SummableSubtractable {}
 extension UInt64: SummableSubtractable {}
 extension Float: SummableSubtractable {}
 extension Double: SummableSubtractable {}
-
-
-
