@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6361D5831C3FE721005CD430"
-               BuildableName = "TCimb.framework"
-               BlueprintName = "TCimb-Mac"
-               ReferencedContainer = "container:TCimb.xcodeproj">
+               BuildableName = "OvertypedFramework.framework"
+               BlueprintName = "OvertypedFramework-Mac"
+               ReferencedContainer = "container:OvertypedFramework.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6361D5921C3FE721005CD430"
-               BuildableName = "TCimb-MacTests.xctest"
-               BlueprintName = "TCimb-MacTests"
-               ReferencedContainer = "container:TCimb.xcodeproj">
+               BuildableName = "OvertypedFramework-MacTests.xctest"
+               BlueprintName = "OvertypedFramework-MacTests"
+               ReferencedContainer = "container:OvertypedFramework.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -43,9 +43,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6361D5831C3FE721005CD430"
-            BuildableName = "TCimb.framework"
-            BlueprintName = "TCimb-Mac"
-            ReferencedContainer = "container:TCimb.xcodeproj">
+            BuildableName = "OvertypedFramework.framework"
+            BlueprintName = "OvertypedFramework-Mac"
+            ReferencedContainer = "container:OvertypedFramework.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -65,9 +65,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6361D5831C3FE721005CD430"
-            BuildableName = "TCimb.framework"
-            BlueprintName = "TCimb-Mac"
-            ReferencedContainer = "container:TCimb.xcodeproj">
+            BuildableName = "OvertypedFramework.framework"
+            BlueprintName = "OvertypedFramework-Mac"
+            ReferencedContainer = "container:OvertypedFramework.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -83,9 +83,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6361D5831C3FE721005CD430"
-            BuildableName = "TCimb.framework"
-            BlueprintName = "TCimb-Mac"
-            ReferencedContainer = "container:TCimb.xcodeproj">
+            BuildableName = "OvertypedFramework.framework"
+            BlueprintName = "OvertypedFramework-Mac"
+            ReferencedContainer = "container:OvertypedFramework.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

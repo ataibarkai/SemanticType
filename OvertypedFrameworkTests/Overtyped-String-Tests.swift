@@ -1,13 +1,13 @@
 //
 //  Overtyped-String-Tests.swift
-//  TCimb
+//  OvertypedFramework
 //
 //  Created by Atai Barkai on 1/12/16.
 //  Copyright © 2016 Atai Barkai. All rights reserved.
 //
 
 import XCTest
-@testable import TCimb
+@testable import OvertypedFramework
 
 
 struct Name: Overtyped {

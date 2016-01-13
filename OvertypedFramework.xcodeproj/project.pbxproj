@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6361D5701C3FE680005CD430 /* TCimb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6361D5651C3FE680005CD430 /* TCimb.framework */; };
-		6361D5941C3FE721005CD430 /* TCimb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6361D5841C3FE721005CD430 /* TCimb.framework */; };
+		6361D5701C3FE680005CD430 /* OvertypedFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6361D5651C3FE680005CD430 /* OvertypedFramework.framework */; };
+		6361D5941C3FE721005CD430 /* OvertypedFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6361D5841C3FE721005CD430 /* OvertypedFramework.framework */; };
 		6361D5B01C3FF5F0005CD430 /* DoublishTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6361D5AE1C3FF5F0005CD430 /* DoublishTests.swift */; };
 		6361D5B11C3FF5F0005CD430 /* DoublishTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6361D5AE1C3FF5F0005CD430 /* DoublishTests.swift */; };
 		6361D5B21C3FF5F0005CD430 /* StringishTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6361D5AF1C3FF5F0005CD430 /* StringishTests.swift */; };
@@ -31,25 +31,25 @@
 			containerPortal = 6361D55C1C3FE680005CD430 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 6361D5641C3FE680005CD430;
-			remoteInfo = TCimb;
+			remoteInfo = OvertypedFramework;
 		};
 		6361D5951C3FE721005CD430 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6361D55C1C3FE680005CD430 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 6361D5831C3FE721005CD430;
-			remoteInfo = "TCimb-Mac";
+			remoteInfo = "OvertypedFramework-Mac";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		6361D5651C3FE680005CD430 /* TCimb.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TCimb.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6361D56F1C3FE680005CD430 /* TCimb-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TCimb-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6361D5651C3FE680005CD430 /* OvertypedFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OvertypedFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6361D56F1C3FE680005CD430 /* OvertypedFramework-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "OvertypedFramework-iOSTests.xctest"; path = "OvertypedFramework-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6361D5761C3FE680005CD430 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6361D5841C3FE721005CD430 /* TCimb.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TCimb.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6361D5931C3FE721005CD430 /* TCimb-MacTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TCimb-MacTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6361D5841C3FE721005CD430 /* OvertypedFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OvertypedFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6361D5931C3FE721005CD430 /* OvertypedFramework-MacTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "OvertypedFramework-MacTests.xctest"; path = "OvertypedFramework-MacTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6361D5A21C3FE7AA005CD430 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6361D5A31C3FE7AA005CD430 /* TCimb.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TCimb.h; sourceTree = "<group>"; };
+		6361D5A31C3FE7AA005CD430 /* OvertypedFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OvertypedFramework.h; sourceTree = "<group>"; };
 		6361D5AE1C3FF5F0005CD430 /* DoublishTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoublishTests.swift; sourceTree = "<group>"; };
 		6361D5AF1C3FF5F0005CD430 /* StringishTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringishTests.swift; sourceTree = "<group>"; };
 		63ED8FF91C46350500AF08D8 /* Overtyped-String-Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Overtyped-String-Tests.swift"; sourceTree = "<group>"; };
@@ -71,7 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6361D5701C3FE680005CD430 /* TCimb.framework in Frameworks */,
+				6361D5701C3FE680005CD430 /* OvertypedFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,7 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6361D5941C3FE721005CD430 /* TCimb.framework in Frameworks */,
+				6361D5941C3FE721005CD430 /* OvertypedFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,7 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				6361D5A11C3FE7AA005CD430 /* CommonSource */,
-				6361D5731C3FE680005CD430 /* TCimbTests */,
+				6361D5731C3FE680005CD430 /* OvertypedFrameworkTests */,
 				6361D5661C3FE680005CD430 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -105,15 +105,15 @@
 		6361D5661C3FE680005CD430 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6361D5651C3FE680005CD430 /* TCimb.framework */,
-				6361D56F1C3FE680005CD430 /* TCimb-iOSTests.xctest */,
-				6361D5841C3FE721005CD430 /* TCimb.framework */,
-				6361D5931C3FE721005CD430 /* TCimb-MacTests.xctest */,
+				6361D5651C3FE680005CD430 /* OvertypedFramework.framework */,
+				6361D56F1C3FE680005CD430 /* OvertypedFramework-iOSTests.xctest */,
+				6361D5841C3FE721005CD430 /* OvertypedFramework.framework */,
+				6361D5931C3FE721005CD430 /* OvertypedFramework-MacTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		6361D5731C3FE680005CD430 /* TCimbTests */ = {
+		6361D5731C3FE680005CD430 /* OvertypedFrameworkTests */ = {
 			isa = PBXGroup;
 			children = (
 				63ED8FF91C46350500AF08D8 /* Overtyped-String-Tests.swift */,
@@ -122,7 +122,7 @@
 				6361D5AE1C3FF5F0005CD430 /* DoublishTests.swift */,
 				6361D5761C3FE680005CD430 /* Info.plist */,
 			);
-			path = TCimbTests;
+			path = OvertypedFrameworkTests;
 			sourceTree = "<group>";
 		};
 		6361D5A11C3FE7AA005CD430 /* CommonSource */ = {
@@ -132,7 +132,7 @@
 				63ED90101C46B07D00AF08D8 /* Overtyped-String.swift */,
 				63ED90111C46B07D00AF08D8 /* Overtyped.swift */,
 				6361D5A21C3FE7AA005CD430 /* Info.plist */,
-				6361D5A31C3FE7AA005CD430 /* TCimb.h */,
+				6361D5A31C3FE7AA005CD430 /* OvertypedFramework.h */,
 			);
 			path = CommonSource;
 			sourceTree = "<group>";
@@ -157,9 +157,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		6361D5641C3FE680005CD430 /* TCimb-iOS */ = {
+		6361D5641C3FE680005CD430 /* OvertypedFramework-iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6361D5791C3FE680005CD430 /* Build configuration list for PBXNativeTarget "TCimb-iOS" */;
+			buildConfigurationList = 6361D5791C3FE680005CD430 /* Build configuration list for PBXNativeTarget "OvertypedFramework-iOS" */;
 			buildPhases = (
 				6361D5601C3FE680005CD430 /* Sources */,
 				6361D5611C3FE680005CD430 /* Frameworks */,
@@ -170,14 +170,14 @@
 			);
 			dependencies = (
 			);
-			name = "TCimb-iOS";
-			productName = TCimb;
-			productReference = 6361D5651C3FE680005CD430 /* TCimb.framework */;
+			name = "OvertypedFramework-iOS";
+			productName = OvertypedFramework;
+			productReference = 6361D5651C3FE680005CD430 /* OvertypedFramework.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		6361D56E1C3FE680005CD430 /* TCimb-iOSTests */ = {
+		6361D56E1C3FE680005CD430 /* OvertypedFramework-iOSTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6361D57C1C3FE680005CD430 /* Build configuration list for PBXNativeTarget "TCimb-iOSTests" */;
+			buildConfigurationList = 6361D57C1C3FE680005CD430 /* Build configuration list for PBXNativeTarget "OvertypedFramework-iOSTests" */;
 			buildPhases = (
 				6361D56B1C3FE680005CD430 /* Sources */,
 				6361D56C1C3FE680005CD430 /* Frameworks */,
@@ -188,14 +188,14 @@
 			dependencies = (
 				6361D5721C3FE680005CD430 /* PBXTargetDependency */,
 			);
-			name = "TCimb-iOSTests";
-			productName = TCimbTests;
-			productReference = 6361D56F1C3FE680005CD430 /* TCimb-iOSTests.xctest */;
+			name = "OvertypedFramework-iOSTests";
+			productName = OvertypedFrameworkTests;
+			productReference = 6361D56F1C3FE680005CD430 /* OvertypedFramework-iOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		6361D5831C3FE721005CD430 /* TCimb-Mac */ = {
+		6361D5831C3FE721005CD430 /* OvertypedFramework-Mac */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6361D59B1C3FE721005CD430 /* Build configuration list for PBXNativeTarget "TCimb-Mac" */;
+			buildConfigurationList = 6361D59B1C3FE721005CD430 /* Build configuration list for PBXNativeTarget "OvertypedFramework-Mac" */;
 			buildPhases = (
 				6361D57F1C3FE721005CD430 /* Sources */,
 				6361D5801C3FE721005CD430 /* Frameworks */,
@@ -206,14 +206,14 @@
 			);
 			dependencies = (
 			);
-			name = "TCimb-Mac";
-			productName = "TCimb-Mac";
-			productReference = 6361D5841C3FE721005CD430 /* TCimb.framework */;
+			name = "OvertypedFramework-Mac";
+			productName = "OvertypedFramework-Mac";
+			productReference = 6361D5841C3FE721005CD430 /* OvertypedFramework.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		6361D5921C3FE721005CD430 /* TCimb-MacTests */ = {
+		6361D5921C3FE721005CD430 /* OvertypedFramework-MacTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6361D59E1C3FE721005CD430 /* Build configuration list for PBXNativeTarget "TCimb-MacTests" */;
+			buildConfigurationList = 6361D59E1C3FE721005CD430 /* Build configuration list for PBXNativeTarget "OvertypedFramework-MacTests" */;
 			buildPhases = (
 				6361D58F1C3FE721005CD430 /* Sources */,
 				6361D5901C3FE721005CD430 /* Frameworks */,
@@ -224,9 +224,9 @@
 			dependencies = (
 				6361D5961C3FE721005CD430 /* PBXTargetDependency */,
 			);
-			name = "TCimb-MacTests";
-			productName = "TCimb-MacTests";
-			productReference = 6361D5931C3FE721005CD430 /* TCimb-MacTests.xctest */;
+			name = "OvertypedFramework-MacTests";
+			productName = "OvertypedFramework-MacTests";
+			productReference = 6361D5931C3FE721005CD430 /* OvertypedFramework-MacTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -253,7 +253,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 6361D55F1C3FE680005CD430 /* Build configuration list for PBXProject "TCimb" */;
+			buildConfigurationList = 6361D55F1C3FE680005CD430 /* Build configuration list for PBXProject "OvertypedFramework" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -265,10 +265,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6361D5641C3FE680005CD430 /* TCimb-iOS */,
-				6361D56E1C3FE680005CD430 /* TCimb-iOSTests */,
-				6361D5831C3FE721005CD430 /* TCimb-Mac */,
-				6361D5921C3FE721005CD430 /* TCimb-MacTests */,
+				6361D5641C3FE680005CD430 /* OvertypedFramework-iOS */,
+				6361D56E1C3FE680005CD430 /* OvertypedFramework-iOSTests */,
+				6361D5831C3FE721005CD430 /* OvertypedFramework-Mac */,
+				6361D5921C3FE721005CD430 /* OvertypedFramework-MacTests */,
 			);
 		};
 /* End PBXProject section */
@@ -352,12 +352,12 @@
 /* Begin PBXTargetDependency section */
 		6361D5721C3FE680005CD430 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 6361D5641C3FE680005CD430 /* TCimb-iOS */;
+			target = 6361D5641C3FE680005CD430 /* OvertypedFramework-iOS */;
 			targetProxy = 6361D5711C3FE680005CD430 /* PBXContainerItemProxy */;
 		};
 		6361D5961C3FE721005CD430 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 6361D5831C3FE721005CD430 /* TCimb-Mac */;
+			target = 6361D5831C3FE721005CD430 /* OvertypedFramework-Mac */;
 			targetProxy = 6361D5951C3FE721005CD430 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -464,8 +464,8 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Atai.TCimb;
-				PRODUCT_NAME = TCimb;
+				PRODUCT_BUNDLE_IDENTIFIER = Atai.OvertypedFramework;
+				PRODUCT_NAME = OvertypedFramework;
 				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTSFOLDERPATH)/Headers";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -484,8 +484,8 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Atai.TCimb;
-				PRODUCT_NAME = TCimb;
+				PRODUCT_BUNDLE_IDENTIFIER = Atai.OvertypedFramework;
+				PRODUCT_NAME = OvertypedFramework;
 				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTSFOLDERPATH)/Headers";
 				SKIP_INSTALL = YES;
 			};
@@ -494,9 +494,9 @@
 		6361D57D1C3FE680005CD430 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = TCimbTests/Info.plist;
+				INFOPLIST_FILE = OvertypedFrameworkTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Atai.TCimbTests;
+				PRODUCT_BUNDLE_IDENTIFIER = Atai.OvertypedFrameworkTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -504,9 +504,9 @@
 		6361D57E1C3FE680005CD430 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = TCimbTests/Info.plist;
+				INFOPLIST_FILE = OvertypedFrameworkTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Atai.TCimbTests;
+				PRODUCT_BUNDLE_IDENTIFIER = Atai.OvertypedFrameworkTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -527,7 +527,7 @@
 				INSTALL_PATH = "@rpath";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_NAME = TCimb;
+				PRODUCT_NAME = OvertypedFramework;
 				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTSFOLDERPATH)/Headers";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -551,7 +551,7 @@
 				INSTALL_PATH = "@rpath";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_NAME = TCimb;
+				PRODUCT_NAME = OvertypedFramework;
 				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTSFOLDERPATH)/Headers";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -567,10 +567,10 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = TCimbTests/Info.plist;
+				INFOPLIST_FILE = OvertypedFrameworkTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_BUNDLE_IDENTIFIER = "Atai.TCimb-MacTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "Atai.OvertypedFramework-MacTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 			};
@@ -585,10 +585,10 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = TCimbTests/Info.plist;
+				INFOPLIST_FILE = OvertypedFrameworkTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_BUNDLE_IDENTIFIER = "Atai.TCimb-MacTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "Atai.OvertypedFramework-MacTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 			};
@@ -597,7 +597,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		6361D55F1C3FE680005CD430 /* Build configuration list for PBXProject "TCimb" */ = {
+		6361D55F1C3FE680005CD430 /* Build configuration list for PBXProject "OvertypedFramework" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6361D5771C3FE680005CD430 /* Debug */,
@@ -606,7 +606,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6361D5791C3FE680005CD430 /* Build configuration list for PBXNativeTarget "TCimb-iOS" */ = {
+		6361D5791C3FE680005CD430 /* Build configuration list for PBXNativeTarget "OvertypedFramework-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6361D57A1C3FE680005CD430 /* Debug */,
@@ -615,7 +615,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6361D57C1C3FE680005CD430 /* Build configuration list for PBXNativeTarget "TCimb-iOSTests" */ = {
+		6361D57C1C3FE680005CD430 /* Build configuration list for PBXNativeTarget "OvertypedFramework-iOSTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6361D57D1C3FE680005CD430 /* Debug */,
@@ -624,7 +624,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6361D59B1C3FE721005CD430 /* Build configuration list for PBXNativeTarget "TCimb-Mac" */ = {
+		6361D59B1C3FE721005CD430 /* Build configuration list for PBXNativeTarget "OvertypedFramework-Mac" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6361D59C1C3FE721005CD430 /* Debug */,
@@ -633,7 +633,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6361D59E1C3FE721005CD430 /* Build configuration list for PBXNativeTarget "TCimb-MacTests" */ = {
+		6361D59E1C3FE721005CD430 /* Build configuration list for PBXNativeTarget "OvertypedFramework-MacTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6361D59F1C3FE721005CD430 /* Debug */,

@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import TCimb
+@testable import OvertypedFramework
 
 struct Kg: Overtyped{
 	var value: Double = 0
@@ -58,7 +58,7 @@ class Overtyped_Numbers_Tests: XCTestCase {
 		let num1_FloatWrapped = FloatWrapper(num1_Float)
 		let num2_FloatWrapped = FloatWrapper(num2_Float)
 		XCTAssertEqual((num2_FloatWrapped-num1_FloatWrapped).value, num2_Float-num1_Float)
-		
+
 		
 	}
 	
