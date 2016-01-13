@@ -9,8 +9,24 @@
 import XCTest
 @testable import TCimb
 
-struct Username: Stringish{ var value: String = "" }
-struct FavoriteShow: Stringish{ var value: String = "Unspecified" }
+
+
+struct FavoriteShow: Overtyped{
+	var value = "Unspecified"
+}
+
+struct Username: Overtyped{
+	private var _value = ""
+	var value: String{
+		get{
+			return _value
+		}
+		set(newValue) {
+			self._value = newValue.lowercaseString
+		}
+	}
+}
+
 
 
 class StringishTests: XCTestCase {
