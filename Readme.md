@@ -6,6 +6,11 @@ Purpose
 `TypeBurrito` is a protocol that enables the quick, *boilerplate-free* creation of types that wrap other types --
 thereby increasing **code safety** and **code clarity**.
 
+`TypeBurrito` has extensions that automatically implement "sane" behavior,
+such as `==`, `<`, `hashValue`, and `String`-converting.
+
+For `TypeBurrito`s that wrap numbers, addition and subtraction is likewise implemented.
+
 For a broader discussion see:
 * https://realm.io/news/altconf-justin-spahr-summers-type-safety/
 * http://nomothetis.svbtle.com/types-as-units
