@@ -1,15 +1,14 @@
 The `TypeBurrito` Protocol
-========================
+==========================
 
 Purpose
 -------
-`TypeBurrito` is a protocol that enables the quick creation of types that wrap other types --
+`TypeBurrito` is a protocol that enables the quick, *boilerplate-free* creation of types that wrap other types --
 thereby increasing **code safety** and **code clarity**.
 
 For a broader discussion see:
 * https://realm.io/news/altconf-justin-spahr-summers-type-safety/
 * http://nomothetis.svbtle.com/types-as-units
-
 
 Examples
 --------
@@ -57,12 +56,30 @@ intuitively reflecting their wrapped value's behavior:
 * during debugging (`CustomDebugStringConvertible`)
 * etc.
 
+e.g.
+	
+	var favoriteFoodMap = [NameOfPerson : FavoriteFood]()
+
+	let personName1 = NameOfPerson("George Costanza")
+	let food1 = FavoriteFood("Calzone")
+
+	let personName2 = NameOfPerson("Jerry Seinfeld")
+	let food2 = FavoriteFood("Pickino's Pizza")
+
+	let personName3 = NameOfPerson("Elaine Benes")
+	let food3 = FavoriteFood("(pro-choice) Duck")
+
+	favoriteFoodMap[personName1] = food1
+	favoriteFoodMap[personName2] = food2
+	favoriteFoodMap[personName3] = food3
+	
+	if(favoriteFoodMap[personName1] == food1) {
+		print(favoriteFoodMap[personName1])
+	}
+
 For types that wrap number types (`SummableSubtractable`), we also get
 * Addition (between identical types only)
 * Subtraction (between identical types only)
-
-For types that wrap `String`s, we also get special functionality:
-* To be added
 
 e.g.
 
@@ -115,3 +132,4 @@ which **guarentees** case incensitivity:
 	
 	// true:
 	if(lowercaseJoe == uppercaseJoe) { ... }
+

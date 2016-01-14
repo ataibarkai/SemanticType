@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		634B75421C477E6D00B2CBEF /* TypeBurrito-Hashing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634B75411C477E6D00B2CBEF /* TypeBurrito-Hashing.swift */; };
+		634B75431C477E6D00B2CBEF /* TypeBurrito-Hashing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634B75411C477E6D00B2CBEF /* TypeBurrito-Hashing.swift */; };
 		6361D5701C3FE680005CD430 /* TypeBurritoFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6361D5651C3FE680005CD430 /* TypeBurritoFramework.framework */; };
 		6361D5941C3FE721005CD430 /* TypeBurritoFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6361D5841C3FE721005CD430 /* TypeBurritoFramework.framework */; };
 		63ED8FFA1C46350500AF08D8 /* TypeBurrito-String-Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED8FF91C46350500AF08D8 /* TypeBurrito-String-Tests.swift */; };
@@ -41,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		634B75411C477E6D00B2CBEF /* TypeBurrito-Hashing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TypeBurrito-Hashing.swift"; sourceTree = "<group>"; };
 		6361D5651C3FE680005CD430 /* TypeBurritoFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TypeBurritoFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6361D56F1C3FE680005CD430 /* TypeBurritoFramework-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TypeBurritoFramework-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6361D5761C3FE680005CD430 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -115,6 +118,7 @@
 			children = (
 				63ED8FF91C46350500AF08D8 /* TypeBurrito-String-Tests.swift */,
 				63ED8FFC1C463C3A00AF08D8 /* TypeBurrito-Numbers-Tests.swift */,
+				634B75411C477E6D00B2CBEF /* TypeBurrito-Hashing.swift */,
 				63ED90211C470E0500AF08D8 /* TypeBurrito-GeneralUsecases-Tests.swift */,
 				6361D5761C3FE680005CD430 /* Info.plist */,
 			);
@@ -315,6 +319,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				634B75421C477E6D00B2CBEF /* TypeBurrito-Hashing.swift in Sources */,
 				63ED90221C470E0500AF08D8 /* TypeBurrito-GeneralUsecases-Tests.swift in Sources */,
 				63ED8FFA1C46350500AF08D8 /* TypeBurrito-String-Tests.swift in Sources */,
 				63ED8FFD1C463C3A00AF08D8 /* TypeBurrito-Numbers-Tests.swift in Sources */,
@@ -335,6 +340,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				634B75431C477E6D00B2CBEF /* TypeBurrito-Hashing.swift in Sources */,
 				63ED90231C470E0500AF08D8 /* TypeBurrito-GeneralUsecases-Tests.swift in Sources */,
 				63ED8FFB1C46350500AF08D8 /* TypeBurrito-String-Tests.swift in Sources */,
 				63ED8FFE1C463C3A00AF08D8 /* TypeBurrito-Numbers-Tests.swift in Sources */,
