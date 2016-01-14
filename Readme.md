@@ -1,21 +1,21 @@
-The `Overtyped` Protocol
+The `TypeBurrito` Protocol
 ========================
 
 Purpose
 -------
-`Overtyped` is a protocol that enables the quick creation of types that wrap other types --
+`TypeBurrito` is a protocol that enables the quick creation of types that wrap other types --
 thereby increasing **code safety** and **code clarity**.
 
 Examples
 --------
 
-For `String`-containing `Overtyped` types:
+For `String`-containing `TypeBurrito` types:
 
-	struct Name: Overtyped {
+	struct Name: TypeBurrito {
 		var value: String = ""
 	}
 
-	struct SQLQuery: Overtyped {
+	struct SQLQuery: TypeBurrito {
 		var value: String = ""
 	}
 
@@ -24,17 +24,17 @@ For `String`-containing `Overtyped` types:
 	func bookCharactersSqlQuery(forName name: Name) -> SQLQuery { ... }
 	func findPersonsByPerformingSQLQuery(sqlQuery: SQLQuery) -> [Person] { ... }
 	
-For `SummableSubtractable`-containing `Overtyped` types:
+For `SummableSubtractable`-containing `TypeBurrito` types:
 
-	struct Kg: Overtyped{
+	struct Kg: TypeBurrito{
 		var value: Double = 0
 	}
 
-	struct Meters: Overtyped{
+	struct Meters: TypeBurrito{
 		var value: Double = 0
 	}
 
-	struct BMI: Overtyped {
+	struct BMI: TypeBurrito {
 		var value: Double = 0
 	}
 	
@@ -44,7 +44,7 @@ For `SummableSubtractable`-containing `Overtyped` types:
 Details
 -------
 
-Types that conform to `Overtyped` can be used in a wide range of standard usecases,
+Types that conform to `TypeBurrito` can be used in a wide range of standard usecases,
 intuitively reflecting their wrapped value's behavior:
 * comparison (`<`, `==`)
 * printing (`CustomStringConvertible`)
@@ -61,11 +61,11 @@ For types that wrap `String`s, we also get special functionality:
 
 e.g.
 
-	struct Meters: Overtyped {
+	struct Meters: TypeBurrito {
 		var value: Double = 0
 	}
 
-	struct Feet: Overtyped {
+	struct Feet: TypeBurrito {
 		var value: Double = 0
 	}
 	
@@ -90,10 +90,10 @@ e.g.
 Advanced
 --------
 
-Overtyped can also be used in more advanced cases, e.g. where we want a `String`-wrappeing type
+TypeBurrito can also be used in more advanced cases, e.g. where we want a `String`-wrappeing type
 which **guarentees** case incensitivity:
 
-	struct LowercaseUsername: Overtyped{
+	struct LowercaseUsername: TypeBurrito{
 		private var _value = ""
 		var value: String{
 			get{

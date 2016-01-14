@@ -1,37 +1,37 @@
 //
-//  Overtyped-Numbers-Tests.swift
-//  Overtyped
+//  TypeBurrito-Numbers-Tests.swift
+//  TypeBurrito
 //
 //  Created by Atai Barkai on 1/13/16.
 //  Copyright © 2016 Atai Barkai. All rights reserved.
 //
 
 import XCTest
-@testable import OvertypedFramework
+@testable import TypeBurritoFramework
 
-struct Kg: Overtyped{
+struct Kg: TypeBurrito{
 	var value: Double = 0
 }
 
-struct Meters: Overtyped{
+struct Meters: TypeBurrito{
 	var value: Double = 0
 }
 
 
-struct DoubleWrapper: Overtyped{
+struct DoubleWrapper: TypeBurrito{
 	var value: Double = 0
 }
 
-struct FloatWrapper: Overtyped{
+struct FloatWrapper: TypeBurrito{
 	var value: Float = 0
 }
 
-struct IntWrapper: Overtyped {
+struct IntWrapper: TypeBurrito {
 	var value: Int = 0
 }
 
 
-class Overtyped_Numbers_Tests: XCTestCase {
+class TypeBurrito_Numbers_Tests: XCTestCase {
 	
 	
 	

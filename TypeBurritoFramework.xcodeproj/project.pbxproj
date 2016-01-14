@@ -7,20 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6361D5701C3FE680005CD430 /* OvertypedFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6361D5651C3FE680005CD430 /* OvertypedFramework.framework */; };
-		6361D5941C3FE721005CD430 /* OvertypedFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6361D5841C3FE721005CD430 /* OvertypedFramework.framework */; };
-		63ED8FFA1C46350500AF08D8 /* Overtyped-String-Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED8FF91C46350500AF08D8 /* Overtyped-String-Tests.swift */; };
-		63ED8FFB1C46350500AF08D8 /* Overtyped-String-Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED8FF91C46350500AF08D8 /* Overtyped-String-Tests.swift */; };
-		63ED8FFD1C463C3A00AF08D8 /* Overtyped-Numbers-Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED8FFC1C463C3A00AF08D8 /* Overtyped-Numbers-Tests.swift */; };
-		63ED8FFE1C463C3A00AF08D8 /* Overtyped-Numbers-Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED8FFC1C463C3A00AF08D8 /* Overtyped-Numbers-Tests.swift */; };
-		63ED90121C46B07D00AF08D8 /* Overtyped-Numbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED900F1C46B07D00AF08D8 /* Overtyped-Numbers.swift */; };
-		63ED90131C46B07D00AF08D8 /* Overtyped-Numbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED900F1C46B07D00AF08D8 /* Overtyped-Numbers.swift */; };
-		63ED90141C46B07D00AF08D8 /* Overtyped-String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED90101C46B07D00AF08D8 /* Overtyped-String.swift */; };
-		63ED90151C46B07D00AF08D8 /* Overtyped-String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED90101C46B07D00AF08D8 /* Overtyped-String.swift */; };
-		63ED90161C46B07D00AF08D8 /* Overtyped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED90111C46B07D00AF08D8 /* Overtyped.swift */; };
-		63ED90171C46B07D00AF08D8 /* Overtyped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED90111C46B07D00AF08D8 /* Overtyped.swift */; };
-		63ED90221C470E0500AF08D8 /* Overtyped-GeneralUsecases-Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED90211C470E0500AF08D8 /* Overtyped-GeneralUsecases-Tests.swift */; };
-		63ED90231C470E0500AF08D8 /* Overtyped-GeneralUsecases-Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED90211C470E0500AF08D8 /* Overtyped-GeneralUsecases-Tests.swift */; };
+		6361D5701C3FE680005CD430 /* TypeBurritoFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6361D5651C3FE680005CD430 /* TypeBurritoFramework.framework */; };
+		6361D5941C3FE721005CD430 /* TypeBurritoFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6361D5841C3FE721005CD430 /* TypeBurritoFramework.framework */; };
+		63ED8FFA1C46350500AF08D8 /* TypeBurrito-String-Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED8FF91C46350500AF08D8 /* TypeBurrito-String-Tests.swift */; };
+		63ED8FFB1C46350500AF08D8 /* TypeBurrito-String-Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED8FF91C46350500AF08D8 /* TypeBurrito-String-Tests.swift */; };
+		63ED8FFD1C463C3A00AF08D8 /* TypeBurrito-Numbers-Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED8FFC1C463C3A00AF08D8 /* TypeBurrito-Numbers-Tests.swift */; };
+		63ED8FFE1C463C3A00AF08D8 /* TypeBurrito-Numbers-Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED8FFC1C463C3A00AF08D8 /* TypeBurrito-Numbers-Tests.swift */; };
+		63ED90121C46B07D00AF08D8 /* TypeBurrito-Numbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED900F1C46B07D00AF08D8 /* TypeBurrito-Numbers.swift */; };
+		63ED90131C46B07D00AF08D8 /* TypeBurrito-Numbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED900F1C46B07D00AF08D8 /* TypeBurrito-Numbers.swift */; };
+		63ED90141C46B07D00AF08D8 /* TypeBurrito-String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED90101C46B07D00AF08D8 /* TypeBurrito-String.swift */; };
+		63ED90151C46B07D00AF08D8 /* TypeBurrito-String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED90101C46B07D00AF08D8 /* TypeBurrito-String.swift */; };
+		63ED90161C46B07D00AF08D8 /* TypeBurrito.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED90111C46B07D00AF08D8 /* TypeBurrito.swift */; };
+		63ED90171C46B07D00AF08D8 /* TypeBurrito.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED90111C46B07D00AF08D8 /* TypeBurrito.swift */; };
+		63ED90221C470E0500AF08D8 /* TypeBurrito-GeneralUsecases-Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED90211C470E0500AF08D8 /* TypeBurrito-GeneralUsecases-Tests.swift */; };
+		63ED90231C470E0500AF08D8 /* TypeBurrito-GeneralUsecases-Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED90211C470E0500AF08D8 /* TypeBurrito-GeneralUsecases-Tests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,31 +29,31 @@
 			containerPortal = 6361D55C1C3FE680005CD430 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 6361D5641C3FE680005CD430;
-			remoteInfo = OvertypedFramework;
+			remoteInfo = TypeBurritoFramework;
 		};
 		6361D5951C3FE721005CD430 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6361D55C1C3FE680005CD430 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 6361D5831C3FE721005CD430;
-			remoteInfo = "OvertypedFramework-Mac";
+			remoteInfo = "TypeBurritoFramework-Mac";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		6361D5651C3FE680005CD430 /* OvertypedFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OvertypedFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6361D56F1C3FE680005CD430 /* OvertypedFramework-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OvertypedFramework-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6361D5651C3FE680005CD430 /* TypeBurritoFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TypeBurritoFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6361D56F1C3FE680005CD430 /* TypeBurritoFramework-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TypeBurritoFramework-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6361D5761C3FE680005CD430 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6361D5841C3FE721005CD430 /* OvertypedFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OvertypedFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6361D5931C3FE721005CD430 /* OvertypedFramework-MacTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OvertypedFramework-MacTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6361D5841C3FE721005CD430 /* TypeBurritoFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TypeBurritoFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6361D5931C3FE721005CD430 /* TypeBurritoFramework-MacTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TypeBurritoFramework-MacTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6361D5A21C3FE7AA005CD430 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6361D5A31C3FE7AA005CD430 /* OvertypedFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OvertypedFramework.h; sourceTree = "<group>"; };
-		63ED8FF91C46350500AF08D8 /* Overtyped-String-Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Overtyped-String-Tests.swift"; sourceTree = "<group>"; };
-		63ED8FFC1C463C3A00AF08D8 /* Overtyped-Numbers-Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Overtyped-Numbers-Tests.swift"; sourceTree = "<group>"; };
-		63ED900F1C46B07D00AF08D8 /* Overtyped-Numbers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Overtyped-Numbers.swift"; sourceTree = "<group>"; };
-		63ED90101C46B07D00AF08D8 /* Overtyped-String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Overtyped-String.swift"; sourceTree = "<group>"; };
-		63ED90111C46B07D00AF08D8 /* Overtyped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Overtyped.swift; sourceTree = "<group>"; };
-		63ED90211C470E0500AF08D8 /* Overtyped-GeneralUsecases-Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Overtyped-GeneralUsecases-Tests.swift"; sourceTree = "<group>"; };
+		6361D5A31C3FE7AA005CD430 /* TypeBurritoFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TypeBurritoFramework.h; sourceTree = "<group>"; };
+		63ED8FF91C46350500AF08D8 /* TypeBurrito-String-Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TypeBurrito-String-Tests.swift"; sourceTree = "<group>"; };
+		63ED8FFC1C463C3A00AF08D8 /* TypeBurrito-Numbers-Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TypeBurrito-Numbers-Tests.swift"; sourceTree = "<group>"; };
+		63ED900F1C46B07D00AF08D8 /* TypeBurrito-Numbers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TypeBurrito-Numbers.swift"; sourceTree = "<group>"; };
+		63ED90101C46B07D00AF08D8 /* TypeBurrito-String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TypeBurrito-String.swift"; sourceTree = "<group>"; };
+		63ED90111C46B07D00AF08D8 /* TypeBurrito.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeBurrito.swift; sourceTree = "<group>"; };
+		63ED90211C470E0500AF08D8 /* TypeBurrito-GeneralUsecases-Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TypeBurrito-GeneralUsecases-Tests.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6361D5701C3FE680005CD430 /* OvertypedFramework.framework in Frameworks */,
+				6361D5701C3FE680005CD430 /* TypeBurritoFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,7 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6361D5941C3FE721005CD430 /* OvertypedFramework.framework in Frameworks */,
+				6361D5941C3FE721005CD430 /* TypeBurritoFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,7 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				6361D5A11C3FE7AA005CD430 /* CommonSource */,
-				6361D5731C3FE680005CD430 /* OvertypedFrameworkTests */,
+				6361D5731C3FE680005CD430 /* TypeBurritoFrameworkTests */,
 				6361D5661C3FE680005CD430 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -102,33 +102,33 @@
 		6361D5661C3FE680005CD430 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6361D5651C3FE680005CD430 /* OvertypedFramework.framework */,
-				6361D56F1C3FE680005CD430 /* OvertypedFramework-iOSTests.xctest */,
-				6361D5841C3FE721005CD430 /* OvertypedFramework.framework */,
-				6361D5931C3FE721005CD430 /* OvertypedFramework-MacTests.xctest */,
+				6361D5651C3FE680005CD430 /* TypeBurritoFramework.framework */,
+				6361D56F1C3FE680005CD430 /* TypeBurritoFramework-iOSTests.xctest */,
+				6361D5841C3FE721005CD430 /* TypeBurritoFramework.framework */,
+				6361D5931C3FE721005CD430 /* TypeBurritoFramework-MacTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		6361D5731C3FE680005CD430 /* OvertypedFrameworkTests */ = {
+		6361D5731C3FE680005CD430 /* TypeBurritoFrameworkTests */ = {
 			isa = PBXGroup;
 			children = (
-				63ED8FF91C46350500AF08D8 /* Overtyped-String-Tests.swift */,
-				63ED8FFC1C463C3A00AF08D8 /* Overtyped-Numbers-Tests.swift */,
-				63ED90211C470E0500AF08D8 /* Overtyped-GeneralUsecases-Tests.swift */,
+				63ED8FF91C46350500AF08D8 /* TypeBurrito-String-Tests.swift */,
+				63ED8FFC1C463C3A00AF08D8 /* TypeBurrito-Numbers-Tests.swift */,
+				63ED90211C470E0500AF08D8 /* TypeBurrito-GeneralUsecases-Tests.swift */,
 				6361D5761C3FE680005CD430 /* Info.plist */,
 			);
-			path = OvertypedFrameworkTests;
+			path = TypeBurritoFrameworkTests;
 			sourceTree = "<group>";
 		};
 		6361D5A11C3FE7AA005CD430 /* CommonSource */ = {
 			isa = PBXGroup;
 			children = (
-				63ED90111C46B07D00AF08D8 /* Overtyped.swift */,
-				63ED90101C46B07D00AF08D8 /* Overtyped-String.swift */,
-				63ED900F1C46B07D00AF08D8 /* Overtyped-Numbers.swift */,
+				63ED90111C46B07D00AF08D8 /* TypeBurrito.swift */,
+				63ED90101C46B07D00AF08D8 /* TypeBurrito-String.swift */,
+				63ED900F1C46B07D00AF08D8 /* TypeBurrito-Numbers.swift */,
 				6361D5A21C3FE7AA005CD430 /* Info.plist */,
-				6361D5A31C3FE7AA005CD430 /* OvertypedFramework.h */,
+				6361D5A31C3FE7AA005CD430 /* TypeBurritoFramework.h */,
 			);
 			path = CommonSource;
 			sourceTree = "<group>";
@@ -153,9 +153,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		6361D5641C3FE680005CD430 /* OvertypedFramework-iOS */ = {
+		6361D5641C3FE680005CD430 /* TypeBurritoFramework-iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6361D5791C3FE680005CD430 /* Build configuration list for PBXNativeTarget "OvertypedFramework-iOS" */;
+			buildConfigurationList = 6361D5791C3FE680005CD430 /* Build configuration list for PBXNativeTarget "TypeBurritoFramework-iOS" */;
 			buildPhases = (
 				6361D5601C3FE680005CD430 /* Sources */,
 				6361D5611C3FE680005CD430 /* Frameworks */,
@@ -166,14 +166,14 @@
 			);
 			dependencies = (
 			);
-			name = "OvertypedFramework-iOS";
-			productName = OvertypedFramework;
-			productReference = 6361D5651C3FE680005CD430 /* OvertypedFramework.framework */;
+			name = "TypeBurritoFramework-iOS";
+			productName = TypeBurritoFramework;
+			productReference = 6361D5651C3FE680005CD430 /* TypeBurritoFramework.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		6361D56E1C3FE680005CD430 /* OvertypedFramework-iOSTests */ = {
+		6361D56E1C3FE680005CD430 /* TypeBurritoFramework-iOSTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6361D57C1C3FE680005CD430 /* Build configuration list for PBXNativeTarget "OvertypedFramework-iOSTests" */;
+			buildConfigurationList = 6361D57C1C3FE680005CD430 /* Build configuration list for PBXNativeTarget "TypeBurritoFramework-iOSTests" */;
 			buildPhases = (
 				6361D56B1C3FE680005CD430 /* Sources */,
 				6361D56C1C3FE680005CD430 /* Frameworks */,
@@ -184,14 +184,14 @@
 			dependencies = (
 				6361D5721C3FE680005CD430 /* PBXTargetDependency */,
 			);
-			name = "OvertypedFramework-iOSTests";
-			productName = OvertypedFrameworkTests;
-			productReference = 6361D56F1C3FE680005CD430 /* OvertypedFramework-iOSTests.xctest */;
+			name = "TypeBurritoFramework-iOSTests";
+			productName = TypeBurritoFrameworkTests;
+			productReference = 6361D56F1C3FE680005CD430 /* TypeBurritoFramework-iOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		6361D5831C3FE721005CD430 /* OvertypedFramework-Mac */ = {
+		6361D5831C3FE721005CD430 /* TypeBurritoFramework-Mac */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6361D59B1C3FE721005CD430 /* Build configuration list for PBXNativeTarget "OvertypedFramework-Mac" */;
+			buildConfigurationList = 6361D59B1C3FE721005CD430 /* Build configuration list for PBXNativeTarget "TypeBurritoFramework-Mac" */;
 			buildPhases = (
 				6361D57F1C3FE721005CD430 /* Sources */,
 				6361D5801C3FE721005CD430 /* Frameworks */,
@@ -202,14 +202,14 @@
 			);
 			dependencies = (
 			);
-			name = "OvertypedFramework-Mac";
-			productName = "OvertypedFramework-Mac";
-			productReference = 6361D5841C3FE721005CD430 /* OvertypedFramework.framework */;
+			name = "TypeBurritoFramework-Mac";
+			productName = "TypeBurritoFramework-Mac";
+			productReference = 6361D5841C3FE721005CD430 /* TypeBurritoFramework.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		6361D5921C3FE721005CD430 /* OvertypedFramework-MacTests */ = {
+		6361D5921C3FE721005CD430 /* TypeBurritoFramework-MacTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6361D59E1C3FE721005CD430 /* Build configuration list for PBXNativeTarget "OvertypedFramework-MacTests" */;
+			buildConfigurationList = 6361D59E1C3FE721005CD430 /* Build configuration list for PBXNativeTarget "TypeBurritoFramework-MacTests" */;
 			buildPhases = (
 				6361D58F1C3FE721005CD430 /* Sources */,
 				6361D5901C3FE721005CD430 /* Frameworks */,
@@ -220,9 +220,9 @@
 			dependencies = (
 				6361D5961C3FE721005CD430 /* PBXTargetDependency */,
 			);
-			name = "OvertypedFramework-MacTests";
-			productName = "OvertypedFramework-MacTests";
-			productReference = 6361D5931C3FE721005CD430 /* OvertypedFramework-MacTests.xctest */;
+			name = "TypeBurritoFramework-MacTests";
+			productName = "TypeBurritoFramework-MacTests";
+			productReference = 6361D5931C3FE721005CD430 /* TypeBurritoFramework-MacTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -249,7 +249,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 6361D55F1C3FE680005CD430 /* Build configuration list for PBXProject "OvertypedFramework" */;
+			buildConfigurationList = 6361D55F1C3FE680005CD430 /* Build configuration list for PBXProject "TypeBurritoFramework" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -261,10 +261,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6361D5641C3FE680005CD430 /* OvertypedFramework-iOS */,
-				6361D56E1C3FE680005CD430 /* OvertypedFramework-iOSTests */,
-				6361D5831C3FE721005CD430 /* OvertypedFramework-Mac */,
-				6361D5921C3FE721005CD430 /* OvertypedFramework-MacTests */,
+				6361D5641C3FE680005CD430 /* TypeBurritoFramework-iOS */,
+				6361D56E1C3FE680005CD430 /* TypeBurritoFramework-iOSTests */,
+				6361D5831C3FE721005CD430 /* TypeBurritoFramework-Mac */,
+				6361D5921C3FE721005CD430 /* TypeBurritoFramework-MacTests */,
 			);
 		};
 /* End PBXProject section */
@@ -305,9 +305,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63ED90161C46B07D00AF08D8 /* Overtyped.swift in Sources */,
-				63ED90121C46B07D00AF08D8 /* Overtyped-Numbers.swift in Sources */,
-				63ED90141C46B07D00AF08D8 /* Overtyped-String.swift in Sources */,
+				63ED90161C46B07D00AF08D8 /* TypeBurrito.swift in Sources */,
+				63ED90121C46B07D00AF08D8 /* TypeBurrito-Numbers.swift in Sources */,
+				63ED90141C46B07D00AF08D8 /* TypeBurrito-String.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -315,9 +315,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63ED90221C470E0500AF08D8 /* Overtyped-GeneralUsecases-Tests.swift in Sources */,
-				63ED8FFA1C46350500AF08D8 /* Overtyped-String-Tests.swift in Sources */,
-				63ED8FFD1C463C3A00AF08D8 /* Overtyped-Numbers-Tests.swift in Sources */,
+				63ED90221C470E0500AF08D8 /* TypeBurrito-GeneralUsecases-Tests.swift in Sources */,
+				63ED8FFA1C46350500AF08D8 /* TypeBurrito-String-Tests.swift in Sources */,
+				63ED8FFD1C463C3A00AF08D8 /* TypeBurrito-Numbers-Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,9 +325,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63ED90171C46B07D00AF08D8 /* Overtyped.swift in Sources */,
-				63ED90131C46B07D00AF08D8 /* Overtyped-Numbers.swift in Sources */,
-				63ED90151C46B07D00AF08D8 /* Overtyped-String.swift in Sources */,
+				63ED90171C46B07D00AF08D8 /* TypeBurrito.swift in Sources */,
+				63ED90131C46B07D00AF08D8 /* TypeBurrito-Numbers.swift in Sources */,
+				63ED90151C46B07D00AF08D8 /* TypeBurrito-String.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,9 +335,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63ED90231C470E0500AF08D8 /* Overtyped-GeneralUsecases-Tests.swift in Sources */,
-				63ED8FFB1C46350500AF08D8 /* Overtyped-String-Tests.swift in Sources */,
-				63ED8FFE1C463C3A00AF08D8 /* Overtyped-Numbers-Tests.swift in Sources */,
+				63ED90231C470E0500AF08D8 /* TypeBurrito-GeneralUsecases-Tests.swift in Sources */,
+				63ED8FFB1C46350500AF08D8 /* TypeBurrito-String-Tests.swift in Sources */,
+				63ED8FFE1C463C3A00AF08D8 /* TypeBurrito-Numbers-Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,12 +346,12 @@
 /* Begin PBXTargetDependency section */
 		6361D5721C3FE680005CD430 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 6361D5641C3FE680005CD430 /* OvertypedFramework-iOS */;
+			target = 6361D5641C3FE680005CD430 /* TypeBurritoFramework-iOS */;
 			targetProxy = 6361D5711C3FE680005CD430 /* PBXContainerItemProxy */;
 		};
 		6361D5961C3FE721005CD430 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 6361D5831C3FE721005CD430 /* OvertypedFramework-Mac */;
+			target = 6361D5831C3FE721005CD430 /* TypeBurritoFramework-Mac */;
 			targetProxy = 6361D5951C3FE721005CD430 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -458,8 +458,8 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Atai.OvertypedFramework;
-				PRODUCT_NAME = OvertypedFramework;
+				PRODUCT_BUNDLE_IDENTIFIER = Atai.TypeBurritoFramework;
+				PRODUCT_NAME = TypeBurritoFramework;
 				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTSFOLDERPATH)/Headers";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -478,8 +478,8 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Atai.OvertypedFramework;
-				PRODUCT_NAME = OvertypedFramework;
+				PRODUCT_BUNDLE_IDENTIFIER = Atai.TypeBurritoFramework;
+				PRODUCT_NAME = TypeBurritoFramework;
 				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTSFOLDERPATH)/Headers";
 				SKIP_INSTALL = YES;
 			};
@@ -488,9 +488,9 @@
 		6361D57D1C3FE680005CD430 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = OvertypedFrameworkTests/Info.plist;
+				INFOPLIST_FILE = TypeBurritoFrameworkTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Atai.OvertypedFrameworkTests;
+				PRODUCT_BUNDLE_IDENTIFIER = Atai.TypeBurritoFrameworkTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -498,9 +498,9 @@
 		6361D57E1C3FE680005CD430 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = OvertypedFrameworkTests/Info.plist;
+				INFOPLIST_FILE = TypeBurritoFrameworkTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Atai.OvertypedFrameworkTests;
+				PRODUCT_BUNDLE_IDENTIFIER = Atai.TypeBurritoFrameworkTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -521,7 +521,7 @@
 				INSTALL_PATH = "@rpath";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_NAME = OvertypedFramework;
+				PRODUCT_NAME = TypeBurritoFramework;
 				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTSFOLDERPATH)/Headers";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -545,7 +545,7 @@
 				INSTALL_PATH = "@rpath";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_NAME = OvertypedFramework;
+				PRODUCT_NAME = TypeBurritoFramework;
 				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTSFOLDERPATH)/Headers";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -561,10 +561,10 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = OvertypedFrameworkTests/Info.plist;
+				INFOPLIST_FILE = TypeBurritoFrameworkTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_BUNDLE_IDENTIFIER = "Atai.OvertypedFramework-MacTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "Atai.TypeBurritoFramework-MacTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 			};
@@ -579,10 +579,10 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = OvertypedFrameworkTests/Info.plist;
+				INFOPLIST_FILE = TypeBurritoFrameworkTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_BUNDLE_IDENTIFIER = "Atai.OvertypedFramework-MacTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "Atai.TypeBurritoFramework-MacTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 			};
@@ -591,7 +591,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		6361D55F1C3FE680005CD430 /* Build configuration list for PBXProject "OvertypedFramework" */ = {
+		6361D55F1C3FE680005CD430 /* Build configuration list for PBXProject "TypeBurritoFramework" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6361D5771C3FE680005CD430 /* Debug */,
@@ -600,7 +600,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6361D5791C3FE680005CD430 /* Build configuration list for PBXNativeTarget "OvertypedFramework-iOS" */ = {
+		6361D5791C3FE680005CD430 /* Build configuration list for PBXNativeTarget "TypeBurritoFramework-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6361D57A1C3FE680005CD430 /* Debug */,
@@ -609,7 +609,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6361D57C1C3FE680005CD430 /* Build configuration list for PBXNativeTarget "OvertypedFramework-iOSTests" */ = {
+		6361D57C1C3FE680005CD430 /* Build configuration list for PBXNativeTarget "TypeBurritoFramework-iOSTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6361D57D1C3FE680005CD430 /* Debug */,
@@ -618,7 +618,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6361D59B1C3FE721005CD430 /* Build configuration list for PBXNativeTarget "OvertypedFramework-Mac" */ = {
+		6361D59B1C3FE721005CD430 /* Build configuration list for PBXNativeTarget "TypeBurritoFramework-Mac" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6361D59C1C3FE721005CD430 /* Debug */,
@@ -627,7 +627,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6361D59E1C3FE721005CD430 /* Build configuration list for PBXNativeTarget "OvertypedFramework-MacTests" */ = {
+		6361D59E1C3FE721005CD430 /* Build configuration list for PBXNativeTarget "TypeBurritoFramework-MacTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6361D59F1C3FE721005CD430 /* Debug */,

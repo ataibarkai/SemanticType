@@ -1,15 +1,15 @@
 //
-//  Overtyped-GeneralUsecases-Tests.swift
-//  OvertypedFramework
+//  TypeBurrito-GeneralUsecases-Tests.swift
+//  TypeBurritoFramework
 //
 //  Created by Atai Barkai on 1/13/16.
 //  Copyright © 2016 Atai Barkai. All rights reserved.
 //
 
 import XCTest
-@testable import OvertypedFramework
+@testable import TypeBurritoFramework
 
-struct LowercaseUsername: Overtyped{
+struct LowercaseUsername: TypeBurrito{
 	private var _value = ""
 	var value: String{
 		get{
@@ -21,9 +21,9 @@ struct LowercaseUsername: Overtyped{
 	}
 }
 
-class Overtyped_GeneralUsecases_Tests: XCTestCase {
+class TypeBurrito_GeneralUsecases_Tests: XCTestCase {
 	
-	func testOvertypedValueMapping() {
+	func testTypeBurritoValueMapping() {
 		
 		let lowercaseJoe = LowercaseUsername("joe")
 		let uppercaseJoe = LowercaseUsername("Joe")

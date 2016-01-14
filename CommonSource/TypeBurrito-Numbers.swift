@@ -8,13 +8,13 @@
 
 import Foundation
 
-// Addition for appropriate Overtyped types
-public func + <T where T: Overtyped, T.UnderlyingValueType: SummableSubtractable>(left: T, right: T) -> T {
+// Addition for appropriate TypeBurrito types
+public func + <T where T: TypeBurrito, T.UnderlyingValueType: SummableSubtractable>(left: T, right: T) -> T {
 	return T.init((left.value + right.value))
 }
 
-// Subtraction for appropriate Overtyped types
-public func -<T where T: Overtyped, T.UnderlyingValueType: SummableSubtractable>(left: T, right: T) -> T {
+// Subtraction for appropriate TypeBurrito types
+public func -<T where T: TypeBurrito, T.UnderlyingValueType: SummableSubtractable>(left: T, right: T) -> T {
 	return T.init((left.value - right.value))
 }
 

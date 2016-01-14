@@ -1,25 +1,25 @@
 //
-//  Overtyped-String-Tests.swift
-//  OvertypedFramework
+//  TypeBurrito-String-Tests.swift
+//  TypeBurritoFramework
 //
 //  Created by Atai Barkai on 1/12/16.
 //  Copyright © 2016 Atai Barkai. All rights reserved.
 //
 
 import XCTest
-@testable import OvertypedFramework
+@testable import TypeBurritoFramework
 
 
-struct Name: Overtyped {
+struct Name: TypeBurrito {
 	var value: String = ""
 }
 
 
-struct Hometown: Overtyped {
+struct Hometown: TypeBurrito {
 	var value: String = "Unspecified"
 }
 
-struct SQLQuery: Overtyped {
+struct SQLQuery: TypeBurrito {
 	var value: String = ""
 }
 
@@ -29,20 +29,20 @@ struct Person {
 }
 
 
-struct FavoriteShow: Overtyped{
+struct FavoriteShow: TypeBurrito{
 	var value = "Unspecified"
 }
 
-struct Username: Overtyped{
+struct Username: TypeBurrito{
 	var value = ""
 }
 
 
 
-class Overtyped_String_Tests: XCTestCase {
+class TypeBurrito_String_Tests: XCTestCase {
 	
 	
-	func testOvertypedStringCreation() {
+	func testTypeBurritoStringCreation() {
 		
 		let joe = Username("joe")
 		let eric = Username("eric")
@@ -63,7 +63,7 @@ class Overtyped_String_Tests: XCTestCase {
 		XCTAssertEqual(emptyShow.value, "Unspecified")
 	}
 	
-	func testOvertypedStringComparison(){
+	func testTypeBurritoStringComparison(){
 		let joeString = "joe"
 		let joe1 = Username(joeString)
 		let joe2 = Username(joeString)
@@ -94,7 +94,7 @@ class Overtyped_String_Tests: XCTestCase {
 	}
 		
 	
-	func testOvertypedStringCompilation() {
+	func testTypeBurritoStringCompilation() {
 		
 		func bookCharactersSqlQuery(forHometown hometown: Hometown) -> SQLQuery{
 			return SQLQuery("SELECT * FROM BookCharacters WHERE Name = \(hometown);")

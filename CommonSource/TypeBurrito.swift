@@ -1,6 +1,6 @@
 //
-//  Overtyped.swift
-//  Overtyped
+//  TypeBurrito.swift
+//  TypeBurrito
 //
 //  Created by Atai Barkai on 1/11/16.
 //  Copyright © 2016 Atai Barkai. All rights reserved.
@@ -10,24 +10,24 @@ import Foundation
 
 /**
 
-The `Overtyped` Protocol
-========================
+The `TypeBurrito` Protocol
+==========================
 
 Purpose
 -------
-`Overtyped` is a protocol that enables the quick creation of types that wrap other types --
+`TypeBurrito` is a protocol that enables the quick creation of types that wrap other types --
 thereby increasing **code safety** and **code clarity**.
 
 Examples
 --------
 
-For `String`-containing `Overtyped` types:
+For `String`-containing `TypeBurrito` types:
 
-	struct Name: Overtyped {
+	struct Name: TypeBurrito {
 		var value: String = ""
 	}
 
-	struct SQLQuery: Overtyped {
+	struct SQLQuery: TypeBurrito {
 		var value: String = ""
 	}
 
@@ -36,17 +36,17 @@ For `String`-containing `Overtyped` types:
 	func bookCharactersSqlQuery(forName name: Name) -> SQLQuery { ... }
 	func findPersonsByPerformingSQLQuery(sqlQuery: SQLQuery) -> [Person] { ... }
 	
-For `SummableSubtractable`-containing `Overtyped` types:
+For `SummableSubtractable`-containing `TypeBurrito` types:
 
-	struct Kg: Overtyped{
+	struct Kg: TypeBurrito{
 		var value: Double = 0
 	}
 
-	struct Meters: Overtyped{
+	struct Meters: TypeBurrito{
 		var value: Double = 0
 	}
 
-	struct BMI: Overtyped {
+	struct BMI: TypeBurrito {
 		var value: Double = 0
 	}
 	
@@ -56,7 +56,7 @@ For `SummableSubtractable`-containing `Overtyped` types:
 Details
 -------
 
-Types that conform to `Overtyped` can be used in a wide range of standard usecases,
+Types that conform to `TypeBurrito` can be used in a wide range of standard usecases,
 intuitively reflecting their wrapped value's behavior:
 * comparison (`<`, `==`)
 * printing (`CustomStringConvertible`)
@@ -73,11 +73,11 @@ For types that wrap `String`s, we also get special functionality:
 
 e.g.
 
-	struct Meters: Overtyped {
+	struct Meters: TypeBurrito {
 		var value: Double = 0
 	}
 
-	struct Feet: Overtyped {
+	struct Feet: TypeBurrito {
 		var value: Double = 0
 	}
 	
@@ -102,10 +102,10 @@ e.g.
 Advanced
 --------
 
-Overtyped can also be used in more advanced cases, e.g. where we want a `String`-wrappeing type
+TypeBurrito can also be used in more advanced cases, e.g. where we want a `String`-wrappeing type
 which **guarentees** case incensitivity:
 
-	struct LowercaseUsername: Overtyped{
+	struct LowercaseUsername: TypeBurrito{
 		private var _value = ""
 		var value: String{
 			get{
@@ -124,11 +124,11 @@ which **guarentees** case incensitivity:
 	if(lowercaseJoe == uppercaseJoe) { ... }
 
 */
-public protocol Overtyped: Comparable, CustomStringConvertible, CustomDebugStringConvertible, Hashable {
+public protocol TypeBurrito: Comparable, CustomStringConvertible, CustomDebugStringConvertible, Hashable {
 	
 	typealias UnderlyingValueType: Comparable, CustomStringConvertible, Hashable
 	
-	/// The value wrapped by this Overtyped subtype
+	/// The value wrapped by this TypeBurrito subtype
 	var value: UnderlyingValueType {get set}
 	init()
 }
@@ -136,7 +136,7 @@ public protocol Overtyped: Comparable, CustomStringConvertible, CustomDebugStrin
 
 
 // Providing the default constructor
-public extension Overtyped {
+public extension TypeBurrito {
 	init(_ value: UnderlyingValueType){
 		self.init()
 		self.value = value
@@ -144,32 +144,32 @@ public extension Overtyped {
 }
 
 // Comparable compliance
-public func == <T where T: Overtyped> (x: T, y: T) -> Bool {
+public func == <T where T: TypeBurrito> (x: T, y: T) -> Bool {
 	return
 			(x.dynamicType == y.dynamicType) && // To be equal, types must be invariant, not covariant
 			(x.value == y.value)
 }
 
-public func < <T where T: Overtyped> (x: T, y:T) -> Bool {
+public func < <T where T: TypeBurrito> (x: T, y:T) -> Bool {
 	return x.value < y.value
 }
 
 // CustomStringConvertible compliance
-public extension Overtyped {
+public extension TypeBurrito {
 	var description: String {
 		return self.value.description
 	}
 }
 
 // CustomDebugStringConvertible compliance
-public extension Overtyped {
+public extension TypeBurrito {
 	var debugDescription: String {
 		return "(\(self.dynamicType)): \(self.value)"
 	}
 }
 
 // Hashable compliance
-public extension Overtyped {
+public extension TypeBurrito {
 	var hashValue: Int {
 		return self.value.hashValue
 	}
