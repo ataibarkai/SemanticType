@@ -6,6 +6,11 @@ Purpose
 `TypeBurrito` is a protocol that enables the quick creation of types that wrap other types --
 thereby increasing **code safety** and **code clarity**.
 
+For a broader discussion see:
+* https://realm.io/news/altconf-justin-spahr-summers-type-safety/
+* http://nomothetis.svbtle.com/types-as-units
+
+
 Examples
 --------
 
