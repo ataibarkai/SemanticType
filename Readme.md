@@ -57,6 +57,16 @@ intuitively reflecting their wrapped value's behavior:
 * etc.
 
 e.g.
+
+	struct NameOfPerson: TypeBurrito{
+		var value = "John Doe"
+	}
+
+	struct FavoriteFood: TypeBurrito {
+		var value = "Burrito!"
+	}
+
+	...
 	
 	var favoriteFoodMap = [NameOfPerson : FavoriteFood]()
 
@@ -69,12 +79,12 @@ e.g.
 	let personName3 = NameOfPerson("Elaine Benes")
 	let food3 = FavoriteFood("(pro-choice) Duck")
 
-	favoriteFoodMap[personName1] = food1
+	favoriteFoodMap[personName1] = food1 // we can use PersonName as a dictionary key without any boilerplate!
 	favoriteFoodMap[personName2] = food2
 	favoriteFoodMap[personName3] = food3
 	
 	if(favoriteFoodMap[personName1] == food1) {
-		print(favoriteFoodMap[personName1])
+	print(favoriteFoodMap[personName1]) // we can print a FavoriteFood without any boilerplate!
 	}
 
 For types that wrap number types (`SummableSubtractable`), we also get
