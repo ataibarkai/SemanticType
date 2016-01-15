@@ -129,8 +129,8 @@
 			isa = PBXGroup;
 			children = (
 				63ED90111C46B07D00AF08D8 /* TypeBurrito.swift */,
-				63ED90101C46B07D00AF08D8 /* TypeBurrito-String.swift */,
 				63ED900F1C46B07D00AF08D8 /* TypeBurrito-Numbers.swift */,
+				63ED90101C46B07D00AF08D8 /* TypeBurrito-String.swift */,
 				6361D5A21C3FE7AA005CD430 /* Info.plist */,
 				6361D5A31C3FE7AA005CD430 /* TypeBurritoFramework.h */,
 			);

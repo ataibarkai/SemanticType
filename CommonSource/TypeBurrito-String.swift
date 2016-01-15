@@ -22,5 +22,6 @@ extension String: CustomStringConvertible{
 //extension String: StringOnlyProtocol {}
 //
 //extension TypeBurrito where Self.UnderlyingValueType: StringOnlyProtocol {
+// Can't think of anything to put here yet...
 //	
 //}
