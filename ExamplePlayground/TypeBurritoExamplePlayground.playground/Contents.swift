@@ -11,7 +11,7 @@ thereby increasing **code safety** and **code clarity**.
 ## Value
 
 A type which adopts `TypeBurrito` *automatically* gets sane behavior and compliance for:
-* `hashValue` (`Hashable` = can be used as a dictionary key)
+* `hashValue` (`Hashable` -> can be used as a dictionary key)
 * `<`, `==` (`Comparable`)
 * it is `CustomStringConvertible`, meaning we can print it and use it inside `String`s
 * it is `CustomDebugStringConvertible`
@@ -32,15 +32,14 @@ just skip to **"`Attempt 3`"** below.
 Suppose we wish to create a simple app for managing a top-secret spy network. Our requirements are:
 * Each spy has a politician she is assigned to spy on.
 * A spy can tell us how heavy her cargo is from her latest mission:
-* If the weight of the cargo is below a certain threshold, we use the agency's standard-issue jetpack.
-* Otherwise, we tell the spy to order an Uber.
+	* If the weight of the cargo is below a certain threshold, we use the agency's standard-issue jetpack.
+	* Otherwise, we tell the spy to order an Uber.
 
 
 We deicde on an architecture for the task:
 * We will store a dictionary mapping each spy to a politician
 * We will store the weight threshold, and compare the total weigt of the spy's cargo to that threshhold. We will then issue directions to the spy accordingly.
 */
-
 
 
 
@@ -56,7 +55,7 @@ var spyPoliticianDictionary_1: [String : String] = [
 	"JarJar" : "Hillary Clinton",
 ]
 
-// Each spy carries a jetpack which can carry a maximum load of 220 lbs.
+// Each spy has a jetpack which can carry a maximum load of 220 lbs.
 let jetpackMaximumLoad_1: Double = 220.0
 
 //: Our desk agents just realized they got Blackfish's and JarJar's assigned politicians switched!
@@ -332,6 +331,8 @@ extension Lbs_3 {
 	}
 }
 
+//: Now we simply create our weight-analysis logic:
+
 let jetpackMaximumLoad_3: Lbs_3 = Lbs_3(220.0)
 
 let allWeights_3: [Lbs_3] = [Lbs_3(200), Lbs_3(5.0), Lbs_3(Kgs_3(10.0))]
@@ -386,5 +387,8 @@ let joe1 = Username("joe@gmail.com")
 let joe2 = Username("Joe@GMAIL.com")
 
 if(joe1 == joe2){
-	print("joe1 is equal to joe2!")
+	print("Success!")
+	print("joe1 is equal to joe2")
 }
+
+
