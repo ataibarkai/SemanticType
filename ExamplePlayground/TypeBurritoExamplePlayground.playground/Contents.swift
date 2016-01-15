@@ -1,12 +1,14 @@
 /*:
 # The `TypeBurrito` Protocol
 
+---------
 
 ## Purpose
 
 `TypeBurrito` is a protocol that enables the quick, *boilerplate-free* creation of types that wrap other types --
 thereby increasing **code safety** and **code clarity**.
 
+---------
 
 ## Value
 
@@ -21,13 +23,20 @@ If the underlying type wrapped by a `TypeBurrito` is a number, then we also *aut
 * `-`
 
 
-
-**Note:**
 ---------
-If you get tired of the motivating examples and just want to see `TypeBurrito` in action,
-just skip to **"`Attempt 3`"** below.
+
 
 ## Walkthrough
+
+
+**Note:** If you get tired of the motivating examples and just want to see `TypeBurrito` in action,
+just skip to **"`Attempt 3`"** below.
+
+**Also note:** The readme.md was generated from the `TypeBurritoExamplePlayground`.
+To follow along, open the *workspace* (*not* the `.playground`) inside of the `ExamplePlayground` folder. Make sure you build the `TypeBurritoFramework` before running the Playground.
+
+---------
+
 
 Suppose we wish to create a simple app for managing a top-secret spy network. Our requirements are:
 * Each spy has a politician she is assigned to spy on.
@@ -282,9 +291,11 @@ Is there a better way?
 
 
 /*:
-## The `TypeBurrito` Solution
-*/
-//: ### Attempt 3
+
+# The `TypeBurrito` Solution
+
+---------
+### Attempt 3
 /*:
 Enter `TypeBurrito` and `Swift`'s awesome type system.
 
@@ -362,6 +373,9 @@ That's it!
 We get all the strengths that come with a highly-typed system, with none of the inconveniences!
 Code safety, without the boilerplate.
 */
+
+
+
 
 
 //: ### Advanced
