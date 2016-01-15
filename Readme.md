@@ -1,17 +1,19 @@
 
 # The `TypeBurrito` Protocol
 
+---------
 
 ## Purpose
 
 `TypeBurrito` is a protocol that enables the quick, *boilerplate-free* creation of types that wrap other types --
 thereby increasing **code safety** and **code clarity**.
 
+---------
 
 ## Value
 
 A type which adopts `TypeBurrito` *automatically* gets sane behavior and compliance for:
-* `hashValue` (`Hashable` = can be used as a dictionary key)
+* `hashValue` (`Hashable` -> can be used as a dictionary key)
 * `<`, `==` (`Comparable`)
 * it is `CustomStringConvertible`, meaning we can print it and use it inside `String`s
 * it is `CustomDebugStringConvertible`
@@ -21,13 +23,20 @@ If the underlying type wrapped by a `TypeBurrito` is a number, then we also *aut
 * `-`
 
 
-
-**Note:**
 ---------
-If you get tired of the motivating examples and just want to see `TypeBurrito` in action,
-just skip to **"`Attempt 3`"** below.
+
 
 ## Walkthrough
+
+
+**Note:** If you get tired of the motivating examples and just want to see `TypeBurrito` in action,
+just skip to **"`Attempt 3`"** below.
+
+**Also note:** The readme.md was generated from the `TypeBurritoExamplePlayground`.
+To follow along, open the *workspace* (*not* the `.playground`) inside of the `ExamplePlayground` folder. Make sure you build the `TypeBurritoFramework` before running the Playground.
+
+---------
+
 
 Suppose we wish to create a simple app for managing a top-secret spy network. Our requirements are:
 * Each spy has a politician she is assigned to spy on.
@@ -46,7 +55,6 @@ We deicde on an architecture for the task:
 
 
 
-
 ```
 ### Attempt 1
 
@@ -59,7 +67,7 @@ var spyPoliticianDictionary_1: [String : String] = [
 	"JarJar" : "Hillary Clinton",
 ]
 
-// Each spy carries a jetpack which can carry a maximum load of 220 lbs.
+// Each spy has a jetpack which can carry a maximum load of 220 lbs.
 let jetpackMaximumLoad_1: Double = 220.0
 
 ```
@@ -323,8 +331,10 @@ Is there a better way?
 
 ```
 
-## The `TypeBurrito` Solution
 
+# The `TypeBurrito` Solution
+
+---------
 ### Attempt 3
 
 Enter `TypeBurrito` and `Swift`'s awesome type system.
@@ -381,6 +391,10 @@ extension Lbs_3 {
 	}
 }
 
+```
+Now we simply create our weight-analysis logic:
+
+```swift
 let jetpackMaximumLoad_3: Lbs_3 = Lbs_3(220.0)
 
 let allWeights_3: [Lbs_3] = [Lbs_3(200), Lbs_3(5.0), Lbs_3(Kgs_3(10.0))]
@@ -414,12 +428,12 @@ Code safety, without the boilerplate.
 
 ```swift
 
+
+
+
 ```
 ### Advanced
 There is more we can do with such a strong type system.
-
-```swift
-```
 For example, we can create a type that **gurantees** case-incensitivity,
 for example when dealing with usernames.
 
@@ -444,7 +458,10 @@ let joe1 = Username("joe@gmail.com")
 let joe2 = Username("Joe@GMAIL.com")
 
 if(joe1 == joe2){
-	print("joe1 is equal to joe2!")
+	print("Success!")
+	print("joe1 is equal to joe2")
 }
+
+
 ```
 
