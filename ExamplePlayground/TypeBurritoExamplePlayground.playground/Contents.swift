@@ -32,8 +32,8 @@ just skip to **"`Attempt 3`"** below.
 Suppose we wish to create a simple app for managing a top-secret spy network. Our requirements are:
 * Each spy has a politician she is assigned to spy on.
 * A spy can tell us how heavy her cargo is from her latest mission:
-	* If the weight of the cargo is below a certain threshold, we use the agency's standard-issue jetpack.
-	* Otherwise, we tell the spy to order an Uber.
+* If the weight of the cargo is below a certain threshold, we use the agency's standard-issue jetpack.
+* Otherwise, we tell the spy to order an Uber.
 
 
 We deicde on an architecture for the task:
@@ -365,7 +365,6 @@ Code safety, without the boilerplate.
 
 //: ### Advanced
 //: There is more we can do with such a strong type system.
-
 //: For example, we can create a type that **gurantees** case-incensitivity,
 //: for example when dealing with usernames.
 

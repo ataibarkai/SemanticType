@@ -5,6 +5,6 @@
       location = "group:../TypeBurritoFramework.xcodeproj">
    </FileRef>
    <FileRef
-      location = "container:TypeBurritoPlayground.playground">
+      location = "container:TypeBurritoExamplePlayground.playground">
    </FileRef>
 </Workspace>
