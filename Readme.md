@@ -14,17 +14,38 @@ thereby increasing **code safety** and **code clarity**.
 
 A type which adopts `TypeBurrito` *automatically* gets sane behavior and compliance for:
 * `hashValue` (`Hashable` -> can be used as a dictionary key)
-* `<`, `==` (`Comparable`)
+* `<`, `==` (`Comparable`, ***but only across the same subtype***)
 * it is `CustomStringConvertible`, meaning we can print it and use it inside `String`s
 * it is `CustomDebugStringConvertible`
 
 If the underlying type wrapped by a `TypeBurrito` is a number, then we also *automatically* get:
-* `+`
-* `-`
-
+* `+` (***but only across the same subtype***)
+* `-` (***but only across the same subtype***)
 
 ---------
 
+## Usage:
+
+```swift
+import TypeBurritoFramework
+
+struct SQLQuery: TypeBurrito {
+	var value: String = ""
+}
+
+struct CupsOfWater: TypeBurrito {
+	var value: Int = 0
+}
+
+struct Meters: TypeBurrito {
+	var value: Double = 0
+}
+
+let _ = SQLQuery("SELECT * FROM SwiftFrameworks")
+let _ = CupsOfWater(40) + CupsOfWater(2)
+let _ = Meters(987.25)
+
+```
 
 ## Walkthrough
 
