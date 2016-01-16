@@ -45,8 +45,15 @@ let _ = CupsOfWater(40) + CupsOfWater(2)
 let _ = Meters(987.25)
 
 /*:
-## Walkthrough
+## Installation:
 
+### Carthage
+Add the following to your cartfile:
+
+`github "ataibarkai/TypeBurritoFramework"`
+
+
+## Walkthrough
 
 **Note:** If you get tired of the motivating examples and just want to see `TypeBurrito` in action,
 just skip to **"`Attempt 3`"** below.
