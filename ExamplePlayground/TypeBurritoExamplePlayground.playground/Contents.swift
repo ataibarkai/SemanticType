@@ -94,7 +94,7 @@ We deicde on an architecture for the task:
 // We build the dictionary of each spy's assigned politician (the spy is referred to by code, of course):
 var spyPoliticianDictionary_1: [String : String] = [
 	"Slick Silver" : "Vladimir Putin",
-	"Micky Mouse" : "Donuld Trump",
+	"Micky Mouse" : "Donald Trump",
 	"Blackfish" : "Barack Obama",
 	"JarJar" : "Hillary Clinton",
 ]
@@ -211,7 +211,7 @@ func == (x: Spy_2, y: Spy_2) -> Bool{
 //: We can now create our dictionary and populate it:
 var spyPoliticianDictionary_2: [Spy_2 : Politician_2] = [
 	Spy_2(value: "Slick Silver") : Politician_2(value: "Vladimir Putin"),
-	Spy_2(value: "Micky Mouse") : Politician_2(value: "Donuld Trump"),
+	Spy_2(value: "Micky Mouse") : Politician_2(value: "Donald Trump"),
 	Spy_2(value: "Blackfish") : Politician_2(value: "Barack Obama"),
 	Spy_2(value: "JarJar") : Politician_2(value: "Hillary Clinton"),
 ]
@@ -351,7 +351,7 @@ struct Politician_3: TypeBurrito{
 //: We can jump right into dictionary creation. And we even avoid the `value: ...` in our constructors.
 var spyPoliticianDictionary_3: [Spy_3 : Politician_3] = [
 	Spy_3("Slick Silver") : Politician_3("Vladimir Putin"),
-	Spy_3("Micky Mouse") : Politician_3("Donuld Trump"),
+	Spy_3("Micky Mouse") : Politician_3("Donald Trump"),
 	Spy_3("Blackfish") : Politician_3("Barack Obama"),
 	Spy_3("JarJar") : Politician_3("Hillary Clinton"),
 ]
