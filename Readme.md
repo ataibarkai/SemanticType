@@ -8,6 +8,15 @@
 `TypeBurrito` is a protocol that enables the quick, *boilerplate-free* creation of types that wrap other types --
 thereby increasing **code safety** and **code clarity**.
 
+
+---------
+
+## Inspiration
+
+* https://realm.io/news/altconf-justin-spahr-summers-type-safety/
+* http://www.johndcook.com/blog/2015/12/01/dimensional-analysis-and-types/
+* http://www.joelonsoftware.com/articles/Wrong.html
+
 ---------
 
 ## Value
