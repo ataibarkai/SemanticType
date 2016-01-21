@@ -10,57 +10,60 @@ import XCTest
 @testable import TypeBurritoFramework
 
 
-struct Name: TypeBurrito {
-	var value: String = ""
-}
-
-
-struct Hometown: TypeBurrito {
-	var value: String = "Unspecified"
-}
-
-struct SQLQuery: TypeBurrito {
-	var value: String = ""
-}
-
-struct Person {
-	var name: Name
-	var hometown: Hometown
-}
-
-
-struct FavoriteShow: TypeBurrito{
-	var value = "Unspecified"
-}
-
-struct Username: TypeBurrito{
-	var value = ""
-}
 
 
 
 class TypeBurrito_String_Tests: XCTestCase {
+	
+	class _Name: TypeBurritoSpec {
+		typealias TheTypeInsideTheBurrito = String
+	}
+	typealias Name = TypeBurrito<_Name>
+	
+	
+	
+	class _Hometown: TypeBurritoSpec {
+		typealias TheTypeInsideTheBurrito = String
+	}
+	typealias Hometown = TypeBurrito<_Hometown>
+	
+	class _SQLQuery: TypeBurritoSpec {
+		typealias TheTypeInsideTheBurrito = String
+	}
+	typealias SQLQuery = TypeBurrito<_SQLQuery>
+	
+	
+	
+	struct Person {
+		var name: Name
+		var hometown: Hometown
+	}
+	
+	class _FavoriteShow: TypeBurritoSpec {
+		typealias TheTypeInsideTheBurrito = String
+	}
+	typealias FavoriteShow = TypeBurrito<_FavoriteShow>
+	
+	
+	class _Username: TypeBurritoSpec {
+		typealias TheTypeInsideTheBurrito = String
+	}
+	typealias Username = TypeBurrito<_Username>
+
 	
 	
 	func testTypeBurritoStringCreation() {
 		
 		let joe = Username("joe")
 		let eric = Username("eric")
-		let emptyUser = Username()
+		XCTAssertEqual(joe.value, "joe")
+		XCTAssertEqual(eric.value, "eric")
 		
 		let drWhoString = "Doctor Who"
 		let drWho = FavoriteShow(drWhoString)
 		let breakingBad = FavoriteShow("Breaking Bad")
-		let emptyShow = FavoriteShow()
-		
-		
-		XCTAssertEqual(joe.value, "joe")
-		XCTAssertEqual(eric.value, "eric")
-		XCTAssertEqual(emptyUser.value, "")
-		
 		XCTAssertEqual(drWho.value, drWhoString)
 		XCTAssertEqual(breakingBad.value, "Breaking Bad")
-		XCTAssertEqual(emptyShow.value, "Unspecified")
 	}
 	
 	func testTypeBurritoStringComparison(){
@@ -68,26 +71,22 @@ class TypeBurrito_String_Tests: XCTestCase {
 		let joe1 = Username(joeString)
 		let joe2 = Username(joeString)
 		let eric = Username("eric")
-		let emptyUser1 = Username()
-		let emptyUser2 = Username()
+		XCTAssertEqual(joe1, joe2)
+		XCTAssertNotEqual(joe1, eric)
 		
 		let drWhoString = "Doctor Who"
 		let drWho1 = FavoriteShow(drWhoString)
 		let drWho2 = FavoriteShow(drWhoString)
 		let breakingBad = FavoriteShow("Breaking Bad")
-		let emptyShow1 = FavoriteShow()
-		let emptyShow2 = FavoriteShow()
-		
-		
-		XCTAssertEqual(joe1, joe2)
-		XCTAssertNotEqual(joe1, eric)
-		XCTAssertNotEqual(joe1, emptyUser1)
-		XCTAssertEqual(emptyUser1, emptyUser2)
-		
 		XCTAssertEqual(drWho1, drWho2)
 		XCTAssertNotEqual(drWho1, breakingBad)
-		XCTAssertNotEqual(drWho1, emptyShow1)
-		XCTAssertEqual(emptyShow1, emptyShow2)
+		
+		
+		let a = Username("a")
+		let b = Username("b")
+		XCTAssertLessThan(a, b)
+		XCTAssertGreaterThan(b, a)
+
 		
 		// The below should give a compile time error
 		//		XCTAssertNotEqual(joe1, drWho1)
@@ -111,3 +110,5 @@ class TypeBurrito_String_Tests: XCTestCase {
 
 
 }
+
+

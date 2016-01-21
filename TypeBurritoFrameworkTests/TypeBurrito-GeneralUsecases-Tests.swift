@@ -9,6 +9,7 @@
 import XCTest
 @testable import TypeBurritoFramework
 
+/*
 struct LowercaseUsername: TypeBurrito{
 	private var _value = ""
 	var value: String{
@@ -32,3 +33,4 @@ class TypeBurrito_GeneralUsecases_Tests: XCTestCase {
 	}
 
 }
+*/

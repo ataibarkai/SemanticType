@@ -10,6 +10,7 @@ import XCTest
 import Foundation
 @testable import TypeBurritoFramework
 
+/*
 struct NameOfPerson: TypeBurrito{
 	var value = "John Doe"
 }
@@ -47,3 +48,4 @@ class TypeBurrito_Hashing: XCTestCase {
 	
 	
 }
+*/

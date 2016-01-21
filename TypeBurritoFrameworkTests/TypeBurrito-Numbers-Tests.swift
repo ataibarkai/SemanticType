@@ -9,6 +9,7 @@
 import XCTest
 @testable import TypeBurritoFramework
 
+/*
 struct Kg: TypeBurrito{
 	var value: Double = 0
 }
@@ -70,3 +71,4 @@ class TypeBurrito_Numbers_Tests: XCTestCase {
 	}
 	
 }
+*/

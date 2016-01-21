@@ -9,14 +9,18 @@
 import Foundation
 
 // Addition for appropriate TypeBurrito types
-public func + <T where T: TypeBurrito, T.UnderlyingValueType: SummableSubtractable>(left: T, right: T) -> T {
-	return T.init((left.value + right.value))
+public func + <Spec where Spec.TheTypeInsideTheBurrito: SummableSubtractable>
+	(left: TypeBurrito<Spec>, right: TypeBurrito<Spec>) -> TypeBurrito<Spec> {
+	return TypeBurrito<Spec>.init((left.value + right.value))
 }
 
 // Subtraction for appropriate TypeBurrito types
-public func - <T where T: TypeBurrito, T.UnderlyingValueType: SummableSubtractable>(left: T, right: T) -> T {
-	return T.init((left.value - right.value))
+public func - <Spec where Spec.TheTypeInsideTheBurrito: SummableSubtractable>
+	(left: TypeBurrito<Spec>, right: TypeBurrito<Spec>) -> TypeBurrito<Spec> {
+		return TypeBurrito<Spec>.init((left.value - right.value))
 }
+
+//extension TypeBurrito where Spec.TheTypeInsideTheBurrito: SummableSubtractable{}
 
 
 public protocol SummableSubtractable{
