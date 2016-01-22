@@ -10,14 +10,19 @@ import XCTest
 import Foundation
 @testable import TypeBurritoFramework
 
-/*
-struct NameOfPerson: TypeBurrito{
-	var value = "John Doe"
-}
 
-struct FavoriteFood: TypeBurrito {
-	var value = "Burrito!"
+enum _NameOfPerson: TypeBurritoSpec {
+	typealias TheTypeInsideTheBurrito = String
 }
+typealias NameOfPerson = TypeBurrito<_NameOfPerson>
+
+
+enum _FavoriteFood: TypeBurritoSpec {
+	typealias TheTypeInsideTheBurrito = String
+}
+typealias FavoriteFood = TypeBurrito<_FavoriteFood>
+
+
 
 
 class TypeBurrito_Hashing: XCTestCase {
@@ -48,4 +53,4 @@ class TypeBurrito_Hashing: XCTestCase {
 	
 	
 }
-*/
+

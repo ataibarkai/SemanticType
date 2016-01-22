@@ -9,27 +9,35 @@
 import XCTest
 @testable import TypeBurritoFramework
 
-/*
-struct Kg: TypeBurrito{
-	var value: Double = 0
-}
 
-struct Meters: TypeBurrito{
-	var value: Double = 0
+enum _Kg: TypeBurritoSpec {
+	typealias TheTypeInsideTheBurrito = Double
 }
+typealias Kg = TypeBurrito<_Kg>
 
 
-struct DoubleWrapper: TypeBurrito{
-	var value: Double = 0
+enum _Meters: TypeBurritoSpec {
+	typealias TheTypeInsideTheBurrito = Double
 }
+typealias Meters = TypeBurrito<_Meters>
 
-struct FloatWrapper: TypeBurrito{
-	var value: Float = 0
-}
 
-struct IntWrapper: TypeBurrito {
-	var value: Int = 0
+enum _DoubleWrapper: TypeBurritoSpec{
+	typealias TheTypeInsideTheBurrito = Double
 }
+typealias DoubleWrapper = TypeBurrito<_DoubleWrapper>
+
+enum _FloatWrapper: TypeBurritoSpec{
+	typealias TheTypeInsideTheBurrito = Float
+}
+typealias FloatWrapper = TypeBurrito<_FloatWrapper>
+
+
+enum _IntWrapper: TypeBurritoSpec{
+	typealias TheTypeInsideTheBurrito = Int
+}
+typealias IntWrapper = TypeBurrito<_IntWrapper>
+
 
 
 class TypeBurrito_Numbers_Tests: XCTestCase {
@@ -71,4 +79,4 @@ class TypeBurrito_Numbers_Tests: XCTestCase {
 	}
 	
 }
-*/
+
