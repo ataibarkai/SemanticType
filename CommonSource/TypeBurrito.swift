@@ -29,7 +29,17 @@ public protocol TypeBurritoSpec {
 
 public struct TypeBurrito <Spec: TypeBurritoSpec>: Comparable, Hashable, CustomStringConvertible, CustomDebugStringConvertible {
 	
-	public var value: Spec.TheTypeInsideTheBurrito
+	// The variable we use to store the value.
+	// It is read/write (for instance so we can implement += and -=),
+	// but it is *internal*, meaning inaccesible for users of the framework.
+	internal var value: Spec.TheTypeInsideTheBurrito
+	
+	// This is a read-only field which is declared *public*,
+	// meaning it is accessible to users of the framework.
+	// It allows users to get ahold of the stored primitive inside the TypeBurrito
+	public var primitiveValueInside: Spec.TheTypeInsideTheBurrito {
+		return self.value
+	}
 	
 	public init(_ value: Spec.TheTypeInsideTheBurrito){
 		self.value = (value)

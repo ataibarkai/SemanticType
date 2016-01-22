@@ -21,6 +21,11 @@ enum _Meters: TypeBurritoSpec {
 }
 typealias Meters = TypeBurrito<_Meters>
 
+enum _Steps: TypeBurritoSpec{
+	typealias TheTypeInsideTheBurrito = Int
+}
+typealias Steps = TypeBurrito<_Steps>
+
 
 enum _DoubleWrapper: TypeBurritoSpec{
 	typealias TheTypeInsideTheBurrito = Double
@@ -86,14 +91,17 @@ class TypeBurrito_Numbers_Tests: XCTestCase {
 	}
 	
 	func testModifyingAdditionSubtraction() {
-		var distanceTraveled = Meters(0)
+		var stepsTraveled = Steps(0)
+		var stepsRemaining = Steps(100)
 		
-		for _ in 0..<100{
-			distanceTraveled += Meters(1)
+		while (stepsRemaining > Steps(0) ){
+			let travellingNow = Steps(1)
+			
+			stepsTraveled += travellingNow
+			stepsRemaining -= travellingNow
 		}
 		
-		XCTAssertEqual(distanceTraveled, Meters(100))
-		
+		XCTAssertEqual(stepsTraveled, Steps(100))
 	}
 	
 }
