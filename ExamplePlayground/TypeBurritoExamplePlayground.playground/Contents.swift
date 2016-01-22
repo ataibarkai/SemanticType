@@ -37,6 +37,7 @@ If the underlying type wrapped by a `TypeBurrito` is a number, then we also *aut
 */
 import TypeBurritoFramework
 
+//: TypeBurrito declerations
 enum _SQLQuery: TypeBurritoSpec { typealias TheTypeInsideTheBurrito = String }
 typealias SQLQuery = TypeBurrito<_SQLQuery>
 
@@ -49,6 +50,7 @@ typealias Meters = TypeBurrito<_Meters>
 enum _Inches: TypeBurritoSpec { typealias TheTypeInsideTheBurrito = Double }
 typealias Inches = TypeBurrito<_Inches>
 
+//: TypeBurritos in practice
 let query = SQLQuery("SELECT * FROM SwiftFrameworks")
 let cupsDrankThisWeek = CupsOfWater(40) + CupsOfWater(2)
 let truth = ( Meters(1000) > Meters(34) )
