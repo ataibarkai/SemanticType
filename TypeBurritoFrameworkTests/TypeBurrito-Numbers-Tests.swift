@@ -85,5 +85,16 @@ class TypeBurrito_Numbers_Tests: XCTestCase {
 //		if (Kg(34) < Meters(35)) { }
 	}
 	
+	func testModifyingAdditionSubtraction() {
+		var distanceTraveled = Meters(0)
+		
+		for _ in 0..<100{
+			distanceTraveled += Meters(1)
+		}
+		
+		XCTAssertEqual(distanceTraveled, Meters(100))
+		
+	}
+	
 }
 

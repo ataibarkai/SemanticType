@@ -29,7 +29,7 @@ public protocol TypeBurritoSpec {
 
 public struct TypeBurrito <Spec: TypeBurritoSpec>: Comparable, Hashable, CustomStringConvertible, CustomDebugStringConvertible {
 	
-	public let value: Spec.TheTypeInsideTheBurrito
+	public var value: Spec.TheTypeInsideTheBurrito
 	
 	public init(_ value: Spec.TheTypeInsideTheBurrito){
 		self.value = (value)

@@ -19,7 +19,7 @@ class TypeBurrito_String_Tests: XCTestCase {
 	// A String-bound TypeBurrito
 	enum _Username: TypeBurritoSpec { typealias TheTypeInsideTheBurrito = String }
 	typealias Username = TypeBurrito<_Username>
-	
+		
 	func testCreation() {
 		let joe = Username("joe")
 		let eric = Username("eric")
@@ -50,9 +50,12 @@ class TypeBurrito_String_Tests: XCTestCase {
 		// The below should give a compile time error
 //		XCTAssertNotEqual(joe1, aShow)
 	}
-		
 	
-	func testTypeBurritoStringComposition() {
+	func testStringComposition() {
+		
+	}
+	
+	func testTypeComposition() {
 		
 		// create a struct which uses TypeBurrito's as fields
 		struct NetflixUser {

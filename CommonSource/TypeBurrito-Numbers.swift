@@ -20,6 +20,16 @@ public func - <Spec where Spec.TheTypeInsideTheBurrito: SummableSubtractable>
 		return TypeBurrito<Spec>.init((left.value - right.value))
 }
 
+public func += <Spec where Spec.TheTypeInsideTheBurrito: SummableSubtractable>
+	(inout left: TypeBurrito<Spec>, right: TypeBurrito<Spec>) {
+		left.value = (left.value + right.value)
+}
+
+public func -= <Spec where Spec.TheTypeInsideTheBurrito: SummableSubtractable>
+	(inout left: TypeBurrito<Spec>, right: TypeBurrito<Spec>) {
+		left.value = (left.value - right.value)
+}
+
 //extension TypeBurrito where Spec.TheTypeInsideTheBurrito: SummableSubtractable{}
 
 
