@@ -8,16 +8,31 @@
 
 import Foundation
 
+/**
+A protocol to be adopted by types that specify and describe a TypeBurrito.
+
+e.g.:
+
+```
+enum _Kg: TypeBurritoSpec {
+	typealias TheTypeInsideTheBurrito = Double
+}
+typealias Kg = TypeBurrito<_Kg>
+
+let _ = Kg(234.2)
+
+```
+*/
 public protocol TypeBurritoSpec {
 	typealias TheTypeInsideTheBurrito: Comparable, CustomStringConvertible, Hashable
 }
 
 public struct TypeBurrito <Spec: TypeBurritoSpec>: Comparable, Hashable, CustomStringConvertible, CustomDebugStringConvertible {
 	
-	public var value: Spec.TheTypeInsideTheBurrito
+	public let value: Spec.TheTypeInsideTheBurrito
 	
 	public init(_ value: Spec.TheTypeInsideTheBurrito){
-		self.value = value
+		self.value = (value)
 	}
 	
 	// CustomStringConvertible compliance
