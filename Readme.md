@@ -50,9 +50,12 @@ typealias Meters = TypeBurrito<_Meters>
 enum _Inches: TypeBurritoSpec { typealias TheTypeInsideTheBurrito = Double }
 typealias Inches = TypeBurrito<_Inches>
 
-let _ = SQLQuery("SELECT * FROM SwiftFrameworks")
-let _ = CupsOfWater(40) + CupsOfWater(2)
-let _ = Meters(987.25)
+let query = SQLQuery("SELECT * FROM SwiftFrameworks")
+let cupsDrankThisWeek = CupsOfWater(40) + CupsOfWater(2)
+let truth = ( Meters(1000) > Meters(34) )
+
+var distanceLeft = Meters(987.25)
+distanceLeft -= Meters(10)
 
 ```
 The following would be a compile time error were it not commented-out
