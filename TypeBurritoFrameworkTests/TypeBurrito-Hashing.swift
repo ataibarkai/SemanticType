@@ -10,29 +10,35 @@ import XCTest
 import Foundation
 @testable import TypeBurritoFramework
 
-struct NameOfPerson: TypeBurrito{
-	var value = "John Doe"
-}
 
-struct FavoriteFood: TypeBurrito {
-	var value = "Burrito!"
+enum _NameOfPerson: TypeBurritoSpec {
+	typealias TheTypeInsideTheBurrito = String
 }
+typealias NameOfPerson = TypeBurrito<_NameOfPerson>
+
+
+enum _Food: TypeBurritoSpec {
+	typealias TheTypeInsideTheBurrito = String
+}
+typealias Food = TypeBurrito<_Food>
+
+
 
 
 class TypeBurrito_Hashing: XCTestCase {
 	
 	func testDictionaryHashing() {
 		
-		var favoriteFoodMap = [NameOfPerson : FavoriteFood]()
+		var favoriteFoodMap = [NameOfPerson : Food]()
 		
 		let personName1 = NameOfPerson("George Costanza")
-		let food1 = FavoriteFood("Calzone")
+		let food1 = Food("Calzone")
 		
 		let personName2 = NameOfPerson("Jerry Seinfeld")
-		let food2 = FavoriteFood("Pickino's Pizza")
+		let food2 = Food("Pickino's Pizza")
 		
 		let personName3 = NameOfPerson("Elaine Benes")
-		let food3 = FavoriteFood("(pro-choice) Duck")
+		let food3 = Food("(pro-choice) Duck")
 		
 		favoriteFoodMap[personName1] = food1
 		favoriteFoodMap[personName2] = food2
@@ -41,9 +47,10 @@ class TypeBurrito_Hashing: XCTestCase {
 		XCTAssertEqual(favoriteFoodMap[personName1], food1)
 		XCTAssertEqual(favoriteFoodMap[personName2], food2)
 		XCTAssertEqual(favoriteFoodMap[personName3], food3)
-		
+		XCTAssertNotEqual(favoriteFoodMap[personName1], food3)
 
 	}
 	
 	
 }
+

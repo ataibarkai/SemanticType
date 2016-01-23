@@ -8,57 +8,69 @@
 
 import Foundation
 
-public protocol TypeBurrito: Comparable, CustomStringConvertible, CustomDebugStringConvertible, Hashable {
-	
-	typealias UnderlyingValueType: Comparable, CustomStringConvertible, Hashable
-	
-	/// The value wrapped by this TypeBurrito subtype
-	var value: UnderlyingValueType {get set}
-	init()
+/**
+A protocol to be adopted by types that specify and describe a TypeBurrito.
+
+e.g.:
+
+```
+enum _Kg: TypeBurritoSpec {
+	typealias TheTypeInsideTheBurrito = Double
+}
+typealias Kg = TypeBurrito<_Kg>
+
+let _ = Kg(234.2)
+
+```
+*/
+public protocol TypeBurritoSpec {
+	typealias TheTypeInsideTheBurrito: Comparable, CustomStringConvertible, Hashable
 }
 
-
-// Providing the default constructor
-public extension TypeBurrito {
-	init(_ value: UnderlyingValueType){
-		self.init()
-		self.value = value
+public struct TypeBurrito <Spec: TypeBurritoSpec>: Comparable, Hashable, CustomStringConvertible, CustomDebugStringConvertible {
+	
+	// The variable we use to store the value.
+	// It is read/write (for instance so we can implement += and -=),
+	// but it is *internal*, meaning inaccesible for users of the framework.
+	internal var value: Spec.TheTypeInsideTheBurrito
+	
+	// This is a read-only field which is declared *public*,
+	// meaning it is accessible to users of the framework.
+	// It allows users to get ahold of the stored primitive inside the TypeBurrito
+	public var primitiveValueInside: Spec.TheTypeInsideTheBurrito {
+		return self.value
 	}
-}
-
-// Comparable compliance
-public func == <T where T: TypeBurrito> (x: T, y: T) -> Bool {
-	return
-			(x.dynamicType == y.dynamicType) && // To be equal, types must be invariant, not covariant
-			(x.value == y.value)
-}
-
-public func < <T where T: TypeBurrito> (x: T, y:T) -> Bool {
-	return x.value < y.value
-}
-
-// CustomStringConvertible compliance
-public extension TypeBurrito {
-	var description: String {
+	
+	public init(_ value: Spec.TheTypeInsideTheBurrito){
+		self.value = (value)
+	}
+	
+	// CustomStringConvertible compliance
+	public var description: String {
 		return self.value.description
 	}
-}
-
-// CustomDebugStringConvertible compliance
-public extension TypeBurrito {
-	var debugDescription: String {
+	
+	// CustomDebugStringConvertible compliance
+	public var debugDescription: String {
 		return "(\(self.dynamicType)): \(self.value)"
 	}
-}
-
-// Hashable compliance
-public extension TypeBurrito {
-	var hashValue: Int {
+	
+	// Hashable compliance
+	public var hashValue: Int {
 		return self.value.hashValue
 	}
+
 }
 
 
-
+// Comparable compliance
+public func  == <Spec: TypeBurritoSpec>
+	(left: TypeBurrito<Spec>, right: TypeBurrito<Spec>) -> Bool {
+	return left.value == right.value
+}
+public func < <Spec: TypeBurritoSpec>
+	(left: TypeBurrito<Spec>, right: TypeBurrito<Spec>) -> Bool {
+		return left.value < right.value
+}
 
 
