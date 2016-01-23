@@ -30,6 +30,8 @@ A type which adopts `TypeBurrito` *automatically* gets sane behavior and complia
 If the underlying type wrapped by a `TypeBurrito` is a number, then we also *automatically* get:
 * `+` (***but only across the same subtype***)
 * `-` (***but only across the same subtype***)
+* `+=` (***but only across the same subtype***)
+* `-=` (***but only across the same subtype***)
 
 ---------
 
