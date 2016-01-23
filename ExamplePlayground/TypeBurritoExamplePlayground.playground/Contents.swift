@@ -60,6 +60,12 @@ let truth = ( Meters(1000) > Meters(34) )
 var distanceLeft = Meters(987.25)
 distanceLeft -= Meters(10)
 
+let sizeOfScreenDiagonal = Inches(13)
+
+func performSQLQuery(sqlQuery: SQLQuery){
+	// can only be called with a SQLQuery, not with just any String
+}
+
 //: The following would be a compile time error were it not commented-out
 //let _ Meters(845.235) + Inches(332)
 
