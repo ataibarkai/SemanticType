@@ -74,7 +74,7 @@ func performSQLQuery(sqlQuery: SQLQuery){
 ```
 The following would be a compile time error were it not commented-out
 ```swift
-//let _ Meters(845.235) + Inches(332)
+//let _ = Meters(845.235) + Inches(332)
 
 ```
 
