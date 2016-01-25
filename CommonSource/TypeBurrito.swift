@@ -14,12 +14,10 @@ A protocol to be adopted by types that specify and describe a TypeBurrito.
 e.g.:
 
 ```
-enum _Kg: TypeBurritoSpec {
-	typealias TheTypeInsideTheBurrito = Double
-}
-typealias Kg = TypeBurrito<_Kg>
+enum _Kgs: TypeBurritoSpec { typealias TheTypeInsideTheBurrito = Double }
+typealias Kgs = TypeBurrito<_Kgs>
 
-let _ = Kg(234.2)
+let _ = Kgs(234.2)
 
 ```
 */
