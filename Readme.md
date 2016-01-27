@@ -43,12 +43,8 @@ import TypeBurritoFramework
 ```
 TypeBurrito declerations
 ```swift
-enum _SQLQuery: TypeBurritoSpec { typealias TheTypeInsideTheBurrito = String
-	init(){}
-}
+enum _SQLQuery: TypeBurritoSpec { typealias TheTypeInsideTheBurrito = String }
 typealias SQLQuery = TypeBurrito<_SQLQuery>
-
-let a = _SQLQuery() as TypeBurritoSpec
 
 enum _Meters: TypeBurritoSpec { typealias TheTypeInsideTheBurrito = Double }
 typealias Meters = TypeBurrito<_Meters>
@@ -91,6 +87,7 @@ For example, we may construct a `Username` type which is inherently case-insensi
 ```swift
 enum _Username: TypeBurritoSpec {
 	typealias TheTypeInsideTheBurrito = String
+	
 	static func gatewayMap(preMap: TheTypeInsideTheBurrito) -> TheTypeInsideTheBurrito{
 		return preMap.lowercaseString
 	}
