@@ -29,8 +29,8 @@ public protocol TypeBurritoSpec {
 
 // This extension provides the **identiy** map as the default gatewayMap implementation.
 // This means that effectively any TypeBurritoSpec which does not specify a gatewayMap will behave as if it doesn't have one.
-extension TypeBurritoSpec {
-	static func gatewayMap(preMap: TheTypeInsideTheBurrito) -> TheTypeInsideTheBurrito {
+public extension TypeBurritoSpec {
+	public static func gatewayMap(preMap: TheTypeInsideTheBurrito) -> TheTypeInsideTheBurrito {
 		return preMap
 	}
 }
