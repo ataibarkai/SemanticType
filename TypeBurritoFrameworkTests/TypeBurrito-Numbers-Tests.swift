@@ -10,42 +10,46 @@ import XCTest
 @testable import TypeBurritoFramework
 
 
-enum _Kg: TypeBurritoSpec {
-	typealias TheTypeInsideTheBurrito = Double
-}
-typealias Kg = TypeBurrito<_Kg>
-
-
-enum _Meters: TypeBurritoSpec {
-	typealias TheTypeInsideTheBurrito = Double
-}
-typealias Meters = TypeBurrito<_Meters>
-
-enum _Steps: TypeBurritoSpec{
-	typealias TheTypeInsideTheBurrito = Int
-}
-typealias Steps = TypeBurrito<_Steps>
-
-
-enum _DoubleWrapper: TypeBurritoSpec{
-	typealias TheTypeInsideTheBurrito = Double
-}
-typealias DoubleWrapper = TypeBurrito<_DoubleWrapper>
-
-enum _FloatWrapper: TypeBurritoSpec{
-	typealias TheTypeInsideTheBurrito = Float
-}
-typealias FloatWrapper = TypeBurrito<_FloatWrapper>
-
-
-enum _IntWrapper: TypeBurritoSpec{
-	typealias TheTypeInsideTheBurrito = Int
-}
-typealias IntWrapper = TypeBurrito<_IntWrapper>
-
-
 
 class TypeBurrito_Numbers_Tests: XCTestCase {
+	enum _Kg: TypeBurritoSpec {	typealias TheTypeInsideTheBurrito = Double }
+	typealias Kg = TypeBurrito<_Kg>
+	
+	
+	enum _Meters: TypeBurritoSpec {	typealias TheTypeInsideTheBurrito = Double }
+	typealias Meters = TypeBurrito<_Meters>
+	
+	enum _Steps: TypeBurritoSpec{ typealias TheTypeInsideTheBurrito = Int }
+	typealias Steps = TypeBurrito<_Steps>
+	
+	
+	enum _DoubleWrapper: TypeBurritoSpec{ typealias TheTypeInsideTheBurrito = Double }
+	typealias DoubleWrapper = TypeBurrito<_DoubleWrapper>
+	
+	enum _FloatWrapper: TypeBurritoSpec{ typealias TheTypeInsideTheBurrito = Float }
+	typealias FloatWrapper = TypeBurrito<_FloatWrapper>
+	
+	
+	enum _IntWrapper: TypeBurritoSpec{ typealias TheTypeInsideTheBurrito = Int }
+	typealias IntWrapper = TypeBurrito<_IntWrapper>
+	
+	
+	enum _MusicVolume: TypeBurritoSpec{
+		typealias TheTypeInsideTheBurrito = Double
+		
+		// we want MusicVolume to only be between 0 and 100
+		static func gatewayMap(preMap: TheTypeInsideTheBurrito) -> TheTypeInsideTheBurrito{
+			switch preMap{
+			case (-Double.infinity)..<0:
+				return 0
+			case 100..<(Double.infinity):
+				return 100
+			default:
+				return preMap
+			}
+		}
+	}
+	typealias MusicVolume = TypeBurrito<_MusicVolume>
 	
 	func testCreation() {
 		
@@ -102,6 +106,28 @@ class TypeBurrito_Numbers_Tests: XCTestCase {
 		}
 		
 		XCTAssertEqual(stepsTraveled, Steps(100))
+	}
+	
+	func testGatewayMap() {
+		
+		let minimumVolume = MusicVolume(0)
+		let maximumVolume = MusicVolume(100)
+		
+		let belowMinimum_1 = MusicVolume(-101)
+		let belowMinimum_2 = MusicVolume(-1873487.01)
+		XCTAssertEqual(belowMinimum_1, minimumVolume)
+		XCTAssertEqual(belowMinimum_2, minimumVolume)
+		
+		let withinRange_1 = MusicVolume(33.56)
+		let withinRange_2 = MusicVolume(28.366)
+		XCTAssertEqual(withinRange_1.primitiveValueInside, 33.56)
+		XCTAssertEqual(withinRange_2.primitiveValueInside, 28.366)
+		
+		let aboveMaximum_1 = MusicVolume(101)
+		let aboveMaximum_2 = MusicVolume(2344723.3101)
+		XCTAssertEqual(aboveMaximum_1, maximumVolume)
+		XCTAssertEqual(aboveMaximum_2, maximumVolume)
+		
 	}
 	
 }

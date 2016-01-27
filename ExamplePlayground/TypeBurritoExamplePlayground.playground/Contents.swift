@@ -5,8 +5,8 @@
 
 ## Purpose
 
-`TypeBurrito` is a protocol that enables the quick, *boilerplate-free* creation of types that wrap other types --
-thereby increasing **code safety** and **code clarity**.
+`TypeBurrito` is a protocol that enables the quick, *boilerplate-free* creation of types that wrap other types.
+This allows for treating types as *restrictions* rather than as *"data holders"* -- thereby increasing **code safety** and **code clarity**.
 
 
 ---------
@@ -40,8 +40,12 @@ If the underlying type wrapped by a `TypeBurrito` is a number, then we also *aut
 import TypeBurritoFramework
 
 //: TypeBurrito declerations
-enum _SQLQuery: TypeBurritoSpec { typealias TheTypeInsideTheBurrito = String }
+enum _SQLQuery: TypeBurritoSpec { typealias TheTypeInsideTheBurrito = String
+	init(){}
+}
 typealias SQLQuery = TypeBurrito<_SQLQuery>
+
+let a = _SQLQuery() as TypeBurritoSpec
 
 enum _Meters: TypeBurritoSpec { typealias TheTypeInsideTheBurrito = Double }
 typealias Meters = TypeBurrito<_Meters>
