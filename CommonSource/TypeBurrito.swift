@@ -23,14 +23,37 @@ let _ = Kgs(234.2)
 */
 public protocol TypeBurritoSpec {
 	typealias TheTypeInsideTheBurrito: Comparable, CustomStringConvertible, Hashable
+	
+	static func gatewayMap(preMap: TheTypeInsideTheBurrito) -> TheTypeInsideTheBurrito
+}
+
+// This extension provides the **identiy** map as the default gatewayMap implementation.
+// This means that effectively any TypeBurritoSpec which does not specify a gatewayMap will behave as if it doesn't have one.
+extension TypeBurritoSpec {
+	static func gatewayMap(preMap: TheTypeInsideTheBurrito) -> TheTypeInsideTheBurrito {
+		return preMap
+	}
 }
 
 public struct TypeBurrito <Spec: TypeBurritoSpec>: Comparable, Hashable, CustomStringConvertible, CustomDebugStringConvertible {
 	
 	// The variable we use to store the value.
+	// It is private and should NOT (and cannot) be accessed directly.
+	// Instead it should be accessed through the value var
+	private var _value: Spec.TheTypeInsideTheBurrito
+	
+	// The variable we use to access the value.
 	// It is read/write (for instance so we can implement += and -=),
 	// but it is *internal*, meaning inaccesible for users of the framework.
-	internal var value: Spec.TheTypeInsideTheBurrito
+	internal var value: Spec.TheTypeInsideTheBurrito{
+		get {
+			return _value
+		}
+		set{
+			// Before setting the value, we first pass it through our gatewayMap function.
+			self._value = Spec.gatewayMap(newValue)
+		}
+	}
 	
 	// This is a read-only field which is declared *public*,
 	// meaning it is accessible to users of the framework.
@@ -40,7 +63,11 @@ public struct TypeBurrito <Spec: TypeBurritoSpec>: Comparable, Hashable, CustomS
 	}
 	
 	public init(_ value: Spec.TheTypeInsideTheBurrito){
-		self.value = (value)
+		
+		// If we could, we would simply set self._value using self.value in this case too.
+		// However Swift is unfortunately not smart enough to realize this would satisfy initialization.
+		
+		self._value = Spec.gatewayMap(value)
 	}
 	
 	// CustomStringConvertible compliance

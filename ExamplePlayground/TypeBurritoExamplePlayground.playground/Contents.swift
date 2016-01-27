@@ -70,6 +70,16 @@ func performSQLQuery(sqlQuery: SQLQuery){
 //let _ = Meters(845.235) + Inches(332)
 
 /*:
+Multiplication and division are not natively supported.
+
+(Meters * Meters is Meters^2, not Meters. That would require a much richer typing system, which Swift unfortunately does not support).
+
+However we can always fall back on the type-less default Swift arithmetic:
+*/
+let buildingHeight = Meters(4)
+let buildingHeightScaledBy3 = Meters(buildingHeight.primitiveValueInside * 3)
+
+/*:
 ## Installation:
 
 ### Carthage

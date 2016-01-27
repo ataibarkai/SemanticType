@@ -19,6 +19,15 @@ class TypeBurrito_String_Tests: XCTestCase {
 	// A String-bound TypeBurrito
 	enum _Username: TypeBurritoSpec { typealias TheTypeInsideTheBurrito = String }
 	typealias Username = TypeBurrito<_Username>
+	
+	enum _CaseInsensitiveUsername: TypeBurritoSpec {
+		typealias TheTypeInsideTheBurrito = String
+		
+		static func gatewayMap(preMap: TheTypeInsideTheBurrito) -> TheTypeInsideTheBurrito{
+			return preMap.lowercaseString
+		}
+	}
+	typealias CaseInsensitiveUsername = TypeBurrito<_CaseInsensitiveUsername>
 		
 	func testCreation() {
 		let joe = Username("joe")
@@ -51,8 +60,12 @@ class TypeBurrito_String_Tests: XCTestCase {
 //		XCTAssertNotEqual(joe1, aShow)
 	}
 	
-	func testStringComposition() {
+	func testGatewayMap() {
 		
+		let lowercaseJoe = CaseInsensitiveUsername("joe")
+		let uppercaseJoe = CaseInsensitiveUsername("JOE")
+		
+		XCTAssertEqual(lowercaseJoe, uppercaseJoe)
 	}
 	
 	func testTypeComposition() {
