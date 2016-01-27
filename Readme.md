@@ -76,9 +76,9 @@ The following would be a compile time error were it not commented-out
 ```
 
 ### Advanced Usage: The `gatewayMap` Function
-We may also define Specs with a `static` function:
+We may also define Specs with a `static` function `gatewayMap` where:
 
-`gatewayMap(preMap: TheTypeInsideTheBurrito) -> TheTypeInsideTheBurrito`
+`static func gatewayMap(preMap: TheTypeInsideTheBurrito) -> TheTypeInsideTheBurrito`
 
 The gateway map allows us to construct types which have an *inherent*
 restriction on the range of allowed values.
@@ -103,11 +103,11 @@ let usernameTypeIsCaseInsensitive = (lowercaseSteve == uppercaseSteve)
 ```
 
 The `gatewayMap` can come in handy whenever we have a restriction on our values
-which is not inherent in the underlying type.
+which is not inherent in our "mental" type, but not in the underlying data type.
 
 Examples include:
 * a `URL` type which is always url-escaped
-* a `SQLCommand` type which is always escaped (and not prone to SQL-injection attacks)
+* a `SQLCommand` type which is always sql-escaped (and not prone to SQL-injection attacks)
 * a `LevelInSomeBuilding` type which does not allow values below -1 nor above 72 (the lowest and highest levels in SomeBuilding).
 * etc.
 
