@@ -39,7 +39,7 @@ If the underlying type wrapped by a `TypeBurrito` is a number, then we also *aut
 */
 import TypeBurritoFramework
 
-//: TypeBurrito declerations
+//: TypeBurrito declerations:
 enum _SQLQuery: TypeBurritoSpec { typealias TheTypeInsideTheBurrito = String }
 typealias SQLQuery = TypeBurrito<_SQLQuery>
 
@@ -49,7 +49,7 @@ typealias Meters = TypeBurrito<_Meters>
 enum _Inches: TypeBurritoSpec { typealias TheTypeInsideTheBurrito = Double }
 typealias Inches = TypeBurrito<_Inches>
 
-//: TypeBurritos in practice
+//: TypeBurritos in practice:
 let query = SQLQuery("SELECT * FROM SwiftFrameworks")
 let metersClimbedToday = Meters(40) + Meters(2)
 let truth = ( Meters(1000) > Meters(34) )
@@ -74,7 +74,9 @@ We may also define Specs with a `static` function `gatewayMap` where:
 
 The gateway map allows us to construct types which have an *inherent*
 restriction on the range of allowed values.
-For example, we may construct a `Username` type which is inherently case-insensitive:
+
+For example, we may construct a `Username` type which is inherently case-insensitive.
+This is achieved by having a `gatewayMap` which converts any input to its lowercase version:
 */
 enum _Username: TypeBurritoSpec {
 	typealias TheTypeInsideTheBurrito = String
@@ -85,15 +87,19 @@ enum _Username: TypeBurritoSpec {
 }
 typealias Username = TypeBurrito<_Username>
 
+//: From that point onwards, we may be **sure** that if we are given a `Username`,
+//: whether it was constructed from lowercase or uppercase characters is insequential.
+
 let lowercaseSteve = Username("steve@gmail.com")
 let uppercaseSteve = Username("STEVE@GMAIL.COM")
 
-// evaluates to true:
-let usernameTypeIsCaseInsensitive = (lowercaseSteve == uppercaseSteve)
+if (lowercaseSteve == uppercaseSteve) {
+	// they are equal
+}
 
 /*:
 The `gatewayMap` can come in handy whenever we have a restriction on our values
-which is not inherent in our "mental" type, but not in the underlying data type.
+which is *inherent in our "mental" model of the type*, but *not in the underlying data type*.
 
 Examples include:
 * a `URL` type which is always url-escaped
