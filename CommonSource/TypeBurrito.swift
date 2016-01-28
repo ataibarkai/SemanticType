@@ -35,9 +35,16 @@ public protocol TypeBurritoSpec {
 // However it is **not so** for 2 reasons:
 // 1. No *instance* is ever created of a type which conforms to TypeBurritoSpec.
 //		The spec is only used as a type.
+//		Furthermore, even variables that store types cannot be used as types,
+//		e.g. the following would not compile:
+//
+//		enum _Username: TypeBurritoSpec { typealias TheTypeInsideTheBurrito = String }
+//		let _someType = _Username.self
+//		typealias someType = TypeBurrito<_someType> // error: use of undeclared type _someType
+//
 // 2. Even if an instance were created (it isn't) of a TypeBurritoSpec, as of Swift 2,
 //		protocols with a specified typealias may only be used as a generic constraint,
-//		and therefore a type which conforms to TypeBurritoSpec may be up-casted to a TypeBurritoSpec/
+//		and therefore a type which conforms to TypeBurritoSpec may not be down-casted to a TypeBurritoSpec.
 public extension TypeBurritoSpec {
 	public static func gatewayMap(preMap: TheTypeInsideTheBurrito) -> TheTypeInsideTheBurrito {
 		return preMap

@@ -68,7 +68,7 @@ func performSQLQuery(sqlQuery: SQLQuery){
 
 /*:
 ### Advanced Usage: The `gatewayMap` Function
-We may also define Specs with a `static` function `gatewayMap` where:
+We may also define `TypeBurritoSpec`s with a static function `gatewayMap` where:
 
 `static func gatewayMap(preMap: TheTypeInsideTheBurrito) -> TheTypeInsideTheBurrito`
 
@@ -107,7 +107,6 @@ Examples include:
 * a `LevelInSomeBuilding` type which does not allow values below -1 nor above 72 (the lowest and highest levels in SomeBuilding).
 * etc.
 */
-
 
 
 
