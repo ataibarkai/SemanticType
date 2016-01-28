@@ -76,7 +76,7 @@ The following would be a compile time error were it not commented-out
 ```
 
 ### Advanced Usage: The `gatewayMap` Function
-We may also define Specs with a `static` function `gatewayMap` where:
+We may also define `TypeBurritoSpec`s with a static function `gatewayMap` where:
 
 `static func gatewayMap(preMap: TheTypeInsideTheBurrito) -> TheTypeInsideTheBurrito`
 
@@ -121,7 +121,6 @@ Examples include:
 
 
 ```swift
-
 
 
 ```
