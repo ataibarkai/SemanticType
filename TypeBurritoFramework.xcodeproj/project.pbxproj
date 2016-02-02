@@ -11,14 +11,16 @@
 		634B75431C477E6D00B2CBEF /* TypeBurrito-Hashing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634B75411C477E6D00B2CBEF /* TypeBurrito-Hashing.swift */; };
 		6361D5701C3FE680005CD430 /* TypeBurritoFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6361D5651C3FE680005CD430 /* TypeBurritoFramework.framework */; };
 		6361D5941C3FE721005CD430 /* TypeBurritoFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6361D5841C3FE721005CD430 /* TypeBurritoFramework.framework */; };
+		63BD454F1C60DA8B00A24484 /* FailableTypeBurrito.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BD454E1C60DA8B00A24484 /* FailableTypeBurrito.swift */; };
+		63BD45511C60DB7000A24484 /* FailableTypeBurrito-Numbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BD45501C60DB7000A24484 /* FailableTypeBurrito-Numbers.swift */; };
+		63BD45541C60DC3500A24484 /* NumberExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BD45531C60DC3500A24484 /* NumberExtensions.swift */; };
+		63BD45561C60DC5800A24484 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BD45551C60DC5800A24484 /* StringExtensions.swift */; };
 		63ED8FFA1C46350500AF08D8 /* TypeBurrito-String-Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED8FF91C46350500AF08D8 /* TypeBurrito-String-Tests.swift */; };
 		63ED8FFB1C46350500AF08D8 /* TypeBurrito-String-Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED8FF91C46350500AF08D8 /* TypeBurrito-String-Tests.swift */; };
 		63ED8FFD1C463C3A00AF08D8 /* TypeBurrito-Numbers-Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED8FFC1C463C3A00AF08D8 /* TypeBurrito-Numbers-Tests.swift */; };
 		63ED8FFE1C463C3A00AF08D8 /* TypeBurrito-Numbers-Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED8FFC1C463C3A00AF08D8 /* TypeBurrito-Numbers-Tests.swift */; };
 		63ED90121C46B07D00AF08D8 /* TypeBurrito-Numbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED900F1C46B07D00AF08D8 /* TypeBurrito-Numbers.swift */; };
 		63ED90131C46B07D00AF08D8 /* TypeBurrito-Numbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED900F1C46B07D00AF08D8 /* TypeBurrito-Numbers.swift */; };
-		63ED90141C46B07D00AF08D8 /* TypeBurrito-String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED90101C46B07D00AF08D8 /* TypeBurrito-String.swift */; };
-		63ED90151C46B07D00AF08D8 /* TypeBurrito-String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED90101C46B07D00AF08D8 /* TypeBurrito-String.swift */; };
 		63ED90161C46B07D00AF08D8 /* TypeBurrito.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED90111C46B07D00AF08D8 /* TypeBurrito.swift */; };
 		63ED90171C46B07D00AF08D8 /* TypeBurrito.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED90111C46B07D00AF08D8 /* TypeBurrito.swift */; };
 		63ED90221C470E0500AF08D8 /* TypeBurrito-GeneralUsecases-Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED90211C470E0500AF08D8 /* TypeBurrito-GeneralUsecases-Tests.swift */; };
@@ -51,10 +53,13 @@
 		6361D5931C3FE721005CD430 /* TypeBurritoFramework-MacTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TypeBurritoFramework-MacTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6361D5A21C3FE7AA005CD430 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6361D5A31C3FE7AA005CD430 /* TypeBurritoFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TypeBurritoFramework.h; sourceTree = "<group>"; };
+		63BD454E1C60DA8B00A24484 /* FailableTypeBurrito.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FailableTypeBurrito.swift; sourceTree = "<group>"; };
+		63BD45501C60DB7000A24484 /* FailableTypeBurrito-Numbers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FailableTypeBurrito-Numbers.swift"; sourceTree = "<group>"; };
+		63BD45531C60DC3500A24484 /* NumberExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberExtensions.swift; sourceTree = "<group>"; };
+		63BD45551C60DC5800A24484 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		63ED8FF91C46350500AF08D8 /* TypeBurrito-String-Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TypeBurrito-String-Tests.swift"; sourceTree = "<group>"; };
 		63ED8FFC1C463C3A00AF08D8 /* TypeBurrito-Numbers-Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TypeBurrito-Numbers-Tests.swift"; sourceTree = "<group>"; };
 		63ED900F1C46B07D00AF08D8 /* TypeBurrito-Numbers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TypeBurrito-Numbers.swift"; sourceTree = "<group>"; };
-		63ED90101C46B07D00AF08D8 /* TypeBurrito-String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TypeBurrito-String.swift"; sourceTree = "<group>"; };
 		63ED90111C46B07D00AF08D8 /* TypeBurrito.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeBurrito.swift; sourceTree = "<group>"; };
 		63ED90211C470E0500AF08D8 /* TypeBurrito-GeneralUsecases-Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TypeBurrito-GeneralUsecases-Tests.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -128,13 +133,40 @@
 		6361D5A11C3FE7AA005CD430 /* CommonSource */ = {
 			isa = PBXGroup;
 			children = (
-				63ED90111C46B07D00AF08D8 /* TypeBurrito.swift */,
-				63ED900F1C46B07D00AF08D8 /* TypeBurrito-Numbers.swift */,
-				63ED90101C46B07D00AF08D8 /* TypeBurrito-String.swift */,
+				63BD45521C60DC1600A24484 /* StandardLibraryExtensions */,
+				63BD454D1C60DA7600A24484 /* FailableTypeBurrito */,
+				63BD454C1C60DA6E00A24484 /* TypeBurrito */,
 				6361D5A21C3FE7AA005CD430 /* Info.plist */,
 				6361D5A31C3FE7AA005CD430 /* TypeBurritoFramework.h */,
 			);
 			path = CommonSource;
+			sourceTree = "<group>";
+		};
+		63BD454C1C60DA6E00A24484 /* TypeBurrito */ = {
+			isa = PBXGroup;
+			children = (
+				63ED90111C46B07D00AF08D8 /* TypeBurrito.swift */,
+				63ED900F1C46B07D00AF08D8 /* TypeBurrito-Numbers.swift */,
+			);
+			name = TypeBurrito;
+			sourceTree = "<group>";
+		};
+		63BD454D1C60DA7600A24484 /* FailableTypeBurrito */ = {
+			isa = PBXGroup;
+			children = (
+				63BD454E1C60DA8B00A24484 /* FailableTypeBurrito.swift */,
+				63BD45501C60DB7000A24484 /* FailableTypeBurrito-Numbers.swift */,
+			);
+			name = FailableTypeBurrito;
+			sourceTree = "<group>";
+		};
+		63BD45521C60DC1600A24484 /* StandardLibraryExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				63BD45551C60DC5800A24484 /* StringExtensions.swift */,
+				63BD45531C60DC3500A24484 /* NumberExtensions.swift */,
+			);
+			name = StandardLibraryExtensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -309,9 +341,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63BD45511C60DB7000A24484 /* FailableTypeBurrito-Numbers.swift in Sources */,
 				63ED90161C46B07D00AF08D8 /* TypeBurrito.swift in Sources */,
+				63BD454F1C60DA8B00A24484 /* FailableTypeBurrito.swift in Sources */,
+				63BD45561C60DC5800A24484 /* StringExtensions.swift in Sources */,
 				63ED90121C46B07D00AF08D8 /* TypeBurrito-Numbers.swift in Sources */,
-				63ED90141C46B07D00AF08D8 /* TypeBurrito-String.swift in Sources */,
+				63BD45541C60DC3500A24484 /* NumberExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,7 +367,6 @@
 			files = (
 				63ED90171C46B07D00AF08D8 /* TypeBurrito.swift in Sources */,
 				63ED90131C46B07D00AF08D8 /* TypeBurrito-Numbers.swift in Sources */,
-				63ED90151C46B07D00AF08D8 /* TypeBurrito-String.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
