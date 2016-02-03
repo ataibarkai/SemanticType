@@ -38,7 +38,7 @@ If the underlying type wrapped by a `TypeBurrito` is a number, then we also *aut
 ## Usage:
 */
 import TypeBurritoFramework
-
+import Foundation
 //: TypeBurrito declerations:
 enum _SQLQuery: TypeBurritoSpec { typealias TheTypeInsideTheBurrito = String }
 typealias SQLQuery = TypeBurrito<_SQLQuery>
@@ -124,26 +124,14 @@ enum _EnglishLettersOnlyString: FailableTypeBurritoSpec {
 	
 	static func gatewayMap(preMap: TheTypeInsideTheBurrito) -> TheTypeInsideTheBurrito? {
 		
-		// internal function to figure out if the String is made up of only English letters
-		func stringIsEnglishLettersOnly(str: String) -> Bool {
-			func characterIsAnEnglishLetter(char: Character) -> Bool {
-				return (char >= "a" && char <= "z") || (char >= "A" && char <= "Z")
-			}
+		switch (preMap.stringByTrimmingCharactersInSet(NSCharacterSet.letterCharacterSet()) == "") {
 			
-			// iterate over all characters in the String to see if they are English letters
-			for char in str.characters {
-				// if any character is not an English letter, return false
-				if !characterIsAnEnglishLetter(char){
-					return false
-				}
-			}
+		case true:
+			return preMap
 			
-			// if we got here then all characters are English letters, so return true
-			return true
+		case false:
+			return nil
 		}
-		
-		// if the String is made of English letters only, return it. Otherwise, return nil.
-		return stringIsEnglishLettersOnly(preMap) ? preMap : nil
 	}
 }
 typealias EnglishLettersOnlyString = FailableTypeBurrito<_EnglishLettersOnlyString>
