@@ -14,13 +14,6 @@ public protocol FailableTypeBurritoSpec {
 	static func gatewayMap(preMap: TheTypeInsideTheBurrito) -> TheTypeInsideTheBurrito?
 }
 
-public extension FailableTypeBurritoSpec {
-	public static func gatewayMap(preMap: TheTypeInsideTheBurrito) -> TheTypeInsideTheBurrito? {
-		return preMap
-	}
-}
-
-
 
 
 

@@ -15,6 +15,8 @@
 		63BD45511C60DB7000A24484 /* FailableTypeBurrito-Numbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BD45501C60DB7000A24484 /* FailableTypeBurrito-Numbers.swift */; };
 		63BD45541C60DC3500A24484 /* NumberExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BD45531C60DC3500A24484 /* NumberExtensions.swift */; };
 		63BD45561C60DC5800A24484 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BD45551C60DC5800A24484 /* StringExtensions.swift */; };
+		63BD455A1C60DDB600A24484 /* FailableTypeBurrito-String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BD45591C60DDB600A24484 /* FailableTypeBurrito-String.swift */; };
+		63BD455B1C60DDB600A24484 /* FailableTypeBurrito-String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BD45591C60DDB600A24484 /* FailableTypeBurrito-String.swift */; };
 		63ED8FFA1C46350500AF08D8 /* TypeBurrito-String-Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED8FF91C46350500AF08D8 /* TypeBurrito-String-Tests.swift */; };
 		63ED8FFB1C46350500AF08D8 /* TypeBurrito-String-Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED8FF91C46350500AF08D8 /* TypeBurrito-String-Tests.swift */; };
 		63ED8FFD1C463C3A00AF08D8 /* TypeBurrito-Numbers-Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED8FFC1C463C3A00AF08D8 /* TypeBurrito-Numbers-Tests.swift */; };
@@ -23,8 +25,6 @@
 		63ED90131C46B07D00AF08D8 /* TypeBurrito-Numbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED900F1C46B07D00AF08D8 /* TypeBurrito-Numbers.swift */; };
 		63ED90161C46B07D00AF08D8 /* TypeBurrito.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED90111C46B07D00AF08D8 /* TypeBurrito.swift */; };
 		63ED90171C46B07D00AF08D8 /* TypeBurrito.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED90111C46B07D00AF08D8 /* TypeBurrito.swift */; };
-		63ED90221C470E0500AF08D8 /* TypeBurrito-GeneralUsecases-Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED90211C470E0500AF08D8 /* TypeBurrito-GeneralUsecases-Tests.swift */; };
-		63ED90231C470E0500AF08D8 /* TypeBurrito-GeneralUsecases-Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED90211C470E0500AF08D8 /* TypeBurrito-GeneralUsecases-Tests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,11 +57,11 @@
 		63BD45501C60DB7000A24484 /* FailableTypeBurrito-Numbers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FailableTypeBurrito-Numbers.swift"; sourceTree = "<group>"; };
 		63BD45531C60DC3500A24484 /* NumberExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberExtensions.swift; sourceTree = "<group>"; };
 		63BD45551C60DC5800A24484 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		63BD45591C60DDB600A24484 /* FailableTypeBurrito-String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FailableTypeBurrito-String.swift"; sourceTree = "<group>"; };
 		63ED8FF91C46350500AF08D8 /* TypeBurrito-String-Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TypeBurrito-String-Tests.swift"; sourceTree = "<group>"; };
 		63ED8FFC1C463C3A00AF08D8 /* TypeBurrito-Numbers-Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TypeBurrito-Numbers-Tests.swift"; sourceTree = "<group>"; };
 		63ED900F1C46B07D00AF08D8 /* TypeBurrito-Numbers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TypeBurrito-Numbers.swift"; sourceTree = "<group>"; };
 		63ED90111C46B07D00AF08D8 /* TypeBurrito.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeBurrito.swift; sourceTree = "<group>"; };
-		63ED90211C470E0500AF08D8 /* TypeBurrito-GeneralUsecases-Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TypeBurrito-GeneralUsecases-Tests.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,10 +121,8 @@
 		6361D5731C3FE680005CD430 /* TypeBurritoFrameworkTests */ = {
 			isa = PBXGroup;
 			children = (
-				63ED8FF91C46350500AF08D8 /* TypeBurrito-String-Tests.swift */,
-				63ED8FFC1C463C3A00AF08D8 /* TypeBurrito-Numbers-Tests.swift */,
-				634B75411C477E6D00B2CBEF /* TypeBurrito-Hashing.swift */,
-				63ED90211C470E0500AF08D8 /* TypeBurrito-GeneralUsecases-Tests.swift */,
+				63BD45571C60DD7500A24484 /* TypeBurrito */,
+				63BD45581C60DD8F00A24484 /* FailableTypeBurrito */,
 				6361D5761C3FE680005CD430 /* Info.plist */,
 			);
 			path = TypeBurritoFrameworkTests;
@@ -167,6 +165,24 @@
 				63BD45531C60DC3500A24484 /* NumberExtensions.swift */,
 			);
 			name = StandardLibraryExtensions;
+			sourceTree = "<group>";
+		};
+		63BD45571C60DD7500A24484 /* TypeBurrito */ = {
+			isa = PBXGroup;
+			children = (
+				63ED8FFC1C463C3A00AF08D8 /* TypeBurrito-Numbers-Tests.swift */,
+				63ED8FF91C46350500AF08D8 /* TypeBurrito-String-Tests.swift */,
+				634B75411C477E6D00B2CBEF /* TypeBurrito-Hashing.swift */,
+			);
+			name = TypeBurrito;
+			sourceTree = "<group>";
+		};
+		63BD45581C60DD8F00A24484 /* FailableTypeBurrito */ = {
+			isa = PBXGroup;
+			children = (
+				63BD45591C60DDB600A24484 /* FailableTypeBurrito-String.swift */,
+			);
+			name = FailableTypeBurrito;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -354,8 +370,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63BD455A1C60DDB600A24484 /* FailableTypeBurrito-String.swift in Sources */,
 				634B75421C477E6D00B2CBEF /* TypeBurrito-Hashing.swift in Sources */,
-				63ED90221C470E0500AF08D8 /* TypeBurrito-GeneralUsecases-Tests.swift in Sources */,
 				63ED8FFA1C46350500AF08D8 /* TypeBurrito-String-Tests.swift in Sources */,
 				63ED8FFD1C463C3A00AF08D8 /* TypeBurrito-Numbers-Tests.swift in Sources */,
 			);
@@ -374,8 +390,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63BD455B1C60DDB600A24484 /* FailableTypeBurrito-String.swift in Sources */,
 				634B75431C477E6D00B2CBEF /* TypeBurrito-Hashing.swift in Sources */,
-				63ED90231C470E0500AF08D8 /* TypeBurrito-GeneralUsecases-Tests.swift in Sources */,
 				63ED8FFB1C46350500AF08D8 /* TypeBurrito-String-Tests.swift in Sources */,
 				63ED8FFE1C463C3A00AF08D8 /* TypeBurrito-Numbers-Tests.swift in Sources */,
 			);
