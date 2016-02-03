@@ -121,7 +121,57 @@ Examples include:
 
 
 ```swift
+```
 
+### Advanced Usage: `FailableTypeBurrito`
+
+There exists a `FailableTypeBurrito` (and a corresponding `FailableTypeBurritoSpec`)
+which is directly analogous to the `TypeBurrito`.
+
+However its `gatewayMap` function may return a `nil`, which would cause the `FailableTypeBurrito` to be `nil`.
+
+For example:
+
+
+```swift
+enum _EnglishLettersOnlyString: FailableTypeBurritoSpec {
+	typealias TheTypeInsideTheBurrito = String
+	
+	static func gatewayMap(preMap: TheTypeInsideTheBurrito) -> TheTypeInsideTheBurrito? {
+		
+		// internal function to figure out if the String is made up of only English letters
+		func stringIsEnglishLettersOnly(str: String) -> Bool {
+			func characterIsAnEnglishLetter(char: Character) -> Bool {
+				return (char >= "a" && char <= "z") || (char >= "A" && char <= "Z")
+			}
+			
+			// iterate over all characters in the String to see if they are English letters
+			for char in str.characters {
+				// if any character is not an English letter, return false
+				if !characterIsAnEnglishLetter(char){
+					return false
+				}
+			}
+			
+			// if we got here then all characters are English letters, so return true
+			return true
+		}
+		
+		// if the String is made of English letters only, return it. Otherwise, return nil.
+		return stringIsEnglishLettersOnly(preMap) ? preMap : nil
+	}
+}
+typealias EnglishLettersOnlyString = FailableTypeBurrito<_EnglishLettersOnlyString>
+
+```
+The following is made of only English letters, and therefore the resultant value is non-`nil`.
+```swift
+let actuallyOnlyLetters = EnglishLettersOnlyString("abclaskjdf")
+
+```
+The following is *not* made of only English letters, and therefore the resultant value is `nil`.
+```swift
+let notOnlyLettes = EnglishLettersOnlyString("asdflkj12345")
 
 ```
 
