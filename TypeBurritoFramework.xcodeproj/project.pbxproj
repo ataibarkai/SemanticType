@@ -11,6 +11,10 @@
 		634B75431C477E6D00B2CBEF /* TypeBurrito-Hashing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634B75411C477E6D00B2CBEF /* TypeBurrito-Hashing.swift */; };
 		6361D5701C3FE680005CD430 /* TypeBurritoFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6361D5651C3FE680005CD430 /* TypeBurritoFramework.framework */; };
 		6361D5941C3FE721005CD430 /* TypeBurritoFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6361D5841C3FE721005CD430 /* TypeBurritoFramework.framework */; };
+		63B9631F1C6B73F1008623F5 /* FailableTypeBurrito.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BD454E1C60DA8B00A24484 /* FailableTypeBurrito.swift */; };
+		63B963201C6B73F1008623F5 /* FailableTypeBurrito-Numbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BD45501C60DB7000A24484 /* FailableTypeBurrito-Numbers.swift */; };
+		63B963211C6B73F4008623F5 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BD45551C60DC5800A24484 /* StringExtensions.swift */; };
+		63B963221C6B73F4008623F5 /* NumberExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BD45531C60DC3500A24484 /* NumberExtensions.swift */; };
 		63BD454F1C60DA8B00A24484 /* FailableTypeBurrito.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BD454E1C60DA8B00A24484 /* FailableTypeBurrito.swift */; };
 		63BD45511C60DB7000A24484 /* FailableTypeBurrito-Numbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BD45501C60DB7000A24484 /* FailableTypeBurrito-Numbers.swift */; };
 		63BD45541C60DC3500A24484 /* NumberExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BD45531C60DC3500A24484 /* NumberExtensions.swift */; };
@@ -381,7 +385,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63B9631F1C6B73F1008623F5 /* FailableTypeBurrito.swift in Sources */,
 				63ED90171C46B07D00AF08D8 /* TypeBurrito.swift in Sources */,
+				63B963211C6B73F4008623F5 /* StringExtensions.swift in Sources */,
+				63B963201C6B73F1008623F5 /* FailableTypeBurrito-Numbers.swift in Sources */,
+				63B963221C6B73F4008623F5 /* NumberExtensions.swift in Sources */,
 				63ED90131C46B07D00AF08D8 /* TypeBurrito-Numbers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
