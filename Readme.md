@@ -1,4 +1,10 @@
 
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+
+
+```swift
+```
+
 # The `TypeBurrito` Protocol
 
 ---------
@@ -166,8 +172,14 @@ let notOnlyLettes = EnglishLettersOnlyString("asdflkj12345")
 ## Installation:
 
 ### Carthage
-Add the following to your cartfile:
+Add the following to your `Cartfile`:
 
 `github "ataibarkai/TypeBurritoFramework"`
+
+
+### CocoaPods
+Add the following to your `Podfile`:
+
+`pod 'TypeBurritoFramework', :git => 'https://github.com/ataibarkai/TypeBurritoFramework.git'`
 
 
