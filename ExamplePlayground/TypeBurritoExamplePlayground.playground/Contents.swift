@@ -134,12 +134,10 @@ enum EnglishLettersOnlyString_Spec: FailableTypeBurritoSpec {
 	
 	static func gatewayMap(preMap: TheTypeInsideTheBurrito) -> TheTypeInsideTheBurrito? {
 		
-		switch (preMap.stringByTrimmingCharactersInSet(NSCharacterSet.letterCharacterSet()) == "") {
-			
-		case true:
+		if(preMap.stringByTrimmingCharactersInSet(NSCharacterSet.letterCharacterSet()) == "") {
 			return preMap
-			
-		case false:
+		}
+		else{
 			return nil
 		}
 	}
@@ -151,6 +149,7 @@ let actuallyOnlyLetters = EnglishLettersOnlyString("abclaskjdf")
 
 //: The following is *not* made of only English letters, and therefore the resultant value is `nil`.
 let notOnlyLettes = EnglishLettersOnlyString("asdflkj12345")
+
 
 /*:
 ## Installation:
