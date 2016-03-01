@@ -2,15 +2,22 @@
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 
-# The `TypeBurrito` Protocol
+# `TypeBurritoFramework`
 
 ---------
 
+## What is it?
+
+`TypeBurritoFramework` is a tiny Swift µFramework which enables the *quick*, *boilerplate-free* creation of types that cleanly couple to runtime code.
+
+---------
+
+
 ## Purpose
 
-`TypeBurrito` is a protocol that enables the quick, *boilerplate-free* creation of types that wrap other types.
-This allows for treating types as *restrictions* rather than as *"data holders"* -- thereby increasing **code safety** and **code clarity**.
+`TypeBurrito` leverages Swift's type system in order to turn *implicit* runtime assumptions into (mostly) *explicit* compile-time assumptions. We do this by encapsulating all runtime assumptions into a single function which is intimately coupled to the type.
 
+This allows for treating types as *restrictions* rather than as *data formatters* -- thereby increasing code **safety** and **clarity**.
 
 ---------
 
@@ -46,14 +53,14 @@ import Foundation
 ```
 TypeBurrito declerations:
 ```swift
-enum _SQLQuery: TypeBurritoSpec { typealias TheTypeInsideTheBurrito = String }
-typealias SQLQuery = TypeBurrito<_SQLQuery>
+enum SQLQuery_Spec: TypeBurritoSpec { typealias TheTypeInsideTheBurrito = String }
+typealias SQLQuery = TypeBurrito<SQLQuery_Spec>
 
-enum _Meters: TypeBurritoSpec { typealias TheTypeInsideTheBurrito = Double }
-typealias Meters = TypeBurrito<_Meters>
+enum Meters_Spec: TypeBurritoSpec { typealias TheTypeInsideTheBurrito = Double }
+typealias Meters = TypeBurrito<Meters_Spec>
 
-enum _Inches: TypeBurritoSpec { typealias TheTypeInsideTheBurrito = Double }
-typealias Inches = TypeBurrito<_Inches>
+enum Inches_Spec: TypeBurritoSpec { typealias TheTypeInsideTheBurrito = Double }
+typealias Inches = TypeBurrito<Inches_Spec>
 
 ```
 TypeBurritos in practice:
@@ -78,7 +85,7 @@ The following would be a compile time error were it not commented-out
 
 ```
 
-### Advanced Usage: The `gatewayMap` Function
+### The `gatewayMap` Function
 We may also define `TypeBurritoSpec`s with a static function `gatewayMap` where:
 
 `static func gatewayMap(preMap: TheTypeInsideTheBurrito) -> TheTypeInsideTheBurrito`
@@ -107,9 +114,7 @@ whether it was constructed from lowercase or uppercase characters is insequentia
 let lowercaseSteve = Username("steve@gmail.com")
 let uppercaseSteve = Username("STEVE@GMAIL.COM")
 
-if (lowercaseSteve == uppercaseSteve) {
-	// they are equal
-}
+assert(lowercaseSteve == uppercaseSteve)
 
 ```
 
@@ -121,6 +126,8 @@ Examples include:
 * a `SQLCommand` type which is always sql-escaped (and not prone to SQL-injection attacks)
 * a `LevelInSomeBuilding` type which does not allow values below -1 nor above 72 (the lowest and highest levels in SomeBuilding).
 * etc.
+
+We still have "type information" which is associated with runtime behavior rather than with compile-time behavior, but this information (and all associated testing) is restricted to the `gatewayMap()` function.
 
 
 ```swift
@@ -137,7 +144,7 @@ For example:
 
 
 ```swift
-enum _EnglishLettersOnlyString: FailableTypeBurritoSpec {
+enum EnglishLettersOnlyString_Spec: FailableTypeBurritoSpec {
 	typealias TheTypeInsideTheBurrito = String
 	
 	static func gatewayMap(preMap: TheTypeInsideTheBurrito) -> TheTypeInsideTheBurrito? {
@@ -152,7 +159,7 @@ enum _EnglishLettersOnlyString: FailableTypeBurritoSpec {
 		}
 	}
 }
-typealias EnglishLettersOnlyString = FailableTypeBurrito<_EnglishLettersOnlyString>
+typealias EnglishLettersOnlyString = FailableTypeBurrito<EnglishLettersOnlyString_Spec>
 
 ```
 The following is made of only English letters, and therefore the resultant value is non-`nil`.
