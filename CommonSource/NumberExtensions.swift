@@ -6,8 +6,6 @@
 //  Copyright © 2016 Atai Barkai. All rights reserved.
 //
 
-import Foundation
-
 public protocol SummableSubtractable{
 	func +(lhs: Self, rhs: Self) -> Self
 	func -(lhs: Self, rhs: Self) -> Self

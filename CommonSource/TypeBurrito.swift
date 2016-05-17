@@ -6,9 +6,6 @@
 //  Copyright © 2016 Atai Barkai. All rights reserved.
 //
 
-
-import Foundation
-
 /**
 A protocol to be adopted by types that specify and describe a TypeBurrito.
 
@@ -23,7 +20,7 @@ let _ = Kgs(234.2)
 ```
 */
 public protocol TypeBurritoSpec {
-	typealias TheTypeInsideTheBurrito: Comparable, CustomStringConvertible, Hashable
+	associatedtype TheTypeInsideTheBurrito: Comparable, CustomStringConvertible, Hashable
 	
 	static func gatewayMap(preMap: TheTypeInsideTheBurrito) -> TheTypeInsideTheBurrito
 }

@@ -6,10 +6,8 @@
 //  Copyright © 2016 Atai Barkai. All rights reserved.
 //
 
-import Foundation
-
 public protocol FailableTypeBurritoSpec {
-	typealias TheTypeInsideTheBurrito: Comparable, CustomStringConvertible, Hashable
+	associatedtype TheTypeInsideTheBurrito: Comparable, CustomStringConvertible, Hashable
 	
 	static func gatewayMap(preMap: TheTypeInsideTheBurrito) -> TheTypeInsideTheBurrito?
 }

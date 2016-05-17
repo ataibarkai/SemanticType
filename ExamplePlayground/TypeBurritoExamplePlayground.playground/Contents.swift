@@ -48,7 +48,7 @@ If the underlying type wrapped by a `TypeBurrito` is a number, then we also *aut
 ## Usage:
 */
 import TypeBurritoFramework
-import Foundation
+
 //: TypeBurrito declerations:
 enum SQLQuery_Spec: TypeBurritoSpec { typealias TheTypeInsideTheBurrito = String }
 typealias SQLQuery = TypeBurrito<SQLQuery_Spec>

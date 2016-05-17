@@ -6,9 +6,6 @@
 //  Copyright © 2016 Atai Barkai. All rights reserved.
 //
 
-import Foundation
-
-
 // String extension that enables TypeBurrito to wrap a String type.
 extension String: CustomStringConvertible{
 	public var description: String {
