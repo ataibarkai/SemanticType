@@ -8,7 +8,9 @@
 
 ## What is it?
 
-`TypeBurritoFramework` is a tiny Swift µFramework which enables the *quick*, *boilerplate-free* creation of types that cleanly couple to runtime code.
+`TypeBurritoFramework` is a tiny Swift µFramework which enables the *quick*, *boilerplate-free* creation of types that
+* Wrap primitive types used in specific circumstances, allowing the type-checker to enforce safe usage
+* Cleanly couple to runtime data checks.
 
 ---------
 
