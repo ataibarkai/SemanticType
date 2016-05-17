@@ -107,7 +107,7 @@ typealias Username = TypeBurrito<_Username>
 
 ```
 From that point onwards, we may be **sure** that if we are given a `Username`,
-whether it was constructed from lowercase or uppercase characters is insequential.
+whether it was constructed from lowercase or uppercase characters is inconsequential.
 
 ```swift
 let lowercaseSteve = Username("steve@gmail.com")
@@ -126,7 +126,7 @@ Examples include:
 * a `LevelInSomeBuilding` type which does not allow values below -1 nor above 72 (the lowest and highest levels in SomeBuilding).
 * etc.
 
-We still have "type information" which is associated with runtime behavior rather than with compile-time behavior, but this information (and all associated testing) is restricted to the `gatewayMap()` function.
+We still have "type information" which is associated with runtime behavior rather than with compile-time behavior, but this information (and all associated testing) is now restricted to the `gatewayMap()` function.
 
 
 ```swift
