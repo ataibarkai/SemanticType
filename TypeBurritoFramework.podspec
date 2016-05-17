@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "TypeBurritoFramework"
-  s.version      = "0.3.3"
+  s.version      = "0.4"
   s.summary      = "Over-Typing Swift μFramework"
 
   # This description is used to generate tags and improve search results.
