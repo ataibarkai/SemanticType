@@ -10,16 +10,13 @@
 
 `TypeBurritoFramework` is a Swift µFramework which enables the *quick*, *boilerplate-free* creation of types that
 * Wrap primitive types used in specific circumstances, allowing the type-checker to enforce safe usage.
-* Cleanly couple to runtime data checks.
+* Cleanly couple to runtime data transformations & checks.
 
 ---------
 
 
 ## Purpose
-
-`TypeBurrito` leverages Swift's type system in order to turn *implicit* runtime assumptions into (mostly) *explicit* compile-time assumptions. We do this by encapsulating all runtime assumptions into a single function which is intimately coupled to the type.
-
-This allows for treating types as *restrictions* rather than merely as *data holders* -- thereby increasing code **safety** and **clarity**.
+To allow for treating types as *restrictions* rather than merely as *data holders* -- thereby increasing code **safety** and **clarity**.
 
 ---------
 
