@@ -33,7 +33,8 @@ public struct FailableTypeBurrito <Spec: FailableTypeBurritoSpec>: Comparable, H
 	
 	// This is a read-only field which is declared *public*,
 	// meaning it is accessible to users of the framework.
-	// It allows users to get ahold of the stored primitive inside the TypeBurrito
+	// It allows users to get ahold of the stored primitive inside the TypeBurrito.
+	// We decouple it from the internal `value` var to allow for a possible future change in implementation.
 	public var primitiveValueInside: Spec.TheTypeInsideTheBurrito {
 		return self.value
 	}

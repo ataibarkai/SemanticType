@@ -31,18 +31,13 @@ public protocol TypeBurritoSpec {
 // On a first glace, it may appear that this is somewhat dangerous, as a user may cast our underlying type into
 // a TypeBurritoSpec, and therefore get the extension's behavior rather than its own specified behvaior.
 // However it is **not so** for 2 reasons:
-// 1. No *instance* is ever created of a type which conforms to TypeBurritoSpec.
-//		The spec is only used as a type.
-//		Furthermore, even variables that store types cannot be used as types,
-//		e.g. the following would not compile:
+// 1. No *instance* is ever created of a type which conforms to `TypeBurritoSpec`.
+//		Only its *type* is used.
 //
-//		enum _Username: TypeBurritoSpec { typealias TheTypeInsideTheBurrito = String }
-//		let _someType = _Username.self
-//		typealias someType = TypeBurrito<_someType> // error: use of undeclared type _someType
-//
-// 2. Even if an instance were created (it isn't) of a TypeBurritoSpec, as of Swift 2,
-//		protocols with a specified typealias may only be used as a generic constraint,
-//		and therefore a type which conforms to TypeBurritoSpec may not be down-casted to a TypeBurritoSpec.
+// 2. As of Swift 2, type covariance and contravariance are not supported (nor are they planned for Swift 3).
+//		This would be the only way such a down-cast could occur on the type level (rather than on the instance level).
+//		If such support is added in the future, this µframework could probably make good use of it,
+//		and would therefore require a redesign at any rate.
 public extension TypeBurritoSpec {
 	public static func gatewayMap(preMap: TheTypeInsideTheBurrito) -> TheTypeInsideTheBurrito {
 		return preMap
