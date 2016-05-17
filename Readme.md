@@ -49,7 +49,7 @@ If the underlying type wrapped by a `TypeBurrito` is a number, then we also *aut
 
 ```swift
 import TypeBurritoFramework
-import Foundation
+
 ```
 TypeBurrito declerations:
 ```swift
