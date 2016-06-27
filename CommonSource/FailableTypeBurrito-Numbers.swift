@@ -6,14 +6,31 @@
 //  Copyright © 2016 Atai Barkai. All rights reserved.
 //
 
-// Addition for appropriate TypeBurrito types
+// -----------------------------
+// SummableSubtractable extensions
+// -----------------------------
+
 public func + <Spec where Spec.TheTypeInsideTheBurrito: SummableSubtractable>
 	(left: FailableTypeBurrito<Spec>, right: FailableTypeBurrito<Spec>) -> FailableTypeBurrito<Spec>? {
 		return FailableTypeBurrito<Spec>.init((left.value + right.value))
 }
 
-// Subtraction for appropriate TypeBurrito types
 public func - <Spec where Spec.TheTypeInsideTheBurrito: SummableSubtractable>
 	(left: FailableTypeBurrito<Spec>, right: FailableTypeBurrito<Spec>) -> FailableTypeBurrito<Spec>? {
 		return FailableTypeBurrito<Spec>.init((left.value - right.value))
+}
+
+
+// -----------------------------
+// MultipliableDivisible extensions
+// -----------------------------
+
+public func * <Spec where Spec.TheTypeInsideTheBurrito: MultipliableDivisible>
+	(left: FailableTypeBurrito<Spec>, right: FailableTypeBurrito<Spec>) -> FailableTypeBurrito<Spec>? {
+	return FailableTypeBurrito<Spec>.init((left.value * right.value))
+}
+
+public func / <Spec where Spec.TheTypeInsideTheBurrito: MultipliableDivisible>
+	(left: FailableTypeBurrito<Spec>, right: FailableTypeBurrito<Spec>) -> FailableTypeBurrito<Spec>? {
+	return FailableTypeBurrito<Spec>.init((left.value / right.value))
 }

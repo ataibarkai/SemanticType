@@ -21,6 +21,10 @@
 		63BD45561C60DC5800A24484 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BD45551C60DC5800A24484 /* StringExtensions.swift */; };
 		63BD455A1C60DDB600A24484 /* FailableTypeBurrito-String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BD45591C60DDB600A24484 /* FailableTypeBurrito-String.swift */; };
 		63BD455B1C60DDB600A24484 /* FailableTypeBurrito-String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BD45591C60DDB600A24484 /* FailableTypeBurrito-String.swift */; };
+		63D80E371D20F64200603039 /* FailableTypeBurrito-Numbers-Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D80E361D20F64200603039 /* FailableTypeBurrito-Numbers-Tests.swift */; };
+		63D80E391D20FA8B00603039 /* FailableTypeBurrito-Hashing-Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D80E381D20FA8B00603039 /* FailableTypeBurrito-Hashing-Tests.swift */; };
+		63D80E3A1D20FA9D00603039 /* FailableTypeBurrito-Numbers-Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D80E361D20F64200603039 /* FailableTypeBurrito-Numbers-Tests.swift */; };
+		63D80E3B1D20FA9D00603039 /* FailableTypeBurrito-Hashing-Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D80E381D20FA8B00603039 /* FailableTypeBurrito-Hashing-Tests.swift */; };
 		63ED8FFA1C46350500AF08D8 /* TypeBurrito-String-Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED8FF91C46350500AF08D8 /* TypeBurrito-String-Tests.swift */; };
 		63ED8FFB1C46350500AF08D8 /* TypeBurrito-String-Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED8FF91C46350500AF08D8 /* TypeBurrito-String-Tests.swift */; };
 		63ED8FFD1C463C3A00AF08D8 /* TypeBurrito-Numbers-Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ED8FFC1C463C3A00AF08D8 /* TypeBurrito-Numbers-Tests.swift */; };
@@ -62,6 +66,8 @@
 		63BD45531C60DC3500A24484 /* NumberExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberExtensions.swift; sourceTree = "<group>"; };
 		63BD45551C60DC5800A24484 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		63BD45591C60DDB600A24484 /* FailableTypeBurrito-String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FailableTypeBurrito-String.swift"; sourceTree = "<group>"; };
+		63D80E361D20F64200603039 /* FailableTypeBurrito-Numbers-Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FailableTypeBurrito-Numbers-Tests.swift"; sourceTree = "<group>"; };
+		63D80E381D20FA8B00603039 /* FailableTypeBurrito-Hashing-Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FailableTypeBurrito-Hashing-Tests.swift"; sourceTree = "<group>"; };
 		63ED8FF91C46350500AF08D8 /* TypeBurrito-String-Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TypeBurrito-String-Tests.swift"; sourceTree = "<group>"; };
 		63ED8FFC1C463C3A00AF08D8 /* TypeBurrito-Numbers-Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TypeBurrito-Numbers-Tests.swift"; sourceTree = "<group>"; };
 		63ED900F1C46B07D00AF08D8 /* TypeBurrito-Numbers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TypeBurrito-Numbers.swift"; sourceTree = "<group>"; };
@@ -185,6 +191,8 @@
 			isa = PBXGroup;
 			children = (
 				63BD45591C60DDB600A24484 /* FailableTypeBurrito-String.swift */,
+				63D80E361D20F64200603039 /* FailableTypeBurrito-Numbers-Tests.swift */,
+				63D80E381D20FA8B00603039 /* FailableTypeBurrito-Hashing-Tests.swift */,
 			);
 			name = FailableTypeBurrito;
 			sourceTree = "<group>";
@@ -377,6 +385,8 @@
 				63BD455A1C60DDB600A24484 /* FailableTypeBurrito-String.swift in Sources */,
 				634B75421C477E6D00B2CBEF /* TypeBurrito-Hashing.swift in Sources */,
 				63ED8FFA1C46350500AF08D8 /* TypeBurrito-String-Tests.swift in Sources */,
+				63D80E371D20F64200603039 /* FailableTypeBurrito-Numbers-Tests.swift in Sources */,
+				63D80E391D20FA8B00603039 /* FailableTypeBurrito-Hashing-Tests.swift in Sources */,
 				63ED8FFD1C463C3A00AF08D8 /* TypeBurrito-Numbers-Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -401,6 +411,8 @@
 				63BD455B1C60DDB600A24484 /* FailableTypeBurrito-String.swift in Sources */,
 				634B75431C477E6D00B2CBEF /* TypeBurrito-Hashing.swift in Sources */,
 				63ED8FFB1C46350500AF08D8 /* TypeBurrito-String-Tests.swift in Sources */,
+				63D80E3A1D20FA9D00603039 /* FailableTypeBurrito-Numbers-Tests.swift in Sources */,
+				63D80E3B1D20FA9D00603039 /* FailableTypeBurrito-Hashing-Tests.swift in Sources */,
 				63ED8FFE1C463C3A00AF08D8 /* TypeBurrito-Numbers-Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
