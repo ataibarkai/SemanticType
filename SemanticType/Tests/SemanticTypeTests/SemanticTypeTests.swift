@@ -6,7 +6,7 @@ final class SemanticTypeTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-        XCTAssertEqual(SemanticType().text, "Hello, World!")
+//        XCTAssertEqual(SemanticType().text, "Hello, World!")
     }
 
     static var allTests = [
