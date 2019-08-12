@@ -26,8 +26,10 @@ public struct SemanticType<Spec: SemanticTypeSpec> {
     /// under *all* circumstances.
     private let _storedBackingPrimitive: Spec.BackingPrimitiveWithValueSemantics
     
-    /// A proxy internally exposing the `_storedBackingPrimitive` property to other files in this package --
-    /// *without* also making it possible to define any initializers circumventing the [create](x-source-tag://create) factory method.
+    /// A proxy internally exposing the `_storedBackingPrimitive` property to other files in this package.
+    ///
+    /// Being a *computed* property, the value exposition *does not* also make it possible
+    /// to define any initializers circumventing the [create](x-source-tag://create) factory method.
     internal var _backingPrimitiveProxy: Spec.BackingPrimitiveWithValueSemantics { _storedBackingPrimitive }
     
     // MARK: init / factories
