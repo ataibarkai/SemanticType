@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  SemanticType+usabilityExtensions.swift
 //  
 //
 //  Created by Atai Barkai on 8/8/19.
@@ -76,11 +76,13 @@ extension SemanticType where Spec.Error == Never {
         return Self.init(
             try map(backingPrimitive)
         )
-    }}
+    }
+    
+}
 
 
-
-private extension Result where Failure == Never {
+// Declared `internal` so that it's available for tests as well.
+internal extension Result where Failure == Never {
     
     /// A variant of `Result.get()` specific to error-less `Result` instances
     /// -- which is therefore statically guarenteed to never `throw`.
