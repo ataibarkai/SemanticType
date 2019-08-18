@@ -31,17 +31,19 @@ extension SemanticType {
         )
     }
     
-//    public func tryMap(
-//        _ mutatingMap: (_ backingPrimitive: inout Spec.BackingPrimitiveWithValueSemantics) throws -> ()
-//    ) rethrows -> Result<Self, Spec.Error> {
-//        return try tryMap { original -> Spec.BackingPrimitiveWithValueSemantics in
-//            var toBeModified = original
-//            try mutatingMap(&toBeModified) // Here we make use of the assumption that `Spec.BackingPrimitiveWithValueSemantics` has
-//                                           // value-semantics, i.e. that this mutation of `backingPrimitiveCopy` would bear no
-//                                           // effect on the original `backingPrimitive`.
-//            return toBeModified
-//        }
-//    }
+    public mutating func mutatingTryMap(
+        _ mutation: (_ backingPrimitive: inout Spec.BackingPrimitiveWithValueSemantics) throws -> ()
+    ) throws {
+        let mapped = try tryMap { original in
+            var toBeModified = original
+            try mutation(&toBeModified) // Here we make use of the assumption that `Spec.BackingPrimitiveWithValueSemantics` has
+                                        // value-semantics, i.e. that this mutation of `backingPrimitiveCopy` would bear no
+                                        // effect on the original `backingPrimitive`.
+            return toBeModified
+        }
+        
+        self = try mapped.get()
+    }
 }
 
 
