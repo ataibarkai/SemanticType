@@ -71,7 +71,7 @@ final class SemanticTypeCoreCreationTests: XCTestCase {
         }
         typealias FiveLetterWordArray = SemanticType<FiveLetterWordArray_Spec>
         
-        let arrayThatOnlyContainsFiveLetterWords = ["12345", "Earth", "water", "melon", "great"]
+        let arrayThatOnlyContainsFiveLetterWords = ["12345", "Earth", "water", "melon", "12345", "great"]
         
         let shouldBeValid = FiveLetterWordArray.create(arrayThatOnlyContainsFiveLetterWords)
         switch shouldBeValid {
@@ -81,12 +81,21 @@ final class SemanticTypeCoreCreationTests: XCTestCase {
             XCTFail()
         }
         
-        let shouldBeInvalid = FiveLetterWordArray.create(arrayThatOnlyContainsFiveLetterWords + ["123456"])
-        switch shouldBeInvalid {
+        let oneInvalidWord = FiveLetterWordArray.create(arrayThatOnlyContainsFiveLetterWords + ["123456"])
+        switch oneInvalidWord {
         case .success:
             XCTFail()
         case .failure(let error):
             XCTAssertEqual(error.excludedWords, ["123456"])
+        }
+        
+        let nonFiveLetterWords = ["123456", "abc", "foo", "A", "123456", "A!"]
+        let aFewInvalidWords = FiveLetterWordArray.create(arrayThatOnlyContainsFiveLetterWords + nonFiveLetterWords)
+        switch aFewInvalidWords {
+        case .success:
+            XCTFail()
+        case .failure(let error):
+            XCTAssertEqual(error.excludedWords, nonFiveLetterWords)
         }
     }
     
