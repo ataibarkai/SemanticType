@@ -5,6 +5,10 @@ final class SemanticType_UsabilityExtensionsTests_ErrorfulSemanticType: XCTestCa
     
     struct Person: Equatable {
         var name: String
+        
+        var associatedGreeting: String {
+            "Hello, my name is \(name)."
+        }
     }
     
     enum PersonWithShortName_Spec: SemanticTypeSpec {
@@ -52,6 +56,15 @@ final class SemanticType_UsabilityExtensionsTests_ErrorfulSemanticType: XCTestCa
     func testSubscriptAccess() {
         let tim = try! PersonWithShortName(Person(name: "Tim"))
         XCTAssertEqual(tim.name, "Tim")
+        XCTAssertEqual(tim.associatedGreeting, "Hello, my name is Tim.")
+
+        let bill = try! PersonWithShortName(Person(name: "Bill"))
+        XCTAssertEqual(bill.name, "Bill")
+        XCTAssertEqual(bill.associatedGreeting, "Hello, my name is Bill.")
+    }
+    
+    func testTryMap() {
+        
     }
     
     
@@ -60,5 +73,6 @@ final class SemanticType_UsabilityExtensionsTests_ErrorfulSemanticType: XCTestCa
         ("testInitialization", testInitialization),
         ("testBackingPrimitiveAccess", testBackingPrimitiveAccess),
         ("testSubscriptAccess", testSubscriptAccess),
+        ("testTryMap", testTryMap),
     ]
 }
