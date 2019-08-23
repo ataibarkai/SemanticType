@@ -13,14 +13,15 @@ final class SemanticType_UsabilityExtensionsTests_ErrorfulSemanticType: XCTestCa
     
     enum PersonWithShortName_Spec: SemanticTypeSpec {
         typealias BackingPrimitiveWithValueSemantics = Person
+        typealias Error = NameIsTooLongError
         
-        enum Error: Swift.Error, Equatable {
-            case nameIsTooLong(name: String)
+        struct NameIsTooLongError: Swift.Error, Equatable {
+            var name: String
         }
         
         static func gatewayMap(preMap: Person) -> Result<Person, PersonWithShortName_Spec.Error> {
             guard preMap.name.count < 5
-                else { return .failure(.nameIsTooLong(name: preMap.name)) }
+                else { return .failure(NameIsTooLongError(name: preMap.name)) }
             
             return .success(preMap)
         }
@@ -36,8 +37,8 @@ final class SemanticType_UsabilityExtensionsTests_ErrorfulSemanticType: XCTestCa
         
         XCTAssertThrowsError(try PersonWithShortName(Person(name: "Joseph"))) { error in
             XCTAssertEqual(
-                error as! PersonWithShortName_Spec.Error,
-                .nameIsTooLong(name: "Joseph")
+                error as! PersonWithShortName.Spec.NameIsTooLongError,
+                PersonWithShortName.Spec.NameIsTooLongError.init(name: "Joseph")
             )
         }
     }
@@ -63,16 +64,70 @@ final class SemanticType_UsabilityExtensionsTests_ErrorfulSemanticType: XCTestCa
         XCTAssertEqual(bill.associatedGreeting, "Hello, my name is Bill.")
     }
     
-    func testTryMap() {
-        
+    func testSuccessfulTryMap() {
+        let joe = try! PersonWithShortName(Person(name: "Joe"))
+        let lowercaseJoe = try! joe.tryMap { person in
+            var person = person
+            person.name = person.name.lowercased()
+            return person
+        }.get()
+        XCTAssertEqual(lowercaseJoe.name, "joe")
     }
     
-    
+    func testFailingTryMap() {
+        let joe = try! PersonWithShortName(Person(name: "Joe"))
 
+        let josephTooLong = joe.tryMap { person in
+            var person = person
+            person.name.removeLast()
+            person.name.append(contentsOf: "seph")
+            return person
+        }
+        
+        switch josephTooLong {
+        case .success:
+            XCTFail()
+        case .failure(let error):
+            XCTAssertEqual(
+                error,
+                PersonWithShortName.Spec.NameIsTooLongError(name: "Joseph")
+            )
+        }
+    }
+    
+    func testSuccessfulMutatingTryMap() {
+        var joe = try! PersonWithShortName(Person(name: "Joe"))
+        
+        XCTAssertEqual(joe.name, "Joe")
+        try! joe.mutatingTryMap { person in person.name = person.name.lowercased() }
+        XCTAssertEqual(joe.name, "joe")
+    }
+    
+    func testFailingMutatingTryMap() {
+        var joe = try! PersonWithShortName(Person(name: "Joe"))
+        
+        XCTAssertEqual(joe.name, "Joe")
+        XCTAssertThrowsError(
+            try joe.mutatingTryMap { person in
+                  person.name.removeLast()
+                  person.name.append(contentsOf: "seph")
+            }
+        ) { error in
+            XCTAssertEqual(
+                error as! PersonWithShortName.Spec.NameIsTooLongError,
+                PersonWithShortName.Spec.NameIsTooLongError.init(name: "Joseph")
+            )
+        }
+    }
+
+    
     static var allTests = [
         ("testInitialization", testInitialization),
         ("testBackingPrimitiveAccess", testBackingPrimitiveAccess),
         ("testSubscriptAccess", testSubscriptAccess),
-        ("testTryMap", testTryMap),
+        ("testSuccessfulTryMap", testSuccessfulTryMap),
+        ("testFailingTryMap", testFailingTryMap),
+        ("testSuccessfulMutatingTryMap", testSuccessfulMutatingTryMap),
+        ("testFailingMutatingTryMap", testFailingMutatingTryMap),
     ]
 }
