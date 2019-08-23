@@ -7,6 +7,7 @@
 
 // A very thin, easily-verifiable core for `SemanticType`,
 // exposing a single, maximally-typed (`Result`-returning) factory method.
+@dynamicMemberLookup
 public struct SemanticType<Spec: SemanticTypeSpec> {
     
     /// The (stored) primitive value backing this instance of `SemanticType`.
