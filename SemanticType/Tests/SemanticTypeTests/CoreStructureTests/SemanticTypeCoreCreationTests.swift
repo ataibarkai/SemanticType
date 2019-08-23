@@ -20,14 +20,14 @@ final class SemanticTypeCoreCreationTests: XCTestCase {
         let fiftyCents = Cents.create(50).get()
         XCTAssertEqual(fiftyCents._backingPrimitiveProxy, 50)
         
-        let negativeFiftyCents = Cents.create(-50).get()
-        XCTAssertEqual(negativeFiftyCents._backingPrimitiveProxy, -50)
+        let fiftyCentsDebt = Cents.create(-50).get()
+        XCTAssertEqual(fiftyCentsDebt._backingPrimitiveProxy, -50)
         
         let adviceMoney = Cents.create(2).get()
         XCTAssertEqual(adviceMoney._backingPrimitiveProxy, 2)
 
-        let aLotOfAdvice = Cents.create(2_000_000_000_000).get()
-        XCTAssertEqual(aLotOfAdvice._backingPrimitiveProxy, 2_000_000_000_000)
+        let bezosMoney = Cents.create(2_000_000_000_000).get()
+        XCTAssertEqual(bezosMoney._backingPrimitiveProxy, 2_000_000_000_000)
 
     }
 
