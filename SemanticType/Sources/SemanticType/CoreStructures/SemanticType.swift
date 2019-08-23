@@ -10,6 +10,8 @@
 @dynamicMemberLookup
 public struct SemanticType<Spec: SemanticTypeSpec> {
     
+    public typealias Spec = Spec
+    
     /// The (stored) primitive value backing this instance of `SemanticType`.
     /// Guarenteed to have been outputted by `Spec.gatewayMap` for some given input.
     ///
