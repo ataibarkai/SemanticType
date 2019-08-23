@@ -1,7 +1,7 @@
 import XCTest
 @testable import SemanticType
 
-final class SemanticType_UsabilityExtensionsTests_ErrorfulSemanticType: XCTestCase {
+final class SemanticType_UsabilityExtensionsTests_ErrorfulSemanticTypeTests: XCTestCase {
     
     struct Person: Equatable {
         var name: String
