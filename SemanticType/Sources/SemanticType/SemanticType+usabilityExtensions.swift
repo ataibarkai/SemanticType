@@ -93,7 +93,6 @@ extension SemanticType where Spec.Error == Never {
         
         self = mapped
     }
-    
 }
 
 

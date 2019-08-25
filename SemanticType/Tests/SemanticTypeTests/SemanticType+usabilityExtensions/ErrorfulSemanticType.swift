@@ -10,7 +10,6 @@ final class SemanticType_UsabilityExtensionsTests_ErrorfulSemanticTypeTests: XCT
             "Hello, my name is \(name)."
         }
     }
-    
     enum PersonWithShortName_Spec: SemanticTypeSpec {
         typealias BackingPrimitiveWithValueSemantics = Person
         typealias Error = NameIsTooLongError
@@ -43,6 +42,7 @@ final class SemanticType_UsabilityExtensionsTests_ErrorfulSemanticTypeTests: XCT
         }
     }
     
+    
     func testBackingPrimitiveAccess() {
         let joe = try! PersonWithShortName(Person(name: "Joe"))
         XCTAssertEqual(joe.backingPrimitive, Person(name: "Joe"))
@@ -54,6 +54,7 @@ final class SemanticType_UsabilityExtensionsTests_ErrorfulSemanticTypeTests: XCT
         XCTAssertEqual(tom.backingPrimitive, Person(name: "tom"))
     }
     
+    
     func testSubscriptAccess() {
         let tim = try! PersonWithShortName(Person(name: "Tim"))
         XCTAssertEqual(tim.name, "Tim")
@@ -64,6 +65,7 @@ final class SemanticType_UsabilityExtensionsTests_ErrorfulSemanticTypeTests: XCT
         XCTAssertEqual(bill.associatedGreeting, "Hello, my name is Bill.")
     }
     
+    
     func testSuccessfulTryMap() {
         let joe = try! PersonWithShortName(Person(name: "Joe"))
         let lowercaseJoe = try! joe.tryMap { person in
@@ -73,6 +75,7 @@ final class SemanticType_UsabilityExtensionsTests_ErrorfulSemanticTypeTests: XCT
         }.get()
         XCTAssertEqual(lowercaseJoe.name, "joe")
     }
+    
     
     func testFailingTryMap() {
         let joe = try! PersonWithShortName(Person(name: "Joe"))
@@ -95,6 +98,7 @@ final class SemanticType_UsabilityExtensionsTests_ErrorfulSemanticTypeTests: XCT
         }
     }
     
+    
     func testSuccessfulMutatingTryMap() {
         var joe = try! PersonWithShortName(Person(name: "Joe"))
         
@@ -102,6 +106,7 @@ final class SemanticType_UsabilityExtensionsTests_ErrorfulSemanticTypeTests: XCT
         try! joe.mutatingTryMap { person in person.name = person.name.lowercased() }
         XCTAssertEqual(joe.name, "joe")
     }
+    
     
     func testFailingMutatingTryMap() {
         var joe = try! PersonWithShortName(Person(name: "Joe"))
@@ -120,6 +125,7 @@ final class SemanticType_UsabilityExtensionsTests_ErrorfulSemanticTypeTests: XCT
         }
     }
 
+    
     
     static var allTests = [
         ("testInitialization", testInitialization),

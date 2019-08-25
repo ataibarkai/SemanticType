@@ -30,6 +30,7 @@ final class SemanticTypeCoreCreationTests: XCTestCase {
         XCTAssertEqual(bezosMoney._backingPrimitiveProxy, 2_000_000_000_000)
 
     }
+    
 
     func testErrorlessValueModifyingCreation() {
         enum CaselessString_Spec: SemanticTypeSpec {
@@ -54,6 +55,7 @@ final class SemanticTypeCoreCreationTests: XCTestCase {
         let str4: CaselessString = CaselessString.create("Yo-Yo Ma").get()
         XCTAssertEqual(str4._backingPrimitiveProxy, "yo-yo ma")
     }
+    
     
     func testErrorfullCreation() {
         enum FiveLetterWordArray_Spec: SemanticTypeSpec {
@@ -98,6 +100,8 @@ final class SemanticTypeCoreCreationTests: XCTestCase {
             XCTAssertEqual(error.excludedWords, nonFiveLetterWords)
         }
     }
+    
+    
     
     static var allTests = [
         ("testErrorlessModificationlessCreation", testErrorlessModificationlessCreation),

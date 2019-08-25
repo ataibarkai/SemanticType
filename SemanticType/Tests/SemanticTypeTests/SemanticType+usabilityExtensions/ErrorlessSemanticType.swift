@@ -2,7 +2,8 @@ import XCTest
 @testable import SemanticType
 
 final class SemanticType_UsabilityExtensionsTests_ErrorlessSemanticTypeTests: XCTestCase {
-        
+    
+    // CaselessString:
     enum CaselessString_Spec: SemanticTypeSpec {
         typealias BackingPrimitiveWithValueSemantics = String
         typealias Error = Never
@@ -13,109 +14,95 @@ final class SemanticType_UsabilityExtensionsTests_ErrorlessSemanticTypeTests: XC
     }
     typealias CaselessString = SemanticType<CaselessString_Spec>
     
+    // Dollars:
     enum Dollars_Spec: SemanticTypeSpec {
         typealias BackingPrimitiveWithValueSemantics = Int
         typealias Error = Never
     }
     typealias Dollars = SemanticType<Dollars_Spec>
     
-    enum name {
-        case <#case#>
+    
+    // ProcessedContactFormInput_Spec:
+    struct ContactFormInput {
+        var email: String
+        var message: String
     }
+    enum ProcessedContactFormInput_Spec: SemanticTypeSpec {
+        typealias BackingPrimitiveWithValueSemantics = ContactFormInput
+        typealias Error = Never
+        
+        static func gatewayMap(preMap: ContactFormInput) -> Result<ContactFormInput, Never> {
+            return .success(.init(
+                email: preMap.email.lowercased(),
+                message: preMap.message
+            ))
+        }
+    }
+    typealias ProcessedContactFormInput = SemanticType<ProcessedContactFormInput_Spec>
+
     
-    
+
     func testInitialization() {
         let hello = CaselessString("HELlo")
         XCTAssertEqual(hello._backingPrimitiveProxy, "hello")
     }
     
-    func testBackingPrimitiveAccess() {
+    
+    func testBackingPrimitiveAccessAndModification() {
         var joe = CaselessString("Joe")
-        XCTAssertEqual(joe.backingPrimitive, "Joe")
+        XCTAssertEqual(joe.backingPrimitive, "joe")
         joe.backingPrimitive.removeLast()
-        joe.backingPrimitive.append("seph")
-        XCTAssertEqual(joe.backingPrimitive, "Joseph")
+        joe.backingPrimitive.append("SEPH")
+        XCTAssertEqual(joe.backingPrimitive, "joseph")
         
         var someMoney = Dollars(15)
         XCTAssertEqual(someMoney.backingPrimitive, 15)
         someMoney.backingPrimitive += 25
         XCTAssertEqual(someMoney.backingPrimitive, 40)
+        
+        var joesProcessedContactFormInput = ProcessedContactFormInput(.init(
+            email: "joe.shmoe@GMAIL.com",
+            message: "What a great library!"
+        ))
+        XCTAssertEqual(joesProcessedContactFormInput.backingPrimitive.email, "joe.shmoe@gmail.com")
+        joesProcessedContactFormInput.backingPrimitive.email.removeLast(9)
+        joesProcessedContactFormInput.backingPrimitive.email.append("YaHOO.cOm")
+        XCTAssertEqual(joesProcessedContactFormInput.backingPrimitive.email, "joe.shmoe@yahoo.com")
     }
+    
     
     func testSubscriptAccess() {
-        let tim = try! PersonWithShortName(Person(name: "Tim"))
-        XCTAssertEqual(tim.name, "Tim")
-        XCTAssertEqual(tim.associatedGreeting, "Hello, my name is Tim.")
-
-        let bill = try! PersonWithShortName(Person(name: "Bill"))
-        XCTAssertEqual(bill.name, "Bill")
-        XCTAssertEqual(bill.associatedGreeting, "Hello, my name is Bill.")
+        let joesProcessedContactFormInput = ProcessedContactFormInput(.init(
+            email: "joe.shmoe@GMAIL.com",
+            message: "What a great library!"
+        ))
+        XCTAssertEqual(joesProcessedContactFormInput.email, "joe.shmoe@gmail.com")
+        XCTAssertEqual(joesProcessedContactFormInput.message, "What a great library!")
     }
     
-    func testSuccessfulTryMap() {
-        let joe = try! PersonWithShortName(Person(name: "Joe"))
-        let lowercaseJoe = try! joe.tryMap { person in
-            var person = person
-            person.name = person.name.lowercased()
-            return person
-        }.get()
-        XCTAssertEqual(lowercaseJoe.name, "joe")
+    
+    func testMap() {
+        let fiveDollars = Dollars(5)
+        let tenDollars = fiveDollars.map { $0 + 5 }
+        XCTAssertEqual(tenDollars.backingPrimitive, 10)
     }
     
-    func testFailingTryMap() {
-        let joe = try! PersonWithShortName(Person(name: "Joe"))
-
-        let josephTooLong = joe.tryMap { person in
-            var person = person
-            person.name.removeLast()
-            person.name.append(contentsOf: "seph")
-            return person
-        }
+    
+    func testMutatingMap() {
+        var anAmountOfDollars = Dollars(5)
         
-        switch josephTooLong {
-        case .success:
-            XCTFail()
-        case .failure(let error):
-            XCTAssertEqual(
-                error,
-                PersonWithShortName.Spec.NameIsTooLongError(name: "Joseph")
-            )
-        }
+        XCTAssertEqual(anAmountOfDollars.backingPrimitive, 5)
+        anAmountOfDollars.mutatingMap { $0 += 5 }
+        XCTAssertEqual(anAmountOfDollars.backingPrimitive, 10)
     }
     
-    func testSuccessfulMutatingTryMap() {
-        var joe = try! PersonWithShortName(Person(name: "Joe"))
-        
-        XCTAssertEqual(joe.name, "Joe")
-        try! joe.mutatingTryMap { person in person.name = person.name.lowercased() }
-        XCTAssertEqual(joe.name, "joe")
-    }
     
-    func testFailingMutatingTryMap() {
-        var joe = try! PersonWithShortName(Person(name: "Joe"))
-        
-        XCTAssertEqual(joe.name, "Joe")
-        XCTAssertThrowsError(
-            try joe.mutatingTryMap { person in
-                  person.name.removeLast()
-                  person.name.append(contentsOf: "seph")
-            }
-        ) { error in
-            XCTAssertEqual(
-                error as! PersonWithShortName.Spec.NameIsTooLongError,
-                PersonWithShortName.Spec.NameIsTooLongError.init(name: "Joseph")
-            )
-        }
-    }
-
     
     static var allTests = [
         ("testInitialization", testInitialization),
-        ("testBackingPrimitiveAccess", testBackingPrimitiveAccess),
+        ("testBackingPrimitiveAccessAndModification", testBackingPrimitiveAccessAndModification),
         ("testSubscriptAccess", testSubscriptAccess),
-        ("testSuccessfulTryMap", testSuccessfulTryMap),
-        ("testFailingTryMap", testFailingTryMap),
-        ("testSuccessfulMutatingTryMap", testSuccessfulMutatingTryMap),
-        ("testFailingMutatingTryMap", testFailingMutatingTryMap),
+        ("testMap", testMap),
+        ("testMutatingMap", testMutatingMap),
     ]
 }
