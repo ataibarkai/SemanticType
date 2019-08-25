@@ -80,6 +80,20 @@ extension SemanticType where Spec.Error == Never {
         )
     }
     
+    public mutating func mutatingMap(
+        _ mutation: (_ backingPrimitive: inout Spec.BackingPrimitiveWithValueSemantics) throws -> ()
+    ) rethrows {
+        let mapped = try map { original in
+            var toBeModified = original
+            try mutation(&toBeModified) // Here we make use of the assumption that `Spec.BackingPrimitiveWithValueSemantics` has
+                                        // value-semantics, i.e. that this mutation of `backingPrimitiveCopy` would bear no
+                                        // effect on the original `backingPrimitive`.
+            return toBeModified
+        }
+        
+        self = mapped
+    }
+    
 }
 
 
