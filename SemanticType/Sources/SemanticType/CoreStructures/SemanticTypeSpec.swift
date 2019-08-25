@@ -7,8 +7,11 @@
 
 public protocol SemanticTypeSpec {
     
-    /// The backing primitive must possess *value semantics* to insure that its structure is not modified by outside forces
-    /// after passing through the `gatewayMap` function and becoming stored inside of a `SemanticType` object.
+    /// The type of the primitive value wrapped by the `SemanticType`.
+    ///
+    /// The backing primitive must possess *value semantics* to insure that the structure of a value is
+    /// not modified by outside forces after passing through the `SemanticType`'s `gatewayMap` function
+    /// and becoming stored inside of a `SemanticType` instance.
     associatedtype BackingPrimitiveWithValueSemantics
     associatedtype Error: Swift.Error
     
