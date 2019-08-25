@@ -3,6 +3,7 @@ import XCTest
 import SemanticTypeTests
 
 var tests = [XCTestCaseEntry]()
-tests += SemanticTypeTests.allTests()
 tests += SemanticTypeCoreCreationTests.allTests()
+tests += SemanticType_UsabilityExtensionsTests_ErrorfulSemanticTypeTests.allTests()
+tests += SemanticType_UsabilityExtensionsTests_ErrorlessSemanticTypeTests.allTests()
 XCTMain(tests)
