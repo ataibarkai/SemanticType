@@ -18,7 +18,7 @@ final class SemanticType_UsabilityExtensionsTests_ErrorfulSemanticTypeTests: XCT
             var name: String
         }
         
-        static func gatewayMap(preMap: Person) -> Result<Person, PersonWithShortName_Spec.Error> {
+        static func gateway(preMap: Person) -> Result<Person, PersonWithShortName_Spec.Error> {
             guard preMap.name.count < 5
                 else { return .failure(NameIsTooLongError(name: preMap.name)) }
             

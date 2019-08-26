@@ -13,7 +13,7 @@ extension SemanticType {
     
     public var backingPrimitive: Spec.BackingPrimitiveWithValueSemantics {
         get {
-            _backingPrimitiveProxy.backingPrimitvie
+            _gatewayOutput.backingPrimitvie
         }
     }
 
@@ -56,7 +56,7 @@ extension SemanticType where Spec.Error == Never {
     /// The value assigned to `backingPrimitive` is passed through the `Spec.gatewayMap` function before making it to `self`.
     public var backingPrimitive: Spec.BackingPrimitiveWithValueSemantics {
         get {
-            _backingPrimitiveProxy.backingPrimitvie
+            _gatewayOutput.backingPrimitvie
         }
         set {
             self = .init(newValue)

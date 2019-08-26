@@ -8,7 +8,7 @@ final class SemanticType_UsabilityExtensionsTests_ErrorlessSemanticTypeTests: XC
         typealias BackingPrimitiveWithValueSemantics = String
         typealias Error = Never
         
-        static func gatewayMap(preMap: String) -> Result<String, Never> {
+        static func gateway(preMap: String) -> Result<String, Never> {
             return .success(preMap.lowercased())
         }
     }
@@ -31,7 +31,7 @@ final class SemanticType_UsabilityExtensionsTests_ErrorlessSemanticTypeTests: XC
         typealias BackingPrimitiveWithValueSemantics = ContactFormInput
         typealias Error = Never
         
-        static func gatewayMap(preMap: ContactFormInput) -> Result<ContactFormInput, Never> {
+        static func gateway(preMap: ContactFormInput) -> Result<ContactFormInput, Never> {
             return .success(.init(
                 email: preMap.email.lowercased(),
                 message: preMap.message
@@ -44,7 +44,7 @@ final class SemanticType_UsabilityExtensionsTests_ErrorlessSemanticTypeTests: XC
 
     func testInitialization() {
         let hello = CaselessString("HELlo")
-        XCTAssertEqual(hello._backingPrimitiveProxy, "hello")
+        XCTAssertEqual(hello._gatewayOutput.backingPrimitvie, "hello")
     }
     
     

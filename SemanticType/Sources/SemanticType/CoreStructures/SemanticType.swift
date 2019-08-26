@@ -31,13 +31,13 @@ public struct SemanticType<Spec: GeneralizedSemanticTypeSpec> {
     /// as long as we make sure this property is always assigned a post-`Spec.gatewayMap` value
     /// *in the context of this file*, we can be sure that it is assigned a post-`Spec.gatewayMap` value
     /// under *all* circumstances.
-    private let _storedBackingPrimitive: GatewayMapOutput
+    private let gatewayOutput: GatewayMapOutput
     
     /// A proxy internally exposing the `_storedBackingPrimitive` property to other files in this package.
     ///
     /// Being a *computed* property, the value exposition *does not* also make it possible
     /// to define any initializers circumventing the [create](x-source-tag://create) factory method.
-    internal var _backingPrimitiveProxy: GatewayMapOutput { _storedBackingPrimitive }
+    internal var _gatewayOutput: GatewayMapOutput { gatewayOutput }
     
     // MARK: init / factories
     /// An unsafe initializer intended to be used only from within the [create](x-source-tag://create) factory method.
@@ -45,24 +45,24 @@ public struct SemanticType<Spec: GeneralizedSemanticTypeSpec> {
     /// This initializer **does not** make sure that the `Spec.gatemapMap` function is being respected.
     /// Thus, the *caller* must be sure to call this initializer with a value outputted by the `Spec.gatemapMap` function.
     /// - Parameter _unsafeDirectlyAssignedBackingPrimitive: The `Spec.BackingPrimitive` object directly assigned to self.
-    ///                                                      Must have been the output of a `Spec.gatewayMap` call.
+    ///                                                      Must have been the output of a `Spec.gateway` call.
     private init(_unsafeDirectlyAssignedBackingPrimitive: GatewayMapOutput) {
-        self._storedBackingPrimitive = _unsafeDirectlyAssignedBackingPrimitive
+        self.gatewayOutput = _unsafeDirectlyAssignedBackingPrimitive
     }
     
     /// The only way to create an instance of `SemanticType`.
-    /// An obtained `SemanticType` is guarenteed to respect its `Spec.gatewayMap` function, in that
-    /// its backing primitive is guarenteed to have been the output of a call to `Spec.gatewayMap`.
+    /// An obtained `SemanticType` is guarenteed to respect its `Spec.gateway` function, in that
+    /// its backing primitive is guarenteed to have been the output of a call to `Spec.gateway`.
     ///
     /// - Parameter preMap: The value to be passed through the `Spec.gatemapMap` function.
     ///
-    /// - Returns: A `SemanticType` instance wrapping the `.success` output of the `Sepc.gatewayMap` function,
-    ///            or otherwise, the error captured by a `.failure` output of the `Sepc.gatewayMap` function.
+    /// - Returns: A `SemanticType` instance wrapping the `.success` output of the `Sepc.gateway` function,
+    ///            or otherwise, the error captured by a `.failure` output of the `Sepc.gateway` function.
     ///
     /// - Tag: create
     public static func create(_ preMap: Spec.BackingPrimitiveWithValueSemantics) -> Result<Self, Spec.Error> {
         return Spec
-            .gatewayMap(preMap: preMap)
+            .gateway(preMap: preMap)
             .map(Self.init(_unsafeDirectlyAssignedBackingPrimitive:))
     }
 }

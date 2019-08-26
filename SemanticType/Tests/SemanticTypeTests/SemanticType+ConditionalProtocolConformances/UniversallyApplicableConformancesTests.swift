@@ -35,7 +35,7 @@ final class SemanticType_ConditioinalProtocolConformances_UniversallyApplicableC
 //    func testCustomStringConvertibleConformance() {
 //        struct StrangeString: CustomStringConvertible {
 //            var str: String
-//            
+//
 //            var description: String {
 //                "\(str)... how strange..."
 //            }
@@ -43,12 +43,12 @@ final class SemanticType_ConditioinalProtocolConformances_UniversallyApplicableC
 //        enum UniquelyStrangeString_Spec: SemanticTypeSpec {
 //            typealias BackingPrimitiveWithValueSemantics = StrangeString
 //            typealias Error = Never
-//            static func gatewayMap(preMap: StrangeString) -> Result<StrangeString, Never> {
+//            static func gateway(preMap: StrangeString) -> Result<StrangeString, Never> {
 //                return .success(preMap)
 //            }
 //        }
 //        typealias UniquelyStrangeString = SemanticType<UniquelyStrangeString_Spec>
-//        
+//
 //        let uniquelyStrangeBobString = UniquelyStrangeString(.init(str: "Bob"))
 //        XCTAssertEqual("\(uniquelyStrangeBobString)", "Bob... how strange...")
 //    }
