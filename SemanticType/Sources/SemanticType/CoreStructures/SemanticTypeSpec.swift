@@ -16,10 +16,15 @@ public protocol GeneralizedSemanticTypeSpec {
     associatedtype GatewayMetadataWithValueSemantics
     associatedtype Error: Swift.Error
     
+    typealias GatewayOutput = (
+        backingPrimitvie: BackingPrimitiveWithValueSemantics,
+        metadata: GatewayMetadataWithValueSemantics
+    )
+    
     /// - Tag: SemanticTypeSpec.gateway
     static func gateway(
        preMap: BackingPrimitiveWithValueSemantics
-    ) -> Result<(BackingPrimitiveWithValueSemantics, GatewayMetadataWithValueSemantics), Error>
+    ) -> Result<GatewayOutput, Error>
 }
 
 
@@ -32,7 +37,7 @@ public protocol SemanticTypeSpec: GeneralizedSemanticTypeSpec where GatewayMetad
 extension SemanticTypeSpec {
     public static func gateway(
        preMap: BackingPrimitiveWithValueSemantics
-    ) -> Result<(BackingPrimitiveWithValueSemantics, GatewayMetadataWithValueSemantics), Error> {
+    ) -> Result<GatewayOutput, Error> {
         return gateway(preMap: preMap).map { ($0, ()) }
     }
 }

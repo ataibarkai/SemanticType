@@ -31,17 +31,16 @@ final class SemanticTypeCoreCreationTests: XCTestCase {
 
         let bezosMoney = Cents.create(2_000_000_000_000).get()
         XCTAssertEqual(bezosMoney._gatewayOutput.backingPrimitvie, 2_000_000_000_000)
-
     }
     
 
     func testErrorlessValueModifyingCreation() {
-        enum CaselessString_Spec: SemanticTypeSpec {
+        enum CaselessString_Spec: ErrorlessSemanticTypeSpec {
             typealias BackingPrimitiveWithValueSemantics = String
             typealias Error = Never
             
-            static func gateway(preMap: String) -> Result<String, Never> {
-                return .success(preMap.lowercased())
+            static func gateway(preMap: String) -> String {
+                return preMap.lowercased()
             }
         }
         typealias CaselessString = SemanticType<CaselessString_Spec>
@@ -104,11 +103,47 @@ final class SemanticTypeCoreCreationTests: XCTestCase {
         }
     }
     
+    func testMeaningfulGatewayMetadata() {
+    }
+    
     
     
     static var allTests = [
         ("testErrorlessModificationlessCreation", testErrorlessModificationlessCreation),
         ("testErrorlessValueModifyingCreation", testErrorlessValueModifyingCreation),
         ("testErrorfullCreation", testErrorfullCreation),
+        ("testMeaningfulGatewayMetadata", testMeaningfulGatewayMetadata),
     ]
+}
+
+enum NonEmptyArray_Spec<Element>: GeneralizedSemanticTypeSpec {
+    typealias BackingPrimitiveWithValueSemantics = [Element]
+    typealias GatewayMetadataWithValueSemantics = (first: Element, last: Element)
+    enum Error: Swift.Error {
+        case arrayIsEmpty
+    }
+    
+    static func gateway(preMap: [Element]) -> Result<GatewayOutput, Error> {
+        guard
+            let first = preMap.first,
+            let last = preMap.last
+            else { return .failure(.arrayIsEmpty) }
+        
+        return .success((
+            backingPrimitvie: preMap,
+            metadata: (first: first,
+                       last: last)
+        ))
+    }
+}
+typealias NonEmptyArray<Element> = SemanticType<NonEmptyArray_Spec<Element>>
+
+extension NonEmptyArray {
+//    var verifiedFirst: Element {
+//        gatewayMetadata.first
+//    }
+//
+//    var verifiedLast: Element {
+//        gatewayMetadata.last
+//    }
 }
