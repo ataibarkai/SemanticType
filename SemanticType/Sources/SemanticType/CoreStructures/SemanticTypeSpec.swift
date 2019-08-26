@@ -50,13 +50,3 @@ extension ErrorlessSemanticTypeSpec {
         return .success(gateway(preMap: preMap))
     }
 }
-
-// This extension provides the **identiy** map as the default gateway implementation
-// for error-less semantic types.
- extension SemanticTypeSpec where Error == Never {
-    public static func gateway(
-        preMap: BackingPrimitiveWithValueSemantics
-    ) -> Result<BackingPrimitiveWithValueSemantics, Error> {
-        return .success(preMap)
-    }
-}

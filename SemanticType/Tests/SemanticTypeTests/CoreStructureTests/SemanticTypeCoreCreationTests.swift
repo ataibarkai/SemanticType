@@ -11,9 +11,12 @@ import XCTest
 final class SemanticTypeCoreCreationTests: XCTestCase {
     
     func testErrorlessModificationlessCreation() {
-        enum Cents_Spec: SemanticTypeSpec {
+        enum Cents_Spec: ErrorlessSemanticTypeSpec {
             typealias BackingPrimitiveWithValueSemantics = Int
             typealias Error = Never
+            static func gateway(preMap: Int) -> Int {
+                return preMap
+            }
         }
         typealias Cents = SemanticType<Cents_Spec>
         
@@ -37,7 +40,7 @@ final class SemanticTypeCoreCreationTests: XCTestCase {
             typealias BackingPrimitiveWithValueSemantics = String
             typealias Error = Never
             
-            static func gatewayMap(preMap: String) -> Result<String, Never> {
+            static func gateway(preMap: String) -> Result<String, Never> {
                 return .success(preMap.lowercased())
             }
         }

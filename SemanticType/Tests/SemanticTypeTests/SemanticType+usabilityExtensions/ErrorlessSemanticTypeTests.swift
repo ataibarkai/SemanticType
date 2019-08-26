@@ -15,9 +15,12 @@ final class SemanticType_UsabilityExtensionsTests_ErrorlessSemanticTypeTests: XC
     typealias CaselessString = SemanticType<CaselessString_Spec>
     
     // Dollars:
-    enum Dollars_Spec: SemanticTypeSpec {
+    enum Dollars_Spec: ErrorlessSemanticTypeSpec {
         typealias BackingPrimitiveWithValueSemantics = Int
         typealias Error = Never
+        static func gateway(preMap: Int) -> Int {
+            return preMap
+        }
     }
     typealias Dollars = SemanticType<Dollars_Spec>
     

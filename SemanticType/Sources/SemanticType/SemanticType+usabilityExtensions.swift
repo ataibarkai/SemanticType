@@ -53,7 +53,7 @@ extension SemanticType where Spec.Error == Never {
         self = Self.create(preMap).get()
     }
     
-    /// The value assigned to `backingPrimitive` is passed through the `Spec.gatewayMap` function before making it to `self`.
+    /// The value assigned to `backingPrimitive` is passed through the `Spec.gateway` function before making it to `self`.
     public var backingPrimitive: Spec.BackingPrimitiveWithValueSemantics {
         get {
             _gatewayOutput.backingPrimitvie

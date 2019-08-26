@@ -22,7 +22,7 @@ final class SemanticType_ConditioinalProtocolConformances_UniversallyApplicableC
         enum UniquelyStrangeString_Spec: SemanticTypeSpec {
             typealias BackingPrimitiveWithValueSemantics = StrangeString
             typealias Error = Never
-            static func gatewayMap(preMap: StrangeString) -> Result<StrangeString, Never> {
+            static func gateway(preMap: StrangeString) -> Result<StrangeString, Never> {
                 return .success(preMap)
             }
         }
