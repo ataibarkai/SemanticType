@@ -104,62 +104,17 @@ final class SemanticTypeCoreCreationTests: XCTestCase {
     }
     
     func testMeaningfulGatewayMetadata() {
-        enum NonEmptyArray_Spec<Element>: GeneralizedSemanticTypeSpec {
-            typealias _Element = Element
-            typealias BackingPrimitiveWithValueSemantics = [Element]
-            struct GatewayMetadataWithValueSemantics {
-                var first: Element
-                var last: Element
-            }
-            enum Error: Swift.Error, Equatable {
-                case arrayIsEmpty
-            }
-            
-            static func gateway(preMap: [Element]) -> Result<GatewayOutput, Error> {
-                guard
-                    let first = preMap.first,
-                    let last = preMap.last
-                    else { return .failure(.arrayIsEmpty) }
-                
-                return .success(.init(
-                    backingPrimitvie: preMap,
-                    metadata: .init(first: first,
-                               last: last)
-                ))
-            }
-        }
-        typealias NonEmptyArray<Element> = SemanticType<NonEmptyArray_Spec<Element>>
+        let joesEmail = try! EmailAddress.create("Joe1234@GMAIL.com").get()
+        XCTAssertEqual(joesEmail.user, "joe1234")
+        XCTAssertEqual(joesEmail.host, "gmail.com")
         
-        
-        func firstElement<Element>(of nonEmptyArray: NonEmptyArray<Element>) -> Element {
-            return nonEmptyArray.gatewayMetadata.first
-        }
-        
-        func lastElement<Element>(of nonEmptyArray: NonEmptyArray<Element>) -> Element {
-            return nonEmptyArray.gatewayMetadata.last
-        }
-        
-        let shouldFailToManifest = NonEmptyArray<String>.create([])
-        switch shouldFailToManifest {
+        let invalidEmail = EmailAddress.create("@gmail.com")
+        switch invalidEmail {
         case .success:
             XCTFail()
         case .failure(let error):
-            XCTAssertEqual(error, .arrayIsEmpty)
+            XCTAssertEqual(error.candidateEmailAddress, "@gmail.com")
         }
-        
-        let aNonEmptyArray = try! NonEmptyArray.create(["Hello", "World", "Hi"]).get()
-        XCTAssertEqual(
-            firstElement(of: aNonEmptyArray),
-            "Hello"
-        )
-        XCTAssertEqual(
-            lastElement(of: aNonEmptyArray),
-            "Hi"
-        )
-        XCTAssertEqual(
-            aNonEmptyArray._gatewayOutput.backingPrimitvie,
-            ["Hello", "World", "Hi"]
-        )
     }
     
     
@@ -170,4 +125,47 @@ final class SemanticTypeCoreCreationTests: XCTestCase {
         ("testErrorfullCreation", testErrorfullCreation),
         ("testMeaningfulGatewayMetadata", testMeaningfulGatewayMetadata),
     ]
+}
+
+// we define `EmailAddress` outside of the test function so that we can write an extension for it
+enum EmailAddress_Spec: GeneralizedSemanticTypeSpec {
+    typealias BackingPrimitiveWithValueSemantics = String
+    struct GatewayMetadataWithValueSemantics {
+        var beforeAtSign: String
+        var afterAtSign: String
+    }
+    struct Error: Swift.Error {
+        var candidateEmailAddress: String
+    }
+    
+    static func gateway(preMap: String) -> Result<GatewayOutput, Error> {
+        let preMap = preMap.lowercased()
+        
+        guard let indexOfFirstAtSign = preMap.firstIndex(of: "@")
+            else { return .failure(.init(candidateEmailAddress: preMap)) }
+        
+        let beforeAtSign = preMap[..<indexOfFirstAtSign]
+        let afterAtSign = preMap[indexOfFirstAtSign...].dropFirst()
+        
+        // make sure we have valid strings before and after the `@`
+        guard !beforeAtSign.isEmpty && !afterAtSign.isEmpty
+            else { return .failure(.init(candidateEmailAddress: preMap)) }
+        
+        return .success(.init(
+            backingPrimitvie: preMap,
+            metadata: .init(beforeAtSign: String(beforeAtSign),
+                            afterAtSign: String(afterAtSign))
+        ))
+    }
+}
+typealias EmailAddress = SemanticType<EmailAddress_Spec>
+
+extension EmailAddress {
+    var user: String {
+        gatewayMetadata.beforeAtSign
+    }
+    
+    var host: String {
+        gatewayMetadata.afterAtSign
+    }
 }
