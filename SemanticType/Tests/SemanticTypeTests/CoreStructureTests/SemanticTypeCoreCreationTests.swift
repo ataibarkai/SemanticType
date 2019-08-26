@@ -104,6 +104,62 @@ final class SemanticTypeCoreCreationTests: XCTestCase {
     }
     
     func testMeaningfulGatewayMetadata() {
+        enum NonEmptyArray_Spec<Element>: GeneralizedSemanticTypeSpec {
+            typealias _Element = Element
+            typealias BackingPrimitiveWithValueSemantics = [Element]
+            struct GatewayMetadataWithValueSemantics {
+                var first: Element
+                var last: Element
+            }
+            enum Error: Swift.Error, Equatable {
+                case arrayIsEmpty
+            }
+            
+            static func gateway(preMap: [Element]) -> Result<GatewayOutput, Error> {
+                guard
+                    let first = preMap.first,
+                    let last = preMap.last
+                    else { return .failure(.arrayIsEmpty) }
+                
+                return .success(.init(
+                    backingPrimitvie: preMap,
+                    metadata: .init(first: first,
+                               last: last)
+                ))
+            }
+        }
+        typealias NonEmptyArray<Element> = SemanticType<NonEmptyArray_Spec<Element>>
+        
+        
+        func firstElement<Element>(of nonEmptyArray: NonEmptyArray<Element>) -> Element {
+            return nonEmptyArray.gatewayMetadata.first
+        }
+        
+        func lastElement<Element>(of nonEmptyArray: NonEmptyArray<Element>) -> Element {
+            return nonEmptyArray.gatewayMetadata.last
+        }
+        
+        let shouldFailToManifest = NonEmptyArray<String>.create([])
+        switch shouldFailToManifest {
+        case .success:
+            XCTFail()
+        case .failure(let error):
+            XCTAssertEqual(error, .arrayIsEmpty)
+        }
+        
+        let aNonEmptyArray = try! NonEmptyArray.create(["Hello", "World", "Hi"]).get()
+        XCTAssertEqual(
+            firstElement(of: aNonEmptyArray),
+            "Hello"
+        )
+        XCTAssertEqual(
+            lastElement(of: aNonEmptyArray),
+            "Hi"
+        )
+        XCTAssertEqual(
+            aNonEmptyArray._gatewayOutput.backingPrimitvie,
+            ["Hello", "World", "Hi"]
+        )
     }
     
     
@@ -114,36 +170,4 @@ final class SemanticTypeCoreCreationTests: XCTestCase {
         ("testErrorfullCreation", testErrorfullCreation),
         ("testMeaningfulGatewayMetadata", testMeaningfulGatewayMetadata),
     ]
-}
-
-enum NonEmptyArray_Spec<Element>: GeneralizedSemanticTypeSpec {
-    typealias BackingPrimitiveWithValueSemantics = [Element]
-    typealias GatewayMetadataWithValueSemantics = (first: Element, last: Element)
-    enum Error: Swift.Error {
-        case arrayIsEmpty
-    }
-    
-    static func gateway(preMap: [Element]) -> Result<GatewayOutput, Error> {
-        guard
-            let first = preMap.first,
-            let last = preMap.last
-            else { return .failure(.arrayIsEmpty) }
-        
-        return .success((
-            backingPrimitvie: preMap,
-            metadata: (first: first,
-                       last: last)
-        ))
-    }
-}
-typealias NonEmptyArray<Element> = SemanticType<NonEmptyArray_Spec<Element>>
-
-extension NonEmptyArray {
-//    var verifiedFirst: Element {
-//        gatewayMetadata.first
-//    }
-//
-//    var verifiedLast: Element {
-//        gatewayMetadata.last
-//    }
 }
