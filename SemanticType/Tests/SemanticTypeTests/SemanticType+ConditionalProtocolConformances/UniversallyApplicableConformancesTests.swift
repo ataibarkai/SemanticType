@@ -104,6 +104,27 @@ final class SemanticType_ConditioinalProtocolConformances_UniversallyApplicableC
         )
     }
     
+    func testComparable() {
+        enum Dollars_Spec: ErrorlessSemanticTypeSpec {
+            typealias BackingPrimitiveWithValueSemantics = Double
+            static func gateway(preMap: Double) -> Double {
+                return preMap
+            }
+        }
+        typealias Dollars = SemanticType<Dollars_Spec>
+        
+        XCTAssertTrue(Dollars(5) < Dollars(5.1))
+        XCTAssertTrue(Dollars(7) < Dollars(3934))
+        XCTAssertTrue(Dollars(100) < Dollars(92345))
+        XCTAssertTrue(Dollars(-235) < Dollars(2342342))
+        XCTAssertTrue(Dollars(-235) < Dollars(-22))
+
+        XCTAssertTrue(Dollars(10) > Dollars(-2342))
+        XCTAssertTrue(Dollars(-22342) > Dollars(-234223424))
+        XCTAssertTrue(Dollars(10) > Dollars(-2342))
+        XCTAssertTrue(Dollars(1000) > Dollars(52))
+    }
+    
     
     
     static var allTests = [

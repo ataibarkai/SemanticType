@@ -13,7 +13,6 @@ final class SemanticTypeCoreCreationTests: XCTestCase {
     func testErrorlessModificationlessCreation() {
         enum Cents_Spec: ErrorlessSemanticTypeSpec {
             typealias BackingPrimitiveWithValueSemantics = Int
-            typealias Error = Never
             static func gateway(preMap: Int) -> Int {
                 return preMap
             }
@@ -37,8 +36,6 @@ final class SemanticTypeCoreCreationTests: XCTestCase {
     func testErrorlessValueModifyingCreation() {
         enum CaselessString_Spec: ErrorlessSemanticTypeSpec {
             typealias BackingPrimitiveWithValueSemantics = String
-            typealias Error = Never
-            
             static func gateway(preMap: String) -> String {
                 return preMap.lowercased()
             }
