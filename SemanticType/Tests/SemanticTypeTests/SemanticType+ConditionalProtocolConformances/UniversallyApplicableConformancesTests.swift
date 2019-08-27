@@ -131,5 +131,6 @@ final class SemanticType_ConditioinalProtocolConformances_UniversallyApplicableC
         ("testCustomStringConvertibleConformance", testCustomStringConvertibleConformance),
         ("testCustomDebugStringConvertibleConformance", testCustomDebugStringConvertibleConformance),
         ("testHashable", testHashable),
+        ("testComparable", testComparable),
     ]
 }
