@@ -47,7 +47,7 @@ final class SemanticType_UsabilityExtensionsTests_ErrorlessSemanticTypeTests: XC
 
     func testInitialization() {
         let hello = CaselessString("HELlo")
-        XCTAssertEqual(hello._gatewayOutput.backingPrimitvie, "hello")
+        XCTAssertEqual(hello._backingPrimitive, "hello")
     }
     
     

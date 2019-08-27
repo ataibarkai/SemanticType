@@ -21,16 +21,16 @@ final class SemanticTypeCoreCreationTests: XCTestCase {
         typealias Cents = SemanticType<Cents_Spec>
         
         let fiftyCents = Cents.create(50).get()
-        XCTAssertEqual(fiftyCents._gatewayOutput.backingPrimitvie, 50)
+        XCTAssertEqual(fiftyCents._backingPrimitive, 50)
         
         let fiftyCentsDebt = Cents.create(-50).get()
-        XCTAssertEqual(fiftyCentsDebt._gatewayOutput.backingPrimitvie, -50)
+        XCTAssertEqual(fiftyCentsDebt._backingPrimitive, -50)
         
         let adviceMoney = Cents.create(2).get()
-        XCTAssertEqual(adviceMoney._gatewayOutput.backingPrimitvie, 2)
+        XCTAssertEqual(adviceMoney._backingPrimitive, 2)
 
         let bezosMoney = Cents.create(2_000_000_000_000).get()
-        XCTAssertEqual(bezosMoney._gatewayOutput.backingPrimitvie, 2_000_000_000_000)
+        XCTAssertEqual(bezosMoney._backingPrimitive, 2_000_000_000_000)
     }
     
 
@@ -46,16 +46,16 @@ final class SemanticTypeCoreCreationTests: XCTestCase {
         typealias CaselessString = SemanticType<CaselessString_Spec>
 
         let str1: CaselessString = CaselessString.create("HeLlo, WorLD.").get()
-        XCTAssertEqual(str1._gatewayOutput.backingPrimitvie, "hello, world.")
+        XCTAssertEqual(str1._backingPrimitive, "hello, world.")
         
         let str2: CaselessString = CaselessString.create("Why would Jerry BRING anything?").get()
-        XCTAssertEqual(str2._gatewayOutput.backingPrimitvie, "why would jerry bring anything?")
+        XCTAssertEqual(str2._backingPrimitive, "why would jerry bring anything?")
         
         let str3: CaselessString = CaselessString.create("Why would JERRY bring anything?").get()
-        XCTAssertEqual(str3._gatewayOutput.backingPrimitvie, "why would jerry bring anything?")
+        XCTAssertEqual(str3._backingPrimitive, "why would jerry bring anything?")
 
         let str4: CaselessString = CaselessString.create("Yo-Yo Ma").get()
-        XCTAssertEqual(str4._gatewayOutput.backingPrimitvie, "yo-yo ma")
+        XCTAssertEqual(str4._backingPrimitive, "yo-yo ma")
     }
     
     
@@ -80,7 +80,7 @@ final class SemanticTypeCoreCreationTests: XCTestCase {
         let shouldBeValid = FiveLetterWordArray.create(arrayThatOnlyContainsFiveLetterWords)
         switch shouldBeValid {
         case .success(let fiveLetterWordArray):
-            XCTAssertEqual(fiveLetterWordArray._gatewayOutput.backingPrimitvie, arrayThatOnlyContainsFiveLetterWords)
+            XCTAssertEqual(fiveLetterWordArray._backingPrimitive, arrayThatOnlyContainsFiveLetterWords)
         case .failure:
             XCTFail()
         }

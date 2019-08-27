@@ -12,7 +12,7 @@ public struct SemanticType<Spec: GeneralizedSemanticTypeSpec> {
     
     public typealias Spec = Spec
     
-    /// The (stored) primitive value backing this instance of `SemanticType`.
+    /// The (stored) `GatewayOutput` value backing this instance of `SemanticType`.
     /// Guarenteed to have been outputted by `Spec.gateway` for some given input.
     ///
     ///
@@ -29,14 +29,16 @@ public struct SemanticType<Spec: GeneralizedSemanticTypeSpec> {
     /// under *all* circumstances.
     private let gatewayOutput: Spec.GatewayOutput
     
-    /// A proxy internally exposing the `_storedBackingPrimitive` property to other files in this package.
+    /// A proxy internally exposing the backingPrimitive portion of the `gatewayOutput` property to other files in this package.
     ///
-    /// Being a *computed* property, the value exposition *does not* also make it possible
-    /// to define any initializers circumventing the [create](x-source-tag://create) factory method.
-    internal var _gatewayOutput: Spec.GatewayOutput { gatewayOutput }
+    /// We define it as an underscore-prefixed, internal variable so that we can define a corresponding
+    /// variable which has a setter under some conditional extensions, and a getter under others.
+    public var _backingPrimitive: Spec.BackingPrimitiveWithValueSemantics {
+        gatewayOutput.backingPrimitvie
+    }
     
     public var gatewayMetadata: Spec.GatewayMetadataWithValueSemantics {
-        _gatewayOutput.metadata
+        gatewayOutput.metadata
     }
     
     // MARK: init / factories
