@@ -101,10 +101,19 @@ final class SemanticType_UsabilityExtensionsTests_ErrorfulSemanticTypeTests: XCT
     
     func testSuccessfulMutatingTryMap() {
         var joe = try! PersonWithShortName(Person(name: "Joe"))
-        
         XCTAssertEqual(joe.name, "Joe")
         try! joe.mutatingTryMap { person in person.name = person.name.lowercased() }
         XCTAssertEqual(joe.name, "joe")
+        
+        var joesEmail = try! EmailAddress.create("JonaTHAN@gmail.com").get()
+        XCTAssertEqual(joesEmail.user, "jonathan")
+        XCTAssertEqual(joesEmail.host, "gmail.com")
+        try! joesEmail.mutatingTryMap { email in
+            email.removeLast(3)
+            email.append("nET")
+        }
+        XCTAssertEqual(joesEmail.user, "jonathan")
+        XCTAssertEqual(joesEmail.host, "gmail.net")
     }
     
     
@@ -121,6 +130,21 @@ final class SemanticType_UsabilityExtensionsTests_ErrorfulSemanticTypeTests: XCT
             XCTAssertEqual(
                 error as! PersonWithShortName.Spec.NameIsTooLongError,
                 PersonWithShortName.Spec.NameIsTooLongError.init(name: "Joseph")
+            )
+        }
+        
+        
+        var joesEmail = try! EmailAddress.create("JonaTHAN@gmail.com").get()
+        XCTAssertEqual(joesEmail.user, "jonathan")
+        XCTAssertEqual(joesEmail.host, "gmail.com")
+        XCTAssertThrowsError(
+            try joesEmail.mutatingTryMap { email in
+                email.removeLast(10)
+            }
+        ) { error in
+            XCTAssertEqual(
+                (error as! EmailAddress.Spec.Error).candidateEmailAddress,
+                "jonathan"
             )
         }
     }
