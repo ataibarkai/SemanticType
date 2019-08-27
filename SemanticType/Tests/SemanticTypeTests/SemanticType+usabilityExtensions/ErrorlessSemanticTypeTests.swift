@@ -91,21 +91,11 @@ final class SemanticType_UsabilityExtensionsTests_ErrorlessSemanticTypeTests: XC
     }
     
     
-    func testMutatingMap() {
-        var anAmountOfDollars = Dollars(5)
-        
-        XCTAssertEqual(anAmountOfDollars.backingPrimitive, 5)
-        anAmountOfDollars.mutatingMap { $0 += 5 }
-        XCTAssertEqual(anAmountOfDollars.backingPrimitive, 10)
-    }
-    
-    
     
     static var allTests = [
         ("testInitialization", testInitialization),
         ("testBackingPrimitiveAccessAndModification", testBackingPrimitiveAccessAndModification),
         ("testSubscriptAccess", testSubscriptAccess),
         ("testMap", testMap),
-        ("testMutatingMap", testMutatingMap),
     ]
 }
