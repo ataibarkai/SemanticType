@@ -55,7 +55,7 @@ final class SemanticType_ConditioinalProtocolConformances_UniversallyApplicableC
     }
     
     
-    func testHashable() {
+    func testHashableConformance() {
         struct StrangeString: Hashable {
             var str: String
         }
@@ -82,7 +82,7 @@ final class SemanticType_ConditioinalProtocolConformances_UniversallyApplicableC
     }
     
     
-    func testEquatable() {
+    func testEquatableConformance() {
         struct StrangeString: Equatable {
             var str: String
         }
@@ -104,7 +104,7 @@ final class SemanticType_ConditioinalProtocolConformances_UniversallyApplicableC
         )
     }
     
-    func testComparable() {
+    func testComparableConformance() {
         enum Dollars_Spec: ErrorlessSemanticTypeSpec {
             typealias BackingPrimitiveWithValueSemantics = Double
             static func gateway(preMap: Double) -> Double {
@@ -125,12 +125,62 @@ final class SemanticType_ConditioinalProtocolConformances_UniversallyApplicableC
         XCTAssertTrue(Dollars(1000) > Dollars(52))
     }
     
+    func testErrorConformance() {
+        struct SomeError: Swift.Error { }
+        enum SpecialCaseError_Spec: ErrorlessSemanticTypeSpec {
+            typealias BackingPrimitiveWithValueSemantics = SomeError
+            static func gateway(preMap: SomeError) -> SomeError {
+                return preMap
+            }
+        }
+        typealias SpcialCaseError = SemanticType<SpecialCaseError_Spec>
+        
+        let throwSpecialCaseError: () throws -> () = {
+            throw SpcialCaseError(.init())
+        }
+        
+        XCTAssertThrowsError(try throwSpecialCaseError())
+    }
+    
+    func testSequenceConformance() {
+        enum ThreeLetterWordSequence_Spec<S: Sequence>: SemanticTypeSpec where S.Element == String {
+            typealias BackingPrimitiveWithValueSemantics = S
+            enum Error: Swift.Error {
+                case longWordFound
+            }
+
+            static func gateway(preMap: BackingPrimitiveWithValueSemantics) -> Result<BackingPrimitiveWithValueSemantics, Error> {
+                guard preMap.allSatisfy({ $0.count == 3 })
+                    else { return .failure(.longWordFound) }
+                
+                return .success(preMap)
+            }
+        }
+        typealias ThreeLetterWordSequence<S: Sequence> = SemanticType<ThreeLetterWordSequence_Spec<S>> where S.Element == String
+        
+        let aFewWords = try! ThreeLetterWordSequence
+            .create(["elk", "pit", "cat", "dog", "bat", "try"])
+            .get()
+        
+        var enumeratedWords: [String] = []
+        for word in aFewWords {
+            enumeratedWords.append(word)
+        }
+        XCTAssertEqual(
+            enumeratedWords,
+            ["elk", "pit", "cat", "dog", "bat", "try"]
+        )
+    }
+    
     
     
     static var allTests = [
         ("testCustomStringConvertibleConformance", testCustomStringConvertibleConformance),
         ("testCustomDebugStringConvertibleConformance", testCustomDebugStringConvertibleConformance),
-        ("testHashable", testHashable),
-        ("testComparable", testComparable),
+        ("testHashableConformance", testHashableConformance),
+        ("testEquatableConformance", testEquatableConformance),
+        ("testComparableConformance", testComparableConformance),
+        ("testErrorConformance", testErrorConformance),
+        ("testSequenceConformance", testSequenceConformance),
     ]
 }
