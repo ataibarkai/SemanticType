@@ -146,14 +146,15 @@ final class SemanticType_ConditioinalProtocolConformances_UniversallyApplicableC
         enum ThreeLetterWordSequence_Spec<S: Sequence>: SemanticTypeSpec where S.Element == String {
             typealias BackingPrimitiveWithValueSemantics = S
             enum Error: Swift.Error {
-                case longWordFound
+                case foundWordWithMismatchedLength(word: String)
             }
 
             static func gateway(preMap: BackingPrimitiveWithValueSemantics) -> Result<BackingPrimitiveWithValueSemantics, Error> {
-                guard preMap.allSatisfy({ $0.count == 3 })
-                    else { return .failure(.longWordFound) }
-                
-                return .success(preMap)
+                if let mismatchedLengthWord = preMap.first(where: { $0.count != 3 }) {
+                    return .failure(.foundWordWithMismatchedLength(word: mismatchedLengthWord))
+                } else {
+                    return .success(preMap)
+                }
             }
         }
         typealias ThreeLetterWordSequence<S: Sequence> = SemanticType<ThreeLetterWordSequence_Spec<S>> where S.Element == String
