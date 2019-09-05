@@ -160,7 +160,7 @@ final class SemanticType_ConditioinalProtocolConformances_UniversallyApplicableC
         typealias ThreeLetterWordSequence<S: Sequence> = SemanticType<ThreeLetterWordSequence_Spec<S>> where S.Element == String
         
         let aFewWords = try! ThreeLetterWordSequence
-            .create(["elk", "pit", "cat", "dog", "bat", "try"])
+            .create(AnySequence(["elk", "pit", "cat", "dog", "bat", "try"]))
             .get()
         
         var enumeratedWords: [String] = []
@@ -173,6 +173,36 @@ final class SemanticType_ConditioinalProtocolConformances_UniversallyApplicableC
         )
     }
     
+    func testCollectionConformance() {
+        enum ThreeLetterWordCollection_Spec<C: Collection>: SemanticTypeSpec where C.Element == String {
+            typealias BackingPrimitiveWithValueSemantics = C
+            enum Error: Swift.Error {
+                case foundWordWithMismatchedLength(word: String)
+            }
+
+            static func gateway(preMap: BackingPrimitiveWithValueSemantics) -> Result<BackingPrimitiveWithValueSemantics, Error> {
+                if let mismatchedLengthWord = preMap.first(where: { $0.count != 3 }) {
+                    return .failure(.foundWordWithMismatchedLength(word: mismatchedLengthWord))
+                } else {
+                    return .success(preMap)
+                }
+            }
+        }
+        typealias ThreeLetterWordCollection<C: Collection> = SemanticType<ThreeLetterWordCollection_Spec<C>> where C.Element == String
+        
+        
+        let aFewWords = try! ThreeLetterWordCollection
+            .create(AnyCollection(["elk", "pit", "cat", "dog", "bat", "try"]))
+            .get()
+        
+        // a helper function to disamgiguate the `.count` we get from the `Collection` conditional conformance extensions,
+        // from the `.count` we get from the universal subscript extension.
+        func processAsCollection<C: Collection>(aFewWords: C) {
+            XCTAssertEqual(aFewWords.count, 6)
+        }
+        processAsCollection(aFewWords: aFewWords)
+    }
+    
     
     
     static var allTests = [
@@ -183,5 +213,6 @@ final class SemanticType_ConditioinalProtocolConformances_UniversallyApplicableC
         ("testComparableConformance", testComparableConformance),
         ("testErrorConformance", testErrorConformance),
         ("testSequenceConformance", testSequenceConformance),
+        ("testCollectionConformance", testCollectionConformance),
     ]
 }
