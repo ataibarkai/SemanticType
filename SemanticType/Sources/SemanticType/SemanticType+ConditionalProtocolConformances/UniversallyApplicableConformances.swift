@@ -85,28 +85,14 @@ extension SemanticType: CustomPlaygroundDisplayConvertible {
 // MARK: `Codable`
 extension SemanticType: Decodable where Spec.BackingPrimitiveWithValueSemantics: Decodable {
   public init(from decoder: Decoder) throws {
-    let backingPrimitive: Spec.BackingPrimitiveWithValueSemantics = try {
-        do {
-            // First, try to decode the primitive value assuming it is wrapped in a singleValueContainer.
-            return try decoder
-                .singleValueContainer()
-                .decode(Spec.BackingPrimitiveWithValueSemantics.self)
-        } catch {
-            // If that fails, attempt to directly decode using `Spec.BackingPrimitiveWithValueSemantics`'s decoding.
-            return try .init(from: decoder)
-        }
-    }()
-    
-    // Try to initialize `self` using the given backing primitive
     try self.init(
-        backingPrimitive
+        try .init(from: decoder)
     )
   }
 }
 
 extension SemanticType: Encodable where Spec.BackingPrimitiveWithValueSemantics: Encodable {
   public func encode(to encoder: Encoder) throws {
-    var container = encoder.singleValueContainer()
-    try container.encode(backingPrimitive)
+    try backingPrimitive.encode(to: encoder)
   }
 }
