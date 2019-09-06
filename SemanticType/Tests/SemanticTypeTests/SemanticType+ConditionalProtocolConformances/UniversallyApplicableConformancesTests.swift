@@ -203,6 +203,40 @@ final class SemanticType_ConditioinalProtocolConformances_UniversallyApplicableC
         processAsCollection(aFewWords: aFewWords)
     }
     
+    func testBidirectionalCollectionConformance() {
+        enum ThreeLetterWordBidirectionalCollection_Spec<C: BidirectionalCollection>: SemanticTypeSpec where C.Element == String {
+            typealias BackingPrimitiveWithValueSemantics = C
+            enum Error: Swift.Error {
+                case foundWordWithMismatchedLength(word: String)
+            }
+
+            static func gateway(preMap: BackingPrimitiveWithValueSemantics) -> Result<BackingPrimitiveWithValueSemantics, Error> {
+                if let mismatchedLengthWord = preMap.first(where: { $0.count != 3 }) {
+                    return .failure(.foundWordWithMismatchedLength(word: mismatchedLengthWord))
+                } else {
+                    return .success(preMap)
+                }
+            }
+        }
+        typealias ThreeLetterWordBidirectionalCollection<C: BidirectionalCollection> = SemanticType<ThreeLetterWordBidirectionalCollection_Spec<C>> where C.Element == String
+        
+        
+        let aFewWords = try! ThreeLetterWordBidirectionalCollection
+            .create(AnyBidirectionalCollection(["elk", "pit", "cat", "dog", "bat", "try"]))
+            .get()
+        
+        // a helper function to disamgiguate the `.count` we get from the `Collection` conditional conformance extensions,
+        // from the `.count` we get from the universal subscript extension.
+        func processAsBidirectionalCollection<C: BidirectionalCollection>(aFewWords: C) where C.Element == String {
+            XCTAssertEqual(aFewWords.last!, "try")
+            XCTAssertEqual(
+                Array(aFewWords.reversed()),
+                ["try", "bat", "dog", "cat", "pit", "elk"]
+            )
+        }
+        processAsBidirectionalCollection(aFewWords: aFewWords)
+
+    }
     
     
     static var allTests = [
@@ -214,5 +248,6 @@ final class SemanticType_ConditioinalProtocolConformances_UniversallyApplicableC
         ("testErrorConformance", testErrorConformance),
         ("testSequenceConformance", testSequenceConformance),
         ("testCollectionConformance", testCollectionConformance),
+        ("testBidirectionalCollectionConformance", testBidirectionalCollectionConformance),
     ]
 }
