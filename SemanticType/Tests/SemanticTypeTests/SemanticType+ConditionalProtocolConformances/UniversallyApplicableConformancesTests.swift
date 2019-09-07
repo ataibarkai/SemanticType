@@ -195,8 +195,8 @@ final class SemanticType_ConditioinalProtocolConformances_UniversallyApplicableC
             .create(AnyCollection(["elk", "pit", "cat", "dog", "bat", "try"]))
             .get()
         
-        // a helper function to disamgiguate the `.count` we get from the `Collection` conditional conformance extensions,
-        // from the `.count` we get from the universal subscript extension.
+        // a helper function to disamgiguate properties exposed through `Collection` conditional conformance extensions,
+        // and properties exposed through the universal subscript extension.
         func processAsCollection<C: Collection>(aFewWords: C) {
             XCTAssertEqual(aFewWords.count, 6)
         }
@@ -222,20 +222,82 @@ final class SemanticType_ConditioinalProtocolConformances_UniversallyApplicableC
         
         
         let aFewWords = try! ThreeLetterWordBidirectionalCollection
-            .create(AnyBidirectionalCollection(["elk", "pit", "cat", "dog", "bat", "try"]))
+            .create(["elk", "pit", "cat", "dog", "bat", "try"])
             .get()
         
-        // a helper function to disamgiguate the `.count` we get from the `Collection` conditional conformance extensions,
-        // from the `.count` we get from the universal subscript extension.
-        func processAsBidirectionalCollection<C: BidirectionalCollection>(aFewWords: C) where C.Element == String {
-            XCTAssertEqual(aFewWords.last!, "try")
+        // a helper function to disamgiguate properties exposed through `BidirectionalCollection` conditional conformance extensions,
+        // and properties exposed through the universal subscript extension.
+        func processAsBidirectionalCollection<C: BidirectionalCollection>(aFewWords: C) where C.Element == String, C.Index == Int {
+            XCTAssertEqual(aFewWords.last, "try")
             XCTAssertEqual(
                 Array(aFewWords.reversed()),
                 ["try", "bat", "dog", "cat", "pit", "elk"]
             )
         }
         processAsBidirectionalCollection(aFewWords: aFewWords)
+    }
+    
+    func testEncodableConformance() {
+        enum Age_Spec: ErrorlessSemanticTypeSpec {
+            typealias BackingPrimitiveWithValueSemantics = Int
+            static func gateway(preMap: Int) -> Int {
+                return preMap
+            }
+        }
+        typealias Age = SemanticType<Age_Spec>
+        
+        struct Person: Encodable {
+            var name: String
+            var age: Age
+        }
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        let encodedJsonString: String = try! {
+            let data = try encoder.encode(
+                Person(name: "John",
+                       age: 28)
+            )
 
+            return String(data: data, encoding: .utf8)!
+        }()
+        
+        XCTAssertEqual(
+            encodedJsonString,
+            """
+            {
+              "name" : "John",
+              "age" : 28
+            }
+            """
+        )
+    }
+    
+    func testDecodableConformance() {
+        enum Age_Spec: ErrorlessSemanticTypeSpec {
+            typealias BackingPrimitiveWithValueSemantics = Int
+            static func gateway(preMap: Int) -> Int {
+                return preMap
+            }
+        }
+        typealias Age = SemanticType<Age_Spec>
+
+        struct Person: Decodable {
+            var name: String
+            var age: Age
+        }
+        let jsonString = """
+        {
+          "name" : "John",
+          "age" : 28
+        }
+        """
+        
+        let decoder = JSONDecoder()
+        let person = try! decoder.decode(Person.self,
+                                         from: jsonString.data(using: .utf8)!)
+        
+        XCTAssertEqual(person.age, 28)
+        XCTAssertEqual(person.name, "John")
     }
     
     
@@ -249,5 +311,7 @@ final class SemanticType_ConditioinalProtocolConformances_UniversallyApplicableC
         ("testSequenceConformance", testSequenceConformance),
         ("testCollectionConformance", testCollectionConformance),
         ("testBidirectionalCollectionConformance", testBidirectionalCollectionConformance),
+        ("testEncodableConformance", testEncodableConformance),
+        ("testDecodableConformance", testDecodableConformance),
     ]
 }
