@@ -6,6 +6,8 @@ public func allTests() -> [XCTestCaseEntry] {
         testCase(SemanticTypeCoreCreationTests.allTests),
         testCase(SemanticType_UsabilityExtensionsTests_ErrorfulSemanticTypeTests.allTests),
         testCase(SemanticType_UsabilityExtensionsTests_ErrorlessSemanticTypeTests.allTests),
+        testCase(SemanticType_ConditioinalProtocolConformances_UniversallyApplicableConformancesTests.allTests),
+        testCase(SemanticType_ConditioinalProtocolConformances_ErrorlessConditionalConformancesTests.allTests),
     ]
 }
 #endif

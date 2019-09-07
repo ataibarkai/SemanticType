@@ -33,7 +33,7 @@ public struct SemanticType<Spec: GeneralizedSemanticTypeSpec> {
     ///
     /// We define it as an underscore-prefixed, internal variable so that we can define a corresponding
     /// variable which has a setter under some conditional extensions, and a getter under others.
-    public var _backingPrimitive: Spec.BackingPrimitiveWithValueSemantics {
+    internal var _backingPrimitive: Spec.BackingPrimitiveWithValueSemantics {
         gatewayOutput.backingPrimitvie
     }
     

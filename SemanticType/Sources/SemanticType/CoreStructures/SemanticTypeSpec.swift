@@ -13,6 +13,12 @@ public protocol GeneralizedSemanticTypeSpec {
     /// not modified by outside forces after passing through the `SemanticType`'s `gateway` function
     /// and becoming stored inside of a `SemanticType` instance.
     associatedtype BackingPrimitiveWithValueSemantics
+    
+    /// The type of the creation-associated metadata available on the `SemanticType`.
+    ///
+    /// The metadata must possess *value semantics* to insure that the structure of a value is
+    /// not modified by outside forces after passing through the `SemanticType`'s `gateway` function
+    /// and becoming stored inside of a `SemanticType` instance.
     associatedtype GatewayMetadataWithValueSemantics
     associatedtype Error: Swift.Error
     
