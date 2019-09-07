@@ -12,7 +12,13 @@ import XCTest
 final class SemanticType_ConditioinalProtocolConformances_ErrorlessConditionalConformancesTests: XCTestCase {
     
     func testAdditiveArithmeticConformance() {
-        
+        enum Seconds_Spec: ErrorlessSemanticTypeSpec {
+
+            static func gateway(preMap: Double) -> Double {
+                return preMap
+            }
+            
+        }
     }
     
     static var allTests = [
