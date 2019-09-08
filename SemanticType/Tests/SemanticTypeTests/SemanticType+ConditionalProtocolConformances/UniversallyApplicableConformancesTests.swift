@@ -237,67 +237,120 @@ final class SemanticType_ConditioinalProtocolConformances_UniversallyApplicableC
         processAsBidirectionalCollection(aFewWords: aFewWords)
     }
     
-    func testEncodableConformance() {
-        enum Age_Spec: ErrorlessSemanticTypeSpec {
-            typealias BackingPrimitiveWithValueSemantics = Int
-            static func gateway(preMap: Int) -> Int {
-                return preMap
-            }
+    
+    // MARK: `Encodable`/`Decodable` test
+    
+    // types used in Encodable/Decodable tests
+    enum Age_Spec: ErrorlessSemanticTypeSpec {
+        typealias BackingPrimitiveWithValueSemantics = Int
+        static func gateway(preMap: Int) -> Int {
+            return preMap
         }
-        typealias Age = SemanticType<Age_Spec>
-        
-        struct Person: Encodable {
-            var name: String
-            var age: Age
+    }
+    typealias Age = SemanticType<Age_Spec>
+    
+    struct Person: Codable {
+        var name: String
+        var age: Age
+    }
+    
+    enum YoungPerson_Spec: SemanticTypeSpec {
+        typealias BackingPrimitiveWithValueSemantics = Person
+        enum Error: Swift.Error {
+            case tooOld(age: Age)
         }
+        static func gateway(preMap: Person) -> Result<Person, Error> {
+            guard preMap.age < 13
+                else { return .failure(.tooOld(age: preMap.age)) }
+            
+            return .success(preMap)
+        }
+    }
+    typealias YoungPerson = SemanticType<YoungPerson_Spec>
+
+    
+    func testEncodableConformance() {        
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
-        let encodedJsonString: String = try! {
-            let data = try encoder.encode(
+        
+        let agePersonJsonString: String = {
+            let data = try! encoder.encode(
                 Person(name: "John",
-                       age: 28)
+                       age: 6)
             )
 
             return String(data: data, encoding: .utf8)!
         }()
         
-        XCTAssertEqual(
-            encodedJsonString,
-            """
-            {
-              "name" : "John",
-              "age" : 28
-            }
-            """
-        )
+        let youngPersonJsonString: String = {
+            let data = try! encoder.encode(
+                try! YoungPerson(
+                    .init(name: "John",
+                          age: 6)
+                )
+            )
+            return String(data: data, encoding: .utf8)!
+
+        }()
+        
+        for personJsonString in [agePersonJsonString, youngPersonJsonString] {
+            XCTAssertEqual(
+                personJsonString,
+                """
+                {
+                  "name" : "John",
+                  "age" : 6
+                }
+                """
+            )
+        }
     }
     
     func testDecodableConformance() {
-        enum Age_Spec: ErrorlessSemanticTypeSpec {
-            typealias BackingPrimitiveWithValueSemantics = Int
-            static func gateway(preMap: Int) -> Int {
-                return preMap
-            }
-        }
-        typealias Age = SemanticType<Age_Spec>
-
-        struct Person: Decodable {
-            var name: String
-            var age: Age
-        }
         let jsonString = """
         {
           "name" : "John",
-          "age" : 28
+          "age" : 6
         }
         """
-        
         let decoder = JSONDecoder()
+        
         let person = try! decoder.decode(Person.self,
                                          from: jsonString.data(using: .utf8)!)
-        
-        XCTAssertEqual(person.age, 28)
+        XCTAssertEqual(person.age, 6)
         XCTAssertEqual(person.name, "John")
+
+        let youngPerson = try! decoder.decode(YoungPerson.self,
+                                              from: jsonString.data(using: .utf8)!)
+        XCTAssertEqual(youngPerson.age, 6)
+        XCTAssertEqual(youngPerson.name, "John")
+    }
+    
+    func testInteroperableEncodingDecoding() {
+        struct PersonWithIntAge: Codable {
+            var name: String
+            var age: Int
+        }
+
+        let encoder = JSONEncoder()
+        let decoder = JSONDecoder()
+
+        let personData = try! encoder.encode(
+            Person(name: "John",
+                   age: 6)
+        )
+        let decodedPersonWithIntAge = try! decoder.decode(PersonWithIntAge.self, from: personData)
+        XCTAssertEqual(decodedPersonWithIntAge.name, "John")
+        XCTAssertEqual(decodedPersonWithIntAge.age, 6)
+        
+        
+        let personWithIntAgeData = try! encoder.encode(
+            PersonWithIntAge(name: "John",
+                             age: 6)
+        )
+        let decodedPerson = try! decoder.decode(Person.self, from: personWithIntAgeData)
+        XCTAssertEqual(decodedPerson.name, "John")
+        XCTAssertEqual(decodedPerson.age, 6)        
     }
     
     
@@ -313,5 +366,6 @@ final class SemanticType_ConditioinalProtocolConformances_UniversallyApplicableC
         ("testBidirectionalCollectionConformance", testBidirectionalCollectionConformance),
         ("testEncodableConformance", testEncodableConformance),
         ("testDecodableConformance", testDecodableConformance),
+        ("testInteroperableEncodingDecoding", testInteroperableEncodingDecoding),
     ]
 }
