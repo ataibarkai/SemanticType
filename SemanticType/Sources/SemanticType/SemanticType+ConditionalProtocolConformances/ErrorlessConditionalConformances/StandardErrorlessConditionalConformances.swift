@@ -32,39 +32,6 @@ extension SemanticType: AdditiveArithmetic
     }
 }
 
-extension SemanticType: Numeric
-    where
-    Spec.BackingPrimitiveWithValueSemantics: Numeric,
-    Spec.Error == Never
-{
-    public typealias Magnitude = Spec.BackingPrimitiveWithValueSemantics.Magnitude
-
-    public init?<T>(exactly source: T) where T : BinaryInteger {
-        guard let inside = Spec.BackingPrimitiveWithValueSemantics.init(exactly: source)
-            else { return nil }
-        
-        self.init(inside)
-    }
-    
-    public var magnitude: Spec.BackingPrimitiveWithValueSemantics.Magnitude {
-        backingPrimitive.magnitude
-    }
-    
-    public static func * (lhs: Self, rhs: Self) -> Self {
-        Self(lhs.backingPrimitive * rhs.backingPrimitive)
-    }
-    
-    public static func *= (lhs: inout Self, rhs: Self) {
-        lhs.backingPrimitive *= rhs.backingPrimitive
-    }
-}
-
-extension SemanticType: SignedNumeric
-    where
-    Spec.BackingPrimitiveWithValueSemantics: SignedNumeric,
-    Spec.Error == Never
-{ }
-
 extension SemanticType: MutableCollection
     where
     Spec.BackingPrimitiveWithValueSemantics: MutableCollection,

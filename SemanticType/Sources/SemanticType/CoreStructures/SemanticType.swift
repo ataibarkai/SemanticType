@@ -16,6 +16,8 @@
 @dynamicMemberLookup
 public struct SemanticType<Spec: GeneralizedSemanticTypeSpec> {
     
+    public typealias _Self = SemanticType<Spec>
+    
     public typealias Spec = Spec
     
     /// The (stored) `GatewayOutput` value backing this instance of `SemanticType`.
