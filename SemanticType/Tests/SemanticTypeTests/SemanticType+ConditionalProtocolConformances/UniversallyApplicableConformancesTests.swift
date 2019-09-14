@@ -49,7 +49,7 @@ final class SemanticType_ConditioinalProtocolConformances_UniversallyApplicableC
 
         let uniquelyStrangeBobString = UniquelyStrangeString(.init(str: "Bob"))
         XCTAssertEqual(
-            (uniquelyStrangeBobString as CustomDebugStringConvertible).debugDescription,
+            uniquelyStrangeBobString.debugDescription,
             "(SemanticType<UniquelyStrangeString_Spec>): Bob... how strange..."
         )
     }
@@ -195,12 +195,7 @@ final class SemanticType_ConditioinalProtocolConformances_UniversallyApplicableC
             .create(AnyCollection(["elk", "pit", "cat", "dog", "bat", "try"]))
             .get()
         
-        // a helper function to disamgiguate properties exposed through `Collection` conditional conformance extensions,
-        // and properties exposed through the universal subscript extension.
-        func processAsCollection<C: Collection>(aFewWords: C) {
-            XCTAssertEqual(aFewWords.count, 6)
-        }
-        processAsCollection(aFewWords: aFewWords)
+        XCTAssertEqual(aFewWords.count, 6)
     }
     
     func testBidirectionalCollectionConformance() {
@@ -225,22 +220,20 @@ final class SemanticType_ConditioinalProtocolConformances_UniversallyApplicableC
             .create(["elk", "pit", "cat", "dog", "bat", "try"])
             .get()
         
-        // a helper function to disamgiguate properties exposed through `BidirectionalCollection` conditional conformance extensions,
-        // and properties exposed through the universal subscript extension.
-        func processAsBidirectionalCollection<C: BidirectionalCollection>(aFewWords: C) where C.Element == String, C.Index == Int {
-            XCTAssertEqual(aFewWords.last, "try")
-            XCTAssertEqual(
-                Array(aFewWords.reversed()),
-                ["try", "bat", "dog", "cat", "pit", "elk"]
-            )
-        }
-        processAsBidirectionalCollection(aFewWords: aFewWords)
+        XCTAssertEqual(aFewWords.last, "try")
+        XCTAssertEqual(
+            Array(aFewWords.reversed()),
+            ["try", "bat", "dog", "cat", "pit", "elk"]
+        )
     }
     
     
     // MARK: `Encodable`/`Decodable` test
     
-    // types used in Encodable/Decodable tests
+    // Types used in Encodable/Decodable tests
+    
+    // We define an `Age` `SemanticType` used by the `Person` object,
+    // so that `YoungPerson` represents a *nested*  `SemanticType` object.
     enum Age_Spec: ErrorlessSemanticTypeSpec {
         typealias BackingPrimitiveWithValueSemantics = Int
         static func gateway(preMap: Int) -> Int {
@@ -290,9 +283,9 @@ final class SemanticType_ConditioinalProtocolConformances_UniversallyApplicableC
                 )
             )
             return String(data: data, encoding: .utf8)!
-
         }()
         
+        // make sure `Person` and `YoungPerson` have identical JSON representations:
         for personJsonString in [agePersonJsonString, youngPersonJsonString] {
             XCTAssertEqual(
                 personJsonString,
@@ -315,6 +308,7 @@ final class SemanticType_ConditioinalProtocolConformances_UniversallyApplicableC
         """
         let decoder = JSONDecoder()
         
+        // make sure `Person` and `YoungPerson` decode identical fields from a given JSON:
         let person = try! decoder.decode(Person.self,
                                          from: jsonString.data(using: .utf8)!)
         XCTAssertEqual(person.age, 6)
@@ -327,6 +321,12 @@ final class SemanticType_ConditioinalProtocolConformances_UniversallyApplicableC
     }
     
     func testInteroperableEncodingDecoding() {
+        
+        /// A type which is structurally identical to `Person`,
+        /// but where `age` is given by an `Int` rather than by an `Age`.
+        ///
+        /// In other words, a SemanticType-free object which is structurally identical
+        /// to the doubly-SemanticType `YoungPerson` object.
         struct PersonWithIntAge: Codable {
             var name: String
             var age: Int
@@ -335,22 +335,30 @@ final class SemanticType_ConditioinalProtocolConformances_UniversallyApplicableC
         let encoder = JSONEncoder()
         let decoder = JSONDecoder()
 
-        let personData = try! encoder.encode(
-            Person(name: "John",
-                   age: 6)
+        // I:
+        // encode `YoungPerson` object
+        let youngPersonData = try! encoder.encode(
+            try! YoungPerson.init(.init(
+               name: "John",
+               age: 6
+            ))
         )
-        let decodedPersonWithIntAge = try! decoder.decode(PersonWithIntAge.self, from: personData)
+        // decode a `PersonWithIntAge` object from it:
+        let decodedPersonWithIntAge = try! decoder.decode(PersonWithIntAge.self, from: youngPersonData)
         XCTAssertEqual(decodedPersonWithIntAge.name, "John")
         XCTAssertEqual(decodedPersonWithIntAge.age, 6)
         
         
+        // II:
+        // encode `PersonWithIntAge` object
         let personWithIntAgeData = try! encoder.encode(
-            PersonWithIntAge(name: "John",
-                             age: 6)
+            PersonWithIntAge(name: "James",
+                             age: 9)
         )
-        let decodedPerson = try! decoder.decode(Person.self, from: personWithIntAgeData)
-        XCTAssertEqual(decodedPerson.name, "John")
-        XCTAssertEqual(decodedPerson.age, 6)        
+        // decode `YoungPerson` object from it:
+        let decodedPerson = try! decoder.decode(YoungPerson.self, from: personWithIntAgeData)
+        XCTAssertEqual(decodedPerson.name, "James")
+        XCTAssertEqual(decodedPerson.age, 9)
     }
     
     
