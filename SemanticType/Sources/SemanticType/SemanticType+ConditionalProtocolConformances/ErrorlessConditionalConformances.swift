@@ -32,20 +32,6 @@ extension SemanticType: AdditiveArithmetic
     }
 }
 
-extension SemanticType: ExpressibleByIntegerLiteral
-    where
-    Spec.BackingPrimitiveWithValueSemantics: ExpressibleByIntegerLiteral,
-    Spec.Error == Never
-{
-    public typealias IntegerLiteralType = Spec.BackingPrimitiveWithValueSemantics.IntegerLiteralType
-    
-    public init(integerLiteral value: Self.IntegerLiteralType) {
-        self.init(
-            .init(integerLiteral: value)
-        )
-    }
-}
-
 extension SemanticType: Numeric
     where
     Spec.BackingPrimitiveWithValueSemantics: Numeric,
@@ -114,6 +100,21 @@ extension SemanticType: RangeReplaceableCollection
         Index == R.Bound
     {
         backingPrimitive.replaceSubrange(subrange, with: newElements)
+    }
+}
+
+
+extension SemanticType: ExpressibleByIntegerLiteral
+    where
+    Spec.BackingPrimitiveWithValueSemantics: ExpressibleByIntegerLiteral,
+    Spec.Error == Never
+{
+    public typealias IntegerLiteralType = Spec.BackingPrimitiveWithValueSemantics.IntegerLiteralType
+    
+    public init(integerLiteral value: Self.IntegerLiteralType) {
+        self.init(
+            .init(integerLiteral: value)
+        )
     }
 }
 
