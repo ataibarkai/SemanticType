@@ -1,10 +1,3 @@
-//
-//  SemanticType.swift
-//  
-//
-//  Created by Atai Barkai on 8/2/19.
-//
-
 // NOTE: This file contains a very thin, easily-verifiable core for `SemanticType`,
 // exposing a single, maximally-typed (`Result`-returning) factory method --
 // which is then utilized in other files to facilitate many other capabilities

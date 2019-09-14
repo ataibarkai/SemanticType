@@ -1,10 +1,3 @@
-//
-//  SemanticType+usabilityExtensions.swift
-//  
-//
-//  Created by Atai Barkai on 8/8/19.
-//
-
 // MARK: - Universal usability extensions -
 extension SemanticType {
     public init(_ preMap: Spec.BackingPrimitiveWithValueSemantics) throws {

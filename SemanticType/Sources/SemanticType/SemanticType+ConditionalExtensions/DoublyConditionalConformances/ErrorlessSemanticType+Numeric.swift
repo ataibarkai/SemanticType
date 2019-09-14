@@ -1,16 +1,11 @@
-//
-//  Numeric.swift
-//  
-//
-//  Created by Atai Barkai on 9/14/19.
-//
-
 /// A marker protocol to be conformed to by a `SemanticTypeSpec` type
 /// to conditionally provide `Numeric` support for its associated `SemanticType`.
 ///
 /// If a `SemanticTypeSpec` conforms to this protocol, its associated `SemanticType`
 /// will conform to `Numeric`.
-public protocol ShouldBeNumeric: GeneralizedSemanticTypeSpec where BackingPrimitiveWithValueSemantics: Numeric { }
+public protocol ShouldBeNumeric: GeneralizedSemanticTypeSpec
+    where
+    BackingPrimitiveWithValueSemantics: Numeric { }
 
 extension SemanticType: Numeric
     where

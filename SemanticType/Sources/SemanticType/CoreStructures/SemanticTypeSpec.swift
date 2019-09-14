@@ -1,11 +1,3 @@
-//
-//  SemanticTypeSpec.swift
-//  
-//
-//  Created by Atai Barkai on 8/2/19.
-//
-
-
 /// A specification object statically determining the properties of a `SemanticType` object
 /// associated with it.
 public protocol GeneralizedSemanticTypeSpec {
