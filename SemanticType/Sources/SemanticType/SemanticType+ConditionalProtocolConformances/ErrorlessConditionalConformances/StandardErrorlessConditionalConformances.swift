@@ -32,6 +32,25 @@ extension SemanticType: AdditiveArithmetic
     }
 }
 
+extension SemanticType: Strideable
+    where
+    Spec.BackingPrimitiveWithValueSemantics: Strideable,
+    Spec.Error == Never
+{
+    public typealias Stride = Spec.BackingPrimitiveWithValueSemantics.Stride
+    
+    public func distance(to other: SemanticType<Spec>) -> Spec.BackingPrimitiveWithValueSemantics.Stride {
+        return backingPrimitive.distance(to: other.backingPrimitive)
+    }
+    
+    public func advanced(by n: Spec.BackingPrimitiveWithValueSemantics.Stride) -> SemanticType<Spec> {
+        return SemanticType.init(
+            backingPrimitive.advanced(by: n)
+        )
+    }
+
+}
+
 extension SemanticType: MutableCollection
     where
     Spec.BackingPrimitiveWithValueSemantics: MutableCollection,
