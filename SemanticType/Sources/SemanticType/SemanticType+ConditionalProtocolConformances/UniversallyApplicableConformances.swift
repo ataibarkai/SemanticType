@@ -76,9 +76,9 @@ extension SemanticType: BidirectionalCollection where Spec.BackingPrimitiveWithV
 
 extension SemanticType: RandomAccessCollection where Spec.BackingPrimitiveWithValueSemantics: RandomAccessCollection { }
 
-extension SemanticType: CustomPlaygroundDisplayConvertible {
+extension SemanticType: CustomPlaygroundDisplayConvertible where Spec.BackingPrimitiveWithValueSemantics: CustomPlaygroundDisplayConvertible {
     public var playgroundDescription: Any {
-        return  backingPrimitive
+        return backingPrimitive.playgroundDescription
     }
 }
 
