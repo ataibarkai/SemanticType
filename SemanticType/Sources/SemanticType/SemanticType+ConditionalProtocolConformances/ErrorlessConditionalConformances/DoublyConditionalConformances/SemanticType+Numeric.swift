@@ -9,19 +9,18 @@
 /// to conditionally provide `Numeric` support for its associated `SemanticType`.
 ///
 /// If a `SemanticTypeSpec` conforms to this protocol, its associated `SemanticType`
-/// will conform to `Numeric` when possible.
-public protocol CanBeNumeric { }
+/// will conform to `Numeric`.
+public protocol ShouldBeNumeric: GeneralizedSemanticTypeSpec where BackingPrimitiveWithValueSemantics: Numeric { }
 
 extension SemanticType: Numeric
     where
-    Spec: CanBeNumeric, // `Numeric` support may not make sense for all
-                        // `SemanticType`s associated with a `Numeric` `BackingPrimitiveWithValueSemantics`
-                        // (for instance, [`Second` * `Second` = `Second`] does not make semantic sense).
-                        // Nevertheless, we *can* provide an implementation in all such cases.
-                        //
-                        // We allow the `Spec` backing the `SemanticType` to signal whether `Numeric`
-                        // support should be provided by conforming to the `CanBeNumeric` marker protocol.
-    Spec.BackingPrimitiveWithValueSemantics: Numeric,
+    Spec: ShouldBeNumeric,  // `Numeric` support may not make sense for all
+                            // `SemanticType`s associated with a `Numeric` `BackingPrimitiveWithValueSemantics`
+                            // (for instance, [`Second` * `Second` = `Second`] does not make semantic sense).
+                            // Nevertheless, we *can* provide an implementation in all such cases.
+                            //
+                            // We allow the `Spec` backing the `SemanticType` to signal whether `Numeric`
+                            // support should be provided by conforming to the `ShouldBeNumeric` marker protocol.
     Spec.Error == Never
 {
     public typealias Magnitude = Spec.BackingPrimitiveWithValueSemantics.Magnitude
@@ -47,10 +46,10 @@ extension SemanticType: Numeric
 }
 
 
-
 extension SemanticType: SignedNumeric
     where
-    _Self: Numeric,
+    Spec: ShouldBeNumeric,
     Spec.BackingPrimitiveWithValueSemantics: SignedNumeric,
     Spec.Error == Never
 { }
+
