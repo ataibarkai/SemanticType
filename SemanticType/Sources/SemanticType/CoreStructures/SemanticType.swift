@@ -5,23 +5,31 @@
 //  Created by Atai Barkai on 8/2/19.
 //
 
-// A very thin, easily-verifiable core for `SemanticType`,
-// exposing a single, maximally-typed (`Result`-returning) factory method.
+// NOTE: This file contains a very thin, easily-verifiable core for `SemanticType`,
+// exposing a single, maximally-typed (`Result`-returning) factory method --
+// which is then utilized in other files to facilitate many other capabilities
+// guarenteed to respect the constraints imposed in this file.
+
+/// A type encoding semantic information over and above the information encoded by
+/// the types used to store its relevant state.
+/// - Tag: SemanticType
 @dynamicMemberLookup
 public struct SemanticType<Spec: GeneralizedSemanticTypeSpec> {
     
     public typealias Spec = Spec
     
     /// The (stored) `GatewayOutput` value backing this instance of `SemanticType`.
-    /// Guarenteed to have been outputted by `Spec.gateway` for some given input.
+    /// Guarenteed to have been outputted by `Spec.gateway` for the input used to initialize
+    /// the `SemanticType` instance.
     ///
     ///
-    /// This stored property is declared `private` to prevent any creation/initialization of a `SemanticType` instance other than
-    /// through the creation path explicitly exposed by this file (namely, the [create](x-source-tag://create) factory method).
+    /// This stored property is declared `private` (rather than e.g. `internal`) to prevent
+    /// any creation/initialization of a `SemanticType` instance other than through the creation path
+    /// explicitly exposed by this file (namely, the [create](x-source-tag://create) factory method).
     ///
-    /// Furthermore, since this property is the *only* property stored on instances of `SemanticType`,
+    /// Furthermore, since this property is the *only* state available to instances of `SemanticType`,
     /// and since it is stored as a constant (i.e. as a `let`), the data underlying a `SemanticType` instance
-    /// can in no way be modified post-initialization.
+    /// is at its core immutable, i.e. it can in no way be modified post-initialization.
     /// This makes it easy to verify that `SemanticType` respects the `Spec.gateway` function
     /// by examining the code in this file *in isolation from code in any other file*:
     /// as long as we make sure this property is always assigned a post-`Spec.gateway` value
@@ -32,7 +40,7 @@ public struct SemanticType<Spec: GeneralizedSemanticTypeSpec> {
     /// A proxy internally exposing the backingPrimitive portion of the `gatewayOutput` property to other files in this package.
     ///
     /// We define it as an underscore-prefixed, internal variable so that we can define a corresponding
-    /// variable which has a setter under some conditional extensions, and a getter under others.
+    /// variable which has both a getter and a setter under some conditional extensions, but only a getter otherwise.
     internal var _backingPrimitive: Spec.BackingPrimitiveWithValueSemantics {
         gatewayOutput.backingPrimitvie
     }
@@ -52,9 +60,9 @@ public struct SemanticType<Spec: GeneralizedSemanticTypeSpec> {
         self.gatewayOutput = _unsafeDirectlyAssignedBackingPrimitive
     }
     
-    /// The only way to create an instance of `SemanticType`.
+    /// The `SemanticType` factory through which all paths of `SemanticType` creation must pass.
     /// An obtained `SemanticType` is guarenteed to respect its `Spec.gateway` function, in that
-    /// its backing primitive is guarenteed to have been the output of a call to `Spec.gateway`.
+    /// its backing primitive is guarenteed to have been the output of a call to `Spec.gateway` using the given input.
     ///
     /// - Parameter preMap: The value to be passed through the `Spec.gatemapMap` function.
     ///

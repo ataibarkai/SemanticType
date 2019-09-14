@@ -5,6 +5,9 @@
 //  Created by Atai Barkai on 8/2/19.
 //
 
+
+/// A specification object statically determining the properties of a `SemanticType` object
+/// associated with it.
 public protocol GeneralizedSemanticTypeSpec {
     
     /// The type of the primitive value wrapped by the `SemanticType`.
@@ -39,17 +42,43 @@ public protocol GeneralizedSemanticTypeSpec {
     /// Then the non-optional `first` and `last` properties could be implemented by querying said metadata values.
     associatedtype GatewayMetadataWithValueSemantics
     
+    /// The type of the error which could be returned when attempting to create instance of the `SemanticType`.
     associatedtype Error: Swift.Error
     
+    /// The output of the [gatewayMap function](x-source-tag://SemanticTypeSpec.gateway).
+    /// See additional documentation on the [struct definition](x-source-tag://GeneralizedSemanticTypeSpec_GatewayOutput)
+    ///
+    /// - Tag: GeneralizedSemanticTypeSpec.GatewayOutput
     typealias GatewayOutput = GeneralizedSemanticTypeSpec_GatewayOutput<BackingPrimitiveWithValueSemantics, GatewayMetadataWithValueSemantics>
     
+    /// A function gating the creation of all `SemanticType` instances associated with this Spec.
+    ///
+    /// - Parameter preMap: The primitive value to be analyzed and modified for association with a `SemanticType` instance.
+    /// - Returns: If a `SemanticType` instance should be created given the provided input, returns the backing primitive
     /// - Tag: SemanticTypeSpec.gateway
     static func gateway(
        preMap: BackingPrimitiveWithValueSemantics
     ) -> Result<GatewayOutput, Error>
 }
+/// The output of the [gatewayMap function](x-source-tag://SemanticTypeSpec.gateway).
+///
+///
+/// NOTE: Since Swift does not currently support nesting definitions of types nested inside a protocol,
+/// we utilize a naming convention + [a typealias on the target protocol](x-source-tag://GeneralizedSemanticTypeSpec.GatewayOutput)
+/// to effectively achieve this goal.
+/// In other words, this type should be viewed as if it were nested under the `GeneralizedSemanticTypeSpec` protocol.
+///
+/// - Tag: GeneralizedSemanticTypeSpec_GatewayOutput
 public struct GeneralizedSemanticTypeSpec_GatewayOutput<BackingPrimitiveWithValueSemantics, GatewayMetadataWithValueSemantics> {
+    
+    /// The primitive value to back a succesfully-created `SemanticType` instance.
+    /// The behavior of the `SemanticType` manifestation largely revolves around this type
+    /// (see [SemanticType](x-source-tag://SemanticType)).
     var backingPrimitvie: BackingPrimitiveWithValueSemantics
+    
+    /// Additinoal metadata object available to the successfully-created `SemanticType` instance.
+    /// May be utilized to provide compiler-verified extensions on the SemanticType, taking advantage of the
+    /// constraints satisfied by the distilled primitive.
     var metadata: GatewayMetadataWithValueSemantics
 }
 
