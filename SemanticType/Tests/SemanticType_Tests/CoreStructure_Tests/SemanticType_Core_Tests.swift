@@ -105,6 +105,15 @@ final class SemanticType_Core_Tests: XCTestCase {
         case .failure(let error):
             XCTAssertEqual(error.candidateEmailAddress, "@gmail.com")
         }
+        
+        
+        let oneTwoThree = try! NonEmptyIntArray.create([1, 2, 3]).get()
+        XCTAssertEqual(oneTwoThree.first as Int, 1)
+        XCTAssertEqual(oneTwoThree.last as Int, 3)
+        
+        XCTAssertThrowsError(
+            try NonEmptyIntArray.create([]).get()
+        )
     }
     
     
@@ -157,5 +166,47 @@ extension EmailAddress {
     
     var host: String {
         gatewayMetadata.afterAtSign
+    }
+}
+
+
+
+// we define `NonEmptyIntArray_Spec` outside of the test function so that we can write an extension for it
+enum NonEmptyIntArray_Spec: GeneralizedSemanticTypeSpec {
+    typealias BackingPrimitiveWithValueSemantics = [Int]
+    struct GatewayMetadataWithValueSemantics {
+        var first: Int
+        var last: Int
+    }
+    enum Error: Swift.Error {
+        case arrayIsEmpty
+    }
+    
+    static func gateway(preMap: [Int]) -> Result<GatewayOutput, Error> {
+        
+        // a non-empty array will always have first/last elements:
+        guard
+            let first = preMap.first,
+            let last = preMap.last
+            else {
+                return .failure(.arrayIsEmpty)
+        }
+        
+        return .success(.init(
+            backingPrimitvie: preMap,
+            metadata: .init(first: first,
+                            last: last)
+        ))
+    }
+}
+typealias NonEmptyIntArray = SemanticType<NonEmptyIntArray_Spec>
+
+extension NonEmptyIntArray {
+    var first: Int {
+        return gatewayMetadata.first
+    }
+    
+    var last: Int {
+        return gatewayMetadata.last
     }
 }
