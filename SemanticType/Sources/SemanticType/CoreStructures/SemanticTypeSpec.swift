@@ -102,4 +102,11 @@ extension ErrorlessSemanticTypeSpec {
     ) -> Result<BackingPrimitiveWithValueSemantics, Error> {
         return .success(gateway(preMap: preMap))
     }
+    
+    public static func gateway(
+       preMap: BackingPrimitiveWithValueSemantics
+    ) -> BackingPrimitiveWithValueSemantics {
+        return preMap
+    }
 }
+
