@@ -6,6 +6,8 @@ public func allTests() -> [XCTestCaseEntry] {
         testCase(SemanticType_Core_Tests.allTests),
         testCase(SemanticTypeSpec_Tests.allTests),
         
+        testCase(ErrorlessSemanticType_Numeric_Tests.allTests),
+        
         testCase(ErrorlessSemanticType_ConditionalConformances_ExpressibleByLiteral_Tests.allTests),
         testCase(ErrorlessSemanticType_ConditionalConformances_Standard_Tests.allTests),
         testCase(ErrorlessSemanticType_NonConformanceConditionalExtensions_Tests.allTests),

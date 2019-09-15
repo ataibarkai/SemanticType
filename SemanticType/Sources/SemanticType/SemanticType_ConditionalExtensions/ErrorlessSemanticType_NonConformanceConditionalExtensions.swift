@@ -6,7 +6,7 @@ extension SemanticType
     Spec.BackingPrimitiveWithValueSemantics: Numeric,
     Spec.Error == Never
 {
-    public static func * (lhs: Self, rhs: Spec.BackingPrimitiveWithValueSemantics) -> Self {
+    public static func * (lhs: Self, rhs: Self.Spec.BackingPrimitiveWithValueSemantics) -> Self {
         return Self(lhs.backingPrimitive * rhs)
     }
 
@@ -14,7 +14,7 @@ extension SemanticType
         Self(lhs * rhs.backingPrimitive)
     }
 
-    public static func *= (lhs: inout Self, rhs: Self) {
-        lhs.backingPrimitive *= rhs.backingPrimitive
+    public static func *= (lhs: inout Self, rhs: Self.Spec.BackingPrimitiveWithValueSemantics) {
+        lhs.backingPrimitive *= rhs
     }
 }
