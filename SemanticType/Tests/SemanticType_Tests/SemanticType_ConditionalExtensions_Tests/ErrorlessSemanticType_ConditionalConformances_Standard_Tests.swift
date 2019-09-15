@@ -1,15 +1,7 @@
-//
-//  File.swift
-//  
-//
-//  Created by Atai Barkai on 9/6/19.
-//
-
-import Foundation
 import XCTest
 @testable import SemanticType
 
-final class SemanticType_ConditioinalProtocolConformances_ErrorlessConditionalConformancesTests: XCTestCase {
+final class ErrorlessSemanticType_ConditionalConformances_Standard_Tests: XCTestCase {
     
     func testAdditiveArithmeticConformance() {
         enum Seconds_Spec: ErrorlessSemanticTypeSpec {

@@ -9,7 +9,7 @@ import Foundation
 import XCTest
 @testable import SemanticType
 
-final class SemanticType_ConditioinalProtocolConformances_UniversallyApplicableConformancesTests: XCTestCase {
+final class SemanticType_ConditionalConformances_Standard_Tests: XCTestCase {
     
     func testCustomStringConvertibleConformance() {
         struct StrangeString: CustomStringConvertible {

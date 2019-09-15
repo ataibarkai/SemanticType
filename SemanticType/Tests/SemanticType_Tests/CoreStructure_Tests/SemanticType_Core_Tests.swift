@@ -1,14 +1,7 @@
-//
-//  SemanticTypeCoreCreationTests.swift
-//  
-//
-//  Created by Atai Barkai on 8/13/19.
-//
-
 import XCTest
 @testable import SemanticType
 
-final class SemanticTypeCoreCreationTests: XCTestCase {
+final class SemanticType_Core_Tests: XCTestCase {
     
     func testErrorlessModificationlessCreation() {
         enum Cents_Spec: ErrorlessSemanticTypeSpec {

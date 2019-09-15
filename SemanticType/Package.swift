@@ -22,7 +22,7 @@ let package = Package(
             name: "SemanticType",
             dependencies: []),
         .testTarget(
-            name: "SemanticTypeTests",
+            name: "SemanticType_Tests",
             dependencies: ["SemanticType"]),
     ]
 )
