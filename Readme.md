@@ -27,9 +27,18 @@ To allow for treating types as *restrictions* rather than merely as *data holder
 
 ## Value
 
-A  `SemanticType` wrapping a primitive "data-holding" type *automatically* gets
-* conditional conformance for numerous standard-library protocols, including `Hashable`,  `Comparable`,  `Equatable`, `Sequence`, `Collection`, `AdditiveArithmetic`, `ExpressibleByLiteral` protocols, and many more.
-* read/write to all variables defined on the underlying primitive value (via typed `@dynamicMemberLookup`  access)
+One could manually create purpose-specific structures wrapping an underlying backing value.
+For instance:
+```swift
+struct Dollars {
+    var value: Double
+}
+```
+
+Nevertheless utilizing `SemanticType` is preferrable because:
+* `SemanticType`s *automatically* get conditional conformances to numerous standard-library protocols, including `Hashable`,  `Comparable`,  `Equatable`, `Sequence`, `Collection`, `AdditiveArithmetic`, `ExpressibleByLiteral` protocols, and many, many, more. This makes it easy to use `SemanticType` values in the context of generic algorithms and data-structures (for instance, as keys in a `Dictionary`, in comparisons, additions, subtractions, etc.). 
+* `SemanticType`s expose *direct* read/write access all variables defined on their backing primitive value (via typed `@dynamicMemberLookup`  access)
+* `SemanticType` makes it easy to impose strict transformations and validation constraints on the values of backing primitives, while enforcing that said constraints are maintained across all operations.
 
 ---------
 
@@ -67,7 +76,7 @@ func performSQLQuery(sqlQuery: SQLQuery){
 }
 
 ```
-The following would be a compile time error were it not commented-out
+The following would result in a compile time error were it not commented-out:
 ```swift
 //let _ = Meters(845.235) + Inches(332)
 
@@ -79,7 +88,7 @@ We may also define `ErrorlessSemanticTypeSpec`s with a static function `gatewayM
 `static func gatewayMap(preMap: BackingPrimitiveWithValueSemantics) -> BackingPrimitiveWithValueSemantics`
 
 The gateway map allows us to construct types which have an *inherent*
-restriction on the range of allowed values.
+restriction on the range of the allowed values.
 
 For example, we may construct a `Username` type which is inherently case-insensitive.
 This is achieved by having a `gatewayMap` which converts any input to its lowercase version:
@@ -88,7 +97,7 @@ This is achieved by having a `gatewayMap` which converts any input to its lowerc
 enum Username_Spec: ErrorlessSemanticTypeSpec {
     typealias BackingPrimitiveWithValueSemantics = String
     
-    static func gatewayMap(preMap: TheTypeInsideTheBurrito) -> TheTypeInsideTheBurrito{
+    static func gatewayMap(preMap: BackingPrimitiveWithValueSemantics) -> BackingPrimitiveWithValueSemantics {
         return preMap.lowercaseString
     }
 }
@@ -121,8 +130,8 @@ We still have "type information" which is associated with runtime behavior rathe
 
 ### Advanced Usage: `SemanticTypeSpec`
 
-`ErrorlessSemanticTypeSpec` is a protocol refinement (with default behavior provided via an extension) of the more basic `SemanticTypeSpec` protocol.
-The `SemanticTypeSpec` protocol's more basic  `gatewayMap`  function may not only transform the incoming value, but also return some *error* if the value failed to pass some validation. 
+`ErrorlessSemanticTypeSpec` is a protocol refinement (with default behavior provided via an extension) of the more general `SemanticTypeSpec` protocol.
+The `SemanticTypeSpec` protocol's more general  `gatewayMap`  function may not only transform the incoming value, but also return some *error* if the value failed to pass some validation. 
 
 For example:
 
@@ -139,8 +148,7 @@ enum EnglishLettersOnlyString_Spec: SemanticTypeSpec {
         let nonEnglishCharacters = preMap.stringByTrimmingCharactersInSet(NSCharacterSet.letterCharacterSet())
         if(nonEnglishCharacters == "") {
             return .success(preMap)
-        }
-        else{
+        } else{
             return .failure(.containsNonEnglishCharacters(nonEnglishCharacters: nonEnglishCharacters))
         }
     }
@@ -161,16 +169,16 @@ let notOnlyLettes = try? EnglishLettersOnlyString("asdflkj12345")
 
 A typed version of the error is available through the `Result`-returning `.create()` factory function:
 ```swift
-let notOnlyLettes = EnglishLettersOnlyString.create("asdflkj12345")
+let englishLettersCreationResult: Result<EnglishLettersOnlyString, EnglishLettersOnlyString_Spec.Error> = EnglishLettersOnlyString.create("asdflkj12345")
 
 ```
 
 
 ### Most Advanced Usage: `GeneralizedSemanticTypeSpec`
 
-`SemanticTypeSpec` is itself also a protocol refinement (with default behavior provided via an extension) of the **most** basic `GeneralizedSemanticTypeSpec` protocol.
-The `GeneralizedSemanticTypeSpec` protocol's most basic  `gatewayMap`  function also defines a metadata value stored on the `SemanticType` instance which is publically available for access.
-It may be used to encode a compiler-accessible fascet of the sub-structure of the wrapped value
+`SemanticTypeSpec` is itself also a protocol refinement (with default behavior provided via an extension) of the **most** generic `GeneralizedSemanticTypeSpec` protocol.
+The `GeneralizedSemanticTypeSpec` protocol's most generic  `gatewayMap`  functio, in addition to the transformed primitive to back a  `SemanticTypeSpec` value, returns an arbitrarily-typed *metadata value* which is then stored on the `SemanticType` instance and made publically available for access.
+This metadata value may be used to encode a compiler-accessible fascet of the sub-structure of the wrapped value
 which was veriried by the `gatewayMap` function.
 
 As an example: suppose we create a `NonEmptyArray` `SemanticType`, i.e. a type whose instances wrap an `Array` -- but which could only be created when said `Array` is non-empty.
@@ -180,9 +188,8 @@ Thus we may expose `first: Element` and `last: Element` in place of `Array`'s co
 
 Since we know that instances of `NonEmptyArray` are not empty, we _could_ implement said non-optionoal  `first` and `last` overrides by forwarding the call to `Array`'s optional properties and force-unwrapping the result. While *we* know this process ought to work, the *compiler* does not -- hence the need for the force-unwrapping. And so we lose the celebrated compiler verification normally characterizing idiomatic swift code.
 
-Instead, we could implement `first` and `last` without circumventing compiler verifications by storing the `Array`'s `first` and `last`
-values as *metadata* during the `gatewayMap`ing (where we could return an error if `first` and `last` are not available).
-Then the non-optional `first` and `last` properties could be implemented by querying said metadata values.
+Instead, we could implement `first` and `last` without circumventing compiler verifications by storing the `Array`'s `first` and `last` values as *metadata* during the `gatewayMap`ing (where we could return an error if `first` and `last` are not available).
+The non-optional `first` and `last` properties could then be implemented by querying said metadata values.
 
 For example:
 ```swift
