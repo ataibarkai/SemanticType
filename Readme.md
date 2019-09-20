@@ -3,19 +3,64 @@
 
 ---------
 
+## Purpose
+
+To make it easy to treat types as *restrictions* rather than merely as *data holders* -- and to thereby improve code **safety** and **clarity**.
+
+---------
+
+
 ## What is it?
 
-`SemanticType` is a Swift µFramework which enables the *quick*, *boilerplate-free* creation of types that
+A `SemanticType` is a *context-specific type* which wraps an underlying value used in specific circumstances.
+It's a type created to capture and convey some *meaning* about a value *which isn't already captured by the type used to encode the value*.
+
+
+### What?
+Say your program contains the `Person` and `Robot` types:
+```swift
+struct Person {
+    var name: String    
+    var age: Int
+}
+
+struct Robot {
+    var id: Int
+    var batteryPercentage: Int
+}
+```
+
+The swift compiler draws a sharp distinction between a `foo: Person`  variable and a `bar: Computer` variable; a quick *option-click* type-reveal immediaely informs us of the kind of data carried by the variable, and there is no danger of accidentally passing a `Computer` to a function that expects a `Person`.
+
+However the same is *not* true when we look at `Person`'s `age: Int` field and at `Robot`'s `id: Int` and `batteryPercentage: Int` fields. Though the fields capture entirely different kinds of data, the compiler can help us with neither clarity nor precision, since in each case all the compiler sees is an `Int`.
+
+We wouldn't have this problem if our types were richer:
+```swift
+struct Person {
+    var name: String    
+    var age: Years
+}
+
+struct Robot {
+    var id: ID
+    var batteryPercentage: BatteryPercentage
+}
+```
+
+We now have `age: Years`, `id: ID`, and `batteryPercentage: BatteryPercentage`.
+Though ultimately each type is backed by an `Int`-encoded integer, the distinctions between them are now visible to the compiler.
+
+The compiler can then utilize this now-visible distinction to perform many sanity-checks on our behalf, such as making sure we never accidentally add up or subtract `Years` and `ID` values -- which would be nonsensical.
+Besides, it's nice to be able to quickly see whether a given variable captures `Years`, an `ID`, `BatteryPercentage`, or some other meaning.
+
+
+is a Swift µFramework which enables the *quick*, *boilerplate-free* creation of types that
 * Wrap primitive types used in specific circumstances, allowing the type-checker to enforce safe usage.
 * Cleanly couple to runtime data transformations & validation checks.
 
 ---------
 
 
-## Purpose
-To allow for treating types as *restrictions* rather than merely as *data holders* -- thereby increasing code **safety** and **clarity**.
-
----------
 
 ## Inspiration
 
@@ -25,7 +70,7 @@ To allow for treating types as *restrictions* rather than merely as *data holder
 
 ---------
 
-## Value
+## Why do I need this library?
 
 One could manually create purpose-specific structures wrapping an underlying backing value.
 For instance:
