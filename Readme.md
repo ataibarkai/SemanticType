@@ -5,10 +5,17 @@
 
 ## Purpose
 
-To make it easy to treat types as *restrictions* rather than merely as *data holders* -- and to thereby improve code **safety** and **clarity**.
+To make it easy to create types used as *restrictions* rather than merely as *data holders* -- and to thereby improve code **safety** and **clarity**.
 
 ---------
 
+## Inspiration
+
+* https://realm.io/news/altconf-justin-spahr-summers-type-safety/
+* http://www.johndcook.com/blog/2015/12/01/dimensional-analysis-and-types/
+* http://www.joelonsoftware.com/articles/Wrong.html
+
+---------
 
 ## What is it?
 
@@ -47,38 +54,28 @@ struct Robot {
 }
 ```
 
-We now have `age: Years`, `id: ID`, and `batteryPercentage: BatteryPercentage`.
-Though ultimately each type is backed by an `Int`-encoded integer, the distinctions between them are now visible to the compiler.
+We now have `age: Years`, `id: ID`, and `batteryPercentage: BatteryPercentage` (where `Years`, `ID`, and `BatteryPercentage` are distinct types, rather than `typealias`es for  `Int`).
+Though ultimately each field is backed by an `Int`-encoded integer, the fields have different types -- which means that the distinction between the fields is now visible to the compiler.
 
-The compiler can then utilize this now-visible distinction to perform many sanity-checks on our behalf, such as making sure we never accidentally add up or subtract `Years` and `ID` values -- which would be nonsensical.
-Besides, it's nice to be able to quickly see whether a given variable captures `Years`, an `ID`, `BatteryPercentage`, or some other meaning.
-
-
-is a Swift µFramework which enables the *quick*, *boilerplate-free* creation of types that
-* Wrap primitive types used in specific circumstances, allowing the type-checker to enforce safe usage.
-* Cleanly couple to runtime data transformations & validation checks.
+The compiler can then utilize this visible distinction between the fields to perform many sanity-checks on our behalf, such as making sure we never populate a Person's age with some `ID` field, and that we never accidentally add up or subtract `Years` and `BatteryPercentage` values (which would be nonsensical).
+Besides, it's nice to be able to quickly see whether a given variable captures `Years`, an `ID`, `BatteryPercentage`, etc.
 
 ---------
 
-
-
-## Inspiration
-
-* https://realm.io/news/altconf-justin-spahr-summers-type-safety/
-* http://www.johndcook.com/blog/2015/12/01/dimensional-analysis-and-types/
-* http://www.joelonsoftware.com/articles/Wrong.html
-
----------
 
 ## Why do I need this library?
 
-One could manually create purpose-specific structures wrapping an underlying backing value.
-For instance:
+You could of course trivially create purpose-specific structures wrapping an underlying backing value used in particular circumstances.
+For instance, you could do:
 ```swift
 struct Dollars {
     var value: Double
 }
 ```
+
+So why do you need this library?
+
+
 
 Nevertheless utilizing `SemanticType` is preferrable because:
 * `SemanticType`s *automatically* get conditional conformances to numerous standard-library protocols, including `Hashable`,  `Comparable`,  `Equatable`, `Sequence`, `Collection`, `AdditiveArithmetic`, `ExpressibleByLiteral` protocols, and many, many, more. This makes it easy to use `SemanticType` values in the context of generic algorithms and data-structures (for instance, as keys in a `Dictionary`, in comparisons, additions, subtractions, etc.). 
