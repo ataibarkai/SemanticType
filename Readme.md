@@ -37,7 +37,7 @@ struct Robot {
 }
 ```
 
-The swift compiler draws a sharp distinction between a `foo: Person`  variable and a `bar: Computer` variable; a quick *option-click* type-reveal immediaely informs us of the kind of data carried by the variable, and there is no danger of accidentally passing a `Computer` to a function that expects a `Person`.
+The swift compiler draws a sharp distinction between a `foo: Person`  variable and a `bar: Robot` variable; a quick *option-click* type-reveal immediaely informs us of the kind of data carried by the variable, and there is no danger of accidentally passing a `Robot` to a function that expects a `Person`.
 
 However the same is *not* true when we look at `Person`'s `age: Int` field and at `Robot`'s `id: Int` and `batteryPercentage: Int` fields. Though the fields capture entirely different kinds of data, the compiler can help us with neither clarity nor precision, since in each case all the compiler sees is an `Int`.
 
