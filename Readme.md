@@ -37,11 +37,15 @@ struct Robot {
 }
 ```
 
-The swift compiler draws a sharp distinction between a `foo: Person`  variable and a `bar: Computer` variable; a quick *option-click* type-reveal immediaely informs us of the kind of data carried by the variable, and there is no danger of accidentally passing a `Computer` to a function that expects a `Person`.
+The swift compiler draws a sharp distinction between a `foo: Person`  variable and a `bar: Robot` variable; there is no danger of accidentally passing a `Robot` to a function that expects a `Person`, and a quick *option-click* immediaely reveals the type of the variable, and therefore the kinds of computations in which we could expect the variable to participate. 
 
-However the same is *not* true when we look at `Person`'s `age: Int` field and at `Robot`'s `id: Int` and `batteryPercentage: Int` fields. Though the fields capture entirely different kinds of data, the compiler can help us with neither clarity nor precision, since in each case all the compiler sees is an `Int`.
+The same is *not* true when we look at the `Int` instance fields introduced above.
+Though the  `Person.age`, `Robot.id`, and `Robot.batteryPercentage` fields capture entirely different kinds of data, they are all typed as  `Int` s. And since **all the compiler sees is a variable's type,**  it can help us with neither clarity nor precision.
 
-We wouldn't have this problem if our types were richer:
+Passing the contents of `Robot.batteryPercentage` into a function expecting `Robot.id` would be just as nonesensical as passing a `Person` to a function expecting a `Robot`. However while the latter would be caught by the compiler, the former would not. 
+
+#### What can we do about this?
+This issue would disappear if our types were richer:
 ```swift
 struct Person {
     var name: String    
@@ -55,21 +59,21 @@ struct Robot {
 ```
 
 We now have `age: Years`, `id: ID`, and `batteryPercentage: BatteryPercentage` (where `Years`, `ID`, and `BatteryPercentage` are distinct types, rather than `typealias`es for  `Int`).
-Though ultimately each field is backed by an `Int`-encoded integer, the fields have different types -- which means that the distinction between the fields is now visible to the compiler.
+Though ultimately each field is backed by an `Int`-encoded integer, the fields have different types -- which means that the semantic distinction between the fields is now visible to the compiler.
 
-The compiler can then utilize this visible distinction between the fields to perform many sanity-checks on our behalf, such as making sure we never populate a Person's age with some `ID` field, and that we never accidentally add up or subtract `Years` and `BatteryPercentage` values (which would be nonsensical).
-Besides, it's nice to be able to quickly see whether a given variable captures `Years`, an `ID`, `BatteryPercentage`, etc.
+The compiler can then utilize this visible distinction between the fields to perform many sanity-checks on our behalf, such as making sure we never populate a `Person`'s age with some `ID` field, and that we never accidentally subtract `Years` from `BatteryPercentage` values.
+Besides, it's nice to be able to quickly see whether a given variable captures `Years`, an `ID`, `BatteryPercentage` -- or some other structure of significance.
 
 ---------
 
 
-## Why do I need this library?
+## Why do I need this library? Can't I make my own rich types?
 
-You could of course trivially create purpose-specific structures wrapping an underlying backing value used in particular circumstances.
+You could of course trivially create purpose-specific structures to wrap an underlying backing value used in particular circumstances.
 For instance, you could do:
 ```swift
-struct Dollars {
-    var value: Double
+struct Years {
+    var value: Int
 }
 ```
 
@@ -77,10 +81,10 @@ So why do you need this library?
 
 
 
-Nevertheless utilizing `SemanticType` is preferrable because:
-* `SemanticType`s *automatically* get conditional conformances to numerous standard-library protocols, including `Hashable`,  `Comparable`,  `Equatable`, `Sequence`, `Collection`, `AdditiveArithmetic`, `ExpressibleByLiteral` protocols, and many, many, more. This makes it easy to use `SemanticType` values in the context of generic algorithms and data-structures (for instance, as keys in a `Dictionary`, in comparisons, additions, subtractions, etc.). 
-* `SemanticType`s expose *direct* read/write access all variables defined on their backing primitive value (via typed `@dynamicMemberLookup`  access)
-* `SemanticType` makes it easy to impose strict transformations and validation constraints on the values of backing primitives, while enforcing that said constraints are maintained across all operations.
+The SemanticType library defines the `SemanticType` structure, which has many desirable properties:
+* `SemanticType`s *automatically* conform to numerous standard-library protocols -- whenever their underlying wrapped type conforms to them. The supported protocols include `Hashable`,  `Comparable`,  `Equatable`, `Sequence`, `Collection`, `AdditiveArithmetic`, `ExpressibleByLiteral` protocols, and **many, many, more**. This makes it easy to use `SemanticType` instances in the context of generic data-structures (e.g. as keys in a `Dictionary`), of protocol-oriented operations (e.g. in comparisons, additions, subtractions, etc.), as well as in the context of generic algorithms.
+* `SemanticType`s expose *direct* read/write access all instance-variables defined on their backing primitive value (via typed `@dynamicMemberLookup`  access).
+* `SemanticType` makes it easy to impose strict *transformations and validation constraints* on the allowable values of the backing primitives, while guarenteeing that said constraints are maintained across all operations. For instance, you can easily create  `OddNumber` and `EvenNumber` types which *guarentee* that all of their instances are odd/even, respectively (see [Advanced Usage](#advanced-usage-semantictypespec)).
 
 ---------
 
