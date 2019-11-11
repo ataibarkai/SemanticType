@@ -104,8 +104,8 @@ final class SemanticType_UsabilityExtensionsTests_ErrorfulSemanticTypeTests: XCT
     func testSuccessfulMutatingTryMap() {
         var joe = try! PersonWithShortName(Person(name: "Joe"))
         XCTAssertEqual(joe.name, "Joe")
-        try! joe.mutatingTryMap { person in person.name = person.name.lowercased() }
-        XCTAssertEqual(joe.name, "joe")
+        try! joe.mutatingTryMap { person in person.associatedGreeting = person.associatedGreeting.lowercased() }
+        XCTAssertEqual(joe.associatedGreeting, "hello, my name is joe.")
         
         var joesEmail = try! EmailAddress.create("JonaTHAN@gmail.com").get()
         XCTAssertEqual(joesEmail.user, "jonathan")
