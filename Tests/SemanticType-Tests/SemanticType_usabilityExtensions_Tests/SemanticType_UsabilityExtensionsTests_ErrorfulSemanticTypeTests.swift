@@ -12,15 +12,13 @@ final class SemanticType_UsabilityExtensionsTests_ErrorfulSemanticTypeTests: XCT
     }
     enum PersonWithShortName_Spec: SemanticTypeSpec {
         typealias BackingPrimitiveWithValueSemantics = Person
-        typealias Error = NameIsTooLongError
-        
-        struct NameIsTooLongError: Swift.Error, Equatable {
-            var name: String
+        enum Error: Swift.Error, Equatable {
+            case nameIsTooLong(name: String)
         }
         
         static func gateway(preMap: Person) -> Result<Person, PersonWithShortName_Spec.Error> {
             guard preMap.name.count < 5
-                else { return .failure(NameIsTooLongError(name: preMap.name)) }
+                else { return .failure(.nameIsTooLong(name: preMap.name)) }
             
             return .success(preMap)
         }
@@ -36,8 +34,8 @@ final class SemanticType_UsabilityExtensionsTests_ErrorfulSemanticTypeTests: XCT
         
         XCTAssertThrowsError(try PersonWithShortName(Person(name: "Joseph"))) { error in
             XCTAssertEqual(
-                error as! PersonWithShortName.Spec.NameIsTooLongError,
-                PersonWithShortName.Spec.NameIsTooLongError.init(name: "Joseph")
+                error as! PersonWithShortName.Spec.Error,
+                PersonWithShortName.Spec.Error.nameIsTooLong(name: "Joseph")
             )
         }
     }
@@ -93,7 +91,7 @@ final class SemanticType_UsabilityExtensionsTests_ErrorfulSemanticTypeTests: XCT
         case .failure(let error):
             XCTAssertEqual(
                 error,
-                PersonWithShortName.Spec.NameIsTooLongError(name: "Joseph")
+                PersonWithShortName.Spec.Error.nameIsTooLong(name: "Joseph")
             )
         }
     }
@@ -128,8 +126,8 @@ final class SemanticType_UsabilityExtensionsTests_ErrorfulSemanticTypeTests: XCT
             }
         ) { error in
             XCTAssertEqual(
-                error as! PersonWithShortName.Spec.NameIsTooLongError,
-                PersonWithShortName.Spec.NameIsTooLongError.init(name: "Joseph")
+                error as! PersonWithShortName.Spec.Error,
+                PersonWithShortName.Spec.Error.nameIsTooLong(name: "Joseph")
             )
         }
         
