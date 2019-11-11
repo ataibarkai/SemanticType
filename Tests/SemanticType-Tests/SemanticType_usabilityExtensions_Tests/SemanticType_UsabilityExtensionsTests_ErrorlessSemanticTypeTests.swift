@@ -5,7 +5,7 @@ final class SemanticType_UsabilityExtensionsTests_ErrorlessSemanticTypeTests: XC
     
     // CaselessString:
     enum CaselessString_Spec: SemanticTypeSpec {
-        typealias BackingPrimitiveWithValueSemantics = String
+        typealias RawValue = String
         typealias Error = Never
         
         static func gateway(preMap: String) -> Result<String, Never> {
@@ -16,7 +16,7 @@ final class SemanticType_UsabilityExtensionsTests_ErrorlessSemanticTypeTests: XC
     
     // Dollars:
     enum Dollars_Spec: ErrorlessSemanticTypeSpec {
-        typealias BackingPrimitiveWithValueSemantics = Int
+        typealias RawValue = Int
         typealias Error = Never
         static func gateway(preMap: Int) -> Int {
             return preMap
@@ -31,7 +31,7 @@ final class SemanticType_UsabilityExtensionsTests_ErrorlessSemanticTypeTests: XC
         var message: String
     }
     enum ProcessedContactFormInput_Spec: SemanticTypeSpec {
-        typealias BackingPrimitiveWithValueSemantics = ContactFormInput
+        typealias RawValue = ContactFormInput
         typealias Error = Never
         
         static func gateway(preMap: ContactFormInput) -> Result<ContactFormInput, Never> {

@@ -3,7 +3,7 @@
 /// will conform to `Numeric`.
 ///
 /// `Numeric` support may not make sense for all
-/// `SemanticType`s associated with a `Numeric` `BackingPrimitiveWithValueSemantics`
+/// `SemanticType`s associated with a `Numeric` `RawValue`
 /// (for instance, [`Second` * `Second` = `Second`] does not make semantic sense).
 /// Nevertheless, we *can* provide an implementation in all such cases.
 ///
@@ -11,23 +11,23 @@
 /// support should be provided by conforming to the `ShouldBeNumeric` marker protocol.
 public protocol ShouldBeNumeric: GeneralizedSemanticTypeSpec
     where
-    BackingPrimitiveWithValueSemantics: Numeric { }
+    RawValue: Numeric { }
 
 extension SemanticType: Numeric
     where
     Spec: ShouldBeNumeric,
     Spec.Error == Never
 {
-    public typealias Magnitude = Spec.BackingPrimitiveWithValueSemantics.Magnitude
+    public typealias Magnitude = Spec.RawValue.Magnitude
 
     public init?<T>(exactly source: T) where T : BinaryInteger {
-        guard let inside = Spec.BackingPrimitiveWithValueSemantics.init(exactly: source)
+        guard let inside = Spec.RawValue.init(exactly: source)
             else { return nil }
         
         self.init(inside)
     }
     
-    public var magnitude: Spec.BackingPrimitiveWithValueSemantics.Magnitude {
+    public var magnitude: Spec.RawValue.Magnitude {
         backingPrimitive.magnitude
     }
     
@@ -44,7 +44,7 @@ extension SemanticType: Numeric
 extension SemanticType: SignedNumeric
     where
     Spec: ShouldBeNumeric,
-    Spec.BackingPrimitiveWithValueSemantics: SignedNumeric,
+    Spec.RawValue: SignedNumeric,
     Spec.Error == Never
 { }
 

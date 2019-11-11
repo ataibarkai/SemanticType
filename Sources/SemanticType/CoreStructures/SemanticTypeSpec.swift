@@ -3,11 +3,12 @@
 public protocol GeneralizedSemanticTypeSpec {
     
     /// The type of the primitive value wrapped by the `SemanticType`.
+    /// Must possess value semantics.
     ///
     /// The backing primitive must possess *value semantics* to insure that the structure of a value is
     /// not modified by outside forces after passing through the `SemanticType`'s `gateway` function
     /// and becoming stored inside of a `SemanticType` instance.
-    associatedtype BackingPrimitiveWithValueSemantics
+    associatedtype RawValue
     
     /// The type of the gateway-associated metadata available on the `SemanticType`.
     ///
@@ -41,7 +42,7 @@ public protocol GeneralizedSemanticTypeSpec {
     /// See additional documentation on the [struct definition](x-source-tag://GeneralizedSemanticTypeSpec_GatewayOutput)
     ///
     /// - Tag: GeneralizedSemanticTypeSpec.GatewayOutput
-    typealias GatewayOutput = GeneralizedSemanticTypeSpec_GatewayOutput<BackingPrimitiveWithValueSemantics, GatewayMetadataWithValueSemantics>
+    typealias GatewayOutput = GeneralizedSemanticTypeSpec_GatewayOutput<RawValue, GatewayMetadataWithValueSemantics>
     
     /// A function gating the creation of all `SemanticType` instances associated with this Spec.
     ///
@@ -49,7 +50,7 @@ public protocol GeneralizedSemanticTypeSpec {
     /// - Returns: If a `SemanticType` instance should be created given the provided input, returns the backing primitive
     /// - Tag: SemanticTypeSpec.gateway
     static func gateway(
-       preMap: BackingPrimitiveWithValueSemantics
+       preMap: RawValue
     ) -> Result<GatewayOutput, Error>
 }
 /// The output of the [gatewayMap function](x-source-tag://SemanticTypeSpec.gateway).
@@ -61,12 +62,12 @@ public protocol GeneralizedSemanticTypeSpec {
 /// In other words, this type should be viewed as if it were nested under the `GeneralizedSemanticTypeSpec` protocol.
 ///
 /// - Tag: GeneralizedSemanticTypeSpec_GatewayOutput
-public struct GeneralizedSemanticTypeSpec_GatewayOutput<BackingPrimitiveWithValueSemantics, GatewayMetadataWithValueSemantics> {
+public struct GeneralizedSemanticTypeSpec_GatewayOutput<RawValue, GatewayMetadataWithValueSemantics> {
     
     /// The primitive value to back a succesfully-created `SemanticType` instance.
     /// The behavior of the `SemanticType` manifestation largely revolves around this type
     /// (see [SemanticType](x-source-tag://SemanticType)).
-    var backingPrimitvie: BackingPrimitiveWithValueSemantics
+    var backingPrimitvie: RawValue
     
     /// Additinoal metadata object available to the successfully-created `SemanticType` instance.
     /// May be utilized to provide compiler-verified extensions on the SemanticType, taking advantage of the
@@ -78,12 +79,12 @@ public struct GeneralizedSemanticTypeSpec_GatewayOutput<BackingPrimitiveWithValu
 /// A `SemanticTypeSpec` with no gateway metadata.
 public protocol SemanticTypeSpec: GeneralizedSemanticTypeSpec where GatewayMetadataWithValueSemantics == () {
     static func gateway(
-       preMap: BackingPrimitiveWithValueSemantics
-    ) -> Result<BackingPrimitiveWithValueSemantics, Error>
+       preMap: RawValue
+    ) -> Result<RawValue, Error>
 }
 extension SemanticTypeSpec {
     public static func gateway(
-       preMap: BackingPrimitiveWithValueSemantics
+       preMap: RawValue
     ) -> Result<GatewayOutput, Error> {
         return gateway(preMap: preMap)
             .map { .init(backingPrimitvie: $0, metadata: ()) }
@@ -93,19 +94,19 @@ extension SemanticTypeSpec {
 /// A `SemanticTypeSpec` whose `gateway` function never errors.
 public protocol ErrorlessSemanticTypeSpec: SemanticTypeSpec where Error == Never {
     static func gateway(
-       preMap: BackingPrimitiveWithValueSemantics
-    ) -> BackingPrimitiveWithValueSemantics
+       preMap: RawValue
+    ) -> RawValue
 }
 extension ErrorlessSemanticTypeSpec {
     public static func gateway(
-       preMap: BackingPrimitiveWithValueSemantics
-    ) -> Result<BackingPrimitiveWithValueSemantics, Error> {
+       preMap: RawValue
+    ) -> Result<RawValue, Error> {
         return .success(gateway(preMap: preMap))
     }
     
     public static func gateway(
-       preMap: BackingPrimitiveWithValueSemantics
-    ) -> BackingPrimitiveWithValueSemantics {
+       preMap: RawValue
+    ) -> RawValue {
         return preMap
     }
 }

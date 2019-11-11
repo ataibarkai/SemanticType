@@ -3,18 +3,18 @@
 // it makes sense to multiply a `SemanticType` instance by an instance of its backing primitive when possible.
 extension SemanticType
     where
-    Spec.BackingPrimitiveWithValueSemantics: Numeric,
+    Spec.RawValue: Numeric,
     Spec.Error == Never
 {
-    public static func * (lhs: Self, rhs: Self.Spec.BackingPrimitiveWithValueSemantics) -> Self {
+    public static func * (lhs: Self, rhs: Self.Spec.RawValue) -> Self {
         return Self(lhs.backingPrimitive * rhs)
     }
 
-    public static func * (lhs: Self.Spec.BackingPrimitiveWithValueSemantics, rhs: Self) -> Self {
+    public static func * (lhs: Self.Spec.RawValue, rhs: Self) -> Self {
         Self(lhs * rhs.backingPrimitive)
     }
 
-    public static func *= (lhs: inout Self, rhs: Self.Spec.BackingPrimitiveWithValueSemantics) {
+    public static func *= (lhs: inout Self, rhs: Self.Spec.RawValue) {
         lhs.backingPrimitive *= rhs
     }
 }

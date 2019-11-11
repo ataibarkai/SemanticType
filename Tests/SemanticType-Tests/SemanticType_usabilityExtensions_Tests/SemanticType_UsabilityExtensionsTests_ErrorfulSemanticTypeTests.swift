@@ -13,7 +13,7 @@ final class SemanticType_UsabilityExtensionsTests_ErrorfulSemanticTypeTests: XCT
         }
     }
     enum PersonWithShortName_Spec: SemanticTypeSpec {
-        typealias BackingPrimitiveWithValueSemantics = Person
+        typealias RawValue = Person
         enum Error: Swift.Error, Equatable {
             case nameIsTooLong(name: String)
         }

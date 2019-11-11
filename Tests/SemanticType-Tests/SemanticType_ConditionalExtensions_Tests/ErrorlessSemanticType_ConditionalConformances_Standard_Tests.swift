@@ -5,7 +5,7 @@ final class ErrorlessSemanticType_ConditionalConformances_Standard_Tests: XCTest
     
     func testAdditiveArithmeticConformance() {
         enum Seconds_Spec: ErrorlessSemanticTypeSpec {
-            typealias BackingPrimitiveWithValueSemantics = Double
+            typealias RawValue = Double
             static func gateway(preMap: Double) -> Double {
                 return preMap
             }

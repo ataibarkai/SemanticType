@@ -1,9 +1,9 @@
 extension SemanticType: ExpressibleByIntegerLiteral
     where
-    Spec.BackingPrimitiveWithValueSemantics: ExpressibleByIntegerLiteral,
+    Spec.RawValue: ExpressibleByIntegerLiteral,
     Spec.Error == Never
 {
-    public typealias IntegerLiteralType = Spec.BackingPrimitiveWithValueSemantics.IntegerLiteralType
+    public typealias IntegerLiteralType = Spec.RawValue.IntegerLiteralType
     
     public init(integerLiteral value: Self.IntegerLiteralType) {
         self.init(
@@ -14,10 +14,10 @@ extension SemanticType: ExpressibleByIntegerLiteral
 
 extension SemanticType: ExpressibleByFloatLiteral
     where
-    Spec.BackingPrimitiveWithValueSemantics: ExpressibleByFloatLiteral,
+    Spec.RawValue: ExpressibleByFloatLiteral,
     Spec.Error == Never
 {
-    public typealias FloatLiteralType = Spec.BackingPrimitiveWithValueSemantics.FloatLiteralType
+    public typealias FloatLiteralType = Spec.RawValue.FloatLiteralType
    
     public init(floatLiteral value: Self.FloatLiteralType) {
         self.init(
@@ -28,10 +28,10 @@ extension SemanticType: ExpressibleByFloatLiteral
 
 extension SemanticType: ExpressibleByUnicodeScalarLiteral
     where
-    Spec.BackingPrimitiveWithValueSemantics: ExpressibleByUnicodeScalarLiteral,
+    Spec.RawValue: ExpressibleByUnicodeScalarLiteral,
     Spec.Error == Never
 {
-    public typealias UnicodeScalarLiteralType = Spec.BackingPrimitiveWithValueSemantics.UnicodeScalarLiteralType
+    public typealias UnicodeScalarLiteralType = Spec.RawValue.UnicodeScalarLiteralType
     
     public init(unicodeScalarLiteral value: Self.UnicodeScalarLiteralType) {
         self.init(
@@ -42,10 +42,10 @@ extension SemanticType: ExpressibleByUnicodeScalarLiteral
 
 extension SemanticType: ExpressibleByExtendedGraphemeClusterLiteral
     where
-    Spec.BackingPrimitiveWithValueSemantics: ExpressibleByExtendedGraphemeClusterLiteral,
+    Spec.RawValue: ExpressibleByExtendedGraphemeClusterLiteral,
     Spec.Error == Never
 {
-    public typealias ExtendedGraphemeClusterLiteralType = Spec.BackingPrimitiveWithValueSemantics.ExtendedGraphemeClusterLiteralType
+    public typealias ExtendedGraphemeClusterLiteralType = Spec.RawValue.ExtendedGraphemeClusterLiteralType
     
     public init(extendedGraphemeClusterLiteral value: Self.ExtendedGraphemeClusterLiteralType) {
         self.init(
@@ -56,10 +56,10 @@ extension SemanticType: ExpressibleByExtendedGraphemeClusterLiteral
 
 extension SemanticType: ExpressibleByStringLiteral
     where
-    Spec.BackingPrimitiveWithValueSemantics: ExpressibleByStringLiteral,
+    Spec.RawValue: ExpressibleByStringLiteral,
     Spec.Error == Never
 {
-    public typealias StringLiteralType = Spec.BackingPrimitiveWithValueSemantics.StringLiteralType
+    public typealias StringLiteralType = Spec.RawValue.StringLiteralType
     
     public init(stringLiteral value: Self.StringLiteralType) {
         self.init(
@@ -70,10 +70,10 @@ extension SemanticType: ExpressibleByStringLiteral
 
 extension SemanticType: ExpressibleByBooleanLiteral
     where
-    Spec.BackingPrimitiveWithValueSemantics: ExpressibleByBooleanLiteral,
+    Spec.RawValue: ExpressibleByBooleanLiteral,
     Spec.Error == Never
 {
-    public typealias BooleanLiteralType = Spec.BackingPrimitiveWithValueSemantics.BooleanLiteralType
+    public typealias BooleanLiteralType = Spec.RawValue.BooleanLiteralType
 
   public init(booleanLiteral value: Self.BooleanLiteralType) {
     self.init(

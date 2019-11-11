@@ -6,7 +6,7 @@ final class ErrorlessSemanticType_NonConformanceConditionalExtensions_Tests: XCT
     func testNumericBackedSemanticTypeMultiplication() {
         
         enum Seconds_Spec: ErrorlessSemanticTypeSpec {
-            typealias BackingPrimitiveWithValueSemantics = Double
+            typealias RawValue = Double
             static func gateway(preMap: Double) -> Double {
                 return preMap
             }

@@ -34,7 +34,7 @@ public struct SemanticType<Spec: GeneralizedSemanticTypeSpec> {
     ///
     /// We define it as an underscore-prefixed, internal variable so that we can define a corresponding public
     /// variable which has both a getter and a setter under some conditional extensions, but only a getter otherwise.
-    internal var _backingPrimitive: Spec.BackingPrimitiveWithValueSemantics {
+    internal var _backingPrimitive: Spec.RawValue {
         gatewayOutput.backingPrimitvie
     }
     
@@ -64,7 +64,7 @@ public struct SemanticType<Spec: GeneralizedSemanticTypeSpec> {
     ///            or otherwise, the error captured by a `.failure` output of the `Sepc.gateway` function.
     ///
     /// - Tag: create
-    public static func create(_ preMap: Spec.BackingPrimitiveWithValueSemantics) -> Result<Self, Spec.Error> {
+    public static func create(_ preMap: Spec.RawValue) -> Result<Self, Spec.Error> {
         return Spec
             .gateway(preMap: preMap)
             .map(Self.init(_unsafeDirectlyAssignedBackingPrimitive:))

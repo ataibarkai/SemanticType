@@ -1,10 +1,10 @@
 extension SemanticType: AdditiveArithmetic
     where
-    Spec.BackingPrimitiveWithValueSemantics: AdditiveArithmetic,
+    Spec.RawValue: AdditiveArithmetic,
     Spec.Error == Never
 {
     public static var zero: Self {
-        return Self(Spec.BackingPrimitiveWithValueSemantics.zero)
+        return Self(Spec.RawValue.zero)
     }
 
     public static func + (lhs: Self, rhs: Self) -> Self {
@@ -24,16 +24,16 @@ extension SemanticType: AdditiveArithmetic
 
 extension SemanticType: Strideable
     where
-    Spec.BackingPrimitiveWithValueSemantics: Strideable,
+    Spec.RawValue: Strideable,
     Spec.Error == Never
 {
-    public typealias Stride = Spec.BackingPrimitiveWithValueSemantics.Stride
+    public typealias Stride = Spec.RawValue.Stride
     
-    public func distance(to other: SemanticType<Spec>) -> Spec.BackingPrimitiveWithValueSemantics.Stride {
+    public func distance(to other: SemanticType<Spec>) -> Spec.RawValue.Stride {
         return backingPrimitive.distance(to: other.backingPrimitive)
     }
     
-    public func advanced(by n: Spec.BackingPrimitiveWithValueSemantics.Stride) -> SemanticType<Spec> {
+    public func advanced(by n: Spec.RawValue.Stride) -> SemanticType<Spec> {
         return SemanticType.init(
             backingPrimitive.advanced(by: n)
         )
@@ -43,10 +43,10 @@ extension SemanticType: Strideable
 
 extension SemanticType: MutableCollection
     where
-    Spec.BackingPrimitiveWithValueSemantics: MutableCollection,
+    Spec.RawValue: MutableCollection,
     Spec.Error == Never
 {
-    public subscript(position: Spec.BackingPrimitiveWithValueSemantics.Index) -> Spec.BackingPrimitiveWithValueSemantics.Element {
+    public subscript(position: Spec.RawValue.Index) -> Spec.RawValue.Element {
         get {
             return backingPrimitive[position]
         }
@@ -59,7 +59,7 @@ extension SemanticType: MutableCollection
 
 extension SemanticType: RangeReplaceableCollection
     where
-    Spec.BackingPrimitiveWithValueSemantics: RangeReplaceableCollection,
+    Spec.RawValue: RangeReplaceableCollection,
     Spec.Error == Never
 {
     public init() {

@@ -96,13 +96,13 @@ import SemanticType
 ```
 SemanticType declerations:
 ```swift
-enum SQLQuery_Spec: ErrorlessSemanticTypeSpec { typealias BackingPrimitiveWithValueSemantics = String }
+enum SQLQuery_Spec: ErrorlessSemanticTypeSpec { typealias RawValue = String }
 typealias SQLQuery = SemanticType<SQLQuery_Spec>
 
-enum Meters_Spec: ErrorlessSemanticTypeSpec { typealias BackingPrimitiveWithValueSemantics = Double }
+enum Meters_Spec: ErrorlessSemanticTypeSpec { typealias RawValue = Double }
 typealias Meters = SemanticType<Meters_Spec>
 
-enum Inches_Spec: ErrorlessSemanticTypeSpec { typealias BackingPrimitiveWithValueSemantics = Double }
+enum Inches_Spec: ErrorlessSemanticTypeSpec { typealias RawValue = Double }
 typealias Inches = SemanticType<Inches_Spec>
 
 ```
@@ -131,7 +131,7 @@ The following would result in a compile time error were it not commented-out:
 ### The `gatewayMap` Function
 We may also define `ErrorlessSemanticTypeSpec`s with a static function `gatewayMap` where:
 
-`static func gatewayMap(preMap: BackingPrimitiveWithValueSemantics) -> BackingPrimitiveWithValueSemantics`
+`static func gatewayMap(preMap: RawValue) -> RawValue`
 
 The gateway map allows us to construct types which have an *inherent*
 restriction on the range of the allowed values.
@@ -141,9 +141,9 @@ This is achieved by having a `gatewayMap` which converts any input to its lowerc
 
 ```swift
 enum Username_Spec: ErrorlessSemanticTypeSpec {
-    typealias BackingPrimitiveWithValueSemantics = String
+    typealias RawValue = String
     
-    static func gatewayMap(preMap: BackingPrimitiveWithValueSemantics) -> BackingPrimitiveWithValueSemantics {
+    static func gatewayMap(preMap: RawValue) -> RawValue {
         return preMap.lowercaseString
     }
 }
@@ -184,13 +184,13 @@ For example:
 
 ```swift
 enum EnglishLettersOnlyString_Spec: SemanticTypeSpec {
-    typealias BackingPrimitiveWithValueSemantics = String
+    typealias RawValue = String
     
     enum Error: Swift.Error {
        case containsNonEnglishCharacters(nonEnglishCharacters: String)
     }
     
-    static func gatewayMap(preMap: BackingPrimitiveWithValueSemantics) -> Result<String, Error> {
+    static func gatewayMap(preMap: RawValue) -> Result<String, Error> {
         let nonEnglishCharacters = preMap.stringByTrimmingCharactersInSet(NSCharacterSet.letterCharacterSet())
         if(nonEnglishCharacters == "") {
             return .success(preMap)
@@ -240,7 +240,7 @@ The non-optional `first` and `last` properties could then be implemented by quer
 For example:
 ```swift
 enum NonEmptyIntArray_Spec: GeneralizedSemanticTypeSpec {
-    typealias BackingPrimitiveWithValueSemantics = [Int]
+    typealias RawValue = [Int]
     struct GatewayMetadataWithValueSemantics {
         var first: Int
         var last: Int

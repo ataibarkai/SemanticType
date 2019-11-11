@@ -1,23 +1,23 @@
 // MARK: - Universal usability extensions -
 extension SemanticType {
-    public init(_ preMap: Spec.BackingPrimitiveWithValueSemantics) throws {
+    public init(_ preMap: Spec.RawValue) throws {
         self = try Self.create(preMap).get()
     }
     
-    public var backingPrimitive: Spec.BackingPrimitiveWithValueSemantics {
+    public var backingPrimitive: Spec.RawValue {
         get {
             _backingPrimitive
         }
     }
 
-    public subscript<T>(dynamicMember keyPath: KeyPath<Spec.BackingPrimitiveWithValueSemantics, T>) -> T {
+    public subscript<T>(dynamicMember keyPath: KeyPath<Spec.RawValue, T>) -> T {
         get {
             backingPrimitive[keyPath: keyPath]
         }
     }
     
     public func tryMap(
-        _ map: (_ backingPrimitive: Spec.BackingPrimitiveWithValueSemantics) throws -> Spec.BackingPrimitiveWithValueSemantics
+        _ map: (_ backingPrimitive: Spec.RawValue) throws -> Spec.RawValue
     ) rethrows -> Result<Self, Spec.Error> {
         return Self.create(
             try map(backingPrimitive)
@@ -25,11 +25,11 @@ extension SemanticType {
     }
     
     public mutating func mutatingTryMap(
-        _ mutation: (_ backingPrimitive: inout Spec.BackingPrimitiveWithValueSemantics) throws -> ()
+        _ mutation: (_ backingPrimitive: inout Spec.RawValue) throws -> ()
     ) throws {
         let mapped = try tryMap { original in
             var toBeModified = original
-            try mutation(&toBeModified) // Here we make use of the assumption that `Spec.BackingPrimitiveWithValueSemantics` has
+            try mutation(&toBeModified) // Here we make use of the assumption that `Spec.RawValue` has
                                         // value-semantics, i.e. that this mutation of `backingPrimitiveCopy` would bear no
                                         // effect on the original `backingPrimitive`.
             return toBeModified
@@ -42,12 +42,12 @@ extension SemanticType {
 
 // MARK: - `Error == Never` extensions -
 extension SemanticType where Spec.Error == Never {
-    public init(_ preMap: Spec.BackingPrimitiveWithValueSemantics) {
+    public init(_ preMap: Spec.RawValue) {
         self = Self.create(preMap).get()
     }
     
     /// The value assigned to `backingPrimitive` is passed through the `Spec.gateway` function before making it to `self`.
-    public var backingPrimitive: Spec.BackingPrimitiveWithValueSemantics {
+    public var backingPrimitive: Spec.RawValue {
         get {
             _backingPrimitive
         }
@@ -56,7 +56,7 @@ extension SemanticType where Spec.Error == Never {
         }
     }
     
-    public subscript<T>(dynamicMember keyPath: WritableKeyPath<Spec.BackingPrimitiveWithValueSemantics, T>) -> T {
+    public subscript<T>(dynamicMember keyPath: WritableKeyPath<Spec.RawValue, T>) -> T {
         get {
             backingPrimitive[keyPath: keyPath]
         }
@@ -66,7 +66,7 @@ extension SemanticType where Spec.Error == Never {
     }
     
     public func map(
-        _ map: (_ backingPrimitive: Spec.BackingPrimitiveWithValueSemantics) throws -> Spec.BackingPrimitiveWithValueSemantics
+        _ map: (_ backingPrimitive: Spec.RawValue) throws -> Spec.RawValue
     ) rethrows -> Self {
         return Self.init(
             try map(backingPrimitive)

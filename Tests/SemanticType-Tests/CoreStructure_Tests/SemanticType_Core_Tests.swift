@@ -5,7 +5,7 @@ final class SemanticType_Core_Tests: XCTestCase {
     
     func testErrorlessModificationlessCreation() {
         enum Cents_Spec: ErrorlessSemanticTypeSpec {
-            typealias BackingPrimitiveWithValueSemantics = Int
+            typealias RawValue = Int
             static func gateway(preMap: Int) -> Int {
                 return preMap
             }
@@ -28,7 +28,7 @@ final class SemanticType_Core_Tests: XCTestCase {
 
     func testErrorlessValueModifyingCreation() {
         enum CaselessString_Spec: ErrorlessSemanticTypeSpec {
-            typealias BackingPrimitiveWithValueSemantics = String
+            typealias RawValue = String
             static func gateway(preMap: String) -> String {
                 return preMap.lowercased()
             }
@@ -51,7 +51,7 @@ final class SemanticType_Core_Tests: XCTestCase {
     
     func testErrorfullCreation() {
         enum FiveLetterWordArray_Spec: SemanticTypeSpec {
-            typealias BackingPrimitiveWithValueSemantics = [String]
+            typealias RawValue = [String]
             struct Error: Swift.Error {
                 var excludedWords: [String]
             }
@@ -128,7 +128,7 @@ final class SemanticType_Core_Tests: XCTestCase {
 
 // we define `EmailAddress` outside of the test function so that we can write an extension for it
 enum EmailAddress_Spec: GeneralizedSemanticTypeSpec {
-    typealias BackingPrimitiveWithValueSemantics = String
+    typealias RawValue = String
     struct GatewayMetadataWithValueSemantics {
         var beforeAtSign: String
         var afterAtSign: String
@@ -173,7 +173,7 @@ extension EmailAddress {
 
 // we define `NonEmptyIntArray_Spec` outside of the test function so that we can write an extension for it
 enum NonEmptyIntArray_Spec: GeneralizedSemanticTypeSpec {
-    typealias BackingPrimitiveWithValueSemantics = [Int]
+    typealias RawValue = [Int]
     struct GatewayMetadataWithValueSemantics {
         var first: Int
         var last: Int
