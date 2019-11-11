@@ -28,15 +28,15 @@ extension SemanticType: Numeric
     }
     
     public var magnitude: Spec.RawValue.Magnitude {
-        backingPrimitive.magnitude
+        rawValue.magnitude
     }
     
     public static func * (lhs: Self, rhs: Self) -> Self {
-        Self(lhs.backingPrimitive * rhs.backingPrimitive)
+        Self(lhs.rawValue * rhs.rawValue)
     }
     
     public static func *= (lhs: inout Self, rhs: Self) {
-        lhs.backingPrimitive *= rhs.backingPrimitive
+        lhs.rawValue *= rhs.rawValue
     }
 }
 

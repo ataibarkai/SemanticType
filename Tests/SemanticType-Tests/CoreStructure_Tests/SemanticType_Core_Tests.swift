@@ -13,16 +13,16 @@ final class SemanticType_Core_Tests: XCTestCase {
         typealias Cents = SemanticType<Cents_Spec>
         
         let fiftyCents = Cents.create(50).get()
-        XCTAssertEqual(fiftyCents._backingPrimitive, 50)
+        XCTAssertEqual(fiftyCents._rawValue, 50)
         
         let fiftyCentsDebt = Cents.create(-50).get()
-        XCTAssertEqual(fiftyCentsDebt._backingPrimitive, -50)
+        XCTAssertEqual(fiftyCentsDebt._rawValue, -50)
         
         let adviceMoney = Cents.create(2).get()
-        XCTAssertEqual(adviceMoney._backingPrimitive, 2)
+        XCTAssertEqual(adviceMoney._rawValue, 2)
 
         let bezosMoney = Cents.create(2_000_000_000_000).get()
-        XCTAssertEqual(bezosMoney._backingPrimitive, 2_000_000_000_000)
+        XCTAssertEqual(bezosMoney._rawValue, 2_000_000_000_000)
     }
     
 
@@ -36,16 +36,16 @@ final class SemanticType_Core_Tests: XCTestCase {
         typealias CaselessString = SemanticType<CaselessString_Spec>
 
         let str1: CaselessString = CaselessString.create("HeLlo, WorLD.").get()
-        XCTAssertEqual(str1._backingPrimitive, "hello, world.")
+        XCTAssertEqual(str1._rawValue, "hello, world.")
         
         let str2: CaselessString = CaselessString.create("Why would Jerry BRING anything?").get()
-        XCTAssertEqual(str2._backingPrimitive, "why would jerry bring anything?")
+        XCTAssertEqual(str2._rawValue, "why would jerry bring anything?")
         
         let str3: CaselessString = CaselessString.create("Why would JERRY bring anything?").get()
-        XCTAssertEqual(str3._backingPrimitive, "why would jerry bring anything?")
+        XCTAssertEqual(str3._rawValue, "why would jerry bring anything?")
 
         let str4: CaselessString = CaselessString.create("Yo-Yo Ma").get()
-        XCTAssertEqual(str4._backingPrimitive, "yo-yo ma")
+        XCTAssertEqual(str4._rawValue, "yo-yo ma")
     }
     
     
@@ -70,7 +70,7 @@ final class SemanticType_Core_Tests: XCTestCase {
         let shouldBeValid = FiveLetterWordArray.create(arrayThatOnlyContainsFiveLetterWords)
         switch shouldBeValid {
         case .success(let fiveLetterWordArray):
-            XCTAssertEqual(fiveLetterWordArray._backingPrimitive, arrayThatOnlyContainsFiveLetterWords)
+            XCTAssertEqual(fiveLetterWordArray._rawValue, arrayThatOnlyContainsFiveLetterWords)
         case .failure:
             XCTFail()
         }
@@ -151,7 +151,7 @@ enum EmailAddress_Spec: GeneralizedSemanticTypeSpec {
             else { return .failure(.init(candidateEmailAddress: preMap)) }
         
         return .success(.init(
-            backingPrimitvie: preMap,
+            rawValue: preMap,
             metadata: .init(beforeAtSign: String(beforeAtSign),
                             afterAtSign: String(afterAtSign))
         ))
@@ -193,7 +193,7 @@ enum NonEmptyIntArray_Spec: GeneralizedSemanticTypeSpec {
         }
         
         return .success(.init(
-            backingPrimitvie: preMap,
+            rawValue: preMap,
             metadata: .init(first: first,
                             last: last)
         ))

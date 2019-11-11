@@ -4,34 +4,34 @@ extension SemanticType {
         self = try Self.create(preMap).get()
     }
     
-    public var backingPrimitive: Spec.RawValue {
+    public var rawValue: Spec.RawValue {
         get {
-            _backingPrimitive
+            _rawValue
         }
     }
 
     public subscript<T>(dynamicMember keyPath: KeyPath<Spec.RawValue, T>) -> T {
         get {
-            backingPrimitive[keyPath: keyPath]
+            rawValue[keyPath: keyPath]
         }
     }
     
     public func tryMap(
-        _ map: (_ backingPrimitive: Spec.RawValue) throws -> Spec.RawValue
+        _ map: (_ rawValue: Spec.RawValue) throws -> Spec.RawValue
     ) rethrows -> Result<Self, Spec.Error> {
         return Self.create(
-            try map(backingPrimitive)
+            try map(rawValue)
         )
     }
     
     public mutating func mutatingTryMap(
-        _ mutation: (_ backingPrimitive: inout Spec.RawValue) throws -> ()
+        _ mutation: (_ rawValue: inout Spec.RawValue) throws -> ()
     ) throws {
         let mapped = try tryMap { original in
             var toBeModified = original
             try mutation(&toBeModified) // Here we make use of the assumption that `Spec.RawValue` has
-                                        // value-semantics, i.e. that this mutation of `backingPrimitiveCopy` would bear no
-                                        // effect on the original `backingPrimitive`.
+                                        // value-semantics, i.e. that this mutation of `toBeModified: Spec.RawValue` would bear no
+                                        // effect on `original: Spec.RawValue`.
             return toBeModified
         }
         
@@ -46,10 +46,10 @@ extension SemanticType where Spec.Error == Never {
         self = Self.create(preMap).get()
     }
     
-    /// The value assigned to `backingPrimitive` is passed through the `Spec.gateway` function before making it to `self`.
-    public var backingPrimitive: Spec.RawValue {
+    /// The value assigned to `rawValue` is passed through the `Spec.gateway` function before making it to `self`.
+    public var rawValue: Spec.RawValue {
         get {
-            _backingPrimitive
+            _rawValue
         }
         set {
             self = .init(newValue)
@@ -58,18 +58,18 @@ extension SemanticType where Spec.Error == Never {
     
     public subscript<T>(dynamicMember keyPath: WritableKeyPath<Spec.RawValue, T>) -> T {
         get {
-            backingPrimitive[keyPath: keyPath]
+            rawValue[keyPath: keyPath]
         }
         set {
-            backingPrimitive[keyPath: keyPath] = newValue
+            rawValue[keyPath: keyPath] = newValue
         }
     }
     
     public func map(
-        _ map: (_ backingPrimitive: Spec.RawValue) throws -> Spec.RawValue
+        _ map: (_ rawValue: Spec.RawValue) throws -> Spec.RawValue
     ) rethrows -> Self {
         return Self.init(
-            try map(backingPrimitive)
+            try map(rawValue)
         )
     }
 }

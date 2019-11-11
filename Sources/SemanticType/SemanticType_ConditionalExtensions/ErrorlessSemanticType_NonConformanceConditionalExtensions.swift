@@ -7,14 +7,14 @@ extension SemanticType
     Spec.Error == Never
 {
     public static func * (lhs: Self, rhs: Self.Spec.RawValue) -> Self {
-        return Self(lhs.backingPrimitive * rhs)
+        return Self(lhs.rawValue * rhs)
     }
 
     public static func * (lhs: Self.Spec.RawValue, rhs: Self) -> Self {
-        Self(lhs * rhs.backingPrimitive)
+        Self(lhs * rhs.rawValue)
     }
 
     public static func *= (lhs: inout Self, rhs: Self.Spec.RawValue) {
-        lhs.backingPrimitive *= rhs
+        lhs.rawValue *= rhs
     }
 }

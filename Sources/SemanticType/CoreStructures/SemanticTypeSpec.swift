@@ -67,7 +67,7 @@ public struct GeneralizedSemanticTypeSpec_GatewayOutput<RawValue, GatewayMetadat
     /// The primitive value to back a succesfully-created `SemanticType` instance.
     /// The behavior of the `SemanticType` manifestation largely revolves around this type
     /// (see [SemanticType](x-source-tag://SemanticType)).
-    var backingPrimitvie: RawValue
+    var rawValue: RawValue
     
     /// Additinoal metadata object available to the successfully-created `SemanticType` instance.
     /// May be utilized to provide compiler-verified extensions on the SemanticType, taking advantage of the
@@ -87,7 +87,7 @@ extension SemanticTypeSpec {
        preMap: RawValue
     ) -> Result<GatewayOutput, Error> {
         return gateway(preMap: preMap)
-            .map { .init(backingPrimitvie: $0, metadata: ()) }
+            .map { .init(rawValue: $0, metadata: ()) }
     }
 }
 

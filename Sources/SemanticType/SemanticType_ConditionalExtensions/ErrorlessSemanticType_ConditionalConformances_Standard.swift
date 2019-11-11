@@ -8,17 +8,17 @@ extension SemanticType: AdditiveArithmetic
     }
 
     public static func + (lhs: Self, rhs: Self) -> Self {
-        return Self(lhs.backingPrimitive + rhs.backingPrimitive)
+        return Self(lhs.rawValue + rhs.rawValue)
     }
     public static func += (lhs: inout Self, rhs: Self) {
-        lhs.backingPrimitive += rhs.backingPrimitive
+        lhs.rawValue += rhs.rawValue
     }
 
     public static func - (lhs: Self, rhs: Self) -> Self {
-        return Self(lhs.backingPrimitive - rhs.backingPrimitive)
+        return Self(lhs.rawValue - rhs.rawValue)
     }
     public static func -= (lhs: inout Self, rhs: Self) {
-        lhs.backingPrimitive -= rhs.backingPrimitive
+        lhs.rawValue -= rhs.rawValue
     }
 }
 
@@ -30,12 +30,12 @@ extension SemanticType: Strideable
     public typealias Stride = Spec.RawValue.Stride
     
     public func distance(to other: SemanticType<Spec>) -> Spec.RawValue.Stride {
-        return backingPrimitive.distance(to: other.backingPrimitive)
+        return rawValue.distance(to: other.rawValue)
     }
     
     public func advanced(by n: Spec.RawValue.Stride) -> SemanticType<Spec> {
         return SemanticType.init(
-            backingPrimitive.advanced(by: n)
+            rawValue.advanced(by: n)
         )
     }
 
@@ -48,10 +48,10 @@ extension SemanticType: MutableCollection
 {
     public subscript(position: Spec.RawValue.Index) -> Spec.RawValue.Element {
         get {
-            return backingPrimitive[position]
+            return rawValue[position]
         }
         set {
-            backingPrimitive[position] = newValue
+            rawValue[position] = newValue
         }
     }
     
@@ -75,7 +75,7 @@ extension SemanticType: RangeReplaceableCollection
         Element == C.Element,
         Index == R.Bound
     {
-        backingPrimitive.replaceSubrange(subrange, with: newElements)
+        rawValue.replaceSubrange(subrange, with: newElements)
     }
 }
 

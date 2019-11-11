@@ -45,13 +45,13 @@ final class SemanticType_UsabilityExtensionsTests_ErrorfulSemanticTypeTests: XCT
     
     func testBackingPrimitiveAccess() {
         let joe = try! PersonWithShortName(Person(name: "Joe"))
-        XCTAssertEqual(joe.backingPrimitive, Person(name: "Joe"))
+        XCTAssertEqual(joe.rawValue, Person(name: "Joe"))
         
         let dean = try! PersonWithShortName(Person(name: "Dean"))
-        XCTAssertEqual(dean.backingPrimitive, Person(name: "Dean"))
+        XCTAssertEqual(dean.rawValue, Person(name: "Dean"))
         
         let tom = try! PersonWithShortName(Person(name: "tom"))
-        XCTAssertEqual(tom.backingPrimitive, Person(name: "tom"))
+        XCTAssertEqual(tom.rawValue, Person(name: "tom"))
     }
     
     
