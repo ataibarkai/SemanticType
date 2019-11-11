@@ -11,6 +11,7 @@ public protocol GeneralizedSemanticTypeSpec {
     associatedtype RawValue
     
     /// The type of the gateway-associated metadata available on the `SemanticType`.
+    /// Must possess value semantics.
     ///
     /// The metadata must possess *value semantics* to ensure that the structure of a value is
     /// not modified by outside forces after passing through the `SemanticType`'s `gateway` function
@@ -18,22 +19,28 @@ public protocol GeneralizedSemanticTypeSpec {
     ///
     /// ---
     ///
-    /// The metadata value is stored on the `SemanticType` instance and is publically available for access.
-    /// It may be used to encode a compiler-accessible fascet of the sub-structure of the wrapped value
-    /// which was veriried by the `gatewayMap` function.
+    /// The `gatewayMap` function may verify that the internal sub-structure of a returned `RawValue`
+    /// satisfies any number of constraints.
+    /// `Metadata` encodes a **compiler-visible fascet** of said verified sub-structure.
+    ///
+    /// ---
     ///
     /// As an example: suppose we create a `NonEmptyArray` `SemanticType`, i.e.
-    /// a type whose instances wrap an `Array` -- but which could only be created when said `Array` is non-empty.
+    /// a type whose instances wrap an `Array` which is *always* non-empty.
+    ///
     /// Unlike instances of `Array`, instances of `NonEmptyArray` are **guarenteed** to have `first` and `last` elements.
     /// Thus we may expose `first: Element` and `last: Element` in place of `Array`'s corresponding *optional* properties.
+    ///
     /// Since we know that instances of `NonEmptyArray` are not empty, we _could_ implement said non-optionoal
     /// `first` and `last` overrides by forwarding the call to `Array`'s optional properties and force-unwrapping the result.
+    ///
     /// While *we* know this process ought to work, the *compiler* does not -- hence the need for the force-unwrapping.
     /// And so we lose the celebrated compiler verification normally characterizing idiomatic swift code.
+    ///
     /// Instead, we could implement `first` and `last` without circumventing compiler verifications by storing the `Array`'s `first` and `last`
     /// values as *metadata* during the `gatewayMap`ing (where we could return an error if `first` and `last` are not available).
-    /// Then the non-optional `first` and `last` properties could be implemented by querying said metadata values.
-    associatedtype GatewayMetadataWithValueSemantics
+    /// The non-optional `first` and `last` properties on `NonEmptyArray` could then be implemented by querying said metadata values.
+    associatedtype Metadata
     
     /// The type of the error which could be returned when attempting to create instance of the `SemanticType`.
     associatedtype Error: Swift.Error
@@ -42,7 +49,7 @@ public protocol GeneralizedSemanticTypeSpec {
     /// See additional documentation on the [struct definition](x-source-tag://GeneralizedSemanticTypeSpec_GatewayOutput)
     ///
     /// - Tag: GeneralizedSemanticTypeSpec.GatewayOutput
-    typealias GatewayOutput = GeneralizedSemanticTypeSpec_GatewayOutput<RawValue, GatewayMetadataWithValueSemantics>
+    typealias GatewayOutput = GeneralizedSemanticTypeSpec_GatewayOutput<RawValue, Metadata>
     
     /// A function gating the creation of all `SemanticType` instances associated with this Spec.
     ///
@@ -62,22 +69,22 @@ public protocol GeneralizedSemanticTypeSpec {
 /// In other words, this type should be viewed as if it were nested under the `GeneralizedSemanticTypeSpec` protocol.
 ///
 /// - Tag: GeneralizedSemanticTypeSpec_GatewayOutput
-public struct GeneralizedSemanticTypeSpec_GatewayOutput<RawValue, GatewayMetadataWithValueSemantics> {
+public struct GeneralizedSemanticTypeSpec_GatewayOutput<RawValue, Metadata> {
     
     /// The primitive value to back a succesfully-created `SemanticType` instance.
     /// The behavior of the `SemanticType` construct largely revolves around this field.
     /// (see [SemanticType](x-source-tag://SemanticType)).
     var rawValue: RawValue
     
-    /// Additinoal metadata object available to the successfully-created `SemanticType` instance.
+    /// Additinoal metadata available to the successfully-created `SemanticType` instance.
     /// May be utilized to provide compiler-verified extensions on the SemanticType, taking advantage of the
     /// constraints satisfied by the distilled `RawValue`.
-    var metadata: GatewayMetadataWithValueSemantics
+    var metadata: Metadata
 }
 
 
 /// A `SemanticTypeSpec` with no gateway metadata.
-public protocol SemanticTypeSpec: GeneralizedSemanticTypeSpec where GatewayMetadataWithValueSemantics == () {
+public protocol SemanticTypeSpec: GeneralizedSemanticTypeSpec where Metadata == () {
     static func gateway(
        preMap: RawValue
     ) -> Result<RawValue, Error>

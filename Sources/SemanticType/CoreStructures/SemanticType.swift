@@ -39,7 +39,7 @@ public struct SemanticType<Spec: GeneralizedSemanticTypeSpec> {
     }
     
     /// The metadata value outputted by the gateway function, along with the (possibly transformed) `rawValue`.
-    public var gatewayMetadata: Spec.GatewayMetadataWithValueSemantics {
+    public var gatewayMetadata: Spec.Metadata {
         gatewayOutput.metadata
     }
     

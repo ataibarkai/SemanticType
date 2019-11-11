@@ -241,7 +241,7 @@ For example:
 ```swift
 enum NonEmptyIntArray_Spec: GeneralizedSemanticTypeSpec {
     typealias RawValue = [Int]
-    struct GatewayMetadataWithValueSemantics {
+    struct Metadata {
         var first: Int
         var last: Int
     }
