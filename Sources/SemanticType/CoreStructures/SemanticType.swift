@@ -32,12 +32,13 @@ public struct SemanticType<Spec: GeneralizedSemanticTypeSpec> {
     
     /// A proxy internally exposing the backingPrimitive portion of the `gatewayOutput` property to other files in this package.
     ///
-    /// We define it as an underscore-prefixed, internal variable so that we can define a corresponding
+    /// We define it as an underscore-prefixed, internal variable so that we can define a corresponding public
     /// variable which has both a getter and a setter under some conditional extensions, but only a getter otherwise.
     internal var _backingPrimitive: Spec.BackingPrimitiveWithValueSemantics {
         gatewayOutput.backingPrimitvie
     }
     
+    /// The metadata value outputted by the gateway function, along with the (possibly transformed) backing primitive.
     public var gatewayMetadata: Spec.GatewayMetadataWithValueSemantics {
         gatewayOutput.metadata
     }
