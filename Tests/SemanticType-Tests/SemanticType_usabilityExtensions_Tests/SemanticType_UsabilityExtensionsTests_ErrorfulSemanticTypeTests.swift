@@ -5,9 +5,11 @@ final class SemanticType_UsabilityExtensionsTests_ErrorfulSemanticTypeTests: XCT
     
     struct Person: Equatable {
         var name: String
+        var associatedGreeting: String
         
-        var associatedGreeting: String {
-            "Hello, my name is \(name)."
+        init(name: String) {
+            self.name = name
+            self.associatedGreeting = "Hello, my name is \(name)." // initialize greeting to default
         }
     }
     enum PersonWithShortName_Spec: SemanticTypeSpec {
@@ -66,12 +68,14 @@ final class SemanticType_UsabilityExtensionsTests_ErrorfulSemanticTypeTests: XCT
     
     func testSuccessfulTryMap() {
         let joe = try! PersonWithShortName(Person(name: "Joe"))
-        let lowercaseJoe = try! joe.tryMap { person in
+        let lowercaseJoeResult = joe.tryMap { person in
             var person = person
-            person.name = person.name.lowercased()
+            person.associatedGreeting = person.associatedGreeting.lowercased()
             return person
-        }.get()
-        XCTAssertEqual(lowercaseJoe.name, "joe")
+        }
+        let lowercaseJoe = try! lowercaseJoeResult.get()
+        
+        XCTAssertEqual(lowercaseJoe.associatedGreeting, "hello, my name is joe.")
     }
     
     
