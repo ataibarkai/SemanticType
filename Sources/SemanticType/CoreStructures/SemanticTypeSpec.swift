@@ -5,7 +5,7 @@ public protocol GeneralizedSemanticTypeSpec {
     /// The type of the primitive value wrapped by the `SemanticType`.
     /// Must possess value semantics.
     ///
-    /// The backing primitive must possess *value semantics* to insure that the structure of a value is
+    /// `RawValue` must possess *value semantics* to insure that the structure of a value is
     /// not modified by outside forces after passing through the `SemanticType`'s `gateway` function
     /// and becoming stored inside of a `SemanticType` instance.
     associatedtype RawValue
@@ -46,8 +46,8 @@ public protocol GeneralizedSemanticTypeSpec {
     
     /// A function gating the creation of all `SemanticType` instances associated with this Spec.
     ///
-    /// - Parameter preMap: The primitive value to be analyzed and modified for association with a `SemanticType` instance.
-    /// - Returns: If a `SemanticType` instance should be created given the provided input, returns the backing primitive
+    /// - Parameter preMap: The `RawValue` to be analyzed and modified for association with a `SemanticType` instance.
+    /// - Returns: If a `SemanticType` instance should be created given the provided input, returns the (possibly transformed) `RawValue` to back the created `SemanticType` instance. Otherwise, returns the error specifying why the instance cannot be creted given the provided input.
     /// - Tag: SemanticTypeSpec.gateway
     static func gateway(
        preMap: RawValue
@@ -65,13 +65,13 @@ public protocol GeneralizedSemanticTypeSpec {
 public struct GeneralizedSemanticTypeSpec_GatewayOutput<RawValue, GatewayMetadataWithValueSemantics> {
     
     /// The primitive value to back a succesfully-created `SemanticType` instance.
-    /// The behavior of the `SemanticType` manifestation largely revolves around this type
+    /// The behavior of the `SemanticType` construct largely revolves around this field.
     /// (see [SemanticType](x-source-tag://SemanticType)).
     var rawValue: RawValue
     
     /// Additinoal metadata object available to the successfully-created `SemanticType` instance.
     /// May be utilized to provide compiler-verified extensions on the SemanticType, taking advantage of the
-    /// constraints satisfied by the distilled primitive.
+    /// constraints satisfied by the distilled `RawValue`.
     var metadata: GatewayMetadataWithValueSemantics
 }
 

@@ -83,8 +83,8 @@ So why do you need this library?
 
 The SemanticType library defines the `SemanticType` structure, which has many desirable properties:
 * `SemanticType`s *automatically* conform to numerous standard-library protocols -- whenever their underlying wrapped type conforms to them. The supported protocols include `Hashable`,  `Comparable`,  `Equatable`, `Sequence`, `Collection`, `AdditiveArithmetic`, `ExpressibleByLiteral` protocols, and **many, many, more**. This makes it easy to use `SemanticType` instances in the context of generic data-structures (e.g. as keys in a `Dictionary`), of protocol-oriented operations (e.g. in comparisons, additions, subtractions, etc.), as well as in the context of generic algorithms.
-* `SemanticType`s expose *direct* read/write access all instance-variables defined on their backing primitive value (via typed `@dynamicMemberLookup`  access).
-* `SemanticType` makes it easy to impose strict *transformations and validation constraints* on the allowable values of the backing primitives, while guarenteeing that said constraints are maintained across all operations. For instance, you can easily create  `OddNumber` and `EvenNumber` types which *guarentee* that all of their instances are odd/even, respectively (see [Advanced Usage](#advanced-usage-semantictypespec)).
+* `SemanticType`s expose *direct* read/write access all instance-variables defined on their `rawValue` (via typed `@dynamicMemberLookup`  access).
+* `SemanticType` makes it easy to impose strict *transformations and validation constraints* on the allowable values of the `rawValue`s, while guarenteeing that said constraints are maintained across all operations. For instance, you can easily create  `OddNumber` and `EvenNumber` types which *guarentee* that all of their instances are odd/even, respectively (see [Advanced Usage](#advanced-usage-semantictypespec)).
 
 ---------
 
@@ -223,7 +223,7 @@ let englishLettersCreationResult: Result<EnglishLettersOnlyString, EnglishLetter
 ### Most Advanced Usage: `GeneralizedSemanticTypeSpec`
 
 `SemanticTypeSpec` is itself also a protocol refinement (with default behavior provided via an extension) of the **most** generic `GeneralizedSemanticTypeSpec` protocol.
-The `GeneralizedSemanticTypeSpec` protocol's most generic  `gatewayMap`  functio, in addition to the transformed primitive to back a  `SemanticTypeSpec` value, returns an arbitrarily-typed *metadata value* which is then stored on the `SemanticType` instance and made publically available for access.
+The `GeneralizedSemanticTypeSpec` protocol's most generic  `gatewayMap`  function, in addition to the transformed `RawValue` to back the  `SemanticType` instance, returns an arbitrarily-typed *metadata value* which is then stored on the `SemanticType` instance and made publically available for access.
 This metadata value may be used to encode a compiler-accessible fascet of the sub-structure of the wrapped value
 which was veriried by the `gatewayMap` function.
 
@@ -260,7 +260,7 @@ enum NonEmptyIntArray_Spec: GeneralizedSemanticTypeSpec {
         }
         
         return .success(.init(
-            backingPrimitvie: preMap,
+            rawValue: preMap,
             metadata: .init(first: first,
                             last: last)
         ))

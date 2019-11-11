@@ -38,7 +38,7 @@ public struct SemanticType<Spec: GeneralizedSemanticTypeSpec> {
         gatewayOutput.rawValue
     }
     
-    /// The metadata value outputted by the gateway function, along with the (possibly transformed) backing primitive.
+    /// The metadata value outputted by the gateway function, along with the (possibly transformed) `rawValue`.
     public var gatewayMetadata: Spec.GatewayMetadataWithValueSemantics {
         gatewayOutput.metadata
     }
@@ -55,8 +55,9 @@ public struct SemanticType<Spec: GeneralizedSemanticTypeSpec> {
     }
     
     /// The `SemanticType` factory through which all paths of `SemanticType` creation must pass.
-    /// An obtained `SemanticType` is guarenteed to respect its `Spec.gateway` function, in that
-    /// its backing primitive is guarenteed to have been the output of a call to `Spec.gateway` using the given input.
+    ///
+    /// The obtained `SemanticType` is guarenteed to respect its `Spec.gateway` function:
+    /// its `rawValue` is guarenteed to have been the output of a call to `Spec.gateway` using the given input.
     ///
     /// - Parameter preMap: The value to be passed through the `Spec.gatemapMap` function.
     ///

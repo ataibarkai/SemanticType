@@ -1,6 +1,6 @@
 
 // NOTE: Even when `SemanticType` is itself non-numeric,
-// it makes sense to multiply a `SemanticType` instance by an instance of its backing primitive when possible.
+// it makes sense to multiply a `SemanticType` instance by an instance of its `RawValue` when possible.
 extension SemanticType
     where
     Spec.RawValue: Numeric,
