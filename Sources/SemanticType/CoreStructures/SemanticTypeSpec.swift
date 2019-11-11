@@ -1,6 +1,6 @@
 /// A specification object statically determining the properties of a `SemanticType` object
 /// associated with it.
-public protocol GeneralizedSemanticTypeSpec {
+public protocol SemanticTypeSpecWithMetadata {
     
     /// The type of the primitive value wrapped by the `SemanticType`.
     /// Must possess value semantics.
@@ -46,10 +46,10 @@ public protocol GeneralizedSemanticTypeSpec {
     associatedtype Error: Swift.Error
     
     /// The output of the [gatewayMap function](x-source-tag://SemanticTypeSpec.gateway).
-    /// See additional documentation on the [struct definition](x-source-tag://GeneralizedSemanticTypeSpec_GatewayOutput)
+    /// See additional documentation on the [struct definition](x-source-tag://SemanticTypeSpecWithMetadata_GatewayOutput)
     ///
-    /// - Tag: GeneralizedSemanticTypeSpec.GatewayOutput
-    typealias GatewayOutput = GeneralizedSemanticTypeSpec_GatewayOutput<RawValue, Metadata>
+    /// - Tag: SemanticTypeSpecWithMetadata.GatewayOutput
+    typealias GatewayOutput = SemanticTypeSpecWithMetadata_GatewayOutput<RawValue, Metadata>
     
     /// A function gating the creation of all `SemanticType` instances associated with this Spec.
     ///
@@ -64,12 +64,12 @@ public protocol GeneralizedSemanticTypeSpec {
 ///
 ///
 /// NOTE: Since Swift does not currently support nesting definitions of types nested inside a protocol,
-/// we utilize a naming convention + [a typealias on the target protocol](x-source-tag://GeneralizedSemanticTypeSpec.GatewayOutput)
+/// we utilize a naming convention + [a typealias on the target protocol](x-source-tag://SemanticTypeSpecWithMetadata.GatewayOutput)
 /// to effectively achieve this goal.
-/// In other words, this type should be viewed as if it were nested under the `GeneralizedSemanticTypeSpec` protocol.
+/// In other words, this type should be viewed as if it were nested under the `SemanticTypeSpecWithMetadata` protocol.
 ///
-/// - Tag: GeneralizedSemanticTypeSpec_GatewayOutput
-public struct GeneralizedSemanticTypeSpec_GatewayOutput<RawValue, Metadata> {
+/// - Tag: SemanticTypeSpecWithMetadata_GatewayOutput
+public struct SemanticTypeSpecWithMetadata_GatewayOutput<RawValue, Metadata> {
     
     /// The primitive value to back a succesfully-created `SemanticType` instance.
     /// The behavior of the `SemanticType` construct largely revolves around this field.
@@ -84,7 +84,7 @@ public struct GeneralizedSemanticTypeSpec_GatewayOutput<RawValue, Metadata> {
 
 
 /// A `SemanticTypeSpec` with no gateway metadata.
-public protocol SemanticTypeSpec: GeneralizedSemanticTypeSpec where Metadata == () {
+public protocol SemanticTypeSpec: SemanticTypeSpecWithMetadata where Metadata == () {
     static func gateway(
        preMap: RawValue
     ) -> Result<RawValue, Error>

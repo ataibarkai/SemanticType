@@ -9,7 +9,7 @@
 ///
 /// We allow the `Spec` backing the `SemanticType` to signal whether `Numeric`
 /// support should be provided by conforming to the `ShouldBeNumeric` marker protocol.
-public protocol ShouldBeNumeric: GeneralizedSemanticTypeSpec
+public protocol ShouldBeNumeric: SemanticTypeSpecWithMetadata
     where
     RawValue: Numeric { }
 

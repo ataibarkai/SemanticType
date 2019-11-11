@@ -127,7 +127,7 @@ final class SemanticType_Core_Tests: XCTestCase {
 }
 
 // we define `EmailAddress` outside of the test function so that we can write an extension for it
-enum EmailAddress_Spec: GeneralizedSemanticTypeSpec {
+enum EmailAddress_Spec: SemanticTypeSpecWithMetadata {
     typealias RawValue = String
     struct Metadata {
         var beforeAtSign: String
@@ -172,7 +172,7 @@ extension EmailAddress {
 
 
 // we define `NonEmptyIntArray_Spec` outside of the test function so that we can write an extension for it
-enum NonEmptyIntArray_Spec: GeneralizedSemanticTypeSpec {
+enum NonEmptyIntArray_Spec: SemanticTypeSpecWithMetadata {
     typealias RawValue = [Int]
     struct Metadata {
         var first: Int

@@ -7,7 +7,7 @@
 /// the types used to store its relevant state.
 /// - Tag: SemanticType
 @dynamicMemberLookup
-public struct SemanticType<Spec: GeneralizedSemanticTypeSpec> {
+public struct SemanticType<Spec: SemanticTypeSpecWithMetadata> {
         
     public typealias Spec = Spec
     
