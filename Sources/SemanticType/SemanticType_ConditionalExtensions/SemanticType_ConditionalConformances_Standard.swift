@@ -37,6 +37,7 @@ extension SemanticType: Comparable where Spec.BackingPrimitiveWithValueSemantics
 
 extension SemanticType: Error where Spec.BackingPrimitiveWithValueSemantics: Error { }
 
+// MARK: List-Like Protocols
 extension SemanticType: Sequence where Spec.BackingPrimitiveWithValueSemantics: Sequence {
     public typealias Element = Spec.BackingPrimitiveWithValueSemantics.Element
     public typealias Iterator = Spec.BackingPrimitiveWithValueSemantics.Iterator
