@@ -90,6 +90,7 @@ public protocol SemanticTypeSpec: SemanticTypeSpecWithMetadata where Metadata ==
     ) -> Result<RawValue, Error>
 }
 extension SemanticTypeSpec {
+    // Implement the parent protocol's requirements in terms of `Self's` requirements:
     public static func gateway(
        preMap: RawValue
     ) -> Result<GatewayOutput, Error> {
@@ -105,16 +106,18 @@ public protocol ErrorlessSemanticTypeSpec: SemanticTypeSpec where Error == Never
     ) -> RawValue
 }
 extension ErrorlessSemanticTypeSpec {
+    // Implement the parent protocol's requirements in terms of `Self's` requirements:
     public static func gateway(
        preMap: RawValue
     ) -> Result<RawValue, Error> {
         return .success(gateway(preMap: preMap))
     }
     
+    // By default, `ErrorlessSemanticTypeSpec` uses the identity function as a gateway
+    // (i.e. no transformation is performed on `RawValue`).
     public static func gateway(
        preMap: RawValue
     ) -> RawValue {
         return preMap
     }
 }
-
