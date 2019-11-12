@@ -37,7 +37,7 @@ struct Robot {
 }
 ```
 
-The swift compiler draws a sharp distinction between a `foo: Person`  variable and a `bar: Robot` variable; there is no danger of accidentally passing a `Robot` to a function that expects a `Person`, and a quick *option-click* immediaely reveals the type of the variable, and therefore the kinds of computations in which we could expect the variable to participate. 
+The swift compiler draws a sharp distinction between a `foo: Person`  variable and a `bar: Robot` variable; there is no danger of accidentally passing a `Robot` to a function that expects a `Person`, and a quick *option-click* immediaely reveals the type of the variable -- and therefore the kinds of computations in which we could expect the variable to participate. 
 
 The same is *not* true when we look at the `Int` instance fields introduced above.
 Though the  `Person.age`, `Robot.id`, and `Robot.batteryPercentage` fields capture entirely different kinds of data, they are all typed as  `Int` s. And since **all the compiler sees is a variable's type,**  it can help us with neither clarity nor precision.
@@ -79,9 +79,7 @@ struct Years {
 
 So why do you need this library?
 
-
-
-The SemanticType library defines the `SemanticType` structure, which has many desirable properties:
+The SemanticType library defines the `SemanticType` structure, which offers sensible convenience as well as carefully-implemented type-level constraint validation:
 * `SemanticType`s *automatically* conform to numerous standard-library protocols -- whenever their underlying wrapped type conforms to them. The supported protocols include `Hashable`,  `Comparable`,  `Equatable`, `Sequence`, `Collection`, `AdditiveArithmetic`, `ExpressibleByLiteral` protocols, and **many, many, more**. This makes it easy to use `SemanticType` instances in the context of generic data-structures (e.g. as keys in a `Dictionary`), of protocol-oriented operations (e.g. in comparisons, additions, subtractions, etc.), as well as in the context of generic algorithms.
 * `SemanticType`s expose *direct* read/write access all instance-variables defined on their `rawValue` (via typed `@dynamicMemberLookup`  access).
 * `SemanticType` makes it easy to impose strict *transformations and validation constraints* on the allowable values of the `rawValue`s, while guarenteeing that said constraints are maintained across all operations. For instance, you can easily create  `OddNumber` and `EvenNumber` types which *guarentee* that all of their instances are odd/even, respectively (see [Advanced Usage](#advanced-usage-semantictypespec)).
@@ -89,6 +87,30 @@ The SemanticType library defines the `SemanticType` structure, which has many de
 ---------
 
 ## Usage:
+
+A `SemanticType` is defined by a `Spec` type belonging to the following protocol hierarchy:
+`ErrorlessSemanticTypeSpec` which refines `SemanticTypeSpec` which refines `SemanticTypeSpecWithMetadata`
+
+| Protocol                       | `gateway` function                                                      | Usage                                                                                                                                                                                                                                                                          |
+|--------------------------------|-------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `ErrorlessSemanticTypeSpec`    | `func gateway(preMap: RawValue) -> RawValue`                            | Every possible `RawValue` instantiation corresponds to a valid `SemanticType` instantiation. Example: a `Meters` type backed by `Double`.                                                                                                                                      |
+| `SemanticTypeSpec`             | `func gateway(preMap: RawValue) -> Result<RawValue, Error>`             | Only a subset of `RawValue` instantiations can be turned into `SemanticType` instantiations. Example: a `Alphanumeric` type backed by `String`, which can only be created out of an alphanumeric `String`.                                                                     |
+| `SemanticTypeSpecWithMetadata` | `func gateway(preMap: RawValue) -> Result<(RawValue, Metadata), Error>` | Only a subset of `RawValue` instantiations can be turned into `SemanticType` instantiations, _and_ we want to store metadata recording the successful validation. Example: a `NonEmptyArray` type which persists non-optional `first: Element` and `last: Element` `Element`s. |
+
+
+| Protocol                       | `gateway` function type                             |
+|--------------------------------|-----------------------------------------------------|
+| `ErrorlessSemanticTypeSpec`    | `(RawValue) -> RawValue`                            |
+| `SemanticTypeSpec`             | `(RawValue) -> Result<RawValue, Error>`             |
+| `SemanticTypeSpecWithMetadata` | `(RawValue) -> Result<(RawValue, Metadata), Error>` |
+
+There are 3 protocol refinements you could use:
+
+| Protocol                       | `gateway` function                                                      |
+|--------------------------------|-------------------------------------------------------------------------|
+| `ErrorlessSemanticTypeSpec`    | `func gateway(preMap: RawValue) -> RawValue`                            |
+| `SemanticTypeSpec`             | `func gateway(preMap: RawValue) -> Result<RawValue, Error>`             |
+| `SemanticTypeSpecWithMetadata` | `func gateway(preMap: RawValue) -> Result<(RawValue, Metadata), Error>` |
 
 ```swift
 import SemanticType
