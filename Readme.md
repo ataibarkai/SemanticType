@@ -88,17 +88,121 @@ The SemanticType library defines the `SemanticType` structure, which offers sens
 
 ## Usage:
 
-A `SemanticType` is defined by a `SemanticTypeSpec` type, of the  `SemanticTypeSpec` protocol family. Given a `SemanticTypeSpec`, a `SemanticType` instantiation is defined thus:
+### Without further ado, some code
+We will cover the different use-cases in detail below. But first some example code:
+
 ```swift
-enum SQLQuery_Spec: SemanticTypeSpec { } // pseudo-code, to be expanded upon shortly...
-typealias SQLQuery = SemanticType<SQLQuery_Spec>
+enum Seconds_Spec: ErrorlessSemanticTypeSpec { typealias RawValue = Double }
+typealias Seconds = SemanticType<Seconds_Spec>
 
-enum Meters_Spec: SemanticTypeSpec { } // pseudo-code, to be expanded upon shortly...
-typealias Meters = SemanticType<Meters_Spec>
+var step1Duration: Seconds = 5
+let step2Duration: Seconds = 10
 
-enum Inches_Spec: SemanticTypeSpec { } // pseudo-code, to be expanded upon shortly...
-typealias Inches = SemanticType<Inches_Spec>
+XCTAssertEqual(
+    step1Duration + step2Duration,
+    Seconds(15)
+)
+
+step1Duration += 7
+XCTAssertEqual(
+    step1Duration,
+    Seconds(12)
+)
+
+XCTAssertEqual(
+    step1Duration - step2Duration,
+    Seconds(2)
+)
+
+// The following will fail to compile, because we try to add `Seconds` and `Double` together:
+let notCompiling = step1Duration + Double(18)
 ```
+
+```swift
+enum CaselessString_Spec: ErrorlessSemanticTypeSpec {
+    typealias RawValue = String
+    
+    static func gateway(preMap: String) -> String {
+        return preMap.lowercased()
+    }
+}
+typealias CaselessString = SemanticType<CaselessString_Spec>
+
+var joe = CaselessString("Joe")
+XCTAssertEqual(joe.rawValue, "joe")
+joe.rawValue.removeLast()
+joe.rawValue.append("SEPH")
+XCTAssertEqual(joe.rawValue, "joseph")
+```
+
+```swift
+struct ContactFormInput {
+    var email: String
+    var message: String
+}
+enum ProcessedContactFormInput_Spec: ErrorlessSemanticTypeSpec {
+    typealias RawValue = ContactFormInput
+    
+    static func gateway(preMap: ContactFormInput) -> ContactFormInput {
+        return .init(
+            email: preMap.email.lowercased(),
+            message: preMap.message
+        )
+    }
+}
+typealias ProcessedContactFormInput = SemanticType<ProcessedContactFormInput_Spec>
+
+let joesProcessedContactFormInput = ProcessedContactFormInput(ContactFormInput.init(
+    email: "joe.shmoe@GMAIL.com",
+    message: "What a great library!"
+))
+XCTAssertEqual(joesProcessedContactFormInput.email, "joe.shmoe@gmail.com")
+XCTAssertEqual(joesProcessedContactFormInput.message, "What a great library!")
+```
+
+```swift
+struct Person: Equatable {
+    var name: String
+    var associatedGreeting: String
+    
+    init(name: String) {
+        self.name = name
+        self.associatedGreeting = "Hello, my name is \(name)." // initialize greeting to default
+    }
+}
+enum PersonWithShortName_Spec: ValidatedSemanticTypeSpec {
+    typealias RawValue = Person
+    enum Error: Swift.Error, Equatable {
+        case nameIsTooLong(name: String)
+    }
+    
+    static func gateway(preMap: Person) -> Result<Person, PersonWithShortName_Spec.Error> {
+        guard preMap.name.count < 5
+            else { return .failure(.nameIsTooLong(name: preMap.name)) }
+        
+        return .success(preMap)
+    }
+}
+typealias PersonWithShortName = SemanticType<PersonWithShortName_Spec>
+
+let tim = try! PersonWithShortName(Person(name: "Tim"))
+XCTAssertEqual(tim.rawValue, Person(name: "Tim")
+XCTAssertEqual(tim.name, "Tim")
+XCTAssertEqual(tim.associatedGreeting, "Hello, my name is Tim.")
+
+
+let joe = try! PersonWithShortName(Person(name: "Joe"))
+let lowercaseJoeResult = joe.tryMap { person in
+    var person = person
+    person.associatedGreeting = person.associatedGreeting.lowercased()
+    return person
+}
+let lowercaseJoe = try! lowercaseJoeResult.get()
+```
+
+### Background
+
+A `SemanticType` is defined by a `SemanticTypeSpec` type, of the  `SemanticTypeSpec` protocol family.
 
 A `SemanticTypeSpec` type has 3 roles:
 1. It serves as a marker type, bringing about a type-level distinction between  `SemanticType` instantiations.
@@ -125,7 +229,7 @@ At the core of the `SemanticTypeSpec` lies the `gateway` function, which (aptly)
 It is used when we don't need to validate our `RawValue` payload in any way (i.e. when every `RawValue` instance can be made to correspond to a `SemanticType` instance).
 
 By default, `ErrorlessSemanticTypeSpec`'s `gateway` function is simply the identify function (i.e. it doesn't transform the `RawValue` in any way).
-Instantiations of `SemanticType` can be composed like their `RawTypes` within the same type, but not *across* types:
+Instantiations of `SemanticType` often support the same operations as their `RawTypes` -- but only *within the same type*, not *across types*:
 ```swift
 enum Years_Spec: ErrorlessSemanticTypeSpec { typealias RawValue = Double }
 typealias Years = SemanticType<Years_Spec>
@@ -178,6 +282,7 @@ While we still have "type information" which is associated with runtime behavior
 This can come in handy whenever we have a restriction on our values which is *inherent in our "mental" model of the type*, but *not in the underlying data type*.
 
 
+
 ### `ValidatedSemanticTypeSpec`
 
 The aforementioned `ErrorlessSemanticTypeSpec` is a protocol refinement (with default behavior provided via an extension) of the more general `ValidatedSemanticTypeSpec` protocol.
@@ -218,6 +323,7 @@ A typed version of the error is available through the `Result`-returning `.creat
 ```swift
 let englishLettersCreationResult: Result<EnglishLettersOnlyString, EnglishLettersOnlyString_Spec.Error> = EnglishLettersOnlyString.create("asdflkj12345")
 ```
+
 
 
 ### `MetaValidatedSemanticTypeSpec`
@@ -286,3 +392,18 @@ XCTAssertEqual(oneTwoThree.first, 1)
 XCTAssertEqual(oneTwoThree.last, 3)
 
 ```
+
+
+## Subtleties
+
+### A note on `Numeric` support
+
+`Numeric` is the protocol Swift uses to support *multiplication and division* within a given type.
+
+`Numeric` support may not make sense for all `SemanticType`s, even when their `RawValue` types are themselves `Numeric`. For instance, [`Second` * `Second` = `Second`] does not make semantic sense.
+
+In other situations, `Numeric` support *does* make sense. For instance [`EvenInteger` * `EvenInteger` = `EvenInteger`].
+
+We allow the `SemanticTypeSpec` backing the `SemanticType` to signal whether `Numeric` support should be provided by conforming to the `ShouldBeNumeric` marker protocol.
+
+
