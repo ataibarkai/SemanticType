@@ -4,12 +4,11 @@ import XCTest
 final class SemanticType_UsabilityExtensionsTests_ErrorlessSemanticTypeTests: XCTestCase {
     
     // CaselessString:
-    enum CaselessString_Spec: ValidatedSemanticTypeSpec {
+    enum CaselessString_Spec: ErrorlessSemanticTypeSpec {
         typealias RawValue = String
-        typealias Error = Never
         
-        static func gateway(preMap: String) -> Result<String, Never> {
-            return .success(preMap.lowercased())
+        static func gateway(preMap: String) -> String {
+            return preMap.lowercased()
         }
     }
     typealias CaselessString = SemanticType<CaselessString_Spec>
@@ -48,6 +47,8 @@ final class SemanticType_UsabilityExtensionsTests_ErrorlessSemanticTypeTests: XC
     func testInitialization() {
         let hello = CaselessString("HELlo")
         XCTAssertEqual(hello._rawValue, "hello")
+        
+        let b: CaselessString = "HeLlo"
     }
     
     
