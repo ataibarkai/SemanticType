@@ -64,6 +64,40 @@ Though ultimately each field is backed by an `Int`-encoded integer, the fields h
 The compiler can then utilize this visible distinction between the fields to perform many sanity-checks on our behalf, such as making sure we never populate a `Person`'s age with some `ID` field, and that we never accidentally subtract `Years` from `BatteryPercentage` values.
 Besides, it's nice to be able to quickly see whether a given variable captures `Years`, an `ID`, `BatteryPercentage` -- or some other structure of significance.
 
+
+### Validation and transformation
+Once we create purpose-specific types used in particular contexts, we can also introduce purpose-specific transformations and validations *at the type level*. Meaning, *all instances* of a given type would be **guarenteed** to have been transformed and validated by a given "gateway" function.
+
+#### Numbers
+A crude example of this can be found with number-encoding types.
+
+Suppose you have a function implementing a complex algorithm which should eventually output a **non-negative integer**.
+
+Precision/rounding issues aside, in principle, you _could_ have this function return a floating-point type such as `Double`.
+After all, a floating-point type _can_ encode positive integers.
+It would be wise to write tests for the function, providing evidence that indeed it always returns integers.
+
+But a better approach would be to have the function return `Int`. The return type of the function would then serve as **proof** that it always returns an integer, since all `Int` instances are (obviously) necessarily integers.
+
+Changing the function's return type is not only *easier* than writing a bunch of dedicated tests, it is also much more robust. While tests provide *evidence* that the function is correct by demonstrating its correctness over some inputs, unless we test the function against *every* possible input, we cannot be sure that there isn't _some_ input out there which would produce a non-integer output.
+By returning `Int`, on the other hand, we have absolute **proof** that the function always returns an integer, for the return type cannot instantiate anything else.
+
+Since the function must not only return an integer, but a *non-negative* integer, we can take this idea a little further and have the function return `UInt` rather than `Int`.
+Again, since `UInt`s are guarenteed to encode non-negative integers, we would now have **proof** that the function always reutrns a non-negative integer for every possible input value.
+
+Of course, we would still need to write tests providing evidence that our function returns the *right* positive integer for a given input.
+But an entire class of bugs would be all but eliminated.
+
+#### `BatteryPercentage`
+What if our values must not only be integers, or even non-negative integers, but integers within a certain range?
+That is of course the case with `BatteryPercentage` values, which must capture a number in the range `[0, 100]` to be sensible.
+
+When we have a dedicated `BatteryPercentage` type for encoding battery percentage levels (rather than simply utilizing `Int`), we can encode this restriction *at the type level*, and hence be **sure** that any given `BatteryPercentage` instance *alwaays* carries a value in the range `[0, 100]`.
+
+#### Clamping and failing
+What if you try to initialize a `BatteryPercentage` instance with a value of  `1324`?
+We often (but not always) have choice in the matter. We can either *clamp* the input value to the nearest-possible valid value (in this case, to `100`), or we can simply `throw` an error and refuse to initialize a `BatteryPercentage` instance.
+
 ---------
 
 
@@ -76,6 +110,7 @@ struct Years {
     var value: Int
 }
 ```
+And you could even create a dedicated `init` enforcing any given validation/transformation.
 
 So why do you need this library?
 
