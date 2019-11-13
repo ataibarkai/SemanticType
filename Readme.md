@@ -88,6 +88,49 @@ The SemanticType library defines the `SemanticType` structure, which offers sens
 
 ## Usage:
 
+A `SemanticType` is defined by a `SemanticTypeSpec` type, of the  `SemanticTypeSpec` protocol family. Given a `SemanticTypeSpec`, a `SemanticType` instantiation is defined thus:
+```swift
+enum SQLQuery_Spec: SemanticTypeSpec { } // pseudo-code, to be expanded upon shortly...
+typealias SQLQuery = SemanticType<SQLQuery_Spec>
+
+enum Meters_Spec: SemanticTypeSpec { } // pseudo-code, to be expanded upon shortly...
+typealias Meters = SemanticType<Meters_Spec>
+
+enum Inches_Spec: SemanticTypeSpec { } // pseudo-code, to be expanded upon shortly...
+typealias Inches = SemanticType<Inches_Spec>
+```
+
+A `SemanticTypeSpec` type has 3 roles:
+1. It serves as a marker type, bringing about a type-level distinction between  `SemanticType` instantiations.
+2. It defines the `RawValue` type wrapped by its associated `SemanticType` instantiation.
+3. It defines how `RawValue` values are transformed and validated before making their way into a `SemanticType` value.
+
+The `SemanticTypeSpec` protocol family consists of a base protocol, and 2 (successive) protocol refinements:
+
+`ErrorlessSemanticTypeSpec`<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;***\~\~refines\~\~>*** `ValidatedSemanticTypeSpec`<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;***\~\~refines\~\~>*** `MetaValidatedSemanticTypeSpec`
+
+At the core of the `SemanticTypeSpec` lies the `gateway` function, which (aptly) serves as a gateway between `RawValue`s and `SemanticType` instances. The `gateway` dictates how values of the underlying `RawValue` type behave as they are transformed into values of a `SemanticType` instantiation.
+
+| Protocol                        | `gateway` function type                             |
+|---------------------------------|-----------------------------------------------------|
+| `ErrorlessSemanticTypeSpec`     | `(RawValue) -> RawValue`                            |
+| `ValidatedSemanticTypeSpec`     | `(RawValue) -> Result<RawValue, Error>`             |
+| `MetaValidatedSemanticTypeSpec` | `(RawValue) -> Result<(RawValue, Metadata), Error>` |
+
+
+```swift
+enum SQLQuery_Spec: // ...
+typealias SQLQuery = SemanticType<SQLQuery_Spec>
+
+enum Meters_Spec: // ...
+typealias Meters = SemanticType<Meters_Spec>
+
+enum Inches_Spec: // ...
+typealias Inches = SemanticType<Inches_Spec>
+```
+
+
 A `SemanticType` is defined by a `Spec` type belonging to the following protocol hierarchy:
 `ErrorlessSemanticTypeSpec` which refines `SemanticTypeSpec` which refines `SemanticTypeSpecWithMetadata`
 
