@@ -1,7 +1,8 @@
 /// A marker protocol.
 /// If a `SemanticTypeSpec` conforms to this protocol, its associated `SemanticType`
 /// will conform to `Numeric`.
-///
+/// Also see [SupportsMultiplicationWithRawValue](x-source-tag://SupportsMultiplicationWithRawValue).
+/// 
 /// `Numeric` support may not make sense for all
 /// `SemanticType`s associated with a `Numeric` `RawValue`
 /// (for instance, [`Second` * `Second` = `Second`] does not make semantic sense).
@@ -9,6 +10,7 @@
 ///
 /// We allow the `Spec` backing the `SemanticType` to signal whether `Numeric`
 /// support should be provided by conforming to the `ShouldBeNumeric` marker protocol.
+/// - Tag: ShouldBeNumeric
 public protocol ShouldBeNumeric: MetaValidatedSemanticTypeSpec
     where
     RawValue: Numeric { }
