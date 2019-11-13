@@ -4,7 +4,7 @@ import XCTest
 final class SemanticType_UsabilityExtensionsTests_ErrorlessSemanticTypeTests: XCTestCase {
     
     // CaselessString:
-    enum CaselessString_Spec: SemanticTypeSpec {
+    enum CaselessString_Spec: ValidatedSemanticTypeSpec {
         typealias RawValue = String
         typealias Error = Never
         
@@ -30,7 +30,7 @@ final class SemanticType_UsabilityExtensionsTests_ErrorlessSemanticTypeTests: XC
         var email: String
         var message: String
     }
-    enum ProcessedContactFormInput_Spec: SemanticTypeSpec {
+    enum ProcessedContactFormInput_Spec: ValidatedSemanticTypeSpec {
         typealias RawValue = ContactFormInput
         typealias Error = Never
         

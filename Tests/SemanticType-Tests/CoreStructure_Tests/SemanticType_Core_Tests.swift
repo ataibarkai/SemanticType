@@ -50,7 +50,7 @@ final class SemanticType_Core_Tests: XCTestCase {
     
     
     func testErrorfullCreation() {
-        enum FiveLetterWordArray_Spec: SemanticTypeSpec {
+        enum FiveLetterWordArray_Spec: ValidatedSemanticTypeSpec {
             typealias RawValue = [String]
             struct Error: Swift.Error {
                 var excludedWords: [String]

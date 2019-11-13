@@ -84,12 +84,12 @@ public struct SemanticTypeSpecWithMetadata_GatewayOutput<RawValue, Metadata> {
 
 
 /// A `SemanticTypeSpec` with no gateway metadata.
-public protocol SemanticTypeSpec: SemanticTypeSpecWithMetadata where Metadata == () {
+public protocol ValidatedSemanticTypeSpec: SemanticTypeSpecWithMetadata where Metadata == () {
     static func gateway(
        preMap: RawValue
     ) -> Result<RawValue, Error>
 }
-extension SemanticTypeSpec {
+extension ValidatedSemanticTypeSpec {
     // Implement the parent protocol's requirements in terms of `Self's` requirements:
     public static func gateway(
        preMap: RawValue
@@ -100,7 +100,7 @@ extension SemanticTypeSpec {
 }
 
 /// A `SemanticTypeSpec` whose `gateway` function never errors.
-public protocol ErrorlessSemanticTypeSpec: SemanticTypeSpec where Error == Never {
+public protocol ErrorlessSemanticTypeSpec: ValidatedSemanticTypeSpec where Error == Never {
     static func gateway(
        preMap: RawValue
     ) -> RawValue

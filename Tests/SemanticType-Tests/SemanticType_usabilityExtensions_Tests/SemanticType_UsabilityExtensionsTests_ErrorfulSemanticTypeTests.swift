@@ -12,7 +12,7 @@ final class SemanticType_UsabilityExtensionsTests_ErrorfulSemanticTypeTests: XCT
             self.associatedGreeting = "Hello, my name is \(name)." // initialize greeting to default
         }
     }
-    enum PersonWithShortName_Spec: SemanticTypeSpec {
+    enum PersonWithShortName_Spec: ValidatedSemanticTypeSpec {
         typealias RawValue = Person
         enum Error: Swift.Error, Equatable {
             case nameIsTooLong(name: String)

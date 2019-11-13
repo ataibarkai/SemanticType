@@ -143,7 +143,7 @@ final class SemanticType_ConditionalConformances_Standard_Tests: XCTestCase {
     }
     
     func testSequenceConformance() {
-        enum ThreeLetterWordSequence_Spec<S: Sequence>: SemanticTypeSpec where S.Element == String {
+        enum ThreeLetterWordSequence_Spec<S: Sequence>: ValidatedSemanticTypeSpec where S.Element == String {
             typealias RawValue = S
             enum Error: Swift.Error {
                 case foundWordWithMismatchedLength(word: String)
@@ -174,7 +174,7 @@ final class SemanticType_ConditionalConformances_Standard_Tests: XCTestCase {
     }
     
     func testCollectionConformance() {
-        enum ThreeLetterWordCollection_Spec<C: Collection>: SemanticTypeSpec where C.Element == String {
+        enum ThreeLetterWordCollection_Spec<C: Collection>: ValidatedSemanticTypeSpec where C.Element == String {
             typealias RawValue = C
             enum Error: Swift.Error {
                 case foundWordWithMismatchedLength(word: String)
@@ -199,7 +199,7 @@ final class SemanticType_ConditionalConformances_Standard_Tests: XCTestCase {
     }
     
     func testBidirectionalCollectionConformance() {
-        enum ThreeLetterWordBidirectionalCollection_Spec<C: BidirectionalCollection>: SemanticTypeSpec where C.Element == String {
+        enum ThreeLetterWordBidirectionalCollection_Spec<C: BidirectionalCollection>: ValidatedSemanticTypeSpec where C.Element == String {
             typealias RawValue = C
             enum Error: Swift.Error {
                 case foundWordWithMismatchedLength(word: String)
@@ -247,7 +247,7 @@ final class SemanticType_ConditionalConformances_Standard_Tests: XCTestCase {
         var age: Age
     }
     
-    enum YoungPerson_Spec: SemanticTypeSpec {
+    enum YoungPerson_Spec: ValidatedSemanticTypeSpec {
         typealias RawValue = Person
         enum Error: Swift.Error {
             case tooOld(age: Age)
