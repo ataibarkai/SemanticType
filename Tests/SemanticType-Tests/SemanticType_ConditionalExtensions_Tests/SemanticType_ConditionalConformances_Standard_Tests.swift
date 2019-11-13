@@ -20,7 +20,7 @@ final class SemanticType_ConditionalConformances_Standard_Tests: XCTestCase {
             }
         }
         enum UniquelyStrangeString_Spec: ErrorlessSemanticTypeSpec {
-            typealias BackingPrimitiveWithValueSemantics = StrangeString
+            typealias RawValue = StrangeString
             static func gateway(preMap: StrangeString) -> StrangeString {
                 return preMap
             }
@@ -40,7 +40,7 @@ final class SemanticType_ConditionalConformances_Standard_Tests: XCTestCase {
             }
         }
         enum UniquelyStrangeString_Spec: ErrorlessSemanticTypeSpec {
-            typealias BackingPrimitiveWithValueSemantics = StrangeString
+            typealias RawValue = StrangeString
             static func gateway(preMap: StrangeString) -> StrangeString {
                 return preMap
             }
@@ -60,7 +60,7 @@ final class SemanticType_ConditionalConformances_Standard_Tests: XCTestCase {
             var str: String
         }
         enum UniquelyStrangeString_Spec: ErrorlessSemanticTypeSpec {
-            typealias BackingPrimitiveWithValueSemantics = StrangeString
+            typealias RawValue = StrangeString
             static func gateway(preMap: StrangeString) -> StrangeString {
                 return preMap
             }
@@ -87,7 +87,7 @@ final class SemanticType_ConditionalConformances_Standard_Tests: XCTestCase {
             var str: String
         }
         enum UniquelyStrangeString_Spec: ErrorlessSemanticTypeSpec {
-            typealias BackingPrimitiveWithValueSemantics = StrangeString
+            typealias RawValue = StrangeString
             static func gateway(preMap: StrangeString) -> StrangeString {
                 return preMap
             }
@@ -106,7 +106,7 @@ final class SemanticType_ConditionalConformances_Standard_Tests: XCTestCase {
     
     func testComparableConformance() {
         enum Dollars_Spec: ErrorlessSemanticTypeSpec {
-            typealias BackingPrimitiveWithValueSemantics = Double
+            typealias RawValue = Double
             static func gateway(preMap: Double) -> Double {
                 return preMap
             }
@@ -128,7 +128,7 @@ final class SemanticType_ConditionalConformances_Standard_Tests: XCTestCase {
     func testErrorConformance() {
         struct SomeError: Swift.Error { }
         enum SpecialCaseError_Spec: ErrorlessSemanticTypeSpec {
-            typealias BackingPrimitiveWithValueSemantics = SomeError
+            typealias RawValue = SomeError
             static func gateway(preMap: SomeError) -> SomeError {
                 return preMap
             }
@@ -143,13 +143,13 @@ final class SemanticType_ConditionalConformances_Standard_Tests: XCTestCase {
     }
     
     func testSequenceConformance() {
-        enum ThreeLetterWordSequence_Spec<S: Sequence>: SemanticTypeSpec where S.Element == String {
-            typealias BackingPrimitiveWithValueSemantics = S
+        enum ThreeLetterWordSequence_Spec<S: Sequence>: ValidatedSemanticTypeSpec where S.Element == String {
+            typealias RawValue = S
             enum Error: Swift.Error {
                 case foundWordWithMismatchedLength(word: String)
             }
 
-            static func gateway(preMap: BackingPrimitiveWithValueSemantics) -> Result<BackingPrimitiveWithValueSemantics, Error> {
+            static func gateway(preMap: RawValue) -> Result<RawValue, Error> {
                 if let mismatchedLengthWord = preMap.first(where: { $0.count != 3 }) {
                     return .failure(.foundWordWithMismatchedLength(word: mismatchedLengthWord))
                 } else {
@@ -174,13 +174,13 @@ final class SemanticType_ConditionalConformances_Standard_Tests: XCTestCase {
     }
     
     func testCollectionConformance() {
-        enum ThreeLetterWordCollection_Spec<C: Collection>: SemanticTypeSpec where C.Element == String {
-            typealias BackingPrimitiveWithValueSemantics = C
+        enum ThreeLetterWordCollection_Spec<C: Collection>: ValidatedSemanticTypeSpec where C.Element == String {
+            typealias RawValue = C
             enum Error: Swift.Error {
                 case foundWordWithMismatchedLength(word: String)
             }
 
-            static func gateway(preMap: BackingPrimitiveWithValueSemantics) -> Result<BackingPrimitiveWithValueSemantics, Error> {
+            static func gateway(preMap: RawValue) -> Result<RawValue, Error> {
                 if let mismatchedLengthWord = preMap.first(where: { $0.count != 3 }) {
                     return .failure(.foundWordWithMismatchedLength(word: mismatchedLengthWord))
                 } else {
@@ -199,13 +199,13 @@ final class SemanticType_ConditionalConformances_Standard_Tests: XCTestCase {
     }
     
     func testBidirectionalCollectionConformance() {
-        enum ThreeLetterWordBidirectionalCollection_Spec<C: BidirectionalCollection>: SemanticTypeSpec where C.Element == String {
-            typealias BackingPrimitiveWithValueSemantics = C
+        enum ThreeLetterWordBidirectionalCollection_Spec<C: BidirectionalCollection>: ValidatedSemanticTypeSpec where C.Element == String {
+            typealias RawValue = C
             enum Error: Swift.Error {
                 case foundWordWithMismatchedLength(word: String)
             }
 
-            static func gateway(preMap: BackingPrimitiveWithValueSemantics) -> Result<BackingPrimitiveWithValueSemantics, Error> {
+            static func gateway(preMap: RawValue) -> Result<RawValue, Error> {
                 if let mismatchedLengthWord = preMap.first(where: { $0.count != 3 }) {
                     return .failure(.foundWordWithMismatchedLength(word: mismatchedLengthWord))
                 } else {
@@ -235,7 +235,7 @@ final class SemanticType_ConditionalConformances_Standard_Tests: XCTestCase {
     // We define an `Age` `SemanticType` used by the `Person` object,
     // so that `YoungPerson` represents a *nested*  `SemanticType` object.
     enum Age_Spec: ErrorlessSemanticTypeSpec {
-        typealias BackingPrimitiveWithValueSemantics = Int
+        typealias RawValue = Int
         static func gateway(preMap: Int) -> Int {
             return preMap
         }
@@ -247,8 +247,8 @@ final class SemanticType_ConditionalConformances_Standard_Tests: XCTestCase {
         var age: Age
     }
     
-    enum YoungPerson_Spec: SemanticTypeSpec {
-        typealias BackingPrimitiveWithValueSemantics = Person
+    enum YoungPerson_Spec: ValidatedSemanticTypeSpec {
+        typealias RawValue = Person
         enum Error: Swift.Error {
             case tooOld(age: Age)
         }

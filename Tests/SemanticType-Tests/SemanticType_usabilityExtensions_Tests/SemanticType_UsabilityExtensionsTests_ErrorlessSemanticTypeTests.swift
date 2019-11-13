@@ -3,42 +3,33 @@ import XCTest
 
 final class SemanticType_UsabilityExtensionsTests_ErrorlessSemanticTypeTests: XCTestCase {
     
+    // Dollars:
+    enum Dollars_Spec: ErrorlessSemanticTypeSpec { typealias RawValue = Int }
+    typealias Dollars = SemanticType<Dollars_Spec>
+
     // CaselessString:
-    enum CaselessString_Spec: SemanticTypeSpec {
-        typealias BackingPrimitiveWithValueSemantics = String
-        typealias Error = Never
+    enum CaselessString_Spec: ErrorlessSemanticTypeSpec {
+        typealias RawValue = String
         
-        static func gateway(preMap: String) -> Result<String, Never> {
-            return .success(preMap.lowercased())
+        static func gateway(preMap: String) -> String {
+            return preMap.lowercased()
         }
     }
     typealias CaselessString = SemanticType<CaselessString_Spec>
-    
-    // Dollars:
-    enum Dollars_Spec: ErrorlessSemanticTypeSpec {
-        typealias BackingPrimitiveWithValueSemantics = Int
-        typealias Error = Never
-        static func gateway(preMap: Int) -> Int {
-            return preMap
-        }
-    }
-    typealias Dollars = SemanticType<Dollars_Spec>
-    
-    
+        
     // ProcessedContactFormInput_Spec:
     struct ContactFormInput {
         var email: String
         var message: String
     }
-    enum ProcessedContactFormInput_Spec: SemanticTypeSpec {
-        typealias BackingPrimitiveWithValueSemantics = ContactFormInput
-        typealias Error = Never
+    enum ProcessedContactFormInput_Spec: ErrorlessSemanticTypeSpec {
+        typealias RawValue = ContactFormInput
         
-        static func gateway(preMap: ContactFormInput) -> Result<ContactFormInput, Never> {
-            return .success(.init(
+        static func gateway(preMap: ContactFormInput) -> ContactFormInput {
+            return .init(
                 email: preMap.email.lowercased(),
                 message: preMap.message
-            ))
+            )
         }
     }
     typealias ProcessedContactFormInput = SemanticType<ProcessedContactFormInput_Spec>
@@ -47,30 +38,30 @@ final class SemanticType_UsabilityExtensionsTests_ErrorlessSemanticTypeTests: XC
 
     func testInitialization() {
         let hello = CaselessString("HELlo")
-        XCTAssertEqual(hello._backingPrimitive, "hello")
+        XCTAssertEqual(hello._rawValue, "hello")
     }
     
     
     func testBackingPrimitiveAccessAndModification() {
         var joe = CaselessString("Joe")
-        XCTAssertEqual(joe.backingPrimitive, "joe")
-        joe.backingPrimitive.removeLast()
-        joe.backingPrimitive.append("SEPH")
-        XCTAssertEqual(joe.backingPrimitive, "joseph")
+        XCTAssertEqual(joe.rawValue, "joe")
+        joe.rawValue.removeLast()
+        joe.rawValue.append("SEPH")
+        XCTAssertEqual(joe.rawValue, "joseph")
         
         var someMoney = Dollars(15)
-        XCTAssertEqual(someMoney.backingPrimitive, 15)
-        someMoney.backingPrimitive += 25
-        XCTAssertEqual(someMoney.backingPrimitive, 40)
+        XCTAssertEqual(someMoney.rawValue, 15)
+        someMoney.rawValue += 25
+        XCTAssertEqual(someMoney.rawValue, 40)
         
         var joesProcessedContactFormInput = ProcessedContactFormInput(.init(
             email: "joe.shmoe@GMAIL.com",
             message: "What a great library!"
         ))
-        XCTAssertEqual(joesProcessedContactFormInput.backingPrimitive.email, "joe.shmoe@gmail.com")
-        joesProcessedContactFormInput.backingPrimitive.email.removeLast(9)
-        joesProcessedContactFormInput.backingPrimitive.email.append("YaHOO.cOm")
-        XCTAssertEqual(joesProcessedContactFormInput.backingPrimitive.email, "joe.shmoe@yahoo.com")
+        XCTAssertEqual(joesProcessedContactFormInput.rawValue.email, "joe.shmoe@gmail.com")
+        joesProcessedContactFormInput.rawValue.email.removeLast(9)
+        joesProcessedContactFormInput.rawValue.email.append("YaHOO.cOm")
+        XCTAssertEqual(joesProcessedContactFormInput.rawValue.email, "joe.shmoe@yahoo.com")
     }
     
     
@@ -87,7 +78,7 @@ final class SemanticType_UsabilityExtensionsTests_ErrorlessSemanticTypeTests: XC
     func testMap() {
         let fiveDollars = Dollars(5)
         let tenDollars = fiveDollars.map { $0 + 5 }
-        XCTAssertEqual(tenDollars.backingPrimitive, 10)
+        XCTAssertEqual(tenDollars.rawValue, 10)
     }
     
     

@@ -5,22 +5,22 @@ final class SemanticType_UsabilityExtensionsTests_ErrorfulSemanticTypeTests: XCT
     
     struct Person: Equatable {
         var name: String
+        var associatedGreeting: String
         
-        var associatedGreeting: String {
-            "Hello, my name is \(name)."
+        init(name: String) {
+            self.name = name
+            self.associatedGreeting = "Hello, my name is \(name)." // initialize greeting to default
         }
     }
-    enum PersonWithShortName_Spec: SemanticTypeSpec {
-        typealias BackingPrimitiveWithValueSemantics = Person
-        typealias Error = NameIsTooLongError
-        
-        struct NameIsTooLongError: Swift.Error, Equatable {
-            var name: String
+    enum PersonWithShortName_Spec: ValidatedSemanticTypeSpec {
+        typealias RawValue = Person
+        enum Error: Swift.Error, Equatable {
+            case nameIsTooLong(name: String)
         }
         
         static func gateway(preMap: Person) -> Result<Person, PersonWithShortName_Spec.Error> {
             guard preMap.name.count < 5
-                else { return .failure(NameIsTooLongError(name: preMap.name)) }
+                else { return .failure(.nameIsTooLong(name: preMap.name)) }
             
             return .success(preMap)
         }
@@ -36,8 +36,8 @@ final class SemanticType_UsabilityExtensionsTests_ErrorfulSemanticTypeTests: XCT
         
         XCTAssertThrowsError(try PersonWithShortName(Person(name: "Joseph"))) { error in
             XCTAssertEqual(
-                error as! PersonWithShortName.Spec.NameIsTooLongError,
-                PersonWithShortName.Spec.NameIsTooLongError.init(name: "Joseph")
+                error as! PersonWithShortName.Spec.Error,
+                PersonWithShortName.Spec.Error.nameIsTooLong(name: "Joseph")
             )
         }
     }
@@ -45,13 +45,13 @@ final class SemanticType_UsabilityExtensionsTests_ErrorfulSemanticTypeTests: XCT
     
     func testBackingPrimitiveAccess() {
         let joe = try! PersonWithShortName(Person(name: "Joe"))
-        XCTAssertEqual(joe.backingPrimitive, Person(name: "Joe"))
+        XCTAssertEqual(joe.rawValue, Person(name: "Joe"))
         
         let dean = try! PersonWithShortName(Person(name: "Dean"))
-        XCTAssertEqual(dean.backingPrimitive, Person(name: "Dean"))
+        XCTAssertEqual(dean.rawValue, Person(name: "Dean"))
         
         let tom = try! PersonWithShortName(Person(name: "tom"))
-        XCTAssertEqual(tom.backingPrimitive, Person(name: "tom"))
+        XCTAssertEqual(tom.rawValue, Person(name: "tom"))
     }
     
     
@@ -68,12 +68,14 @@ final class SemanticType_UsabilityExtensionsTests_ErrorfulSemanticTypeTests: XCT
     
     func testSuccessfulTryMap() {
         let joe = try! PersonWithShortName(Person(name: "Joe"))
-        let lowercaseJoe = try! joe.tryMap { person in
+        let lowercaseJoeResult = joe.tryMap { person in
             var person = person
-            person.name = person.name.lowercased()
+            person.associatedGreeting = person.associatedGreeting.lowercased()
             return person
-        }.get()
-        XCTAssertEqual(lowercaseJoe.name, "joe")
+        }
+        let lowercaseJoe = try! lowercaseJoeResult.get()
+        
+        XCTAssertEqual(lowercaseJoe.associatedGreeting, "hello, my name is joe.")
     }
     
     
@@ -93,7 +95,7 @@ final class SemanticType_UsabilityExtensionsTests_ErrorfulSemanticTypeTests: XCT
         case .failure(let error):
             XCTAssertEqual(
                 error,
-                PersonWithShortName.Spec.NameIsTooLongError(name: "Joseph")
+                PersonWithShortName.Spec.Error.nameIsTooLong(name: "Joseph")
             )
         }
     }
@@ -102,8 +104,8 @@ final class SemanticType_UsabilityExtensionsTests_ErrorfulSemanticTypeTests: XCT
     func testSuccessfulMutatingTryMap() {
         var joe = try! PersonWithShortName(Person(name: "Joe"))
         XCTAssertEqual(joe.name, "Joe")
-        try! joe.mutatingTryMap { person in person.name = person.name.lowercased() }
-        XCTAssertEqual(joe.name, "joe")
+        try! joe.mutatingTryMap { person in person.associatedGreeting = person.associatedGreeting.lowercased() }
+        XCTAssertEqual(joe.associatedGreeting, "hello, my name is joe.")
         
         var joesEmail = try! EmailAddress.create("JonaTHAN@gmail.com").get()
         XCTAssertEqual(joesEmail.user, "jonathan")
@@ -128,8 +130,8 @@ final class SemanticType_UsabilityExtensionsTests_ErrorfulSemanticTypeTests: XCT
             }
         ) { error in
             XCTAssertEqual(
-                error as! PersonWithShortName.Spec.NameIsTooLongError,
-                PersonWithShortName.Spec.NameIsTooLongError.init(name: "Joseph")
+                error as! PersonWithShortName.Spec.Error,
+                PersonWithShortName.Spec.Error.nameIsTooLong(name: "Joseph")
             )
         }
         

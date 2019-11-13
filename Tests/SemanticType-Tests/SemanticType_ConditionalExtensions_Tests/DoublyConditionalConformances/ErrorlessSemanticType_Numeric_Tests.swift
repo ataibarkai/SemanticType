@@ -5,7 +5,7 @@ final class ErrorlessSemanticType_Numeric_Tests: XCTestCase {
     
     func testNumericConformance() {
         enum UserEnteredInt_Spec: ErrorlessSemanticTypeSpec, ShouldBeNumeric {
-            typealias BackingPrimitiveWithValueSemantics = Int
+            typealias RawValue = Int
             static func gateway(preMap: Int) -> Int {
                 return preMap
             }

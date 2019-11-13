@@ -1,42 +1,42 @@
-/// A marker protocol to be conformed to by a `SemanticTypeSpec` type
-/// to conditionally provide `Numeric` support for its associated `SemanticType`.
-///
+/// A marker protocol.
 /// If a `SemanticTypeSpec` conforms to this protocol, its associated `SemanticType`
 /// will conform to `Numeric`.
-public protocol ShouldBeNumeric: GeneralizedSemanticTypeSpec
+///
+/// `Numeric` support may not make sense for all
+/// `SemanticType`s associated with a `Numeric` `RawValue`
+/// (for instance, [`Second` * `Second` = `Second`] does not make semantic sense).
+/// Nevertheless, we *can* provide an implementation in all such cases.
+///
+/// We allow the `Spec` backing the `SemanticType` to signal whether `Numeric`
+/// support should be provided by conforming to the `ShouldBeNumeric` marker protocol.
+public protocol ShouldBeNumeric: MetaValidatedSemanticTypeSpec
     where
-    BackingPrimitiveWithValueSemantics: Numeric { }
+    RawValue: Numeric { }
 
 extension SemanticType: Numeric
     where
-    Spec: ShouldBeNumeric,  // `Numeric` support may not make sense for all
-                            // `SemanticType`s associated with a `Numeric` `BackingPrimitiveWithValueSemantics`
-                            // (for instance, [`Second` * `Second` = `Second`] does not make semantic sense).
-                            // Nevertheless, we *can* provide an implementation in all such cases.
-                            //
-                            // We allow the `Spec` backing the `SemanticType` to signal whether `Numeric`
-                            // support should be provided by conforming to the `ShouldBeNumeric` marker protocol.
+    Spec: ShouldBeNumeric,
     Spec.Error == Never
 {
-    public typealias Magnitude = Spec.BackingPrimitiveWithValueSemantics.Magnitude
+    public typealias Magnitude = Spec.RawValue.Magnitude
 
     public init?<T>(exactly source: T) where T : BinaryInteger {
-        guard let inside = Spec.BackingPrimitiveWithValueSemantics.init(exactly: source)
+        guard let inside = Spec.RawValue.init(exactly: source)
             else { return nil }
         
         self.init(inside)
     }
     
-    public var magnitude: Spec.BackingPrimitiveWithValueSemantics.Magnitude {
-        backingPrimitive.magnitude
+    public var magnitude: Spec.RawValue.Magnitude {
+        rawValue.magnitude
     }
     
     public static func * (lhs: Self, rhs: Self) -> Self {
-        Self(lhs.backingPrimitive * rhs.backingPrimitive)
+        Self(lhs.rawValue * rhs.rawValue)
     }
     
     public static func *= (lhs: inout Self, rhs: Self) {
-        lhs.backingPrimitive *= rhs.backingPrimitive
+        lhs.rawValue *= rhs.rawValue
     }
 }
 
@@ -44,7 +44,7 @@ extension SemanticType: Numeric
 extension SemanticType: SignedNumeric
     where
     Spec: ShouldBeNumeric,
-    Spec.BackingPrimitiveWithValueSemantics: SignedNumeric,
+    Spec.RawValue: SignedNumeric,
     Spec.Error == Never
 { }
 

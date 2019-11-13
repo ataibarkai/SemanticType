@@ -7,7 +7,7 @@
 /// the types used to store its relevant state.
 /// - Tag: SemanticType
 @dynamicMemberLookup
-public struct SemanticType<Spec: GeneralizedSemanticTypeSpec> {
+public struct SemanticType<Spec: MetaValidatedSemanticTypeSpec> {
         
     public typealias Spec = Spec
     
@@ -30,15 +30,16 @@ public struct SemanticType<Spec: GeneralizedSemanticTypeSpec> {
     /// under *all* circumstances.
     private let gatewayOutput: Spec.GatewayOutput
     
-    /// A proxy internally exposing the backingPrimitive portion of the `gatewayOutput` property to other files in this package.
+    /// A proxy internally exposing the `rawValue` portion of the `gatewayOutput` property to other files in this package.
     ///
-    /// We define it as an underscore-prefixed, internal variable so that we can define a corresponding
-    /// variable which has both a getter and a setter under some conditional extensions, but only a getter otherwise.
-    internal var _backingPrimitive: Spec.BackingPrimitiveWithValueSemantics {
-        gatewayOutput.backingPrimitvie
+    /// We define it as an underscore-prefixed, internal variable so that we can define a corresponding public
+    /// variable which has **both** a getter and a setter under some conditional extensions, but only a getter otherwise.
+    internal var _rawValue: Spec.RawValue {
+        gatewayOutput.rawValue
     }
     
-    public var gatewayMetadata: Spec.GatewayMetadataWithValueSemantics {
+    /// The metadata value outputted by the gateway function, along with the (possibly transformed) `rawValue`.
+    public var gatewayMetadata: Spec.Metadata {
         gatewayOutput.metadata
     }
     
@@ -54,8 +55,9 @@ public struct SemanticType<Spec: GeneralizedSemanticTypeSpec> {
     }
     
     /// The `SemanticType` factory through which all paths of `SemanticType` creation must pass.
-    /// An obtained `SemanticType` is guarenteed to respect its `Spec.gateway` function, in that
-    /// its backing primitive is guarenteed to have been the output of a call to `Spec.gateway` using the given input.
+    ///
+    /// The obtained `SemanticType` is guarenteed to respect its `Spec.gateway` function:
+    /// its `rawValue` is guarenteed to have been the output of a call to `Spec.gateway` using the given input.
     ///
     /// - Parameter preMap: The value to be passed through the `Spec.gatemapMap` function.
     ///
@@ -63,7 +65,7 @@ public struct SemanticType<Spec: GeneralizedSemanticTypeSpec> {
     ///            or otherwise, the error captured by a `.failure` output of the `Sepc.gateway` function.
     ///
     /// - Tag: create
-    public static func create(_ preMap: Spec.BackingPrimitiveWithValueSemantics) -> Result<Self, Spec.Error> {
+    public static func create(_ preMap: Spec.RawValue) -> Result<Self, Spec.Error> {
         return Spec
             .gateway(preMap: preMap)
             .map(Self.init(_unsafeDirectlyAssignedBackingPrimitive:))

@@ -4,12 +4,7 @@ import XCTest
 final class ErrorlessSemanticType_ConditionalConformances_Standard_Tests: XCTestCase {
     
     func testAdditiveArithmeticConformance() {
-        enum Seconds_Spec: ErrorlessSemanticTypeSpec {
-            typealias BackingPrimitiveWithValueSemantics = Double
-            static func gateway(preMap: Double) -> Double {
-                return preMap
-            }
-        }
+        enum Seconds_Spec: ErrorlessSemanticTypeSpec { typealias RawValue = Double }
         typealias Seconds = SemanticType<Seconds_Spec>
         
         var step1Duration: Seconds = 5

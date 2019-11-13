@@ -1,37 +1,37 @@
 // MARK: - Universal usability extensions -
 extension SemanticType {
-    public init(_ preMap: Spec.BackingPrimitiveWithValueSemantics) throws {
+    public init(_ preMap: Spec.RawValue) throws {
         self = try Self.create(preMap).get()
     }
     
-    public var backingPrimitive: Spec.BackingPrimitiveWithValueSemantics {
+    public var rawValue: Spec.RawValue {
         get {
-            _backingPrimitive
+            _rawValue
         }
     }
 
-    public subscript<T>(dynamicMember keyPath: KeyPath<Spec.BackingPrimitiveWithValueSemantics, T>) -> T {
+    public subscript<T>(dynamicMember keyPath: KeyPath<Spec.RawValue, T>) -> T {
         get {
-            backingPrimitive[keyPath: keyPath]
+            rawValue[keyPath: keyPath]
         }
     }
     
     public func tryMap(
-        _ map: (_ backingPrimitive: Spec.BackingPrimitiveWithValueSemantics) throws -> Spec.BackingPrimitiveWithValueSemantics
+        _ map: (_ rawValue: Spec.RawValue) throws -> Spec.RawValue
     ) rethrows -> Result<Self, Spec.Error> {
         return Self.create(
-            try map(backingPrimitive)
+            try map(rawValue)
         )
     }
     
     public mutating func mutatingTryMap(
-        _ mutation: (_ backingPrimitive: inout Spec.BackingPrimitiveWithValueSemantics) throws -> ()
+        _ mutation: (_ rawValue: inout Spec.RawValue) throws -> ()
     ) throws {
         let mapped = try tryMap { original in
             var toBeModified = original
-            try mutation(&toBeModified) // Here we make use of the assumption that `Spec.BackingPrimitiveWithValueSemantics` has
-                                        // value-semantics, i.e. that this mutation of `backingPrimitiveCopy` would bear no
-                                        // effect on the original `backingPrimitive`.
+            try mutation(&toBeModified) // Here we make use of the assumption that `Spec.RawValue` has
+                                        // value-semantics, i.e. that this mutation of `toBeModified: Spec.RawValue` would bear no
+                                        // effect on `original: Spec.RawValue`.
             return toBeModified
         }
         
@@ -42,34 +42,34 @@ extension SemanticType {
 
 // MARK: - `Error == Never` extensions -
 extension SemanticType where Spec.Error == Never {
-    public init(_ preMap: Spec.BackingPrimitiveWithValueSemantics) {
+    public init(_ preMap: Spec.RawValue) {
         self = Self.create(preMap).get()
     }
     
-    /// The value assigned to `backingPrimitive` is passed through the `Spec.gateway` function before making it to `self`.
-    public var backingPrimitive: Spec.BackingPrimitiveWithValueSemantics {
+    /// The value assigned to `rawValue` is passed through the `Spec.gateway` function before making it to `self`.
+    public var rawValue: Spec.RawValue {
         get {
-            _backingPrimitive
+            _rawValue
         }
         set {
             self = .init(newValue)
         }
     }
     
-    public subscript<T>(dynamicMember keyPath: WritableKeyPath<Spec.BackingPrimitiveWithValueSemantics, T>) -> T {
+    public subscript<T>(dynamicMember keyPath: WritableKeyPath<Spec.RawValue, T>) -> T {
         get {
-            backingPrimitive[keyPath: keyPath]
+            rawValue[keyPath: keyPath]
         }
         set {
-            backingPrimitive[keyPath: keyPath] = newValue
+            rawValue[keyPath: keyPath] = newValue
         }
     }
     
     public func map(
-        _ map: (_ backingPrimitive: Spec.BackingPrimitiveWithValueSemantics) throws -> Spec.BackingPrimitiveWithValueSemantics
+        _ map: (_ rawValue: Spec.RawValue) throws -> Spec.RawValue
     ) rethrows -> Self {
         return Self.init(
-            try map(backingPrimitive)
+            try map(rawValue)
         )
     }
 }
