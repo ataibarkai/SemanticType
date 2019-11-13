@@ -1,7 +1,6 @@
 /// A marker protocol.
 /// If a `SemanticTypeSpec` conforms to this protocol, its associated `SemanticType`
 /// will conform to `Numeric`.
-/// Also see [SupportsMultiplicationWithRawValue](x-source-tag://SupportsMultiplicationWithRawValue).
 /// 
 /// `Numeric` support may not make sense for all
 /// `SemanticType`s associated with a `Numeric` `RawValue`

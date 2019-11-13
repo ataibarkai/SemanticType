@@ -443,10 +443,3 @@ XCTAssertEqual(oneTwoThree.last, 3)
 In other situations, `Numeric` support *does* make sense. For instance [`EvenInteger` * `EvenInteger` = `EvenInteger`].
 
 We allow the `SemanticTypeSpec` backing the `SemanticType` to signal whether `Numeric` support should be provided by conforming to the `ShouldBeNumeric` marker protocol.
-
-
-#### `SupportsMultiplicationWithRawValue`
-Similarly, in some cases it makes sense to support multiplication with values of the `RawType`.
-For instance [`Second` * `Int` = `Second`] makes sense!
-
-To support multiplication between values of a `SemanticType`  instantiation and values of its `RawType`, have the `SemanticTypeSpec` conform to `SupportsMultiplicationWithRawValue`.
