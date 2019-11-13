@@ -119,134 +119,71 @@ At the core of the `SemanticTypeSpec` lies the `gateway` function, which (aptly)
 | `MetaValidatedSemanticTypeSpec` | `(RawValue) -> Result<(RawValue, Metadata), Error>` |
 
 
+
+### `ErrorlessSemanticTypeSpec`
+`ErrorlessSemanticTypeSpec` is the simplest (and most refined) `SemanticTypeSpec` protocol.
+It is used when we don't need to validate our `RawValue` payload in any way (i.e. when every `RawValue` instance can be made to correspond to a `SemanticType` instance).
+
+By default, `ErrorlessSemanticTypeSpec`'s `gateway` function is simply the identify function (i.e. it doesn't transform the `RawValue` in any way).
+Instantiations of `SemanticType` can be composed like their `RawTypes` within the same type, but not *across* types:
 ```swift
-enum SQLQuery_Spec: // ...
-typealias SQLQuery = SemanticType<SQLQuery_Spec>
+enum Years_Spec: ErrorlessSemanticTypeSpec { typealias RawValue = Double }
+typealias Years = SemanticType<Years_Spec>
 
-enum Meters_Spec: // ...
-typealias Meters = SemanticType<Meters_Spec>
+let fiveYears: Years = 5
+let threeYears: Years = 3
+let eigthYears: Years = fiveYears + threeYears
+let truth = ( Years(151) > Years(34) )
 
-enum Inches_Spec: // ...
-typealias Inches = SemanticType<Inches_Spec>
-```
-
-
-A `SemanticType` is defined by a `Spec` type belonging to the following protocol hierarchy:
-`ErrorlessSemanticTypeSpec` which refines `SemanticTypeSpec` which refines `SemanticTypeSpecWithMetadata`
-
-| Protocol                       | `gateway` function                                                      | Usage                                                                                                                                                                                                                                                                          |
-|--------------------------------|-------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `ErrorlessSemanticTypeSpec`    | `func gateway(preMap: RawValue) -> RawValue`                            | Every possible `RawValue` instantiation corresponds to a valid `SemanticType` instantiation. Example: a `Meters` type backed by `Double`.                                                                                                                                      |
-| `SemanticTypeSpec`             | `func gateway(preMap: RawValue) -> Result<RawValue, Error>`             | Only a subset of `RawValue` instantiations can be turned into `SemanticType` instantiations. Example: a `Alphanumeric` type backed by `String`, which can only be created out of an alphanumeric `String`.                                                                     |
-| `SemanticTypeSpecWithMetadata` | `func gateway(preMap: RawValue) -> Result<(RawValue, Metadata), Error>` | Only a subset of `RawValue` instantiations can be turned into `SemanticType` instantiations, _and_ we want to store metadata recording the successful validation. Example: a `NonEmptyArray` type which persists non-optional `first: Element` and `last: Element` `Element`s. |
-
-
-| Protocol                       | `gateway` function type                             |
-|--------------------------------|-----------------------------------------------------|
-| `ErrorlessSemanticTypeSpec`    | `(RawValue) -> RawValue`                            |
-| `SemanticTypeSpec`             | `(RawValue) -> Result<RawValue, Error>`             |
-| `SemanticTypeSpecWithMetadata` | `(RawValue) -> Result<(RawValue, Metadata), Error>` |
-
-There are 3 protocol refinements you could use:
-
-| Protocol                       | `gateway` function                                                      |
-|--------------------------------|-------------------------------------------------------------------------|
-| `ErrorlessSemanticTypeSpec`    | `func gateway(preMap: RawValue) -> RawValue`                            |
-| `SemanticTypeSpec`             | `func gateway(preMap: RawValue) -> Result<RawValue, Error>`             |
-| `SemanticTypeSpecWithMetadata` | `func gateway(preMap: RawValue) -> Result<(RawValue, Metadata), Error>` |
-
-```swift
-import SemanticType
-
-```
-SemanticType declerations:
-```swift
-enum SQLQuery_Spec: ErrorlessSemanticTypeSpec { typealias RawValue = String }
-typealias SQLQuery = SemanticType<SQLQuery_Spec>
-
-enum Meters_Spec: ErrorlessSemanticTypeSpec { typealias RawValue = Double }
-typealias Meters = SemanticType<Meters_Spec>
 
 enum Inches_Spec: ErrorlessSemanticTypeSpec { typealias RawValue = Double }
 typealias Inches = SemanticType<Inches_Spec>
 
-```
-SemanticType in practice:
-```swift
-let query = SQLQuery("SELECT * FROM SwiftFrameworks")
-let metersClimbedToday = Meters(40) + Meters(2)
-let truth = ( Meters(1000) > Meters(34) )
+let tenInches: Inches = 10
+let fourInches: Inches = 4
 
-var distanceLeft = Meters(987.25)
-distanceLeft -= Meters(10)
+let anotherTruth = ( fourInches <= tenInches )
 
-let lengthOfScreenDiagonal = Inches(13)
+---
 
-func performSQLQuery(sqlQuery: SQLQuery){
-    // can only be called with a SQLQuery, not with just any String
-}
-
-```
-The following would result in a compile time error were it not commented-out:
-```swift
-//let _ = Meters(845.235) + Inches(332)
-
+// The following examples would not compile, as they mix-up `Years` and `Inches`:
+let willNotCompile1 = Years(5) + Inches(1)
+let willNotCompile2 = Yeras(19) > Inches(32)
 ```
 
-### The `gatewayMap` Function
-We may also define `ErrorlessSemanticTypeSpec`s with a static function `gatewayMap` where:
+We can also consider cases where the `gateway` function is explicitly specified -- allowing us to specify an arbitrary transformation to be applied to a `RawValue` before it is transformed into a `SemanticType`.
+The `gateway` function can be leveraged to construct types which have an *inherent* restriction on the range of the allowed values.
 
-`static func gatewayMap(preMap: RawValue) -> RawValue`
-
-The gateway map allows us to construct types which have an *inherent*
-restriction on the range of the allowed values.
-
-For example, we may construct a `Username` type which is inherently case-insensitive.
-This is achieved by having a `gatewayMap` which converts any input to its lowercase version:
-
+For instance, consider the following `CaseInsensitiveString` type which is *inherently* case-insensitive:
 ```swift
-enum Username_Spec: ErrorlessSemanticTypeSpec {
+enum CaseInsensitiveString_Spec: ErrorlessSemanticTypeSpec {
     typealias RawValue = String
     
-    static func gatewayMap(preMap: RawValue) -> RawValue {
-        return preMap.lowercaseString
+    static func gateway(preMap: String) -> String {
+        return preMap.lowercased()
     }
 }
-typealias Username = SemanticType<Username_Spec>
+typealias CaseInsensitiveString = SemanticType<CaseInsensitiveString_Spec>
 
-```
-From that point onwards, we may be **sure** that if we are given a `Username`,
-whether it was constructed from lowercase or uppercase characters is inconsequential.
-
-```swift
-let lowercaseSteve = Username("steve@gmail.com")
-let uppercaseSteve = Username("STEVE@GMAIL.COM")
-
-assert(lowercaseSteve == uppercaseSteve)
-
+let hello1: CaseInsensitiveString = "hELlo"
+let hello2: CaseInsensitiveString = "HelLO"
+let _ = (hello1 == hello2) // true
 ```
 
-The `gatewayMap` can come in handy whenever we have a restriction on our values
-which is *inherent in our "mental" model of the type*, but *not in the underlying data type*.
+From this point onwards, we can be **sure** that if we have a `CaseInsensitiveString` instance, no operation on it would depend on any casing information.
 
-Examples include:
-* a `URL` type which is always url-escaped
-* a `SQLCommand` type which is always sql-escaped (and not prone to SQL-injection attacks)
-* a `LevelInSomeBuilding` type which does not allow values below -1 nor above 72 (the lowest and highest levels in SomeBuilding).
-* etc.
+Other examples include a `SQLCommand` type which is always sql-escaped (and not prone to SQL-injection attacks), a `LevelInSomeBuilding` type which clamps values to values above -1 and below 72 (the lowest and highest levels in `SomeBuilding`), etc.
 
-We still have "type information" which is associated with runtime behavior rather than with compile-time behavior, but this information (and all associated testing!) is now restricted to the `gatewayMap()` function.
+While we still have "type information" which is associated with runtime behavior rather than with compile-time behavior, this information **(and all associated testing!)** is now restricted to the `gateway` function.
+This can come in handy whenever we have a restriction on our values which is *inherent in our "mental" model of the type*, but *not in the underlying data type*.
 
 
+### `ValidatedSemanticTypeSpec`
 
-### Advanced Usage: `SemanticTypeSpec`
-
-`ErrorlessSemanticTypeSpec` is a protocol refinement (with default behavior provided via an extension) of the more general `SemanticTypeSpec` protocol.
-The `SemanticTypeSpec` protocol's more general  `gatewayMap`  function may not only transform the incoming value, but also return some *error* if the value failed to pass some validation. 
+The aforementioned `ErrorlessSemanticTypeSpec` is a protocol refinement (with default behavior provided via an extension) of the more general `ValidatedSemanticTypeSpec` protocol.
+The `ValidatedSemanticTypeSpec` protocol's more general  `gateway`  function may not only transform the incoming value, but also return some *error* if the value failed to pass some validation. 
 
 For example:
-
-
 ```swift
 enum EnglishLettersOnlyString_Spec: SemanticTypeSpec {
     typealias RawValue = String
@@ -269,26 +206,24 @@ typealias EnglishLettersOnlyString = SemanticType<EnglishLettersOnlyString_Spec>
 ```
 The following is made of only English letters, and therefore the initialization will not `throw`:
 ```swift
-let actuallyOnlyLetters = try EnglishLettersOnlyString("abclaskjdf")
-
+let actuallyOnlyLetters = try EnglishLettersOnlyString("abclaskjdf") // will succeed
 ```
+
 The following is *not* made of only English letters, and therefore the initializatino will `throw`:
 ```swift
-let notOnlyLettes = try? EnglishLettersOnlyString("asdflkj12345")
-
+let notOnlyLettes = try? EnglishLettersOnlyString("asdflkj12345") // will throw
 ```
 
 A typed version of the error is available through the `Result`-returning `.create()` factory function:
 ```swift
 let englishLettersCreationResult: Result<EnglishLettersOnlyString, EnglishLettersOnlyString_Spec.Error> = EnglishLettersOnlyString.create("asdflkj12345")
-
 ```
 
 
-### Most Advanced Usage: `GeneralizedSemanticTypeSpec`
+### `MetaValidatedSemanticTypeSpec`
 
-`SemanticTypeSpec` is itself also a protocol refinement (with default behavior provided via an extension) of the **most** generic `GeneralizedSemanticTypeSpec` protocol.
-The `GeneralizedSemanticTypeSpec` protocol's most generic  `gatewayMap`  function, in addition to the transformed `RawValue` to back the  `SemanticType` instance, returns an arbitrarily-typed *metadata value* which is then stored on the `SemanticType` instance and made publically available for access.
+`ValidatedSemanticTypeSpec` is itself also a protocol refinement (with default behavior provided via an extension) of the **most** generic `MetaValidatedSemanticTypeSpec` protocol.
+The `MetaValidatedSemanticTypeSpec` protocol's most generic  `gateway`  function, in addition to the transformed `RawValue` to back the  `SemanticType` instance, returns an arbitrarily-typed *metadata value* which is then stored on the `SemanticType` instance and made publically available for access.
 This metadata value may be used to encode a compiler-accessible fascet of the sub-structure of the wrapped value
 which was veriried by the `gatewayMap` function.
 
@@ -347,7 +282,7 @@ extension NonEmptyIntArray {
 // ...
 
 let oneTwoThree = try! NonEmptyIntArray.create([1, 2, 3]).get()
-XCTAssertEqual(oneTwoThree.first as Int, 1)
-XCTAssertEqual(oneTwoThree.last as Int, 3)
+XCTAssertEqual(oneTwoThree.first, 1)
+XCTAssertEqual(oneTwoThree.last, 3)
 
 ```
