@@ -46,10 +46,10 @@ public protocol MetaValidatedSemanticTypeSpec {
     associatedtype Error: Swift.Error
     
     /// The output of the [gatewayMap function](x-source-tag://SemanticTypeSpec.gateway).
-    /// See additional documentation on the [struct definition](x-source-tag://SemanticTypeSpecWithMetadata_GatewayOutput)
+    /// See additional documentation on the [struct definition](x-source-tag://MetaValidatedSemanticTypeSpec_GatewayOutput)
     ///
     /// - Tag: MetaValidatedSemanticTypeSpec.GatewayOutput
-    typealias GatewayOutput = SemanticTypeSpecWithMetadata_GatewayOutput<RawValue, Metadata>
+    typealias GatewayOutput = MetaValidatedSemanticTypeSpec_GatewayOutput<RawValue, Metadata>
     
     /// A function gating the creation of all `SemanticType` instances associated with this Spec.
     ///
@@ -68,8 +68,8 @@ public protocol MetaValidatedSemanticTypeSpec {
 /// to effectively achieve this goal.
 /// In other words, this type should be viewed as if it were nested under the `MetaValidatedSemanticTypeSpec` protocol.
 ///
-/// - Tag: SemanticTypeSpecWithMetadata_GatewayOutput
-public struct SemanticTypeSpecWithMetadata_GatewayOutput<RawValue, Metadata> {
+/// - Tag: MetaValidatedSemanticTypeSpec_GatewayOutput
+public struct MetaValidatedSemanticTypeSpec_GatewayOutput<RawValue, Metadata> {
     
     /// The primitive value to back a succesfully-created `SemanticType` instance.
     /// The behavior of the `SemanticType` construct largely revolves around this field.
