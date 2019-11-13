@@ -1,6 +1,6 @@
 /// A specification object statically determining the properties of a `SemanticType` object
 /// associated with it.
-public protocol SemanticTypeSpecWithMetadata {
+public protocol MetaValidatedSemanticTypeSpec {
     
     /// The type of the primitive value wrapped by the `SemanticType`.
     /// Must possess value semantics.
@@ -48,7 +48,7 @@ public protocol SemanticTypeSpecWithMetadata {
     /// The output of the [gatewayMap function](x-source-tag://SemanticTypeSpec.gateway).
     /// See additional documentation on the [struct definition](x-source-tag://SemanticTypeSpecWithMetadata_GatewayOutput)
     ///
-    /// - Tag: SemanticTypeSpecWithMetadata.GatewayOutput
+    /// - Tag: MetaValidatedSemanticTypeSpec.GatewayOutput
     typealias GatewayOutput = SemanticTypeSpecWithMetadata_GatewayOutput<RawValue, Metadata>
     
     /// A function gating the creation of all `SemanticType` instances associated with this Spec.
@@ -64,9 +64,9 @@ public protocol SemanticTypeSpecWithMetadata {
 ///
 ///
 /// NOTE: Since Swift does not currently support nesting definitions of types nested inside a protocol,
-/// we utilize a naming convention + [a typealias on the target protocol](x-source-tag://SemanticTypeSpecWithMetadata.GatewayOutput)
+/// we utilize a naming convention + [a typealias on the target protocol](x-source-tag://MetaValidatedSemanticTypeSpec.GatewayOutput)
 /// to effectively achieve this goal.
-/// In other words, this type should be viewed as if it were nested under the `SemanticTypeSpecWithMetadata` protocol.
+/// In other words, this type should be viewed as if it were nested under the `MetaValidatedSemanticTypeSpec` protocol.
 ///
 /// - Tag: SemanticTypeSpecWithMetadata_GatewayOutput
 public struct SemanticTypeSpecWithMetadata_GatewayOutput<RawValue, Metadata> {
@@ -84,7 +84,7 @@ public struct SemanticTypeSpecWithMetadata_GatewayOutput<RawValue, Metadata> {
 
 
 /// A `SemanticTypeSpec` with no gateway metadata.
-public protocol ValidatedSemanticTypeSpec: SemanticTypeSpecWithMetadata where Metadata == () {
+public protocol ValidatedSemanticTypeSpec: MetaValidatedSemanticTypeSpec where Metadata == () {
     static func gateway(
        preMap: RawValue
     ) -> Result<RawValue, Error>
