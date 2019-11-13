@@ -114,10 +114,12 @@ And you could even create a dedicated `init` enforcing any given validation/tran
 
 So why do you need this library?
 
-The library defines the `SemanticType` structure, which offers sensible convenience as well as carefully-implemented type-level constraint validation:
+In short, the library lets you effortlessly define `SemanticType`s that are *as easy to work with as their underlying `RawValue`s*, and that are guarenteed to enforce a given transformation/validation without burdening you with the details. 
+
+In more detail, the library defines the `SemanticType` structure, which offers sensible convenience as well as carefully-implemented type-level constraint validation:
 * `SemanticType`s *automatically* conform to numerous standard-library protocols whenever possible (i.e. whenever their associated `RawValue` conforms to the protoco). The supported protocols include `Hashable`,  `Comparable`,  `Equatable`, `Sequence`, `Collection`, `AdditiveArithmetic`, `ExpressibleByLiteral` protocols, and **many, many, more**. This makes it easy to use `SemanticType` instances in the context of generic data-structures (e.g. as keys in a `Dictionary`), of protocol-oriented operations (e.g. in comparisons, additions, subtractions, etc.), as well as in the context of generic algorithms.
 * `SemanticType`s expose *direct* read/write access all instance-variables defined on their `RawValue` (via typed `@dynamicMemberLookup`  access).
-* `SemanticType` makes it easy to impose strict *transformations and validation constraints* on the allowable values of the `RawValue`s, **while guarenteeing that said constraints are maintained across all operations**. All you have to provide is the `gateway` function, and the library takes care of the rest. For instance, you can easily create  `OddNumber` and `EvenNumber` types which *guarentee* that all of their instances are odd/even, respectively.
+* `SemanticType` makes it easy to impose strict *transformations and validation constraints* on the allowable values of the `RawValue`s, **while guarenteeing that said constraints are maintained across all operations**. All you have to provide is the `gateway` function, and the library takes care of the rest. For instance, you can easily create  `OddNumber` and `EvenNumber` types which *guarentee* that all of their instances are odd/even, respectively, and which are guarenteed to maintain this property across all possible transformations.
 
 ---------
 
