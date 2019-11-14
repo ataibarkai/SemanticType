@@ -101,16 +101,16 @@ final class SemanticType_UsabilityExtensionsTests_ErrorfulSemanticTypeTests: XCT
     }
     
     
-    func testSuccessfulMutatingTryMap() {
+    func testSuccessfulMutateRawValue() {
         var joe = try! PersonWithShortName(Person(name: "Joe"))
         XCTAssertEqual(joe.name, "Joe")
-        try! joe.mutatingTryMap { person in person.associatedGreeting = person.associatedGreeting.lowercased() }
+        try! joe.mutateRawValue { person in person.associatedGreeting = person.associatedGreeting.lowercased() }
         XCTAssertEqual(joe.associatedGreeting, "hello, my name is joe.")
         
         var joesEmail = try! EmailAddress.create("JonaTHAN@gmail.com").get()
         XCTAssertEqual(joesEmail.user, "jonathan")
         XCTAssertEqual(joesEmail.host, "gmail.com")
-        try! joesEmail.mutatingTryMap { email in
+        try! joesEmail.mutateRawValue { email in
             email.removeLast(3)
             email.append("nET")
         }
@@ -119,12 +119,12 @@ final class SemanticType_UsabilityExtensionsTests_ErrorfulSemanticTypeTests: XCT
     }
     
     
-    func testFailingMutatingTryMap() {
+    func testFailingMutateRawValue() {
         var joe = try! PersonWithShortName(Person(name: "Joe"))
         
         XCTAssertEqual(joe.name, "Joe")
         XCTAssertThrowsError(
-            try joe.mutatingTryMap { person in
+            try joe.mutateRawValue { person in
                   person.name.removeLast()
                   person.name.append(contentsOf: "seph")
             }
@@ -140,7 +140,7 @@ final class SemanticType_UsabilityExtensionsTests_ErrorfulSemanticTypeTests: XCT
         XCTAssertEqual(joesEmail.user, "jonathan")
         XCTAssertEqual(joesEmail.host, "gmail.com")
         XCTAssertThrowsError(
-            try joesEmail.mutatingTryMap { email in
+            try joesEmail.mutateRawValue { email in
                 email.removeLast(10)
             }
         ) { error in
@@ -159,7 +159,7 @@ final class SemanticType_UsabilityExtensionsTests_ErrorfulSemanticTypeTests: XCT
         ("testSubscriptAccess", testSubscriptAccess),
         ("testSuccessfulTryMap", testSuccessfulTryMap),
         ("testFailingTryMap", testFailingTryMap),
-        ("testSuccessfulMutatingTryMap", testSuccessfulMutatingTryMap),
-        ("testFailingMutatingTryMap", testFailingMutatingTryMap),
+        ("testSuccessfulMutateRawValue", testSuccessfulMutateRawValue),
+        ("testFailingMutateRawValue", testFailingMutateRawValue),
     ]
 }
