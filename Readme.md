@@ -435,7 +435,7 @@ XCTAssertEqual(oneTwoThree.last, 3)
 
 ### A note on `Numeric` support
 
-`Numeric` is the protocol swift uses to support *multiplication and division* within a given type.
+`Numeric` is the protocol swift uses to support *multiplication* within a given type.
 
 #### `ShouldBeNumeric`
 `Numeric` support may not make sense for all `SemanticType`s, even when their `RawValue` types are themselves `Numeric`. For instance, [`Second` * `Second` = `Second`] does not make semantic sense.
