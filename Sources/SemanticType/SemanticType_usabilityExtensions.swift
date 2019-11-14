@@ -24,7 +24,7 @@ extension SemanticType {
         )
     }
     
-    public mutating func mutatingTryMap(
+    public mutating func mutateRawValue(
         _ mutation: (_ rawValue: inout Spec.RawValue) throws -> ()
     ) throws {
         let mapped = try tryMap { original in
