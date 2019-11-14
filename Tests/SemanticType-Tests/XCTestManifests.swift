@@ -10,7 +10,6 @@ public func allTests() -> [XCTestCaseEntry] {
         
         testCase(ErrorlessSemanticType_ConditionalConformances_ExpressibleByLiteral_Tests.allTests),
         testCase(ErrorlessSemanticType_ConditionalConformances_Standard_Tests.allTests),
-        testCase(ErrorlessSemanticType_NonConformanceConditionalExtensions_Tests.allTests),
         testCase(SemanticType_ConditionalConformances_Standard_Tests.allTests),
         
         testCase(SemanticType_UsabilityExtensionsTests_ErrorfulSemanticTypeTests.allTests),

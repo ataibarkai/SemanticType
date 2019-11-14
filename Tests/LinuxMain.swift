@@ -8,7 +8,6 @@ tests += SemanticTypeSpec_Tests.allTests,
 
 tests += ErrorlessSemanticType_ConditionalConformances_ExpressibleByLiteral_Tests.allTests,
 tests += ErrorlessSemanticType_ConditionalConformances_Standard_Tests.allTests,
-tests += ErrorlessSemanticType_NonConformanceConditionalExtensions_Tests.allTests,
 tests += SemanticType_ConditionalConformances_Standard_Tests.allTests,
 
 tests += SemanticType_UsabilityExtensionsTests_ErrorfulSemanticTypeTests.allTests,
