@@ -19,7 +19,7 @@ To make it easy to encode more business logic in the type system, and to thereby
 
 ## What is it?
 
-A `SemanticType` is a *context-specific type* which wraps an underlying value used in specific circumstances.
+A Semantic Type is a *context-specific type* which wraps an underlying value used in specific circumstances.
 It's a type created to capture and convey some *meaning* about a value which isn't already captured by the type used to *encode* the value.
 
 
@@ -45,12 +45,12 @@ struct Robot {
 }
 ```
 
-The swift compiler draws a sharp distinction between a `foo: Person`  variable and a `bar: Robot` variable; there is no danger of accidentally passing a `Robot` to a function that expects a `Person`, and a quick *option-click* type inspeection immediaely illuminates the kinds of computations in which we could expect the variable to participate. 
+The swift compiler draws a sharp distinction between a `foo: Person`  variable and a `bar: Robot` variable; there is no danger of accidentally passing a `Robot` to a function that expects a `Person`, and a quick *option-click* type inspection immediaely illuminates the kinds of computations in which we could expect the variable to participate. 
 
 The same is *not* true when we look at the `Int` instance fields defined above.
 Though  `Person.age`, `Robot.id`, and `Robot.batteryPercentage` capture entirely different kinds of data, they are all typed as  `Int` s. And since **all the compiler sees is a variable's type,**  it can help us with neither clarity nor precision.
 
-Passing the contents of `Robot.batteryPercentage` into a function expecting `Robot.id` would be just as nonesensical as passing a `Person` to a function expecting a `Robot`. But while the latter would be caught by the compiler, the former would not. 
+Passing the contents of `Robot.batteryPercentage` into a function expecting `Robot.id` would be just as nonsensical as passing a `Person` to a function expecting a `Robot`. But while the latter would be caught by the compiler, the former would not. 
 
 #### What can we do about this?
 This issue would disappear if our types were richer:
@@ -90,26 +90,26 @@ We can find an example of this idea in `Foundation`'s `URL` type, as the validat
 
 All URLs can be encoded as `String`s. But not all `String`s can be used as URLs.
 
-When you have a `URL` instance, you have **proof** that the `String` value backing it indeed conforms to the constraints defined by the `URL` standard.
+When you have a `URL` instance, you have **proof** that the `String` value backing it indeed conforms to the constraints defined by the URL standard.
 
-`URL` even combines the benefits of the initial validation step to expose safe purpose-specific *extensions*.
-Once you have a valid `URL`, you can create another valid `URL` simply by appending a path component to your original `URL`.
-Which is precisely what `URL`'s `.appendingPathComponent(...)` function does.
+`URL` further utilizes the benefits of the initial validation step to expose safe, purpose-specific *extensions*.
+Once you have a valid URL, you can create another valid URL simply by appending a path component to your original URL.
+This is precisely what `URL`'s `.appendingPathComponent(...)` function does.
 
 #### `BatteryPercentage`
-We don't have to look far to find oppurtunities to enforce type-level constraints.
+We don't have to look far to find oppurtunities to enforce constraints at the type-level.
 For instancee, in our previous example, `BatteryPercentage` values must capture a number in the range `[0, 100]` to be sensible.
 
 When we have a dedicated `BatteryPercentage` type for encoding battery percentage values (rather than using `Int`), we can encode this constraint *at the type level*, and hence be **sure** that any given `BatteryPercentage` instance *always* carries a value in the range `[0, 100]`.
 
-#### Clamping and failing
+#### Choose: clamp, or fail?
 What if you try to initialize a `BatteryPercentage` instance with a value of  `1324`?
 We often (but not always) have **choice** in the matter. We can either *clamp* the input value to the nearest-possible valid value (in this case, to `100`), or we can simply `throw` an error and refuse to initialize the `BatteryPercentage` instance.
 
 ---------
 
 
-## Why do I need this library? Can't I make my own rich types?
+## Why do I need this library? Can't I define my own rich types?
 
 You could of course trivially define purpose-specific structures to wrap an underlying backing value used in particular circumstances.
 For instance, you could define:
@@ -121,6 +121,9 @@ struct Years {
 And you could even define a dedicated `init` enforcing any given validation/transformation.
 
 So why do you need this library?
+
+There's a reason semantic types are not widely used. *They're usually a pain to work with*.
+For example, you couldn't use instances of the `Years` struct defined above as keys in a dictionary, because `Years` doesn't conform to `Hashable`. You also couldn't simply add up or subtract two `Years` instances.
 
 This library lets you effortlessly define Semantic Types that are *as easy to work with as their underlying `RawValue`s*, and that are **guarenteed** to enforce a given transformation/validation through all possible mutations -- without burdening you with the details. 
 
