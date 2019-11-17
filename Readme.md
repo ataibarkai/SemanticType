@@ -5,7 +5,7 @@
 
 ## Purpose
 
-To make it easy to create types used as *restrictions* rather than merely as *data holders* -- and to thereby improve code **safety** and **clarity**.
+To make it easy to encode more business logic in the type system, and to thereby improve code **safety** and **clarity**.
 
 ---------
 
@@ -20,10 +20,18 @@ To make it easy to create types used as *restrictions* rather than merely as *da
 ## What is it?
 
 A `SemanticType` is a *context-specific type* which wraps an underlying value used in specific circumstances.
-It's a type created to capture and convey some *meaning* about a value *which isn't already captured by the type used to encode the value*.
+It's a type created to capture and convey some *meaning* about a value which isn't already captured by the type used to *encode* the value.
 
 
-### What?
+### What? 
+Instances of primitive types (such as `Int`, `Double`, `String`,  etc.) are often used under widely incompatiblee circumstances; a `Double` instance may encode a task-completion-percentage in one context, a time interval in another context, and a dollar amount in yet another.
+Though associated with identical *data* (e.g. floating points), such instances must never be confused with one another (we wouldn't want to pass a time interval to a function expecting a dollar amount). At times, such values are also associated with context-specific *constraints* which must be carefully maintained (a percentge-encoding `Double` must capture a number between 0 to and 100).
+
+A `SemanticType` is a purpose-specific type wrapping a primitive value used in a particular context. It creates a type-level distinction between such contexts, and makes it possible to encode constraint-enforcing validations & transformations right at the type level.
+
+
+### Come again?
+
 Say your program contains the `Person` and `Robot` types:
 ```swift
 struct Person {
@@ -37,12 +45,12 @@ struct Robot {
 }
 ```
 
-The swift compiler draws a sharp distinction between a `foo: Person`  variable and a `bar: Robot` variable; there is no danger of accidentally passing a `Robot` to a function that expects a `Person`, and a quick *option-click* immediaely reveals the type of the variable -- and therefore the kinds of computations in which we could expect the variable to participate. 
+The swift compiler draws a sharp distinction between a `foo: Person`  variable and a `bar: Robot` variable; there is no danger of accidentally passing a `Robot` to a function that expects a `Person`, and a quick *option-click* type inspeection immediaely illuminates the kinds of computations in which we could expect the variable to participate. 
 
-The same is *not* true when we look at the `Int` instance fields introduced above.
-Though the  `Person.age`, `Robot.id`, and `Robot.batteryPercentage` fields capture entirely different kinds of data, they are all typed as  `Int` s. And since **all the compiler sees is a variable's type,**  it can help us with neither clarity nor precision.
+The same is *not* true when we look at the `Int` instance fields defined above.
+Though  `Person.age`, `Robot.id`, and `Robot.batteryPercentage` capture entirely different kinds of data, they are all typed as  `Int` s. And since **all the compiler sees is a variable's type,**  it can help us with neither clarity nor precision.
 
-Passing the contents of `Robot.batteryPercentage` into a function expecting `Robot.id` would be just as nonesensical as passing a `Person` to a function expecting a `Robot`. However while the latter would be caught by the compiler, the former would not. 
+Passing the contents of `Robot.batteryPercentage` into a function expecting `Robot.id` would be just as nonesensical as passing a `Person` to a function expecting a `Robot`. But while the latter would be caught by the compiler, the former would not. 
 
 #### What can we do about this?
 This issue would disappear if our types were richer:
@@ -64,59 +72,59 @@ Though ultimately each field is backed by an `Int`-encoded integer, the fields h
 The compiler can then utilize this visible distinction between the fields to perform many sanity-checks on our behalf, such as making sure we never populate a `Person`'s age with some `ID` field, and that we never accidentally subtract `Years` from `BatteryPercentage` values.
 Besides, it's nice to be able to quickly see whether a given variable captures `Years`, an `ID`, `BatteryPercentage` -- or some other structure of significance.
 
+### Purpose-specific extensions
+A purpose-specific type makes it possible to define purpose-specific type extensions.
+
+For instance, it may be convenient to have a `isLow: Bool` computed variable available on types encoding battery percentages, returning `true` whenever `self` is below a given "low battery" threshhold (say, 20%).
+
+We wouldn't want to contaminate the global `Int` namespace with such an extension, for `var isLow: Bool { self < 20 }` doesn't make sense for `Int`s defined in any context *besides* battery percentages; the price for the convenience in the context of work with battery percentages would be increased congnitive in *all other contexts*.
+
+But with a dedicated `BatteryPercentage` type, we can encode such an extension with no down-sides whatsoever.
+
 
 ### Validation and transformation
-Once we create purpose-specific types used in particular contexts, we can also introduce purpose-specific transformations and validations *at the type level*. Meaning, *all instances* of a given type would be **guarenteed** to have been transformed and validated by a given "gateway" function.
+Once we create purpose-specific types used in particular contexts, we can also introduce purpose-specific, constraint-enforcing transformations and validations *at the type level*. Meaning, the raw values backing *all instances* of a given semantic-type would be **guarenteed** to maintain a given set of constraints defined by some **"gateway"** function.
 
-#### Numbers
-A crude example of this can be found with number-encoding types.
+#### String vs. URL
+We can find an example of this idea in `Foundation`'s `URL` type, as the validation step is one of the primary roles of the `URL` type.
 
-Suppose you have a function implementing a complex algorithm which should eventually output a **non-negative integer**.
+All URLs can be encoded as `String`s. But not all `String`s can be used as URLs.
 
-Precision/rounding issues aside, in principle, you _could_ have this function return a floating-point type such as `Double`.
-After all, a floating-point type _can_ encode positive integers.
-It would be wise to write tests for the function, providing evidence that indeed it always returns integers.
+When you have a `URL` instance, you have **proof** that the `String` value backing it indeed conforms to the constraints defined by the `URL` standard.
 
-But a better approach would be to have the function return `Int`. The return type of the function would then serve as **proof** that it always returns an integer, since all `Int` instances are (obviously) necessarily integers.
-
-Changing the function's return type is not only *easier* than writing a bunch of dedicated tests, it is also much more robust. While tests provide *evidence* that the function is correct by demonstrating its correctness over some inputs, unless we test the function against *every* possible input, we cannot be sure that there isn't _some_ input out there which would produce a non-integer output.
-By returning `Int`, on the other hand, we have absolute **proof** that the function always returns an integer, for the return type cannot instantiate anything else.
-
-Since the function must not only return an integer, but a *non-negative* integer, we can take this idea a little further and have the function return `UInt` rather than `Int`.
-Again, since `UInt`s are guarenteed to encode non-negative integers, we would now have **proof** that the function always reutrns a non-negative integer for every possible input value.
-
-Of course, we would still need to write tests providing evidence that our function returns the *right* positive integer for a given input.
-But an entire class of bugs would be all but eliminated.
+`URL` even combines the benefits of the initial validation step to expose safe purpose-specific *extensions*.
+Once you have a valid `URL`, you can create another valid `URL` simply by appending a path component to your original `URL`.
+Which is precisely what `URL`'s `.appendingPathComponent(...)` function does.
 
 #### `BatteryPercentage`
-What if our values must not only be integers, or even non-negative integers, but integers within a certain range?
-That is of course the case with `BatteryPercentage` values, which must capture a number in the range `[0, 100]` to be sensible.
+We don't have to look far to find oppurtunities to enforce type-level constraints.
+For instancee, in our previous example, `BatteryPercentage` values must capture a number in the range `[0, 100]` to be sensible.
 
-When we have a dedicated `BatteryPercentage` type for encoding battery percentage levels (rather than simply utilizing `Int`), we can encode this restriction *at the type level*, and hence be **sure** that any given `BatteryPercentage` instance *alwaays* carries a value in the range `[0, 100]`.
+When we have a dedicated `BatteryPercentage` type for encoding battery percentage values (rather than using `Int`), we can encode this constraint *at the type level*, and hence be **sure** that any given `BatteryPercentage` instance *always* carries a value in the range `[0, 100]`.
 
 #### Clamping and failing
 What if you try to initialize a `BatteryPercentage` instance with a value of  `1324`?
-We often (but not always) have choice in the matter. We can either *clamp* the input value to the nearest-possible valid value (in this case, to `100`), or we can simply `throw` an error and refuse to initialize a `BatteryPercentage` instance.
+We often (but not always) have **choice** in the matter. We can either *clamp* the input value to the nearest-possible valid value (in this case, to `100`), or we can simply `throw` an error and refuse to initialize the `BatteryPercentage` instance.
 
 ---------
 
 
 ## Why do I need this library? Can't I make my own rich types?
 
-You could of course trivially create purpose-specific structures to wrap an underlying backing value used in particular circumstances.
-For instance, you could do:
+You could of course trivially define purpose-specific structures to wrap an underlying backing value used in particular circumstances.
+For instance, you could define:
 ```swift
 struct Years {
     var value: Int
 }
 ```
-And you could even create a dedicated `init` enforcing any given validation/transformation.
+And you could even define a dedicated `init` enforcing any given validation/transformation.
 
 So why do you need this library?
 
-In short, the library lets you effortlessly define `SemanticType`s that are *as easy to work with as their underlying `RawValue`s*, and that are guarenteed to enforce a given transformation/validation without burdening you with the details. 
+This library lets you effortlessly define Semantic Types that are *as easy to work with as their underlying `RawValue`s*, and that are **guarenteed** to enforce a given transformation/validation through all possible mutations -- without burdening you with the details. 
 
-In more detail, the library defines the `SemanticType` structure, which offers sensible convenience as well as carefully-implemented type-level constraint validation:
+It does so by defining the `SemanticType` structure, which offers sensible conveniences as well as carefully-implemented type-level constraint validation:
 * `SemanticType`s *automatically* conform to numerous standard-library protocols whenever possible (i.e. whenever their associated `RawValue` conforms to the protocol). The supported protocols include `Hashable`,  `Comparable`,  `Equatable`, `Sequence`, `Collection`, `AdditiveArithmetic`, `ExpressibleByLiteral` protocols, and **many, many, more**. This makes it easy to use `SemanticType` instances in the context of generic data-structures (e.g. as keys in a `Dictionary`), of protocol-oriented operations (e.g. in comparisons, additions, subtractions, etc.), as well as in the context of generic algorithms.
 * `SemanticType`s expose *direct* read/write access all instance-variables defined on their `RawValue` (via typed `@dynamicMemberLookup`  access).
 * `SemanticType` makes it easy to impose strict *transformations and validation constraints* on the allowable values of the `RawValue`s, **while guarenteeing that said constraints are maintained across all operations**. All you have to provide is the `gateway` function, and the library takes care of the rest. For instance, you can easily create  `OddNumber` and `EvenNumber` types which *guarentee* that all of their instances are odd/even, respectively, and which are guarenteed to maintain this property across all possible transformations.
@@ -125,8 +133,8 @@ In more detail, the library defines the `SemanticType` structure, which offers s
 
 ## Usage:
 
-### Without further ado, some code
-We will cover the different use-cases in detail below. But first some example code:
+### Show me some code already!
+We will cover the different use-cases in detail below, but first, without further ado, here's some example code:
 
 ```swift
 enum Seconds_Spec: ErrorlessSemanticTypeSpec { typealias RawValue = Double }
