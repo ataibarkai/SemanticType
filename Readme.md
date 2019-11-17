@@ -1,6 +1,7 @@
 
-# Table of Contents
-- [`SemanticType`](#semantictype)
+# `SemanticType`
+
+## Table of Contents
 * [Purpose](#purpose)
 * [Inspiration](#inspiration)
 * [What is it?](#what-is-it)
@@ -23,8 +24,6 @@
   + [A note on `Numeric` support](#a-note-on-numeric-support)
   - [`ShouldBeNumeric`](#shouldbenumeric)
 
-
-# `SemanticType`
 
 ## Purpose
 
