@@ -240,12 +240,13 @@ XCTAssertEqual(tim.associatedGreeting, "Hello, my name is Tim.")
 
 
 let joe = try! PersonWithShortName(Person(name: "Joe"))
-let lowercaseJoeResult = joe.tryMap { person in
+let lowercaseJoe = joe.tryMap { person in
     var person = person
     person.associatedGreeting = person.associatedGreeting.lowercased()
     return person
-}
-let lowercaseJoe = try! lowercaseJoeResult.get()
+}.get()
+
+XCTAssertEqual(lowercaseJoe.associatedGreeting, "hello, my name is joe.")
 ```
 
 ### Background
