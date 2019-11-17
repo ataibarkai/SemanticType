@@ -77,7 +77,7 @@ A purpose-specific type makes it possible to define purpose-specific type extens
 
 For instance, it may be convenient to have a `isLow: Bool` computed variable available on types encoding battery percentages, returning `true` whenever `self` is below a given "low battery" threshhold (say, 20%).
 
-We wouldn't want to contaminate the global `Int` namespace with such an extension, for `var isLow: Bool { self < 20 }` doesn't make sense for `Int`s defined in any context *besides* battery percentages; the price for the convenience in the context of work with battery percentages would be increased congnitive in *all other contexts*.
+We wouldn't want to contaminate the global `Int` namespace with such an extension, for `isLow: Bool` doesn't make sense for `Int`s defined in any context *besides* battery percentages; the price for the convenience in the context of work with battery percentages would be increased congnitive in *all other contexts*.
 
 But with a dedicated `BatteryPercentage` type, we can encode such an extension with no down-sides whatsoever.
 
@@ -86,11 +86,11 @@ But with a dedicated `BatteryPercentage` type, we can encode such an extension w
 Once we create purpose-specific types used in particular contexts, we can also introduce purpose-specific, constraint-enforcing transformations and validations *at the type level*. Meaning, the raw values backing *all instances* of a given semantic-type would be **guarenteed** to maintain a given set of constraints defined by some **"gateway"** function.
 
 #### String vs. URL
-We can find an example of this idea in `Foundation`'s `URL` type, as the validation step is one of the primary roles of the `URL` type.
+A demonstrationo of this idea can be found in `Foundation`'s `URL` type, where the validation step plays a primary role.
 
-All URLs can be encoded as `String`s. But not all `String`s can be used as URLs.
+All URLs are `String`s. But not all `String`s are valid URLs.
 
-When you have a `URL` instance, you have **proof** that the `String` value backing it indeed conforms to the constraints defined by the URL standard.
+When you have a `URL` instance, you have **proof** that the `String` value backing it indeed maintains the constraints defined by the URL standard.
 
 `URL` further utilizes the benefits of the initial validation step to expose safe, purpose-specific *extensions*.
 Once you have a valid URL, you can create another valid URL simply by appending a path component to your original URL.
@@ -98,11 +98,11 @@ This is precisely what `URL`'s `.appendingPathComponent(...)` function does.
 
 #### `BatteryPercentage`
 We don't have to look far to find oppurtunities to enforce constraints at the type-level.
-For instancee, in our previous example, `BatteryPercentage` values must capture a number in the range `[0, 100]` to be sensible.
+In our previous example, battery percentage values must capture a number in the range `[0, 100]` to be sensible.
 
 When we have a dedicated `BatteryPercentage` type for encoding battery percentage values (rather than using `Int`), we can encode this constraint *at the type level*, and hence be **sure** that any given `BatteryPercentage` instance *always* carries a value in the range `[0, 100]`.
 
-#### Choose: clamp, or fail?
+#### Choose: clamp, or throw an error?
 What if you try to initialize a `BatteryPercentage` instance with a value of  `1324`?
 We often (but not always) have **choice** in the matter. We can either *clamp* the input value to the nearest-possible valid value (in this case, to `100`), or we can simply `throw` an error and refuse to initialize the `BatteryPercentage` instance.
 
