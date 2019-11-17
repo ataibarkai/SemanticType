@@ -1,13 +1,34 @@
 
-# `SemanticType`
+# Table of Contents
+- [`SemanticType`](#-semantictype-)
+* [Purpose](#purpose)
+* [Inspiration](#inspiration)
+* [What is it?](#what-is-it-)
+  + [What?](#what-)
+  + [Come again?](#come-again-)
+    - [What can we do about this?](#what-can-we-do-about-this-)
+  + [Purpose-specific extensions](#purpose-specific-extensions)
+  + [Validation and transformation](#validation-and-transformation)
+    - [String vs. URL](#string-vs-url)
+    - [`BatteryPercentage`](#-batterypercentage-)
+    - [Choose: clamp, or throw an error?](#choose--clamp--or-throw-an-error-)
+* [Why do I need this library? Can't I define my own rich types?](#why-do-i-need-this-library--can-t-i-define-my-own-rich-types-)
+* [Usage:](#usage-)
+  + [Show me some code already!](#show-me-some-code-already-)
+  + [Background](#background)
+  + [`ErrorlessSemanticTypeSpec`](#-errorlesssemantictypespec-)
+  + [`ValidatedSemanticTypeSpec`](#-validatedsemantictypespec-)
+  + [`MetaValidatedSemanticTypeSpec`](#-metavalidatedsemantictypespec-)
+* [Subtleties](#subtleties)
+  + [A note on `Numeric` support](#a-note-on--numeric--support)
+    - [`ShouldBeNumeric`](#-shouldbenumeric-)
 
----------
+
+# `SemanticType`
 
 ## Purpose
 
 To make it easy to encode more business logic in the type system, and to thereby improve code **safety** and **clarity**.
-
----------
 
 ## Inspiration
 
@@ -15,7 +36,6 @@ To make it easy to encode more business logic in the type system, and to thereby
 * http://www.johndcook.com/blog/2015/12/01/dimensional-analysis-and-types/
 * http://www.joelonsoftware.com/articles/Wrong.html
 
----------
 
 ## What is it?
 
