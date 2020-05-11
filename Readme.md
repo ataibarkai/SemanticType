@@ -47,8 +47,8 @@ This library makes it easy and seamless to create full-fledged semantic types th
 
 
 ### What? 
-Instances of primitive types (such as `Int`, `Double`, `String`,  etc.) are often used under widely incompatiblee circumstances; a `Double` instance may encode a task-completion-percentage in one context, a time interval in another context, and a dollar amount in yet another.
-Though associated with identical *data* (e.g. floating points), such instances must never be confused with one another; we wouldn't want to pass a time interval to a function expecting a dollar amount. At times, such values are also associated with context-specific *constraints* which must be carefully maintained; a percentge-encoding `Double` must capture a number between 0 to and 100.
+Instances of primitive types (such as `Int`, `Double`, `String`,  etc.) are often used under widely incompatiblee circumstances; a `Double` instance may encode a task-completion-percentage in one context, a time interval in another context, and pixel width in yet another.
+Though associated with identical *data* (e.g. floating points), such instances must never be confused with one another; we wouldn't want to pass a time interval to a function expecting pixel width. At times, such values are also associated with context-specific *constraints* which must be carefully maintained; a percentge-encoding `Double` must capture a number between 0 to and 100.
 
 A `SemanticType` is a purpose-specific type wrapping a primitive value used in a particular context. It creates a type-level distinction between such contexts, and makes it possible to encode constraint-enforcing validations & transformations right at the type level.
 
