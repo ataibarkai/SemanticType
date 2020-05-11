@@ -41,6 +41,10 @@ To make it easy to encode more business logic in the type system, and to thereby
 A Semantic Type is a *context-specific type* which wraps an underlying value used in specific circumstances.
 It's a type created to capture and convey some *meaning* about a value which isn't already captured by the type used to *encode* the value.
 
+You can think of types such as `Years` and `Meters` used in place of `Double`, or even types such as `ShortString` and `AlphanumericString` used in place of `String`.
+
+This library makes it easy and seamless to create full-fledged semantic types that are no less convenient to use then their primitive counterparts. If you just want to see some code, feel free to [jump ahead](#show-me-some-code-already).
+
 
 ### What? 
 Instances of primitive types (such as `Int`, `Double`, `String`,  etc.) are often used under widely incompatiblee circumstances; a `Double` instance may encode a task-completion-percentage in one context, a time interval in another context, and a dollar amount in yet another.
